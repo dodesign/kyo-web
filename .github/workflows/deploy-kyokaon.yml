@@ -1,0 +1,37 @@
+name: Deploy kyo-kaon theme
+
+# kyo-kaon.jp の子テーマに変更があった時だけ、FTPS(暗号化FTP)で本番へ反映する。
+#
+# ★本番で動いているのは welcart_basic-beldad（Welcart Basic の子テーマ）。
+#   Welcart のテンプレート上書き（wc_templates/）と業務ロジック（functions.php）が入っている。
+#
+# ★公開フォルダ名はドメイン名と違う。
+#   ドメイン kyo-kaon.jp → サーバー上のフォルダは /web/kaon/
+#   ここを間違えるとFTPは「成功」するのに本番に出ない。
+#
+# uploads・WordPress本体・プラグイン・DBには一切触れない。
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'kyo-kaon.jp/wp-content/themes/welcart_basic-beldad/**'
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy theme via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.LOLIPOP_FTP_SERVER }}
+          username: ${{ secrets.LOLIPOP_FTP_USERNAME }}
+          password: ${{ secrets.LOLIPOP_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./kyo-kaon.jp/wp-content/themes/welcart_basic-beldad/
+          server-dir: /web/kaon/wp-content/themes/welcart_basic-beldad/

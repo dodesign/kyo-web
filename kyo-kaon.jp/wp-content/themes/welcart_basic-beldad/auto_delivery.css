@@ -1,0 +1,178 @@
+/* 
+ WCEX Auto Delivery Style
+*/
+
+
+.item-info #wc_regular .wcr_tlt {
+	font-family: 'Suranna', '游明朝体', 'Yu Mincho', YuMincho, 'ヒラギノ明朝 Pro', 'Hiragino Mincho Pro', 'MS P明朝', 'MS PMincho', serif;
+}
+
+/* =item_single.php
+-------------------------------------------------------------- */
+
+.item-info #wc_regular {
+	margin: 2.142em 0 0;
+}
+.item-info #wc_regular .wcr_tlt {
+	font-size: 18px;
+	margin: 1.111em .833em 0;
+	padding: 0 0 0 12px;
+	background: none;
+	border-left-width: 4px;
+	border-left-style: solid;
+	text-indent: 0;
+	line-height: 18px;
+	letter-spacing: 1px;
+}
+/* -- table -- */
+.ad-table-wrapper {
+	margin: 1.071em 1.071em 0;
+}
+#wc_regular table {
+	margin-bottom: 0;
+	border: none;
+}
+#wc_regular table th,
+#wc_regular table td {
+	background: none;
+	padding: .714em;
+	border: 1px solid #999;
+}
+#wc_regular table th {
+	font-weight: bold;
+}
+#wc_regular table td {
+	background-color: #fff;
+}
+.item-info #wc_regular .field,
+.item-info #wc_regular .skuform {
+	padding: .714em 0;
+}
+.item-info #wc_regular .skuform:last-child {
+	padding-bottom: 0;
+	border: none;
+}
+#wc_regular form {
+	margin: 0 1.429em;
+	padding-bottom: 1.071em;
+}
+#wc_regular input.skuquantity {
+	width: 50px !important;
+	height: 40px;
+	padding: 0 .357em;
+    text-align: center;
+}
+.item-info #wc_regular .skubutton {
+	padding: 0 .714em;
+}
+
+/* =Member Page
+-------------------------------------------------------------- */
+
+#wc_autodelivery_history h3 {
+	font-size: 16px;
+    margin: 0;
+    padding: 0 15px 20px;
+	background: none;
+    border: none;
+    letter-spacing: 1px;
+}
+#wc_autodelivery_history .currency_code {
+	margin: 0 1.071em;
+}
+#wc_autodelivery_history .inside {
+	margin: 0 1.071em;
+	border: none;
+}
+/* -- table -- */
+#wc_autodelivery_history table {
+	border: none;
+	border-collapse: separate;
+	border-top-width: 1px;
+	border-top-style: solid;
+}
+#wc_autodelivery_history table th,
+#wc_autodelivery_history table td {
+	padding: .909em .273em;
+	border: none;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+#wc_autodelivery_history table th {
+	background: none;
+}
+#wc_autodelivery_history .send input {
+	background: none;
+}
+
+
+/**
+ * 16.1 Mobile Large 620px
+ */
+@media screen and (min-width: 38.75em) {
+
+
+/* =Member Page
+-------------------------------------------------------------- */
+
+	#wc_autodelivery_history table tr {
+		display: table-row;
+	}
+	
+}
+
+
+/**
+ * 16.4 Desktop Small 1000px
+ */
+@media screen and (min-width: 62.5em) {
+
+
+/* =item_single.php
+-------------------------------------------------------------- */
+
+	.item-info #wc_regular {
+		margin-top: 1.429em;
+	}
+	.item-info #wc_regular .wcr_tlt {
+		font-size: 18px;
+		margin: 1.111em 1.111em 0;
+		line-height: 20px;
+	}
+	.ad-table-wrapper {
+		margin: 1.428em 1.428em 0;
+	}
+	.item-info #wc_regular .skuform {
+		padding: 1.071em 0;
+	}
+	#wc_regular form {
+		padding-bottom: 1.071em;
+	}
+
+	/* -- skuform -- */
+	.item-info #wc_regular .skuform .field {
+		padding: 0;
+	}
+
+/* =Member Page
+-------------------------------------------------------------- */
+
+	#wc_autodelivery_history h3 {
+		font-size: 20px;
+		margin: 0 0 30px;
+		padding: 0;
+		background: none;
+	}
+	#wc_autodelivery_history .currency_code,
+	#wc_autodelivery_history .inside {
+		margin: 0;
+	}
+	#wc_autodelivery_history table th,
+	#wc_autodelivery_history table td {
+		padding: 1.071em .357em;
+	}
+	#wc_autodelivery_history table th {
+		font-weight: bold;
+	}
+	
+}

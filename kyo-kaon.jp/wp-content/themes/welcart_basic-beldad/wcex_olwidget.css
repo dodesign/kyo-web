@@ -1,0 +1,13 @@
+
+#secondary .widget_wcex_olwidget td,
+.widget_wcex_olwidget td {
+	padding: .714em .357em;
+	border: none;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+}
+
+.widget_wcex_olwidget .olw_amount {
+	text-align: right;
+	font-weight: normal;
+}

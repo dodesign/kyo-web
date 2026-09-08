@@ -1,0 +1,71 @@
+
+/* =
+-------------------------------------------------------------- */
+
+/* --------  -------- */
+/* --  -- */
+/* -  - */
+
+
+/* = Secondary
+-------------------------------------------------------------- */
+
+#secondary .widgetcart_rows th.item,
+#secondary .widgetcart_rows th.quant,
+#secondary .widgetcart_rows th.price,
+#secondary .widgetcart_rows th.trush {
+	background: none;
+}
+#secondary .widgetcart_rows th.item,
+#secondary .widgetcart_rows th.quant,
+#secondary .widgetcart_rows th.price,
+#secondary .widgetcart_rows th.trush,
+#secondary .widgetcart_rows td.widgetcart_item,
+#secondary .widgetcart_rows td.widgetcart_quant,
+#secondary .widgetcart_rows td.widgetcart_price,
+#secondary .widgetcart_rows td.widgetcart_trush {
+	border: none;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+#secondary .widgetcart_rows th em {
+	display: inline-block;
+	color: #666;
+}
+#secondary #wdgctToCart a {
+	margin-top: 0;
+	border: 1px solid #000;
+}
+#secondary #wdgctToCart a:hover {
+	background: none;
+}
+#secondary #wdgctToCheckout a {
+	background-color: #333;
+	color: #fff;
+	height: 40px;
+	padding: 0;
+	line-height: 40px;
+}
+#secondary #wdgctToCheckout a:hover {
+	background-color: rgba(51,51,51,.6);
+}
+
+/* = wc_item_single.php
+-------------------------------------------------------------- */
+
+/* -- .update_box + .completion_box -- */
+#wgct_alert.update_box,
+#wgct_alert.completion_box {
+	max-width: 360px;
+	width: 80%;
+	left: 50% !important;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	padding: 50px;
+	z-index: 4;
+	border: none;
+}
+#wgct_alert #wdgctToCheckout {
+	margin-top: 10px;
+}

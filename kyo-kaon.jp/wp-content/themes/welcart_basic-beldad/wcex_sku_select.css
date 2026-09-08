@@ -1,0 +1,99 @@
+/* 
+ WCEX SKU Select Style 
+*/
+
+.skuform.sku-select .right {
+	width: 100%;
+}
+
+/* -- table -- */
+.item-info table.item-sku {
+	display: block;
+	margin-bottom: 1.429em;
+	border-collapse: separate;
+	overflow-x: auto;
+}
+.item-sku tbody tr {
+	border: none;
+}
+.item-info .item-sku th {
+	white-space: nowrap;
+}
+.item-info .item-sku th,
+.item-info .item-sku td {
+	height: 40px;
+	padding: 1.071em .714em;
+}
+.item-info .item-sku th,
+.item-info .item-sku td,
+.item-info .item-sku tbody tr th,
+.item-info .item-sku th:last-child,
+.item-info .item-sku td:last-child {
+	border: none;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+.item-info .item-sku th {
+	background: none;
+	font-weight: normal;
+}
+.skuform table.item-sku {
+	border: none;
+}
+/* -- dl,dt,dd -- */
+dl.item-sku,
+dl.item-sku dt,
+dl.item-sku dd {
+	display: block;
+	border: none;
+}
+dl.item-sku dt,
+dl.item-sku dd {
+	width: auto;
+}
+.skuform .item-sku {
+	margin-bottom: .714em;
+}
+dl.item-sku dt {
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	background: none;
+}
+dl.item-sku dd {
+	margin: 0 0 .5714em;
+	padding: 0;
+}
+dl.item-sku select {
+	width: 100%;
+}
+#wc_regular dl.item-sku dt,
+#wc_regular dl.item-sku dd {
+	float: none;
+}
+dl.item-sku dd label {
+	padding: 10px 20px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+dl.item-sku dd input[type=radio]:checked + label, dl.item-sku dd label:hover {
+	padding: 10px 19px;
+}
+
+.wcss_loading {
+	margin-right: .357em;
+}
+
+/**
+ * 16.2 Tablet Small 740px
+ */
+@media screen and (min-width: 46.25em) {
+	
+	/* -- table -- */
+	.skuform table.item-sku {
+		border: none;
+	}
+
+}

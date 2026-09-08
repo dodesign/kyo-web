@@ -1,0 +1,126 @@
+# ==========================================================
+# 方針
+# ==========================================================
+# 「自分たちが書いたもの／再インストールで元に戻せないもの」だけを管理する。
+# WordPress本体・配布プラグイン・画像は入れない（ファイル数が膨らみ、
+# 更新のたびに数千ファイルの差分が出て、自分たちの1行が埋もれるため）。
+#
+# 管理するもの（kyo-kaon.jp）:
+#   - wp-content/themes/welcart_basic-beldad/   子テーマ（自作）
+#   - wp-content/mu-plugins/                    手書き
+#   - wp-content/plugins/wp-custom-api/         自作プラグイン
+#   - .htaccess                                 サイトルート
+#
+# ★自動デプロイの対象は子テーマだけ（.github/workflows/deploy-kyokaon.yml）。
+#   mu-plugins や wp-custom-api は履歴を残すだけで、反映は手で行う。
+
+# ==========================================================
+# kyo-kaon.jp : いったん全部除外してから、必要なものだけ戻す
+# ==========================================================
+
+kyo-kaon.jp/*
+!kyo-kaon.jp/.htaccess
+!kyo-kaon.jp/wp-content/
+
+kyo-kaon.jp/wp-content/*
+!kyo-kaon.jp/wp-content/themes/
+!kyo-kaon.jp/wp-content/mu-plugins/
+!kyo-kaon.jp/wp-content/plugins/
+
+kyo-kaon.jp/wp-content/themes/*
+!kyo-kaon.jp/wp-content/themes/welcart_basic-beldad/
+!kyo-kaon.jp/wp-content/themes/README-ここにテーマを置く.md
+
+kyo-kaon.jp/wp-content/plugins/*
+!kyo-kaon.jp/wp-content/plugins/wp-custom-api/
+
+# ==========================================================
+# 秘密情報・認証情報
+# ==========================================================
+
+**/wp-config.php
+**/wp-config.php.*
+**/wp-config-*.php
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+
+**/auth.json
+**/credentials.json
+**/service-account*.json
+**/client_secret*.json
+
+# Basic認証のハッシュ
+**/.htpasswd
+
+# ==========================================================
+# 画像・動画・バックアップ・キャッシュ
+# ==========================================================
+
+**/wp-content/uploads/
+**/wp-content/cache/
+**/wp-content/upgrade/
+**/wp-content/upgrade-temp-backup/
+**/wp-content/ai1wm-backups/
+**/aiowps_backups/
+**/wp-content/updraft/
+**/wp-content/backups/
+**/wp-content/backup*/
+**/wp-content/wpvividbackups/
+
+**/*.sql
+**/*.sql.gz
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.wpress
+
+# ==========================================================
+# ログ・一時ファイル
+# ==========================================================
+
+**/wp-content/debug.log
+**/kaon-fatal-*.log
+**/error_log
+**/access.log
+**/wp-content/wflogs/
+**/logs/
+**/cache/
+**/tmp/
+**/temp/
+
+*.log
+*.tmp
+*.temp
+*.swp
+*.bak
+
+# Dreamweaver が作るメモフォルダ
+**/_notes/
+
+# ==========================================================
+# 再生成できる依存ファイル
+# ==========================================================
+
+**/node_modules/
+
+# ★ **/vendor/ は書かないこと。
+#   子テーマの assets/vendor/（flexslider・slick・fixed-header）まで巻き込み、
+#   スライダーのCSS/JS/フォントがリポジトリから抜け落ちる。
+#   Composer の vendor が必要になったら、その1箇所だけをパス指定で除外する。
+
+# ==========================================================
+# エディタ・OS
+# ==========================================================
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 退避した入れ子リポジトリ
+**/.git_old/

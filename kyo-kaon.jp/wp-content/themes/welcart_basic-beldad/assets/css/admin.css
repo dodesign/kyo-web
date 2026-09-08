@@ -1,0 +1,237 @@
+
+/* = Theme Customizer
+-------------------------------------------------------------- */
+
+/* ---------- Custom Color  ---------- */
+
+/* -- display: block; -- */
+#customize-control-main_color:before,
+#customize-control-main_th_bg:before,
+#customize-control-main_table_border:after,
+#customize-control-foot_bottom_text:after,
+#customize-control-opt_new:before,
+#customize-control-soldout_text:after,
+#customize-control-foot_top_bg:before,
+#customize-control-foot_bottom_bg:before,
+#customize-control-foot_top_border:after,
+#customize-control-cart_button_bg:before,
+#customize-control-opt_sale:after,
+#customize-control-soldout_bg:before,
+#customize-control-main_button_bg:before,
+#customize-control-sub_button1_color:before,
+#customize-control-sub_button2_bg:before {
+	display: block;
+	font-size: 14px;
+	line-height: 24px;
+	font-weight: 600;
+}
+/* -- margin/padding -- */
+#customize-control-main_th_bg,
+#customize-control-main_th_text,
+#customize-control-main_table_border,
+#customize-control-foot_top_bg,
+#customize-control-foot_top_text,
+#customize-control-foot_top_link,
+#customize-control-foot_bottom_bg,
+#customize-control-cart_button_bg,
+#customize-control-cart_button_text,
+#customize-control-soldout_bg,
+#customize-control-soldout_text,
+#customize-control-main_button_bg,
+#customize-control-main_button_text,
+#customize-control-sub_button1_color,
+#customize-control-sub_button1_bg,
+#customize-control-sub_button2_bg,
+#customize-control-sub_button2_text,
+#customize-control customize-control-color,
+#customize-control-opt_new,
+#customize-control-opt_reco,
+#customize-control-opt_stock,
+#customize-control-opt_sale {
+	margin-bottom: 10px;
+	padding-left: 20px;
+}
+#customize-control-foot_table_border,
+#customize-control-foot_th_bg,
+#customize-control-foot_th_text {
+	margin-bottom: 10px;
+	padding-left: 40px;
+}
+#customize-control-foot_bottom_text,
+#customize-control-foot_top_border {
+	margin-bottom: 0;
+	padding-left: 20px;
+}
+#customize-control-opt_sale,
+#customize-control-soldout_text {
+	margin-bottom: 0;
+}
+
+/* -- h1 -- */
+#customize-control-main_color:before {
+	margin: 0 -12px 10px;
+	padding: 8px 10px 8px 14px;
+	background-color: #444;
+	color: #fff;
+}
+#customize-control-main_table_border:after,
+#customize-control-foot_bottom_text:after {
+	margin: 10px -32px 10px;
+	padding: 8px 10px 8px 14px;
+	background-color: #444;
+	color: #fff;
+}
+#customize-control-soldout_text:after {
+	margin: 10px 0 10px -32px;
+	padding: 8px 10px 8px 14px;
+	background-color: #444;
+	color: #fff;
+}
+/* -- h2 -- */
+#customize-control-main_th_bg:before,
+#customize-control-foot_top_bg:before,
+#customize-control-foot_bottom_bg:before,
+#customize-control-opt_new:before {
+    background-color: #fff;
+    color: #444;
+	margin: 0 0 10px -32px;
+	padding: 5px 10px 5px 14px;
+}
+#customize-control-foot_top_bg:before {
+    background-color: #fff;
+    color: #444;
+	margin: -20px 0 10px -30px;
+	padding: 5px 10px 5px 14px;
+}
+#customize-control-opt_sale:after {
+    background-color: #fff;
+    color: #444;
+	margin: 10px 0 10px -40px;
+	padding: 5px 10px 5px 20px;
+}
+#customize-control-cart_button_bg:before,
+#customize-control-soldout_bg:before,
+#customize-control-main_button_bg:before,
+#customize-control-sub_button1_color:before,
+#customize-control-sub_button2_bg:before {
+	margin: 0 0 5px -20px;
+}
+#customize-control-foot_top_border:after {
+	margin: 0 0 10px -20px;
+	padding: 10px 10px 0 20px;
+}
+
+
+/* ---------- Theme Option  ---------- */
+
+#customize-control-h_itemnum input[type=number],
+#customize-control-info_num input[type=number],
+#customize-control-topics_num input[type=number],
+#customize-control-pickup_num input[type=number] {
+	width: 80px;
+}
+#customize-control-h_itemcat,
+#customize-control-control_display_inquiry_text,
+#customize-control-control_continue_shopping_button {
+	margin-bottom: 8px;
+}
+#customize-control-control_display_soldout,
+#customize-control-control_display_inquiry {
+	margin-bottom: 5px;
+}
+#customize-control-h_itemnum,
+#customize-control-control_display_produt_tag,
+#customize-control-info_num,
+#customize-control-topics_num,
+#customize-control-control_display_cat {
+	margin-bottom: 15px;
+}
+#customize-control-h_itemcat:before,
+#customize-control-control_display_widget_slide:before,
+#customize-control-control_display_soldout:before,
+#customize-control-control_display_info:before,
+#customize-control-control_display_topics:before,
+#customize-control-control_display_cat:before,
+#customize-control-control_display_pickup:before,
+#customize-control-control_page_loading:before,
+#customize-control-control_fixed_header:before,
+#customize-control-control_display_top_sidebar:before,
+#customize-control-control_sidebar:before,
+#customize-control-control_cart_button:before,
+#customize-control-control_continue_shopping_button:before {
+	display: block;
+	font-size: 14px;
+	line-height: 24px;
+	font-weight: 600;
+}
+#customize-control-control_display_h_item_slide,
+#customize-control-control_display_pickup_slide {
+	margin-top: -10px;
+}
+
+/* -- h1 -- */
+#customize-control-h_itemcat:before {
+	margin: 0 -12px 10px;
+	padding: 8px 10px 8px 14px;
+	background-color: #444;
+	color: #fff;
+}
+#customize-control-control_cart_button:before,
+#customize-control-control_page_loading:before,
+#customize-control-control_fixed_header:before,
+#customize-control-control_display_top_sidebar:before,
+#customize-control-control_sidebar:before,
+#customize-control-control_display_soldout:before,
+#customize-control-control_display_info:before,
+#customize-control-control_display_topics:before,
+#customize-control-control_display_cat:before,
+#customize-control-control_display_pickup:before,
+#customize-control-control_continue_shopping_button:before,
+#customize-control-control_display_widget_slide:before {
+	margin: 0 -12px 10px;
+	padding: 8px 10px 8px 14px;
+	background-color: #444;
+	color: #fff;
+}
+
+/* -- label -- */
+.customize-control-checkbox label,
+.customize-control-radio .customize-control-title {
+	font-weight: 600;
+}
+#_customize-description-control_display_top_sidebar {
+	margin-top: 5px;
+	margin-left: -25px;
+}
+
+
+/* = Category Term Meta
+-------------------------------------------------------------- */
+#wp-wcct_description-wrap textarea.wp-editor-area {
+	border: none;
+}
+
+.wcct-image-uploader .thumbnail-form {
+	overflow: hidden;
+}
+.wcct-image-uploader .thumbnail-form input,
+.wcct-image-uploader .thumbnail-form button {
+	float: left;
+}
+.wcct-image-uploader .catimg-form input,
+.wcct-image-uploader .thumbnail-form input{
+	width: 70%;
+}
+.wcct-image-uploader .wcct-tag-catimg-preview,
+.wcct-image-uploader .wcct-tag-thumbnail-preview {
+	padding: 1px;
+}
+.wcct-image-uploader .wcct-tag-catimg-preview img,
+.wcct-image-uploader .wcct-tag-thumbnail-preview img{
+	width: 50%;
+	height: auto;
+}
+.edit-form-field .wcct-tag-catimg-preview img,
+.edit-form-field .wcct-tag-thumbnail-preview img{
+	width: 50%;
+}

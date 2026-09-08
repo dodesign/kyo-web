@@ -1,0 +1,34 @@
+
+/* =
+-------------------------------------------------------------- */
+
+/* --------  -------- */
+/* --  -- */
+/* -  - */
+
+/* = Safari Hacks
+-------------------------------------------------------------- */
+
+.h-column .iconbtn img {
+	height: 20px;
+}
+
+footer .flex-container {
+	text-align: center;
+}
+footer .f-logo,
+footer .sns {
+	display: inline-block;
+}
+
+#searchform .s-box input.search-text {
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+}
+
+#show .layout li.grid,
+#show .layout li.list {
+	width: 30px;
+	height: 30px;
+}

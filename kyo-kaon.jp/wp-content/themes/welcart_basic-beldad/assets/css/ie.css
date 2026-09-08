@@ -1,0 +1,15 @@
+
+/* =
+-------------------------------------------------------------- */
+
+/* --------  -------- */
+/* --  -- */
+/* -  - */
+
+/* = IE Hacks
+-------------------------------------------------------------- */
+
+.home-widget .widget_welcart_featured .thumimg img,
+.home-widget .widget_welcart_bestseller .itemimg img {
+	width: 100%;
+}
