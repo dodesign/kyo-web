@@ -229,3 +229,46 @@ function kaon_gads_purchase_conversion( $html, $entries, $carts ) {
 	$tag .= '</script>' . "\n";
 	return $html . $tag;
 }
+
+
+/* ===== GA4：予約フォーム送信を generate_lead として送る =====
+   Contact Form 7 は AJAX 送信なので、GA4 の拡張計測（フォームの操作）では拾えない。
+   CF7 の wpcf7mailsent イベントを拾って GA4 にイベントを送る。
+
+   Google広告側のコンバージョン（AW-18113833274/…）は Elementor 側に別途入っているので、
+   ここでは触らない。二重発火を避けるため GA4 のイベントだけを送る。
+
+   ・意図的に value は送っていない。予約は「申込」であって売上確定ではないため、
+     GA4 の「合計収益」に見込み金額が混ざるのを避ける。
+     金額で見たくなったら value: 8800 * 人数 を足す。
+   ・plan / page_path を一緒に送るので、ワークショップ予約と一般の問い合わせを
+     GA4 側で区別できる。 */
+add_action( 'wp_footer', 'kaon_ga4_cf7_lead_event', 99 );
+function kaon_ga4_cf7_lead_event() {
+	?>
+	<script>
+	document.addEventListener( 'wpcf7mailsent', function ( e ) {
+		if ( typeof gtag !== 'function' ) { return; }
+		var plan = '', people = '';
+		try {
+			( e.detail.inputs || [] ).forEach( function ( f ) {
+				if ( f.name === 'plan' ) { plan = f.value; }
+				if ( f.name === 'number-702' ) { people = f.value; }
+			} );
+		} catch ( err ) {}
+		gtag( 'event', 'generate_lead', {
+			form_id: e.detail.contactFormId,
+			page_path: location.pathname,
+			plan: plan,
+			people: people
+		} );
+	}, false );
+	</script>
+	<?php
+}
+
+
+/* PHPメモリ上限の引き上げ
+   WordPress 7.1 + Elementor で /service/workshop/ が既定の128Mを超えて500になるため。
+   管理画面は WP_MAX_MEMORY_LIMIT により既に256Mで動いているので、フロントも揃える。 */
+@ini_set( 'memory_limit', '256M' );
