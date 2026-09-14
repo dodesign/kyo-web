@@ -6,8 +6,18 @@ name: Deploy kyo-kaon theme
 #   Welcart のテンプレート上書き（wc_templates/）と業務ロジック（functions.php）が入っている。
 #
 # ★公開フォルダ名はドメイン名と違う。
-#   ドメイン kyo-kaon.jp → サーバー上のフォルダは /web/kaon/
-#   ここを間違えるとFTPは「成功」するのに本番に出ない。
+#   ドメイン kyo-kaon.jp → サーバー上のフォルダは kaon/
+#
+# ★★server-dir は「/kaon/」で始める。「/web/kaon/」ではない。★★
+#   このFTPアカウントのログイン直後の位置が既に web/ の中なので、
+#   /web/kaon/ と書くと web/web/kaon/ という別フォルダが作られ、
+#   **Actionsは緑（成功）になるのに本番には一切反映されない。**
+#   2026-09-08〜09-14 の間、実際にこれで2回とも空振りしていた。
+#
+#   確認方法：デプロイ後に
+#     https://kyo-kaon.jp/wp-content/themes/welcart_basic-beldad/style.css
+#   の Last-Modified が今の日時になっているか見る。
+#   「200が返ること」は確認にならない（元からあるファイルなので当然200）。
 #
 # uploads・WordPress本体・プラグイン・DBには一切触れない。
 
@@ -34,4 +44,4 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./kyo-kaon.jp/wp-content/themes/welcart_basic-beldad/
-          server-dir: /web/kaon/wp-content/themes/welcart_basic-beldad/
+          server-dir: /kaon/wp-content/themes/welcart_basic-beldad/
