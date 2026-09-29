@@ -16,6 +16,18 @@ get_header();
 			<h1 class="cart_page_title"><?php _e( 'Confirmation', 'usces' ); ?></h1>
 
 			<div id="info-confirm">
+
+				<?php
+				/* ★この画面は「注文完了画面」と見間違えられやすい。
+				   実際、注文が完了していないのに完了したと思って離脱した例がある（2026-09）。
+				   一番上に「まだ完了していない」ことと、次に何を押せばいいかを明示する。 */
+				?>
+				<div class="kaon-not-yet">
+					<strong>まだご注文は完了していません</strong>
+					<span>内容をご確認のうえ、ページ下部の<b>「上記内容で注文する」</b>ボタンを押してください。<br>
+					クレジットカードでお支払いの場合は、このあとカード会社による本人確認の画面が表示されます。</span>
+				</div>
+
 				<div class="confiem_notice">
 					<?php _e( 'Please do not change product addition and amount of it with the other window with displaying this page.', 'usces' ); ?>
 				</div>
@@ -196,7 +208,13 @@ get_header();
 
 				</div><!-- .confirm_table-wrap -->
 
-				<?php usces_purchase_button(); ?>
+				<?php
+				/* スマホでは3Dセキュアの枠が縦に長く、注文ボタンが画面外に出てしまう。
+				   独自クラスで包んで、SPでは画面下に貼り付ける（CSSは functions.php 側）。 */
+				?>
+				<div class="kaon-purchase-area">
+					<?php usces_purchase_button(); ?>
+				</div>
 
 				<div class="footer_explanation">
 					<?php do_action( 'usces_action_confirm_page_footer' ); ?>

@@ -320,9 +320,40 @@ function kaon_3ds_iframe_visible() {
 		font-size: 15px;
 	}
 	#kaon-3ds-notice b { display: block; margin-bottom: .4em; font-size: 16px; }
+
+	/* 確認画面を「注文完了画面」と間違えさせないための帯 */
+	.kaon-not-yet {
+		margin: 0 0 1em;
+		padding: 1em 1.2em;
+		border: 2px solid #c0392b;
+		background: #fff5f4;
+		line-height: 1.7;
+	}
+	.kaon-not-yet strong {
+		display: block;
+		margin-bottom: .3em;
+		color: #c0392b;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	.kaon-not-yet span { font-size: 15px; }
+
 	@media screen and (max-width: 768px) {
 		div[id="3dscontainer"] { min-height: 700px !important; }
 		iframe[id="3ds_challenge"] { height: 700px !important; min-height: 700px !important; }
+
+		/* ★スマホでは3Dセキュアの枠が縦に長く、「上記内容で注文する」が画面外に出て
+		   押せることに気づけない。ボタン列を画面下に貼り付けて常に見えるようにする。 */
+		.kaon-purchase-area {
+			position: sticky;
+			bottom: 0;
+			z-index: 50;
+			margin-top: 1em;
+			padding: .7em .5em calc(.7em + env(safe-area-inset-bottom));
+			background: #fff;
+			box-shadow: 0 -2px 10px rgba( 0, 0, 0, .18 );
+		}
+		.kaon-not-yet strong { font-size: 18px; }
 	}
 	</style>
 	<script>
