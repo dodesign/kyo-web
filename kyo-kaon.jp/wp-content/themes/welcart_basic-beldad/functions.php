@@ -268,6 +268,97 @@ function kaon_ga4_cf7_lead_event() {
 }
 
 
+/* ===== EMV 3-Dセキュア（本人確認）画面を見えるようにする =====
+   2026-09-29 に実機テストで判明した、カード決済が完了しない件の対処。
+
+   【症状】
+   お客様から「カード決済のときにローディングが完了せず決済できない」という
+   連絡が2026年9月に2〜3件。ZEUSの決済ログには該当する記録が1件も無かった。
+
+   【原因】
+   確認画面で ZEUS が差し込む 3-Dセキュアの iframe が
+     <div id="3dscontainer"><iframe id="3ds_challenge" height="300px">
+   と高さ300px固定で描画される。カード会社（JCB J/Secure等）の本人確認画面は
+   これに収まらず、**ワンタイムパスワードの入力欄と送信ボタンが枠の外に隠れる**。
+   枠内に独自のスクロールバーが出るが、その下で「処理中...」のスピナーが
+   回り続けるため、お客様は「読み込みが終わらない」と認識して離脱していた。
+   本人確認が完了しないので決済要求自体が成立せず、ZEUS側に記録が残らない。
+
+   【対処】
+   ・iframe と親コンテナの高さを広げる（属性 height="300px" を !important で上書き）
+   ・スマホでも縦に余裕を持たせる
+   ・何を求められている画面なのか、日本語の案内を上に出す
+   ※ iframe の中身はカード会社のドメイン（クロスオリジン）なので触れない。
+     こちら側でできるのは「隠さないこと」と「案内を出すこと」まで。 */
+add_action( 'wp_head', 'kaon_3ds_iframe_visible', 99 );
+function kaon_3ds_iframe_visible() {
+	// 全ページに出しているのは、3Dセキュアの枠がどのテンプレートで差し込まれても
+	// 確実に効かせるため。枠が無いページでは何も表示されない（JSが要素を見つけて初めて出す）。
+	?>
+	<style>
+	/* ID が数字で始まるため #3dscontainer とは書けない（CSSの仕様）。
+	   属性セレクタで指定する。エスケープ記法 #\33 dscontainer は読みにくいので使わない。 */
+	div[id="3dscontainer"] {
+		height: auto !important;
+		min-height: 640px !important;
+		max-width: 100%;
+		margin: 1.5em auto;
+	}
+	iframe[id="3ds_challenge"] {
+		height: 640px !important;
+		min-height: 640px !important;
+		width: 100% !important;
+		border: 1px solid #ddd !important;
+	}
+	#kaon-3ds-notice {
+		display: none;
+		margin: 1.5em auto 0.5em;
+		padding: 1em 1.2em;
+		border: 2px solid #bfa14a;
+		background: #fdfaf2;
+		line-height: 1.7;
+		font-size: 15px;
+	}
+	#kaon-3ds-notice b { display: block; margin-bottom: .4em; font-size: 16px; }
+	@media screen and (max-width: 768px) {
+		div[id="3dscontainer"] { min-height: 700px !important; }
+		iframe[id="3ds_challenge"] { height: 700px !important; min-height: 700px !important; }
+	}
+	</style>
+	<script>
+	( function () {
+		var NOTICE_HTML =
+			'<b>カード会社による本人確認（3Dセキュア）の画面です</b>' +
+			'下の枠内に、ご利用のカード会社から本人確認の画面が表示されます。' +
+			'ワンタイムパスワードやパスワードの入力を求められますので、' +
+			'枠内の案内に従って入力し、枠内の送信ボタンを押してください。' +
+			'<br>本人確認が完了するまで、この画面は「処理中」の表示のままになります。';
+
+		function showNotice() {
+			var box = document.getElementById( '3dscontainer' );
+			if ( ! box || document.getElementById( 'kaon-3ds-notice' ) ) { return; }
+			var n = document.createElement( 'div' );
+			n.id = 'kaon-3ds-notice';
+			n.innerHTML = NOTICE_HTML;
+			n.style.display = 'block';
+			box.parentNode.insertBefore( n, box );
+			try { n.scrollIntoView( { behavior: 'smooth', block: 'start' } ); } catch ( e ) {}
+		}
+
+		if ( ! window.MutationObserver ) { return; }
+		var mo = new MutationObserver( function () {
+			if ( document.getElementById( '3dscontainer' ) ) { showNotice(); }
+		} );
+		document.addEventListener( 'DOMContentLoaded', function () {
+			showNotice();
+			mo.observe( document.body, { childList: true, subtree: true } );
+		} );
+	} )();
+	</script>
+	<?php
+}
+
+
 /* PHPメモリ上限の引き上げ
    WordPress 7.1 + Elementor で /service/workshop/ が既定の128Mを超えて500になるため。
    管理画面は WP_MAX_MEMORY_LIMIT により既に256Mで動いているので、フロントも揃える。 */
