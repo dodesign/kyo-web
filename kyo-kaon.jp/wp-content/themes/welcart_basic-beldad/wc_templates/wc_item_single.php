@@ -141,6 +141,19 @@ get_header();
 
 										</div><!-- .field -->
 
+										<?php
+										/* ★在庫が少ないときだけ「残り◯点」を出す（2026-10-01 追加）
+										   usces_the_itemZaikoNum( 'return' ) はそのSKUの在庫数を返す。
+										   在庫数が未設定のときは false が返るので is_numeric で弾く。
+										   しきい値は functions.php の KAON_ZAIKO_ALERT（既定3）。
+										   超えているときは何も出さない。 */
+										$kaon_zaiko = function_exists( 'usces_the_itemZaikoNum' ) ? usces_the_itemZaikoNum( 'return' ) : false;
+										$kaon_alert = defined( 'KAON_ZAIKO_ALERT' ) ? (int) KAON_ZAIKO_ALERT : 3;
+										if ( usces_have_zaiko() && is_numeric( $kaon_zaiko ) && 0 < (int) $kaon_zaiko && (int) $kaon_zaiko <= $kaon_alert ) :
+										?>
+										<p class="kaon-zaiko-alert">残り<?php echo (int) $kaon_zaiko; ?>点</p>
+										<?php endif; ?>
+
 										<?php if( !usces_have_zaiko() ) : ?>
 											<?php if( wcct_get_options( 'inquiry_link_button' ) ) :?>
 												<div class="contact-item"><a href="<?php echo wcct_get_inquiry_link_url(); ?>"><i class="fa fa-envelope"></i><?php wcct_options( 'inquiry_text' ); ?></a></div>

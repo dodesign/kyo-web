@@ -355,6 +355,20 @@ function kaon_3ds_iframe_visible() {
 		}
 		.kaon-not-yet strong { font-size: 18px; }
 	}
+
+	/* 「残り◯点」（商品詳細のSKUごと。出す条件は wc_templates/wc_item_single.php 側） */
+	.kaon-zaiko-alert {
+		display: inline-block;
+		margin: .2em 0 .6em;
+		padding: .25em .8em;
+		border: 1px solid #c0392b;
+		border-radius: 2px;
+		background: #fff5f4;
+		color: #c0392b;
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 1.4;
+	}
 	</style>
 	<script>
 	( function () {
@@ -387,6 +401,16 @@ function kaon_3ds_iframe_visible() {
 	} )();
 	</script>
 	<?php
+}
+
+
+/* ===== 「残り◯点」を出すしきい値 =====
+   商品詳細ページで、SKUの在庫数がこの数以下のときだけ「残り◯点」と表示する。
+   0点のときは出さない（Welcartが売り切れ表示に切り替えるため）。
+   表示そのものは wc_templates/wc_item_single.php に入れてある。
+   数を変えたいときはここだけ直せばよい。 */
+if ( ! defined( 'KAON_ZAIKO_ALERT' ) ) {
+	define( 'KAON_ZAIKO_ALERT', 3 );
 }
 
 
