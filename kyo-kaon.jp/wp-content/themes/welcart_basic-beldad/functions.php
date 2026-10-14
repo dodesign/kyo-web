@@ -651,6 +651,12 @@ function kaon_archive_list_style() {
 		gap: 56px 36px;
 		font-family: "Shippori Mincho", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Noto Serif JP", serif;
 	}
+	/* ★このdivは class="info-list cf"。親テーマの .cf は clearfix として
+	   ::before / ::after に content を入れているが、Grid ではこの擬似要素が
+	   「1個のアイテム」として数えられ、左上と末尾に空きマスができる。
+	   フロート時代の名残なので、Grid 化したここでは消す。 */
+	.info-list::before,
+	.info-list::after { content: none; display: none; }
 	/* ★親テーマ style.css は一覧を「サムネイル左35%フロート＋本文 margin-left:40%」の
 	   横並びレイアウトで組んでいる。カード化するには float と 40% の余白を
 	   ここで明示的に打ち消す必要がある（宣言し忘れると親テーマの値が残る）。 */
