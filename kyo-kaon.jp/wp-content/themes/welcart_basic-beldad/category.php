@@ -107,8 +107,11 @@ get_header(); ?>
 						<div id="post-<?php the_ID(); ?>" <?php post_class( 'list' ); ?>>
 							<a href="<?php the_permalink(); ?>" rel="bookmark">
 								<span class="thumbnail">
-									<?php if ( has_post_thumbnail() ) : ?>
-										<?php the_post_thumbnail(); ?>
+									<?php
+									/* ★サイズ指定なしの the_post_thumbnail() だと元画像（1080×1920等）が
+									   そのまま出て、1記事で画面が埋まってしまう。必ずサイズを指定する。 */
+									if ( has_post_thumbnail() ) : ?>
+										<?php the_post_thumbnail( 'medium_large' ); ?>
 									<?php else: ?>
 										<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/noimg.gif">
 									<?php endif; ?>

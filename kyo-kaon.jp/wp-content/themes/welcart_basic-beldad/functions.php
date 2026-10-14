@@ -466,22 +466,15 @@ function kaon_workshop_cases_shortcode( $atts ) {
 
 			// 先頭の【…】を外す
 			$title = preg_replace( '/^【[^】]*】\s*/u', '', get_the_title() );
-
-			// 本文の冒頭。ボタンの文言と記号を除いてから詰める
-			$text = wp_strip_all_tags( get_the_content(), true );
-			$text = str_replace( 'この商品についてお問い合わせ', '', $text );
-			$text = preg_replace( '/^\s*【[^】]*】\s*/u', '', trim( $text ) );
-			$text = wp_trim_words( $text, 60, '…' );
 			?>
 			<li class="kaon-cases__item">
-				<a class="kaon-cases__link" href="<?php the_permalink(); ?>">
+				<a class="kaon-cases__link" href="<?php the_permalink(); ?>" target="_blank" rel="noopener">
 					<?php if ( has_post_thumbnail() ) : ?>
 						<span class="kaon-cases__thumb"><?php the_post_thumbnail( 'medium_large' ); ?></span>
 					<?php endif; ?>
 					<span class="kaon-cases__body">
 						<span class="kaon-cases__date"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></span>
 						<span class="kaon-cases__title"><?php echo esc_html( $title ); ?></span>
-						<span class="kaon-cases__text"><?php echo esc_html( $text ); ?></span>
 					</span>
 				</a>
 			</li>
@@ -490,7 +483,7 @@ function kaon_workshop_cases_shortcode( $atts ) {
 
 		<?php if ( $cat_link ) : ?>
 		<p class="kaon-cases__more">
-			<a href="<?php echo esc_url( $cat_link ); ?>">体験のようすをもっと見る</a>
+			<a href="<?php echo esc_url( $cat_link ); ?>" target="_blank" rel="noopener">体験のようすをもっと見る</a>
 		</p>
 		<?php endif; ?>
 	</div>
@@ -507,11 +500,18 @@ add_action( 'wp_head', 'kaon_workshop_cases_style', 100 );
 function kaon_workshop_cases_style() {
 	?>
 	<style>
-	.kaon-cases { margin: 0 auto; max-width: 1100px; }
+	/* ★フォントはLPに合わせて明朝。ゴシックはこのページの世界観に合わない。
+	   Shippori Mincho は Elementor がこのLPで読み込んでいるので、そのまま使える。
+	   他ページで使う場合に備えて、OS標準の明朝をフォールバックに並べてある。 */
+	.kaon-cases {
+		margin: 0 auto;
+		max-width: 1120px;
+		font-family: "Shippori Mincho", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Noto Serif JP", serif;
+	}
 	.kaon-cases__list {
 		display: grid;
 		grid-template-columns: repeat( 3, 1fr );
-		gap: 28px 24px;
+		gap: 56px 36px;
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -519,65 +519,195 @@ function kaon_workshop_cases_style() {
 	.kaon-cases__item { margin: 0; padding: 0; list-style: none; }
 	.kaon-cases__link {
 		display: block;
+		height: 100%;
 		color: inherit;
 		text-decoration: none;
-		height: 100%;
 	}
+
+	/* 写真。縦長（3:4）にして、一枚絵として見せる */
 	.kaon-cases__thumb {
+		position: relative;
 		display: block;
 		overflow: hidden;
-		margin-bottom: 14px;
-		background: #f4f1ec;
-		aspect-ratio: 4 / 3;
+		margin-bottom: 22px;
+		background: #f2efe9;
+		aspect-ratio: 3 / 4;
 	}
 	.kaon-cases__thumb img {
 		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform .4s ease;
+		transition: transform 1.2s cubic-bezier( .2, .8, .2, 1 ), opacity .6s ease;
 	}
-	.kaon-cases__link:hover .kaon-cases__thumb img { transform: scale( 1.04 ); }
-	.kaon-cases__body { display: block; }
+	.kaon-cases__link:hover .kaon-cases__thumb img { transform: scale( 1.06 ); opacity: .88; }
+
+	.kaon-cases__body { display: block; text-align: center; }
+
+	/* 日付は細く小さく。装飾として置く */
 	.kaon-cases__date {
 		display: block;
-		margin-bottom: .4em;
-		color: #a08b5a;
-		font-size: 13px;
-		letter-spacing: .08em;
+		margin-bottom: 1.1em;
+		color: #a89770;
+		font-size: 12px;
+		letter-spacing: .22em;
+		line-height: 1;
+	}
+	/* 日付とタイトルの間に細い罫を一本。これだけで"誌面"らしくなる */
+	.kaon-cases__date::after {
+		content: "";
+		display: block;
+		width: 28px;
+		height: 1px;
+		margin: 1em auto 0;
+		background: #cbbf9f;
 	}
 	.kaon-cases__title {
 		display: block;
-		margin-bottom: .5em;
 		font-size: 17px;
-		font-weight: bold;
-		line-height: 1.6;
+		font-weight: 500;
+		line-height: 2;
+		letter-spacing: .06em;
+		color: #2b2724;
 	}
-	.kaon-cases__text {
-		display: block;
-		font-size: 14px;
-		line-height: 1.9;
-		color: #555;
-	}
-	.kaon-cases__more { margin: 2.4em 0 0; text-align: center; }
+
+	.kaon-cases__more { margin: 4.5em 0 0; text-align: center; }
 	.kaon-cases__more a {
 		display: inline-block;
-		padding: .8em 2.4em;
-		border: 1px solid #bfa14a;
-		color: #8a6d2f;
+		position: relative;
+		padding: 0 0 .7em;
+		border: 0;
+		color: #8a7748;
 		font-size: 15px;
-		letter-spacing: .06em;
+		letter-spacing: .18em;
 		text-decoration: none;
-		transition: background .3s ease, color .3s ease;
 	}
-	.kaon-cases__more a:hover { background: #bfa14a; color: #fff; }
+	/* 下線をホバーで伸ばす。枠線のボタンより静かで、明朝に合う */
+	.kaon-cases__more a::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 100%;
+		height: 1px;
+		background: #bfa14a;
+		transform: translateX( -50% ) scaleX( .35 );
+		transform-origin: center;
+		transition: transform .5s cubic-bezier( .2, .8, .2, 1 );
+	}
+	.kaon-cases__more a:hover::after { transform: translateX( -50% ) scaleX( 1 ); }
 
 	@media screen and (max-width: 900px) {
-		.kaon-cases__list { grid-template-columns: repeat( 2, 1fr ); gap: 24px 18px; }
+		.kaon-cases__list { grid-template-columns: repeat( 2, 1fr ); gap: 44px 24px; }
 	}
 	@media screen and (max-width: 600px) {
-		.kaon-cases__list { grid-template-columns: 1fr; gap: 26px; }
-		.kaon-cases__title { font-size: 16px; }
+		.kaon-cases__list { grid-template-columns: repeat( 2, 1fr ); gap: 32px 16px; }
+		.kaon-cases__thumb { margin-bottom: 16px; }
+		.kaon-cases__title { font-size: 14px; line-height: 1.9; }
+		.kaon-cases__date { font-size: 11px; margin-bottom: .9em; }
+		.kaon-cases__more { margin-top: 3em; }
+	}
+	</style>
+	<?php
+}
+
+
+/* ===== ブログ・カテゴリー一覧の見た目 =====
+   2026-10-14 修正。元の状態は次の2つが同時に起きていて非常に読みにくかった。
+     ・category.php が the_post_thumbnail() をサイズ指定なしで出していたため、
+       縦長の元画像（1080×1920）が 619×1100px で表示され、1記事で画面が埋まっていた
+     ・抜粋が44文字しかなく、本文の雰囲気が伝わらなかった
+   サムネイルのサイズ指定は category.php 側で直し、ここでは抜粋の長さと配置を整える。 */
+
+/* 一覧の抜粋を長くする。日本語は wp_trim_words が「文字数」として扱う。 */
+add_filter( 'excerpt_length', 'kaon_archive_excerpt_length', 999 );
+function kaon_archive_excerpt_length( $length ) {
+	if ( is_admin() ) {
+		return $length;
+	}
+	if ( is_category() || is_archive() || is_home() || is_search() ) {
+		return 110;
+	}
+	return $length;
+}
+
+add_filter( 'excerpt_more', 'kaon_archive_excerpt_more', 999 );
+function kaon_archive_excerpt_more( $more ) {
+	return is_admin() ? $more : '…';
+}
+
+add_action( 'wp_head', 'kaon_archive_list_style', 100 );
+function kaon_archive_list_style() {
+
+	if ( ! ( is_category() || is_home() ) ) {
+		return;
+	}
+	?>
+	<style>
+	/* ブログ／カテゴリー一覧をカード3列に。LPの体験事例と同じ語彙で揃える。 */
+	.info-list {
+		display: grid;
+		grid-template-columns: repeat( 3, 1fr );
+		gap: 56px 36px;
+		font-family: "Shippori Mincho", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Noto Serif JP", serif;
+	}
+	.info-list .list { width: auto; margin: 0; float: none; }
+	.info-list .list > a {
+		display: block;
+		height: 100%;
+		color: inherit;
+		text-decoration: none;
+	}
+	.info-list .thumbnail {
+		display: block;
+		overflow: hidden;
+		margin-bottom: 20px;
+		background: #f2efe9;
+		aspect-ratio: 3 / 4;
+	}
+	.info-list .thumbnail img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		object-fit: cover;
+		transition: transform 1.2s cubic-bezier( .2, .8, .2, 1 ), opacity .6s ease;
+	}
+	.info-list .list > a:hover .thumbnail img { transform: scale( 1.06 ); opacity: .88; }
+
+	.info-list .date {
+		display: block;
+		margin-bottom: .9em;
+		color: #a89770;
+		font-size: 12px;
+		letter-spacing: .18em;
+		line-height: 1;
+	}
+	.info-list .date i { display: none; }
+	.info-list .title {
+		display: block;
+		margin-bottom: .8em;
+		font-size: 17px;
+		font-weight: 500;
+		line-height: 1.9;
+		letter-spacing: .04em;
+		color: #2b2724;
+	}
+	.info-list .excerpt {
+		font-size: 13.5px;
+		line-height: 2;
+		color: #6b645c;
+	}
+	.info-list .excerpt p { margin: 0; }
+
+	@media screen and (max-width: 900px) {
+		.info-list { grid-template-columns: repeat( 2, 1fr ); gap: 44px 24px; }
+	}
+	@media screen and (max-width: 600px) {
+		.info-list { grid-template-columns: repeat( 2, 1fr ); gap: 32px 16px; }
+		.info-list .thumbnail { margin-bottom: 14px; }
+		.info-list .title { font-size: 14px; line-height: 1.8; }
+		.info-list .excerpt { font-size: 12px; line-height: 1.9; }
 	}
 	</style>
 	<?php
