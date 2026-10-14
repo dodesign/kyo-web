@@ -414,6 +414,176 @@ if ( ! defined( 'KAON_ZAIKO_ALERT' ) ) {
 }
 
 
+/* ===== ワークショップの体験事例を並べるショートコード =====
+   使い方：ワークショップLPに [kaon_workshop_cases] を置くだけ。
+   カテゴリー「京念珠作りワークショップ写真」(slug: workshop-photo) の記事を新しい順に出す。
+   記事を追加すれば自動で増えるので、以後の更新作業は不要。
+
+   引数（どれも省略可）
+     count … 表示件数（既定6）
+     cat   … カテゴリーのスラッグ（既定 workshop-photo）
+   例： [kaon_workshop_cases count="3"]
+
+   ★タイトル先頭の【京念珠作りワークショップ写真】は冗長なので表示時に取り除く。
+   ★本文に「この商品についてお問い合わせ」というボタンの文言が混ざるので、抜粋から除外する。 */
+add_shortcode( 'kaon_workshop_cases', 'kaon_workshop_cases_shortcode' );
+function kaon_workshop_cases_shortcode( $atts ) {
+
+	$atts = shortcode_atts(
+		array(
+			'count' => 6,
+			'cat'   => 'workshop-photo',
+		),
+		$atts,
+		'kaon_workshop_cases'
+	);
+
+	$q = new WP_Query(
+		array(
+			'category_name'       => sanitize_title( $atts['cat'] ),
+			'posts_per_page'      => (int) $atts['count'],
+			'post_status'         => 'publish',
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+		)
+	);
+
+	if ( ! $q->have_posts() ) {
+		wp_reset_postdata();
+		return '';
+	}
+
+	$cat      = get_category_by_slug( sanitize_title( $atts['cat'] ) );
+	$cat_link = $cat ? get_category_link( $cat->term_id ) : '';
+
+	ob_start();
+	?>
+	<div class="kaon-cases">
+		<ul class="kaon-cases__list">
+		<?php
+		while ( $q->have_posts() ) :
+			$q->the_post();
+
+			// 先頭の【…】を外す
+			$title = preg_replace( '/^【[^】]*】\s*/u', '', get_the_title() );
+
+			// 本文の冒頭。ボタンの文言と記号を除いてから詰める
+			$text = wp_strip_all_tags( get_the_content(), true );
+			$text = str_replace( 'この商品についてお問い合わせ', '', $text );
+			$text = preg_replace( '/^\s*【[^】]*】\s*/u', '', trim( $text ) );
+			$text = wp_trim_words( $text, 60, '…' );
+			?>
+			<li class="kaon-cases__item">
+				<a class="kaon-cases__link" href="<?php the_permalink(); ?>">
+					<?php if ( has_post_thumbnail() ) : ?>
+						<span class="kaon-cases__thumb"><?php the_post_thumbnail( 'medium_large' ); ?></span>
+					<?php endif; ?>
+					<span class="kaon-cases__body">
+						<span class="kaon-cases__date"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></span>
+						<span class="kaon-cases__title"><?php echo esc_html( $title ); ?></span>
+						<span class="kaon-cases__text"><?php echo esc_html( $text ); ?></span>
+					</span>
+				</a>
+			</li>
+		<?php endwhile; ?>
+		</ul>
+
+		<?php if ( $cat_link ) : ?>
+		<p class="kaon-cases__more">
+			<a href="<?php echo esc_url( $cat_link ); ?>">体験のようすをもっと見る</a>
+		</p>
+		<?php endif; ?>
+	</div>
+	<?php
+	wp_reset_postdata();
+
+	return ob_get_clean();
+}
+
+
+/* 体験事例カードの見た目。LPはElementorなので、テーマ側のCSSに影響されないよう
+   .kaon-cases 配下で完結させている。 */
+add_action( 'wp_head', 'kaon_workshop_cases_style', 100 );
+function kaon_workshop_cases_style() {
+	?>
+	<style>
+	.kaon-cases { margin: 0 auto; max-width: 1100px; }
+	.kaon-cases__list {
+		display: grid;
+		grid-template-columns: repeat( 3, 1fr );
+		gap: 28px 24px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.kaon-cases__item { margin: 0; padding: 0; list-style: none; }
+	.kaon-cases__link {
+		display: block;
+		color: inherit;
+		text-decoration: none;
+		height: 100%;
+	}
+	.kaon-cases__thumb {
+		display: block;
+		overflow: hidden;
+		margin-bottom: 14px;
+		background: #f4f1ec;
+		aspect-ratio: 4 / 3;
+	}
+	.kaon-cases__thumb img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform .4s ease;
+	}
+	.kaon-cases__link:hover .kaon-cases__thumb img { transform: scale( 1.04 ); }
+	.kaon-cases__body { display: block; }
+	.kaon-cases__date {
+		display: block;
+		margin-bottom: .4em;
+		color: #a08b5a;
+		font-size: 13px;
+		letter-spacing: .08em;
+	}
+	.kaon-cases__title {
+		display: block;
+		margin-bottom: .5em;
+		font-size: 17px;
+		font-weight: bold;
+		line-height: 1.6;
+	}
+	.kaon-cases__text {
+		display: block;
+		font-size: 14px;
+		line-height: 1.9;
+		color: #555;
+	}
+	.kaon-cases__more { margin: 2.4em 0 0; text-align: center; }
+	.kaon-cases__more a {
+		display: inline-block;
+		padding: .8em 2.4em;
+		border: 1px solid #bfa14a;
+		color: #8a6d2f;
+		font-size: 15px;
+		letter-spacing: .06em;
+		text-decoration: none;
+		transition: background .3s ease, color .3s ease;
+	}
+	.kaon-cases__more a:hover { background: #bfa14a; color: #fff; }
+
+	@media screen and (max-width: 900px) {
+		.kaon-cases__list { grid-template-columns: repeat( 2, 1fr ); gap: 24px 18px; }
+	}
+	@media screen and (max-width: 600px) {
+		.kaon-cases__list { grid-template-columns: 1fr; gap: 26px; }
+		.kaon-cases__title { font-size: 16px; }
+	}
+	</style>
+	<?php
+}
+
+
 /* PHPメモリ上限の引き上げ
    WordPress 7.1 + Elementor で /service/workshop/ が既定の128Mを超えて500になるため。
    管理画面は WP_MAX_MEMORY_LIMIT により既に256Mで動いているので、フロントも揃える。 */
