@@ -651,17 +651,35 @@ function kaon_archive_list_style() {
 		gap: 56px 36px;
 		font-family: "Shippori Mincho", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Noto Serif JP", serif;
 	}
-	.info-list .list { width: auto; margin: 0; float: none; }
+	/* ★親テーマ style.css は一覧を「サムネイル左35%フロート＋本文 margin-left:40%」の
+	   横並びレイアウトで組んでいる。カード化するには float と 40% の余白を
+	   ここで明示的に打ち消す必要がある（宣言し忘れると親テーマの値が残る）。 */
+	.info-list .list {
+		width: auto;
+		margin: 0;
+		padding: 0;
+		float: none;
+		border-bottom: none;
+	}
+	/* マークアップ順は サムネイル→タイトル→日付→抜粋。
+	   日付を先に出したいので flex の order で入れ替える。 */
 	.info-list .list > a {
-		display: block;
+		display: flex;
+		flex-direction: column;
 		height: 100%;
 		color: inherit;
 		text-decoration: none;
 	}
+	.info-list .thumbnail { order: 1; }
+	.info-list .date      { order: 2; }
+	.info-list .title     { order: 3; }
+	.info-list .excerpt   { order: 4; }
 	.info-list .thumbnail {
 		display: block;
+		float: none;
+		width: 100%;
 		overflow: hidden;
-		margin-bottom: 20px;
+		margin: 0 0 20px;
 		background: #f2efe9;
 		aspect-ratio: 3 / 4;
 	}
@@ -677,7 +695,9 @@ function kaon_archive_list_style() {
 
 	.info-list .date {
 		display: block;
-		margin-bottom: .9em;
+		margin: 0 0 .9em;
+		padding: 0;
+		border: none;
 		color: #a89770;
 		font-size: 12px;
 		letter-spacing: .18em;
@@ -686,7 +706,7 @@ function kaon_archive_list_style() {
 	.info-list .date i { display: none; }
 	.info-list .title {
 		display: block;
-		margin-bottom: .8em;
+		margin: 0 0 .8em;
 		font-size: 17px;
 		font-weight: 500;
 		line-height: 1.9;
@@ -694,11 +714,12 @@ function kaon_archive_list_style() {
 		color: #2b2724;
 	}
 	.info-list .excerpt {
+		margin: 0;
 		font-size: 13.5px;
 		line-height: 2;
 		color: #6b645c;
 	}
-	.info-list .excerpt p { margin: 0; }
+	.info-list .excerpt p { margin: 0; font-size: 13.5px; line-height: 2; }
 
 	@media screen and (max-width: 900px) {
 		.info-list { grid-template-columns: repeat( 2, 1fr ); gap: 44px 24px; }
@@ -707,7 +728,8 @@ function kaon_archive_list_style() {
 		.info-list { grid-template-columns: repeat( 2, 1fr ); gap: 32px 16px; }
 		.info-list .thumbnail { margin-bottom: 14px; }
 		.info-list .title { font-size: 14px; line-height: 1.8; }
-		.info-list .excerpt { font-size: 12px; line-height: 1.9; }
+		.info-list .excerpt, .info-list .excerpt p { font-size: 12px; line-height: 1.9; }
+		.info-list .date { font-size: 11px; }
 	}
 	</style>
 	<?php
