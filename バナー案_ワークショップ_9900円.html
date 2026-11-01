@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ワークショップLP トップバナー案</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2118; --ink-sub:#6b655d; --gold:#a89770;
+    --paper:#faf7f2; --line:#e7ddcf;
+    --mincho:"Shippori Mincho","Yu Mincho",YuMincho,"Hiragino Mincho ProN","Noto Serif JP",serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#efece6;color:var(--ink);font-family:var(--mincho)}
+  .wrap{max-width:1180px;margin:0 auto;padding:40px 20px 80px}
+  .lead{font-size:14px;line-height:2;color:#4a4038;background:#fff;border:1px solid var(--line);padding:20px 24px;margin-bottom:40px}
+  .lead b{color:#9a3b2f}
+  h2.label{font-size:15px;letter-spacing:.2em;margin:56px 0 4px;color:var(--ink)}
+  h2.label span{display:inline-block;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.18em;padding:4px 10px;margin-right:12px;vertical-align:3px}
+  .note{font-size:12.5px;line-height:1.9;color:var(--ink-sub);margin:0 0 16px}
+  .stage{border:1px solid var(--line);background:#000;overflow:hidden}
+
+  /* ---------- 共通：ヒーロー ---------- */
+  .hero{position:relative;height:560px;display:flex;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.02)}
+  .hero::after{content:"";position:absolute;inset:0}
+  .hero > *{position:relative;z-index:2}
+  .shot1::before{background-image:url(https://kyo-kaon.jp/wp-content/uploads/2025/01/0049-scaled.jpg)}
+  .shot2::before{background-image:url(https://kyo-kaon.jp/wp-content/uploads/2025/01/BK2A0321-scaled.jpg)}
+  .shot3::before{background-image:url(https://kyo-kaon.jp/wp-content/uploads/2025/01/0091-scaled.jpg)}
+
+  /* ---------- A ---------- */
+  .a{align-items:center;justify-content:center;text-align:center}
+  .a::after{background:linear-gradient(180deg,rgba(20,14,8,.42),rgba(20,14,8,.18) 40%,rgba(20,14,8,.66))}
+  .a__in{color:#fff;padding:0 24px}
+  .a__eyebrow{font-size:12px;letter-spacing:.42em;margin:0 0 22px;color:#f0e6d6;text-indent:.42em}
+  .a__h1{font-size:40px;line-height:1.75;font-weight:500;margin:0;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+  .a__rule{width:1px;height:46px;background:rgba(255,255,255,.5);margin:30px auto}
+  .a__price{display:inline-flex;align-items:baseline;gap:4px;color:#fff}
+  .a__num{font-size:68px;line-height:1;letter-spacing:.01em;text-shadow:0 2px 20px rgba(0,0,0,.55)}
+  .a__yen{font-size:22px}
+  .a__tax{font-size:13px;color:#e8dcc8;margin-left:10px}
+  .a__facts{list-style:none;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:0;margin:26px 0 0}
+  .a__facts li{font-size:12.5px;color:#fff;border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:5px 15px;backdrop-filter:blur(2px)}
+  .a__cta{display:inline-block;margin-top:32px;background:#9a3b2f;color:#fff;text-decoration:none;font-size:15px;letter-spacing:.14em;padding:15px 52px}
+
+  /* ---------- B ---------- */
+  .b{align-items:stretch}
+  .b::after{background:linear-gradient(90deg,rgba(18,13,8,.78) 0%,rgba(18,13,8,.52) 42%,rgba(18,13,8,.1) 100%)}
+  .b__in{display:flex;flex-direction:column;justify-content:center;padding:0 clamp(28px,6vw,86px);max-width:720px;color:#fff}
+  .b__eyebrow{font-size:11.5px;letter-spacing:.38em;color:#e3d4bb;margin:0 0 20px}
+  .b__h1{font-size:36px;line-height:1.8;font-weight:500;margin:0 0 26px}
+  .b__card{display:inline-block;background:rgba(250,247,242,.95);color:var(--ink);padding:22px 28px;max-width:430px}
+  .b__row{display:flex;align-items:baseline;gap:6px}
+  .b__num{font-size:54px;line-height:1}
+  .b__yen{font-size:18px}
+  .b__per{font-size:13px;color:var(--ink-sub);margin-left:8px}
+  .b__meta{margin:12px 0 0;font-size:13px;color:#4a4038;line-height:1.9;border-top:1px solid var(--line);padding-top:12px}
+  .b__cta{display:block;margin-top:16px;background:#9a3b2f;color:#fff;text-align:center;text-decoration:none;font-size:15px;letter-spacing:.14em;padding:14px 0}
+
+  /* ---------- C ---------- */
+  .c{align-items:flex-end}
+  .c::after{background:linear-gradient(180deg,rgba(20,14,8,.3),rgba(20,14,8,.05) 45%,rgba(20,14,8,.72))}
+  .c__in{width:100%;padding:0 0 0 0}
+  .c__title{color:#fff;text-align:center;font-size:34px;line-height:1.8;margin:0 0 28px;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+  .c__bar{background:rgba(250,247,242,.96);border-top:1px solid var(--line);padding:20px 16px}
+  .c__barin{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap}
+  .c__price{display:flex;align-items:baseline;gap:4px}
+  .c__num{font-size:46px;line-height:1}
+  .c__yen{font-size:16px}
+  .c__per{font-size:13px;color:var(--ink-sub);margin-left:6px}
+  .c__facts{list-style:none;display:flex;gap:9px;flex-wrap:wrap;margin:0;padding:0}
+  .c__facts li{font-size:12.5px;color:#4a4038;border:1px solid #d9cdbb;border-radius:999px;padding:5px 13px;background:#fff}
+  .c__cta{background:#9a3b2f;color:#fff;text-decoration:none;font-size:14.5px;letter-spacing:.14em;padding:14px 38px}
+  .c__old{font-size:12.5px;color:#8a8279;margin-left:10px}
+  .c__old s{color:#a9a098}
+
+  /* ---------- スマホ比較 ---------- */
+  .sp{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px}
+  .sp figure{margin:0;width:300px}
+  .sp figcaption{font-size:12px;color:var(--ink-sub);padding:8px 2px;line-height:1.7}
+  .sp .stage{background:#000}
+  .sp .hero{height:480px}
+  .sp .a__h1{font-size:23px}
+  .sp .a__num{font-size:46px}
+  .sp .a__eyebrow{font-size:10px;letter-spacing:.3em}
+  .sp .a__facts li{font-size:11px;padding:4px 11px}
+  .sp .a__cta{font-size:13.5px;padding:13px 34px;margin-top:24px}
+  .sp .b__in{padding:0 22px;max-width:none}
+  .sp .b__h1{font-size:22px;margin-bottom:18px}
+  .sp .b__num{font-size:40px}
+  .sp .b__card{padding:16px 18px}
+  .sp .c__title{font-size:21px;margin-bottom:18px}
+  .sp .c__num{font-size:36px}
+  .sp .c__barin{gap:14px}
+  .sp .c__cta{padding:12px 28px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="lead">
+    ワークショップLP（<b>/service/workshop/</b>）トップバナーの3案です。料金は <b>9,900円（税込）</b> で入れています。<br>
+    写真は現在スライダーで使われている本番画像をそのまま読み込んでいます。<strong>このファイルはブラウザで開いてください</strong>（写真はサイトから読み込むため、ネット接続が必要です）。<br>
+    現状はトップのスライダーに料金が入っておらず、価格は下の帯で初めて出てきます。3案とも<strong>ファーストビューの中に9,900円を入れる</strong>方針です。書体は現行LPに合わせて明朝（Shippori Mincho）。
+  </p>
+
+  <!-- A -->
+  <h2 class="label"><span>A案</span>中央・一枚絵</h2>
+  <p class="note">いまの構成に一番近い案。中央の見出しの下に細い罫を入れ、価格を大きく置く。写真の邪魔をせず、価格と「60分・手ぶら・1名から」が一目で入る。<strong>変更がいちばん小さく、失敗しにくい。</strong></p>
+  <div class="stage">
+    <div class="hero shot1 a">
+      <div class="a__in">
+        <p class="a__eyebrow">京都・上賀茂　喜芳工房</p>
+        <h1 class="a__h1">京念珠の美術館で作る、<br>想いを込めた京念珠ブレスレット。</h1>
+        <div class="a__rule"></div>
+        <div class="a__price"><span class="a__num">9,900</span><span class="a__yen">円</span><span class="a__tax">（税込）/ お一人様</span></div>
+        <ul class="a__facts"><li>所要 約60分</li><li>手ぶらでOK</li><li>1名様から</li><li>土日祝も予約可</li></ul>
+        <div><a class="a__cta" href="#">体験を予約する</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B -->
+  <h2 class="label"><span>B案</span>左寄せ・予約カード</h2>
+  <p class="note">写真を右に逃がし、左に見出しと料金カードを置く。<strong>価格と予約ボタンが同じ箱に入るので、いちばん「申し込みやすい」形。</strong>スマホでは上下に積む。広告をまた回すときはこの型が強い。</p>
+  <div class="stage">
+    <div class="hero shot2 b">
+      <div class="b__in">
+        <p class="b__eyebrow">数珠ブレスレット作り体験</p>
+        <h1 class="b__h1">京念珠の美術館で作る、<br>想いを込めた一本。</h1>
+        <div class="b__card">
+          <div class="b__row"><span class="b__num">9,900</span><span class="b__yen">円</span><span class="b__per">（税込）/ お一人様</span></div>
+          <p class="b__meta">所要 約60分 ／ 手ぶらでOK ／ 1名様から<br>地下鉄北山駅から徒歩12分・土日祝も予約可</p>
+          <a class="b__cta" href="#">体験を予約する</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C -->
+  <h2 class="label"><span>C案</span>写真を大きく・帯を一体化</h2>
+  <p class="note">見出しは写真の上に控えめに置き、<strong>いま写真の下にある料金の帯をファーストビューの中に引き上げる</strong>案。写真の良さを一番残せる。現行の帯のデザインをほぼ流用するので、作る手間も小さい。</p>
+  <div class="stage">
+    <div class="hero shot3 c">
+      <div class="c__in">
+        <h1 class="c__title">京念珠の美術館で作る、<br>想いを込めた京念珠ブレスレット。</h1>
+        <div class="c__bar">
+          <div class="c__barin">
+            <div class="c__price"><span class="c__num">9,900</span><span class="c__yen">円</span><span class="c__per">（税込）/ お一人様</span></div>
+            <ul class="c__facts"><li>所要 約60分</li><li>手ぶらでOK</li><li>1名様から</li><li>土日祝も予約可</li></ul>
+            <a class="c__cta" href="#">予約する</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スマホ -->
+  <h2 class="label"><span>参考</span>スマホでの見え方</h2>
+  <p class="note">予約の大半はスマホからです（10/8の予約もGoogleアプリ経由でした）。縦でも価格が折り返さないか確認用。</p>
+  <div class="sp">
+    <figure>
+      <div class="stage">
+        <div class="hero shot1 a">
+          <div class="a__in">
+            <p class="a__eyebrow">京都・上賀茂</p>
+            <h1 class="a__h1">京念珠の美術館で作る、<br>想いを込めた一本。</h1>
+            <div class="a__rule"></div>
+            <div class="a__price"><span class="a__num">9,900</span><span class="a__yen">円</span></div>
+            <ul class="a__facts"><li>約60分</li><li>手ぶらOK</li><li>1名様から</li></ul>
+            <div><a class="a__cta" href="#">体験を予約する</a></div>
+          </div>
+        </div>
+      </div>
+      <figcaption>A案</figcaption>
+    </figure>
+    <figure>
+      <div class="stage">
+        <div class="hero shot2 b">
+          <div class="b__in">
+            <p class="b__eyebrow">数珠ブレスレット作り体験</p>
+            <h1 class="b__h1">京念珠の美術館で作る、<br>想いを込めた一本。</h1>
+            <div class="b__card">
+              <div class="b__row"><span class="b__num">9,900</span><span class="b__yen">円</span><span class="b__per">（税込）</span></div>
+              <p class="b__meta">約60分 ／ 手ぶらでOK ／ 1名様から</p>
+              <a class="b__cta" href="#">体験を予約する</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption>B案</figcaption>
+    </figure>
+    <figure>
+      <div class="stage">
+        <div class="hero shot3 c">
+          <div class="c__in">
+            <h1 class="c__title">京念珠の美術館で作る、<br>想いを込めた一本。</h1>
+            <div class="c__bar">
+              <div class="c__barin">
+                <div class="c__price"><span class="c__num">9,900</span><span class="c__yen">円</span></div>
+                <ul class="c__facts"><li>約60分</li><li>手ぶらOK</li><li>1名様から</li></ul>
+                <a class="c__cta" href="#">予約する</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption>C案</figcaption>
+    </figure>
+  </div>
+
+</div>
+</body>
+</html>

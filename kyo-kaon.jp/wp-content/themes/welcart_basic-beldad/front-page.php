@@ -137,7 +137,12 @@ get_header(); ?>
 										<div class="list post-461 post type-post status-publish format-standard has-post-thumbnail category-case">
 											<a href="https://kyo-kaon.jp/service/workshop/">
 												<span class="thumbnail">
-													<img src="https://kyo-kaon.jp/common/img/service_workshop.jpg" sizes="(max-width: 500px) 100vw, 500px">
+													<?php /* ★2026-11-01 料金改定（8,800円→9,900円）にともない差し替え。
+														旧: /common/img/service_workshop.jpg（8,800円が画像に焼き込まれていた）
+														/common/ はWeb直下でGit管理外＝Actionsで配信できないため、
+														新バナーはメディアライブラリ（uploads）に置いて参照している。
+														差し替えるときは管理画面でアップロードし、このURLを書き換えること。 */ ?>
+													<img src="https://kyo-kaon.jp/wp-content/uploads/2026/11/banner-workshop-9900.jpg" sizes="(max-width: 500px) 100vw, 500px" alt="京念珠ブレス作り体験 9,900円（税込）所要約60分・手ぶらでOK・1名様から">
 												</span>
 												<h3 class="title">京念珠ブレスレット作り体験 受付中！</h3>
 											</a>
