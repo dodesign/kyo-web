@@ -98,7 +98,9 @@
 		function jump(k) { move(function () { return PAD + k; }); }
 
 		var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		function play() { clearInterval(timer); if (!reduce) timer = setInterval(function () { step(1); }, 5000); }
+		// 自動送りの間隔。2026-11-02 5秒→3.8秒（沙織さん指示）
+		var INTERVAL = 3800;
+		function play() { clearInterval(timer); if (!reduce) timer = setInterval(function () { step(1); }, INTERVAL); }
 		function stop() { clearInterval(timer); }
 
 		root.addEventListener('mouseenter', stop);
@@ -144,8 +146,41 @@
 		play();
 	}
 
+
+	/* ---------- スクロールで ふわっと出す ----------
+	   対象は下の SELECTOR。JSが動いたときだけ kn-rv を付けるので、JSが止まっても中身は見える。
+	   同じ親の中で並んでいるもの（カードなど）は、少しずつ遅らせて順番に出す。 */
+	var REVEAL = [
+		'.kn-home .kn-head', '.kn-news__list li', '.kn-item', '.kn-cat', '.kn-om__text', '.kn-om__works > a',
+		'.kn-post', '.kn-blog__lead', '.kn-ft-contact__in', '.kn-ft-shops .kn-head', '.kn-shop',
+		'.kn-page [data-rv]', '.kn-arc .kn-head', '.kn-arc__chips'
+	].join(',');
+	function initReveal() {
+		if (!('IntersectionObserver' in window)) return;
+		if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		var els = Array.prototype.slice.call(document.querySelectorAll(REVEAL));
+		if (!els.length) return;
+		var io = new IntersectionObserver(function (entries) {
+			entries.forEach(function (en) {
+				if (!en.isIntersecting) return;
+				en.target.classList.add('is-in');
+				io.unobserve(en.target);
+			});
+		}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+		els.forEach(function (el) {
+			// すでに画面内にあるもの（読み込み直後に見えている部分）は即表示
+			var r = el.getBoundingClientRect();
+			if (r.top < window.innerHeight * 0.92 && r.bottom > 0) return;
+			var sib = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+			el.style.transitionDelay = Math.min(sib % 4, 3) * 90 + 'ms';
+			el.classList.add('kn-rv');
+			io.observe(el);
+		});
+	}
+
 	function init() {
 		initMenu();
+		initReveal();
 		var cs = document.querySelectorAll('[data-kn-fc]');
 		for (var i = 0; i < cs.length; i++) initCarousel(cs[i]);
 	}

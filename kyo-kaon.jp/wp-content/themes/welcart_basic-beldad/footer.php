@@ -41,7 +41,12 @@
 					</div>
 				</section>
 
-				<section class="kn-ft-shops">
+				<?php
+				/* 店舗欄の背景：北山本店サロンの写真（06.画像素材/210421_サロン撮影（小藪さん）/0001.jpg → メディアID 8048）。
+				   差し替えるときはIDを変える。 */
+				$kn_shops_bg = wp_get_attachment_image_url( 8048, '1536x1536' );
+				?>
+				<section class="kn-ft-shops"<?php if ( $kn_shops_bg ) : ?> style="--kn-shops-bg:url('<?php echo esc_url( $kn_shops_bg ); ?>')"<?php endif; ?>>
 					<div class="kn-wrap">
 						<div class="kn-head kn-head--solo"><h2><small>SHOPS</small>店舗のご案内</h2></div>
 						<p class="kn-ft-shops__lead">お品を手に取ってご覧いただけます。</p>

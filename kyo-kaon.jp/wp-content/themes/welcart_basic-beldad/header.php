@@ -75,7 +75,7 @@
 						</a>
 					</<?php echo $kn_tag; ?>>
 
-					<?php if ( ! $kn_is_cart ) : /* カート・購入手続き中はメニューを出さない（旧ヘッダーと同じ） */ ?>
+					<?php /* 2026-11-02 沙織さんの指示でカート・購入手続き中もメニューを出す（旧ヘッダーは隠していた） */ if ( true ) : ?>
 					<nav class="kn-hd__nav" aria-label="メインメニュー">
 						<?php wp_nav_menu( array( 'theme_location' => 'header', 'container' => false, 'menu_class' => 'kn-hd__menu', 'menu_id' => 'kn-hd-menu', 'depth' => 2, 'fallback_cb' => false ) ); ?>
 					</nav>
@@ -91,7 +91,7 @@
 				</div>
 			</header>
 
-			<?php if ( ! $kn_is_cart ) : ?>
+			<?php if ( true ) : ?>
 			<div id="kn-spmenu" class="kn-spmenu" aria-hidden="true">
 				<div class="kn-spmenu__top">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( wcct_get_options( 'logo' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"></a>

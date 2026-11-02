@@ -3,7 +3,16 @@
  * @package Welcart
  * @subpackage Welcart Belded
  */
-get_header(); ?>
+get_header();
+
+/* 2026-11-02 リニューアル：商品カテゴリーは新しい一覧（template-parts/kaon-item-archive.php）で出す。
+   サイドバーも出さない。ブログなど記事のカテゴリーは、このファイルの下の旧来の処理のまま。 */
+if ( usces_is_cat_of_item( get_query_var( 'cat' ) ) ) {
+	get_template_part( 'template-parts/kaon-item-archive' );
+	get_footer();
+	return;
+}
+?>
 
 		<div id="primary" class="site-content">
 			<div id="content" role="main">

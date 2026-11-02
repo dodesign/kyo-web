@@ -109,6 +109,7 @@ html.kn-lock,html.kn-lock body{overflow:hidden !important}
 .kn-fc{position:relative;padding:48px 0 36px;background:var(--kn-paper)}
 .kn-fc__viewport{overflow:hidden}
 .kn-fc__track{display:flex;gap:22px;transition:transform .9s cubic-bezier(.2,.75,.2,1);will-change:transform}
+.kn-fc__slide,.kn-fc__slide:hover,.kn-fc__slide:focus,.kn-fc__slide:visited{color:#fff !important}
 .kn-fc__slide{flex:0 0 70vw;max-width:1180px;aspect-ratio:16/9;max-height:664px;position:relative;overflow:hidden;opacity:.4;transition:opacity .9s ease;background:#111;color:#fff;display:block}
 .kn-fc__slide.is-active{opacity:1}
 .kn-fc__slide .kn-fc__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 6s ease}
@@ -170,6 +171,7 @@ html.kn-lock,html.kn-lock body{overflow:hidden !important}
    ⑤ 念珠をさがす
    ========================================================= */
 .kn-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.kn-cat,.kn-cat:hover,.kn-cat:focus,.kn-cat:visited{color:#fff !important}
 .kn-cat{position:relative;display:block;aspect-ratio:3/2;overflow:hidden;background:#111;color:#fff}
 .kn-cat .kn-cat__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;transition:transform 1.2s ease,opacity .6s}
 .kn-cat:hover .kn-cat__img{transform:scale(1.05);opacity:.68}
@@ -201,13 +203,13 @@ html.kn-lock,html.kn-lock body{overflow:hidden !important}
 
 /* =========================================================
    ③ ブログ
-   サムネイルは縦長9:16のインスタ表紙。下1/4は余白なので、上から3:4で切ると
-   写真＋表紙のタイトル＋ロゴがちょうど収まる（/blog/ 一覧のカードとも同じ比率）
+   サムネイルは縦長9:16のインスタ表紙。上から切り出して見せる。
+   3:4だと下のロゴ「喜芳工房」が切れたので 2:3 にした（9:16の上84%が見える）。
    ========================================================= */
 .kn-blog__lead{font-size:14px;line-height:2;color:var(--kn-sub);margin:-14px 0 30px}
 .kn-posts{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
 .kn-post{display:block;color:var(--kn-ink)}
-.kn-post__img{display:block;aspect-ratio:3/4;overflow:hidden;background:#eee;position:relative}
+.kn-post__img{display:block;aspect-ratio:2/3;overflow:hidden;background:#eee;position:relative}
 .kn-post__img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s ease}
 .kn-post:hover .kn-post__img img{transform:scale(1.04)}
 .kn-post__tag{position:absolute;left:10px;top:10px;font-size:10px;letter-spacing:.14em;background:rgba(255,255,255,.92);color:var(--kn-ink);padding:3px 8px}
@@ -235,7 +237,12 @@ html.kn-lock,html.kn-lock body{overflow:hidden !important}
 .kn-ft-btn::after{content:"→";font-family:sans-serif}
 .kn-ft-contact__cols span{display:block;font-size:12px;color:#cfc4b2;margin-top:10px;letter-spacing:.1em}
 
-.kn-ft-shops{background:var(--kn-paper);padding:84px 0}
+.kn-ft-shops{position:relative;padding:96px 0;background:var(--kn-paper)}
+/* 背景はサロンの写真（footer.php で --kn-shops-bg に入れている）。紙色を薄く重ねてカードを読みやすく */
+.kn-ft-shops::before{content:"";position:absolute;inset:0;background:var(--kn-shops-bg) center/cover no-repeat;opacity:.55}
+.kn-ft-shops::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,247,242,.72),rgba(250,247,242,.55))}
+.kn-ft-shops > .kn-wrap{position:relative;z-index:1}
+.kn-shop{box-shadow:0 18px 40px rgba(43,33,24,.08)}
 .kn-ft-shops__lead{font-size:14px;line-height:2;color:var(--kn-sub);margin:-6px 0 30px}
 .kn-ft-shops__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
 .kn-shop{background:#fff;border:1px solid var(--kn-line);padding:34px 34px 30px;color:var(--kn-ink)}
@@ -321,6 +328,158 @@ html.kn-lock,html.kn-lock body{overflow:hidden !important}
 	.kn-ft-main__grid{grid-template-columns:repeat(4,1fr)}
 	.kn-ft-brand{grid-column:1 / -1}
 }
+
+
+/* =========================================================
+   共通：ページ上部・ボタン・横幅いっぱいのページ
+   ========================================================= */
+/* サイドバーを出さないページ（商品一覧・こだわり）は #primary を全幅に */
+.kn-arc-page #main,.kn-wide-page #main{margin-left:0 !important;margin-right:0 !important}
+.kn-arc-page #primary,.kn-wide-page #primary{width:auto !important;max-width:none !important;float:none !important;margin:0 !important;padding:0 !important}
+.kn-arc-page #secondary,.kn-wide-page #secondary{display:none !important}
+.kn-arc-page .site-content-wrap,.kn-wide-page .site-content-wrap{max-width:none !important;width:auto !important}
+.kn-page,.kn-arc{font-family:var(--kn-M);color:var(--kn-ink)}
+.kn-page *,.kn-arc *{box-sizing:border-box}
+.kn-page a,.kn-arc a{text-decoration:none}
+.kn-page img,.kn-arc img{display:block;max-width:100%}
+
+/* ヘッダー下の検索バー（親テーマ .common-parts）を控えめに */
+.common-parts{background:transparent !important;border-bottom:1px solid var(--kn-line)}
+.common-parts .column1070{padding-top:10px !important;padding-bottom:10px !important}
+.common-parts #searchform input[type="text"],.common-parts #searchform input[type="search"]{border:1px solid var(--kn-line) !important;background:#fff !important;font-family:var(--kn-M)}
+.kn-arc-page .common-parts,.kn-wide-page .common-parts{display:none}
+
+.kn-btn{display:inline-flex;align-items:center;gap:12px;font-size:13.5px;letter-spacing:.16em;padding:15px 30px;transition:.3s;font-family:var(--kn-M)}
+.kn-btn::after{content:"→";font-family:sans-serif}
+.kn-btn--light{background:#fff;color:var(--kn-ink) !important}
+.kn-btn--light:hover{background:var(--kn-paper)}
+.kn-btn--line{border:1px solid rgba(255,255,255,.8);color:#fff !important}
+.kn-btn--line:hover{background:#fff;color:var(--kn-ink) !important}
+
+/* 写真の上にタイトルを置くページ見出し */
+.kn-pghero{position:relative;min-height:min(62vh,560px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#1e1915}
+.kn-pghero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;animation:kn-zoom 14s ease-out both}
+@keyframes kn-zoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+.kn-pghero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,.15) 0%,rgba(14,10,6,.25) 40%,rgba(14,10,6,.78) 100%)}
+.kn-pghero__body{position:relative;z-index:1;max-width:1080px;width:100%;margin:0 auto;padding:0 28px 64px}
+.kn-pghero__eyebrow{font-size:11.5px;letter-spacing:.4em;color:#e4d4b4;margin:0 0 14px;display:flex;align-items:center;gap:12px}
+.kn-pghero__eyebrow::before{content:"";width:28px;height:1px;background:#e4d4b4}
+.kn-pghero__title{font-family:var(--kn-M);font-size:clamp(28px,3.4vw,44px);font-weight:500;letter-spacing:.14em;line-height:1.4;margin:0 0 18px;color:#fff;padding:0;border:0}
+.kn-pghero__lead{font-size:15px;line-height:2.1;letter-spacing:.08em;margin:0;color:#f1e9dc}
+
+/* =========================================================
+   喜芳工房のこだわり
+   ========================================================= */
+.kn-craft__kiho{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:center}
+.kn-craft__portrait{margin:0}
+.kn-craft__portrait img{width:100%;height:auto;filter:grayscale(1) contrast(1.05)}
+.kn-craft__portrait figcaption,.kn-craft__wide figcaption{font-size:12px;letter-spacing:.2em;color:var(--kn-mute);margin-top:12px}
+.kn-timeline{list-style:none;margin:0 0 26px;padding:0;border-top:1px solid var(--kn-line)}
+.kn-timeline li{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--kn-line);font-size:14.5px;line-height:1.9;margin:0}
+.kn-timeline span{color:var(--kn-gold);letter-spacing:.1em;font-size:13px;padding-top:2px}
+.kn-craft__note{font-size:13px;line-height:2;color:var(--kn-sub);margin:0;padding-left:14px;border-left:2px solid var(--kn-gold)}
+.kn-craft__wide{margin:72px 0 0}
+.kn-craft__wide img{width:100%;aspect-ratio:21/9;object-fit:cover}
+.kn-craft__koubou{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.kn-craft__p{font-size:15px;line-height:2.1;color:#4a4038;margin:0 0 18px}
+.kn-craft__roles{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--kn-line);border-bottom:1px solid var(--kn-line)}
+.kn-craft__roles li{text-align:center;padding:18px 4px;font-size:15px;letter-spacing:.12em;position:relative;margin:0}
+.kn-craft__roles li + li::before{content:"";position:absolute;left:0;top:28%;bottom:28%;width:1px;background:var(--kn-line)}
+.kn-craft__roles span{display:block;font-size:10.5px;letter-spacing:.24em;color:var(--kn-gold);margin-bottom:6px}
+.kn-craft__mosaic{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kn-craft__mosaic img{width:100%;height:100%;object-fit:cover;aspect-ratio:1}
+.kn-craft__mosaic img.is-main{grid-column:1 / -1;aspect-ratio:3/2}
+.kn-tech{display:grid;gap:72px}
+.kn-tech__item{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center}
+.kn-tech__item:nth-child(even) .kn-tech__img{order:2}
+.kn-tech__img{background:#f3efe8;overflow:hidden}
+.kn-tech__img img{width:100%;height:auto;transition:transform 1.4s ease}
+.kn-tech__item:hover .kn-tech__img img{transform:scale(1.03)}
+.kn-tech__no{font-size:40px;line-height:1;color:var(--kn-gold);letter-spacing:.04em;margin:0 0 14px;font-weight:400}
+.kn-tech__t{font-family:var(--kn-M);font-size:21px;font-weight:500;letter-spacing:.1em;line-height:1.6;margin:0 0 18px;color:var(--kn-ink);padding:0;border:0}
+.kn-tech__t::before,.kn-tech__t::after{display:none}
+.kn-tech__body p{font-size:14.5px;line-height:2.05;color:#4a4038;margin:0 0 10px}
+.kn-tech__note{font-size:12.5px !important;color:var(--kn-accent) !important;margin-top:16px !important;padding-left:14px;border-left:2px solid var(--kn-accent)}
+.kn-craft__end{position:relative;min-height:440px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;background:#1e1915}
+.kn-craft__endimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.kn-craft__endbody{position:relative;z-index:1;padding:80px 24px}
+.kn-craft__endbody .kn-pghero__eyebrow{justify-content:center}
+.kn-craft__endbody h2{font-family:var(--kn-M);font-size:clamp(22px,2.6vw,32px);font-weight:500;letter-spacing:.16em;margin:0 0 34px;color:#fff;border:0;padding:0}
+.kn-craft__btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* data-rv（こだわりページなど）もスクロールで出す */
+[data-rv]{will-change:auto}
+
+/* =========================================================
+   商品一覧（/category/item/ 以下）
+   ========================================================= */
+.kn-arc__hero{background:var(--kn-paper);padding:56px 0 40px;border-bottom:1px solid var(--kn-line)}
+.kn-arc__crumb{font-size:12px;letter-spacing:.1em;color:var(--kn-mute);margin:0 0 22px}
+.kn-arc__crumb a{color:var(--kn-mute)}
+.kn-arc__crumb a:hover{color:var(--kn-ink)}
+.kn-arc__crumb span{margin:0 8px;color:#cfc3ae}
+.kn-arc__title{font-family:var(--kn-M);font-size:30px;font-weight:500;letter-spacing:.14em;line-height:1.4;margin:0;padding:0;border:0;color:var(--kn-ink)}
+.kn-arc__title small{display:block;font-size:11px;letter-spacing:.32em;color:var(--kn-gold);margin-bottom:10px;font-weight:400}
+.kn-arc__desc{font-size:14px;line-height:2;color:var(--kn-sub);max-width:760px;margin:0 0 12px}
+.kn-arc__desc p{margin:0 0 8px}
+.kn-arc__count{font-size:12.5px;letter-spacing:.14em;color:var(--kn-gold);margin:0}
+.kn-arc__chips{padding:22px 0 6px;border-bottom:1px solid var(--kn-line);background:#fff}
+.kn-arc__row{display:flex;align-items:baseline;gap:18px;margin-bottom:14px}
+.kn-arc__label{flex:0 0 88px;font-size:11.5px;letter-spacing:.2em;color:var(--kn-mute);padding-top:7px}
+.kn-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.kn-chips li{margin:0;padding:0}
+.kn-chip{display:inline-flex;align-items:baseline;gap:6px;font-size:13px;letter-spacing:.08em;color:var(--kn-ink) !important;border:1px solid var(--kn-line);background:#fff;padding:6px 14px;border-radius:999px;transition:.25s;white-space:nowrap}
+.kn-chip small{font-size:10.5px;color:var(--kn-mute)}
+.kn-chip:hover{border-color:var(--kn-gold)}
+.kn-chip.is-current{background:var(--kn-ink);border-color:var(--kn-ink);color:#fff !important}
+.kn-chip.is-current small{color:#cfc4b2}
+.kn-arc__more{margin:2px 0 14px}
+.kn-arc__more summary{cursor:pointer;font-size:12.5px;letter-spacing:.14em;color:var(--kn-sub);list-style:none;display:inline-flex;align-items:center;gap:8px;padding:4px 0}
+.kn-arc__more summary::-webkit-details-marker{display:none}
+.kn-arc__more summary::after{content:"＋";font-size:12px;color:var(--kn-gold)}
+.kn-arc__more[open] summary::after{content:"－"}
+.kn-arc__more[open] summary{margin-bottom:14px}
+.kn-arc__list{padding-top:48px}
+.kn-arc__none{text-align:center;color:var(--kn-sub);padding:60px 0}
+.kn-pager{margin-top:64px;display:flex;justify-content:center}
+.kn-pager ul.page-numbers{display:flex;gap:8px;list-style:none;margin:0;padding:0;border:0;background:none}
+.kn-pager ul.page-numbers li{margin:0;padding:0;border:0;float:none}
+.kn-pager .page-numbers a,.kn-pager .page-numbers span{display:flex;align-items:center;justify-content:center;min-width:42px;height:42px;padding:0 8px;border:1px solid var(--kn-line);font-family:var(--kn-M);font-size:14px;color:var(--kn-ink) !important;background:#fff;transition:.25s}
+.kn-pager .page-numbers a:hover{border-color:var(--kn-gold)}
+.kn-pager .page-numbers span.current{background:var(--kn-ink);border-color:var(--kn-ink);color:#fff !important}
+.kn-pager .page-numbers span.dots{border:0;background:none}
+
+@media (max-width:768px){
+	.kn-pghero{min-height:420px}
+	.kn-pghero__body{padding:0 20px 44px}
+	.kn-pghero__lead{font-size:13.5px}
+	.kn-craft__kiho,.kn-craft__koubou{grid-template-columns:1fr;gap:34px}
+	.kn-craft__portrait{max-width:320px;margin:0 auto}
+	.kn-timeline li{grid-template-columns:96px 1fr;gap:12px;font-size:13.5px}
+	.kn-craft__wide{margin-top:44px}
+	.kn-craft__wide img{aspect-ratio:4/3}
+	.kn-craft__p{font-size:14px}
+	.kn-tech{gap:52px}
+	.kn-tech__item{grid-template-columns:1fr;gap:22px}
+	.kn-tech__item:nth-child(even) .kn-tech__img{order:0}
+	.kn-tech__no{font-size:32px;margin-bottom:8px}
+	.kn-tech__t{font-size:18px}
+	.kn-tech__body p{font-size:13.5px}
+	.kn-craft__end{min-height:380px}
+	.kn-btn{width:100%;justify-content:center}
+	.kn-arc__hero{padding:36px 0 28px}
+	.kn-arc__title{font-size:23px}
+	.kn-arc__row{flex-direction:column;gap:8px}
+	.kn-arc__label{flex:none;padding:0}
+	.kn-arc__row .kn-chips{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+	.kn-ft-shops{padding:64px 0}
+}
+
+/* スクロールで出す（kaon-site.js が kn-rv を付ける） */
+.kn-rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.75,.2,1)}
+.kn-rv.is-in{opacity:1;transform:none}
+
 @media (prefers-reduced-motion:reduce){
+	.kn-rv{opacity:1 !important;transform:none !important}
 	.kn-fc__track,.kn-fc__slide,.kn-fc__img{transition:none !important}
 }

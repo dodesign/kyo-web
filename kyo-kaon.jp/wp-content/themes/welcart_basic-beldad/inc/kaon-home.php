@@ -106,6 +106,18 @@ function kaon_home_counts() {
    ここから下は部品（ふだんは触らない）
    ========================================================= */
 
+/** 商品カテゴリーの一覧ページに kn-arc-page を付ける（CSSで全幅レイアウトにするため） */
+add_filter( 'body_class', 'kaon_body_class_arc' );
+function kaon_body_class_arc( $classes ) {
+	if ( is_category() && function_exists( 'usces_is_cat_of_item' ) && usces_is_cat_of_item( get_query_var( 'cat' ) ) ) {
+		$classes[] = 'kn-arc-page';
+	}
+	if ( is_page( 'kihou-koubou' ) ) {
+		$classes[] = 'kn-wide-page';
+	}
+	return $classes;
+}
+
 /** 画像を ID または URL から <img> にする */
 function kaon_img( $img, $size = 'large', $alt = '', $attr = array() ) {
 	$attr = array_merge( array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => $alt ), $attr );
