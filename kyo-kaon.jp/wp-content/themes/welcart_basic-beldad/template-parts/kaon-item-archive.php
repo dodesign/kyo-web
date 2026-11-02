@@ -13,89 +13,122 @@ $kn_cat_id = (int) get_query_var( 'cat' );
 $kn_cat    = get_category( $kn_cat_id );
 $kn_root   = (int) usces_get_cat_id( 'item' );
 
-/** チップの列を出す */
-$kn_chips = function ( $terms, $current_id, $all = null ) {
-	if ( empty( $terms ) && ! $all ) {
-		return;
+$kn_st      = kaon_cat_structure();
+$kn_color   = get_category_by_slug( 'color-search' );
+$kn_material = get_category_by_slug( 'material-search' );
+$kn_color_id = $kn_color ? (int) $kn_color->term_id : 0;
+$kn_mat_id   = $kn_material ? (int) $kn_material->term_id : 0;
+
+/** チップの列を出す。$items は [ ID => 表示名(空ならカテゴリー名) ] */
+$kn_chips = function ( $items, $current_id ) use ( $kn_st ) {
+	$out = '';
+	foreach ( $items as $id => $label ) {
+		$t = get_category( $id );
+		if ( ! $t || is_wp_error( $t ) ) {
+			continue;
+		}
+		if ( 'all' !== $label && ! $t->count && $id !== $current_id ) {
+			continue; // 商品が無いカテゴリーは出さない
+		}
+		if ( ! $label || 'all' === $label ) {
+			$label = ( 'all' === $label ) ? 'すべて' : ( isset( $kn_st['labels'][ $id ] ) ? $kn_st['labels'][ $id ] : preg_replace( '/（.*?）|\(.*?\)/u', '', $t->name ) );
+			$count = ( 'すべて' === $label ) ? '' : '<small>' . (int) $t->count . '</small>';
+		} else {
+			$count = '<small>' . (int) $t->count . '</small>';
+		}
+		$cls  = ( $current_id === (int) $id ) ? ' is-current' : '';
+		$out .= '<li><a class="kn-chip' . $cls . '" href="' . esc_url( get_category_link( $t ) ) . '">' . esc_html( $label ) . $count . '</a></li>';
 	}
-	echo '<ul class="kn-chips">';
-	if ( $all ) {
-		$cls = ( $current_id === (int) $all['id'] ) ? ' is-current' : '';
-		echo '<li><a class="kn-chip' . $cls . '" href="' . esc_url( $all['url'] ) . '">' . esc_html( $all['label'] ) . '</a></li>';
+	if ( $out ) {
+		echo '<ul class="kn-chips">' . $out . '</ul>';
 	}
-	foreach ( $terms as $t ) {
-		$cls = ( $current_id === (int) $t->term_id ) ? ' is-current' : '';
-		echo '<li><a class="kn-chip' . $cls . '" href="' . esc_url( get_category_link( $t ) ) . '">' . esc_html( preg_replace( '/（.*?）|\(.*?\)/u', '', $t->name ) ) . '<small>' . (int) $t->count . '</small></a></li>';
-	}
-	echo '</ul>';
+};
+$kn_ids = function ( $ids ) {
+	return array_fill_keys( $ids, '' );
 };
 
-// 1段目：商品の大分類（新商品・お勧め・送料無料などの「印」系は除く）
-$kn_exclude = array( 'itemnew', 'itemreco', 'free-shipping', 'color-search', 'material-search' );
-$kn_top = array_filter( get_categories( array( 'parent' => $kn_root, 'hide_empty' => true ) ), function ( $t ) use ( $kn_exclude ) {
-	return ! in_array( $t->slug, $kn_exclude, true );
-} );
-
-// 2段目：いま見ているカテゴリーの子、または兄弟（男性用 > 京念珠／数珠ブレスレット など）
-$kn_sub_parent = 0;
-if ( $kn_cat && ! is_wp_error( $kn_cat ) ) {
-	if ( get_categories( array( 'parent' => $kn_cat_id, 'hide_empty' => true ) ) ) {
-		$kn_sub_parent = $kn_cat_id;
-	} elseif ( $kn_cat->parent && (int) $kn_cat->parent !== $kn_root ) {
-		$kn_sub_parent = (int) $kn_cat->parent;
-	}
+// いま見ているカテゴリーが「どの種類」に属するか
+$kn_type = 0;
+if ( in_array( $kn_cat_id, $kn_st['types'], true ) ) {
+	$kn_type = $kn_cat_id;
+} elseif ( isset( $kn_st['sub'][ $kn_cat_id ] ) ) {
+	$kn_type = $kn_st['sub'][ $kn_cat_id ][0];
 }
-$kn_color    = get_category_by_slug( 'color-search' );
-$kn_material = get_category_by_slug( 'material-search' );
+
+// 見出し
+if ( $kn_cat_id === $kn_root ) {
+	$kn_title = '商品一覧';
+} elseif ( isset( $kn_st['sub'][ $kn_cat_id ] ) ) {
+	$kn_title = $kn_st['sub'][ $kn_cat_id ][1];
+} else {
+	$kn_title = get_cat_name( $kn_cat_id );
+}
+
+// 色・素材の子カテゴリー一覧（ID => ''）
+$kn_kids = function ( $parent ) {
+	$r = array();
+	foreach ( get_categories( array( 'parent' => $parent, 'hide_empty' => true ) ) as $t ) {
+		$r[ (int) $t->term_id ] = '';
+	}
+	return $r;
+};
+$kn_in_colmat = $kn_cat && in_array( (int) $kn_cat->parent, array( $kn_color_id, $kn_mat_id ), true );
 ?>
 <div id="primary" class="site-content kn-arc">
 	<div id="content" role="main">
 
-		<header class="kn-arc__hero kn-full">
+		<?php /* <header> にしないこと（親テーマの #content header 指定に負ける） */ ?>
+		<div class="kn-arc__hero kn-full">
 			<div class="kn-wrap">
 				<p class="kn-arc__crumb">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">トップ</a>
 					<?php if ( $kn_cat_id !== $kn_root ) : ?>
 						<span>/</span><a href="<?php echo esc_url( get_category_link( $kn_root ) ); ?>">商品一覧</a>
-						<?php if ( $kn_cat && $kn_cat->parent && (int) $kn_cat->parent !== $kn_root ) : ?>
+						<?php if ( $kn_type && $kn_type !== $kn_cat_id ) : ?>
+							<span>/</span><a href="<?php echo esc_url( get_category_link( $kn_type ) ); ?>"><?php echo esc_html( get_cat_name( $kn_type ) ); ?></a>
+						<?php elseif ( ! $kn_type && $kn_cat && $kn_cat->parent && (int) $kn_cat->parent !== $kn_root ) : ?>
 							<span>/</span><a href="<?php echo esc_url( get_category_link( $kn_cat->parent ) ); ?>"><?php echo esc_html( get_cat_name( $kn_cat->parent ) ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
 				</p>
 				<div class="kn-head kn-head--solo">
-					<h1 class="kn-arc__title"><small>PRODUCTS</small><?php echo esc_html( $kn_cat_id === $kn_root ? '商品一覧' : get_cat_name( $kn_cat_id ) ); ?></h1>
+					<h1 class="kn-arc__title"><small>PRODUCTS</small><?php echo esc_html( $kn_title ); ?></h1>
 				</div>
 				<?php if ( category_description() ) : ?>
 					<div class="kn-arc__desc"><?php echo wp_kses_post( category_description() ); ?></div>
 				<?php endif; ?>
 				<p class="kn-arc__count"><?php echo (int) $GLOBALS['wp_query']->found_posts; ?>点</p>
 			</div>
-		</header>
+		</div>
 
 		<div class="kn-arc__chips kn-full">
 			<div class="kn-wrap">
 				<div class="kn-arc__row">
-					<span class="kn-arc__label">カテゴリー</span>
-					<?php $kn_chips( $kn_top, $kn_cat_id, array( 'id' => $kn_root, 'url' => get_category_link( $kn_root ), 'label' => 'すべて' ) ); ?>
+					<span class="kn-arc__label">種類</span>
+					<?php $kn_chips( array( $kn_root => 'all' ) + $kn_ids( $kn_st['types'] ), $kn_type ? $kn_type : $kn_cat_id ); ?>
 				</div>
-				<?php if ( $kn_sub_parent ) : ?>
-				<div class="kn-arc__row">
-					<span class="kn-arc__label"><?php echo esc_html( get_cat_name( $kn_sub_parent ) ); ?></span>
-					<?php $kn_chips( get_categories( array( 'parent' => $kn_sub_parent, 'hide_empty' => true ) ), $kn_cat_id ); ?>
+				<?php if ( $kn_type && isset( $kn_st['genders'][ $kn_type ] ) ) : ?>
+				<div class="kn-arc__row kn-arc__row--sub">
+					<span class="kn-arc__label">男女</span>
+					<?php $kn_chips( array( $kn_type => 'all' ) + $kn_st['genders'][ $kn_type ], $kn_cat_id ); ?>
 				</div>
 				<?php endif; ?>
-				<details class="kn-arc__more"<?php echo ( $kn_cat && in_array( (int) $kn_cat->parent, array( (int) ( $kn_color ? $kn_color->term_id : 0 ), (int) ( $kn_material ? $kn_material->term_id : 0 ) ), true ) ) ? ' open' : ''; ?>>
+				<div class="kn-arc__row">
+					<span class="kn-arc__label">特集</span>
+					<?php $kn_chips( $kn_ids( $kn_st['features'] ), $kn_cat_id ); ?>
+				</div>
+				<details class="kn-arc__more"<?php echo $kn_in_colmat ? ' open' : ''; ?>>
 					<summary>色・素材から探す</summary>
-					<?php if ( $kn_color ) : ?>
+					<?php if ( $kn_color_id ) : ?>
 					<div class="kn-arc__row">
 						<span class="kn-arc__label">カラー</span>
-						<?php $kn_chips( get_categories( array( 'parent' => $kn_color->term_id, 'hide_empty' => true ) ), $kn_cat_id ); ?>
+						<?php $kn_chips( $kn_kids( $kn_color_id ), $kn_cat_id ); ?>
 					</div>
 					<?php endif; ?>
-					<?php if ( $kn_material ) : ?>
+					<?php if ( $kn_mat_id ) : ?>
 					<div class="kn-arc__row">
 						<span class="kn-arc__label">素材</span>
-						<?php $kn_chips( get_categories( array( 'parent' => $kn_material->term_id, 'hide_empty' => true ) ), $kn_cat_id ); ?>
+						<?php $kn_chips( $kn_kids( $kn_mat_id ), $kn_cat_id ); ?>
 					</div>
 					<?php endif; ?>
 				</details>

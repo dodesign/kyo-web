@@ -90,9 +90,11 @@
 								<h4>SHOP</h4>
 								<ul>
 									<li><a href="<?php echo $kn_u( '/category/item/' ); ?>">商品一覧</a></li>
+									<li><a href="<?php echo esc_url( get_category_link( 103 ) ); ?>">京念珠（数珠）</a></li>
+									<li><a href="<?php echo esc_url( get_category_link( 104 ) ); ?>">数珠ブレスレット</a></li>
+									<li><a href="<?php echo esc_url( get_category_link( 105 ) ); ?>">数珠＋念珠袋セット</a></li>
+									<li><a href="<?php echo $kn_u( '/category/item/kyo-nenjyu-case/' ); ?>">念珠袋</a></li>
 									<li><a href="<?php echo $kn_u( '/category/item/one-of-a-kind/' ); ?>">一点もの</a></li>
-									<li><a href="<?php echo $kn_u( '/category/item/ladies/' ); ?>">女性用</a></li>
-									<li><a href="<?php echo $kn_u( '/category/item/mens/' ); ?>">男性用</a></li>
 									<li><a href="<?php echo $kn_u( '/category/item/kiho/' ); ?>">喜芳作</a></li>
 									<li><a href="<?php echo $kn_u( '/category/item/furusato/' ); ?>">ふるさと納税 返礼品</a></li>
 								</ul>

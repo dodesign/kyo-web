@@ -73,11 +73,73 @@ function kaon_home_cat_tiles() {
 		array( 'en' => 'KIHO',          'ja' => '喜芳作',           'cat' => 84, 'img' => 7560 ),
 		array( 'en' => 'FOR WOMEN',     'ja' => '女性用 京念珠',    'cat' => 9,  'img' => 7835 ),
 		array( 'en' => 'FOR MEN',       'ja' => '男性用 京念珠',    'cat' => 10, 'img' => '/wp-content/uploads/2026/01/IMG_6283-500x500.jpg' ),
-		// ★「数珠ブレスレット」をまとめたカテゴリーが無いので、いちばん点数の多い女性用につないでいる。
-		//   男性用（7）・男女兼用（20）も含めたいなら、親カテゴリー「数珠ブレスレット」を作ってそのIDに替える。
-		array( 'en' => 'BRACELET',      'ja' => '数珠ブレスレット', 'cat' => 8,  'img' => 6025, 'hide_count' => true ),
+		// 2026-11-02 「数珠ブレスレット」(104) を新設したのでそこへ（以前は女性用ブレスレット 8 につないでいた）
+		array( 'en' => 'BRACELET',      'ja' => '数珠ブレスレット', 'cat' => 104, 'img' => 6025 ),
 		array( 'en' => 'VALUE',         'ja' => 'お値打ち品',       'cat' => 93, 'img' => 6902 ),
 	);
+}
+
+/* =========================================================
+   設定 2.5：商品カテゴリーの見せ方（商品一覧のチップ・パンくず・見出し）
+   2026-11-02 「種類→男女」の順に整理。
+   ★WordPress のカテゴリー自体は「男性用 > 京念珠」「女性用 > 数珠ブレスレット」のように
+     男女が先の古い形のまま残っている（URLを変えないため）。そこに「種類」のカテゴリー
+     （京念珠 103／数珠ブレスレット 104／数珠＋念珠袋セット 105）を足して、見せ方をここで決めている。
+   ★種類のカテゴリーは、商品を保存したときに自動で付く（kaon_sync_type_cats）。
+     男女のカテゴリー（女性用の京念珠 9 など）さえ付けておけばよい。
+   ========================================================= */
+function kaon_cat_structure() {
+	return array(
+		// 1段目「種類」
+		'types'    => array( 103, 104, 105, 18, 23 ),
+		// 2段目「特集」
+		'features' => array( 85, 84, 93, 80, 4, 3 ),
+		// 種類ごとの「男女」チップ。[ カテゴリーID => 表示名 ]
+		'genders'  => array(
+			103 => array( 9 => '女性用', 10 => '男性用' ),
+			104 => array( 8 => '女性用', 7 => '男性用', 20 => '男女兼用' ),
+		),
+		// 子カテゴリー → [ 種類のID, 見出しに出す名前 ]
+		'sub'      => array(
+			9  => array( 103, '女性用の京念珠' ),
+			10 => array( 103, '男性用の京念珠' ),
+			8  => array( 104, '女性用の数珠ブレスレット' ),
+			7  => array( 104, '男性用の数珠ブレスレット' ),
+			20 => array( 104, '男女兼用の数珠ブレスレット' ),
+		),
+		// チップでの短い表示名（カテゴリー名が長いもの）
+		'labels'   => array( 103 => '京念珠', 105 => '念珠＋念珠袋セット', 18 => '念珠袋', 85 => '一点もの', 80 => 'ふるさと納税', 3 => 'お勧め', 4 => '新商品' ),
+	);
+}
+
+/** 商品を保存したら「種類」のカテゴリーを自動で付ける（男女のカテゴリーから判断） */
+add_action( 'set_object_terms', 'kaon_sync_type_cats', 20, 6 );
+function kaon_sync_type_cats( $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids ) {
+	static $busy = false;
+	if ( $busy || 'category' !== $taxonomy ) {
+		return;
+	}
+	$cats = wp_get_post_categories( $object_id );
+	if ( ! in_array( 2, $cats, true ) && ! array_intersect( $cats, array( 5, 6, 7, 8, 9, 10, 19, 20 ) ) ) {
+		return; // 商品ではない
+	}
+	$add = array();
+	if ( array_intersect( $cats, array( 9, 10 ) ) ) {
+		$add[] = 103;
+	}
+	if ( array_intersect( $cats, array( 7, 8, 20 ) ) ) {
+		$add[] = 104;
+	}
+	if ( array_intersect( $cats, array( 86, 87 ) ) ) { // 旧「数珠＆数珠袋セット」（男女別）
+		$add[] = 105;
+		$add[] = 103;
+	}
+	$add = array_diff( $add, $cats );
+	if ( $add ) {
+		$busy = true;
+		wp_set_post_categories( $object_id, array_merge( $cats, $add ) );
+		$busy = false;
+	}
 }
 
 /* =========================================================
@@ -114,6 +176,10 @@ function kaon_body_class_arc( $classes ) {
 	}
 	if ( is_page( 'kihou-koubou' ) ) {
 		$classes[] = 'kn-wide-page';
+	}
+	if ( is_page( 'contact' ) ) {
+		$classes[] = 'kn-wide-page';
+		$classes[] = 'kn-contact-page'; // フッターのお問い合わせ帯を出さない（同じ内容が続くため）
 	}
 	return $classes;
 }

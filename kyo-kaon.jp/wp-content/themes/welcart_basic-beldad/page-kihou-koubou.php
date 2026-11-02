@@ -50,14 +50,15 @@ $kn_tech = array(
 	<div id="content" role="main">
 
 		<?php /* ---------- ヒーロー ---------- */ ?>
-		<header class="kn-pghero kn-full">
+		<?php /* ★<header> にしないこと。親テーマの「#content header{position:inherit}」に負けて、写真がページ全体に広がってしまう */ ?>
+		<div class="kn-pghero kn-full">
 			<?php echo kaon_img( 8050, '1536x1536', '', array( 'class' => 'kn-pghero__img', 'loading' => 'eager' ) ); ?>
 			<div class="kn-pghero__body">
 				<p class="kn-pghero__eyebrow">OUR CRAFT</p>
 				<h1 class="kn-pghero__title"><?php the_title(); ?></h1>
 				<p class="kn-pghero__lead">喜芳の技術と想いは、<br>喜芳工房の職人たちに受け継がれている。</p>
 			</div>
-		</header>
+		</div>
 
 		<?php /* ---------- 喜芳とは ---------- */ ?>
 		<section class="kn-sec kn-full">
