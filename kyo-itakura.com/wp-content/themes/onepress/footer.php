@@ -1,271 +1,126 @@
 <?php
 /**
- * The template for displaying the footer.
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * フッター。2026-11-02 リニューアル（旧版は Git の履歴）。
+ * ・上から「ご相談の帯」→「店舗のご案内（地図）」→「リンク」→ スマホ下部の固定メニュー
+ * ・地図は Google マップの埋め込み（loading="lazy" なので、見える位置に来るまで読み込まない）
  *
  * @package OnePress
  */
 ?>
+</main><!-- .ki-main -->
 
+<footer class="ki-ft">
 
-    <?php if( !is_home()) :  ?>
-
-    <section class="p-under p-intro section-bg-jpn-light">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 p-section-padding">
-                <h2 class="section--heading__s">
-                    最適なご提案をさせていただきます
-                </h2>
-                <!-- /.section--heading__s -->
-                <h1 class="section--heading c-text-center">
-                    お気軽にお問合せください
-                </h1>
-                <div class="p-section--cont/ent">
-                    <p>是非一度お気軽にお問い合わせいただき、京念珠をお手に取ってご覧いただけますと幸いで御座います。<br> 季節によって取り扱っているお念珠が異なります。季節の珠や房をメインのラインナップの念珠に取り入れています。
-                    </p>
-
-                    <p><b>各宗派の本式や略式はもちろんのこと、ご希望のお色の珠などでオーダーメイドでご対応させて頂くことも可能</b>です。<br> お探しの材質や色目やご予算など、「こんなことは難しいかな……」と思われるようなこだわりもご遠慮なくご相談ください。
-                        <br><b>喜芳直伝の技術を受け継いだ職人がお一人おひとりのご要望を具現化</b>します。
-                    </p>
-
-                    <p>関西一円であればサンプルをお持ちしてお話しをお伺いさせて頂きます。 名古屋と富山には隔月で担当者が参りますので、直接お会いしてお話しさせて頂くことが可能です。
-                        <br> その他の地域には、郵送でご対応させて頂きます。
-                    </p>
-                    <h2 class="p-heading_deco">ひとつからご注文可能です</h2>
-                    <div class="p-heading_deco__lead">
-                        <p>月々の固定費や最低取引額などの制限はございません。<br> ご入用の際に、必要な分をご発注頂くことが可能です。<br>
-                           <b>個人の方や、個人事業主の方からのお問合せももちろん大歓迎</b>です。お気軽に<a href="/contact/">お問い合わせ</a>くださいませ。<br>
-                            
-                            <br> またお問い合わせ頂いた方に対して、営業のお電話などはしておりませんので、ご安心くださいませ。
-                        </p>
-                    </div>
-                    <!-- /.p-heading_deco__lead -->
-                </div>
-                <!-- /.p-section--content -->
-            </div>
-            <!-- /.col-sm-7 -->
-        </div>
-        <!-- /.row -->
-    </section>
-
-    <?php endif; ?>
-
-    <footer class="p-footer">
-        <section class="p-fotter-section1 p-section-full">
-            <div class="row">
-                <a href="/case">
-                    <div class="p-fotter-section1-1 p-fotter-section__inner col-sm-4">
-                        <h2 class="p-fotter-section1__title">
-                            実績
-                        </h2>
-                        <!-- /.p-fotter-section1__title -->
-                        <p class="p-fotter-section1__lead">職人が一つひとつ想いをこめて<br>つくった念珠をご紹介します
-                        </p>
-                        <!-- /.p-fotter-section1__lead -->
-                        <div class="row">
-                            <div class="col-sm-12 text-center c-mt-2">
-                                <div class="btn btn-white text-center">
-                                    詳しくみる
-                                </div>
-                            </div>
-                            <!-- /.col-sm-4 -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                </a>
-                <!-- /.col-sm-4 -->
-                <a href="/about">
-                    <div class="p-fotter-section1-2 p-fotter-section__inner col-sm-4">
-                        <h2 class="p-fotter-section1__title u-color-dark">
-                            板倉のこだわり
-                        </h2>
-                        <!-- /.p-fotter-section1__title -->
-                        <p class="p-fotter-section1__lead u-color-dark">イメージやスケジュールに合わせて<br>オーダーメイドでおつくりします</p>
-                        <!-- /.p-fotter-section1__lead -->
-                        <div class="row">
-                            <div class="col-sm-12 text-center c-mt-2">
-                                <div class="btn btn-default text-center">
-                                    詳しくみる
-                                </div>
-                            </div>
-                            <!-- /.col-sm-4 -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                </a>
-                <!-- /.col-sm-4 -->
-                <a href="/company">
-                    <div class="p-fotter-section1-3 p-fotter-section__inner col-sm-4">
-                        <h2 class="p-fotter-section1__title">
-                            会社概要
-                        </h2>
-                        <!-- /.p-fotter-section1__title -->
-                        <p class="p-fotter-section1__lead">板倉のこれまでとこれからについて<br>ご紹介しています</p>
-                        <!-- /.p-fotter-section1__lead -->
-                        <div class="row">
-                            <div class="col-sm-12 text-center c-mt-2">
-                                <div class="btn btn-white text-center">
-                                    詳しくみる
-                                </div>
-                            </div>
-                            <!-- /.col-sm-4 -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                </a>
-                <!-- /.col-sm-4 -->
-            </div>
-            <!-- /.row -->
-        </section>
-        <div class="p-deco-line row">
-            <div class="p-deco-line1 col-xs-4 c-no-margin c-no-padding"></div>
-            <!-- /.col-sm-4 -->
-            <div class="p-deco-line2 col-xs-4 c-no-margin c-no-padding"></div>
-            <!-- /.col-sm-4 -->
-            <div class="p-deco-line3 col-xs-4 c-no-margin c-no-padding"></div>
-            <!-- /.col-sm-4 -->
-        </div>
-        <!-- /.row -->
-        <section class="p-fotter-section2 section-bg-jpn-denger">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h1 class="section--heading">
-                            お問合せ
-                        </h1>
-                        <p class="c-text-center">些細なことでもお気軽にご相談・お問い合わせください。</p>
-                    </div>
-                    <!-- /.col-sm-12 -->
-                </div>
-                <div class="row">
-                    <div class="col-sm-9 col-sm-offset-1">
-                        <div class="row">
-                            <div class="col-sm-6 text-center">
-                                <h2><a href="tel: 0757216600" onclick="gtag('event','tel-tap',{'event_category':'click','event_label': 'head'});"><img src="<?php echo get_template_directory_uri(); ?>/common/img/footer_tell.png" alt="京念珠板倉 電話 075-721-6600"></a></h2>
-                            </div>
-                            <!-- /.col-sm-6 -->
-                            <div class="col-sm-6 text-center">
-                                <h2 class="c-no-margin "><img src="<?php echo get_template_directory_uri(); ?>/common/img/footer_mail.png" alt="京念珠板倉 電話 075-721-6600"></h2>
-                                <div class="row">
-                                    <div class="col-sm-12 text-center c-mt-1">
-                                        <div class="btn btn-success btn-large text-center">
-                                            <a href="/contact" target="_blank">お問合せする</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.col-sm-4 -->
-                                </div>
-                                <!-- /.row -->
-                            </div>
-                            <!-- /.col-sm-6 -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.col-sm-8 -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.conrainer -->
-        </section>
-        <div class="p-deco-line row">
-            <div class="p-deco-line1 col-xs-4 c-no-margin c-no-padding"></div>
-            <!-- /.col-sm-4 -->
-            <div class="p-deco-line2 col-xs-4 c-no-margin c-no-padding"></div>
-            <!-- /.col-sm-4 -->
-            <div class="p-deco-line3 col-xs-4 c-no-margin c-no-padding"></div>
-            <!-- /.col-sm-4 -->
-        </div>
-        <!-- /.row -->
-        <section class="p-fotter-section3">
-            <div class="row">
-                <div class="p-fotter-section3__left col-sm-3 col-sm-offset-2">
-                    <h4>京念珠の老舗</h4>
-                    <h2 class="c-no-margin"><img src="<?php echo get_template_directory_uri(); ?>/common/img/logo.jpg" alt="株式会社意匠京念珠板倉"></h2>
-                    <address>
-                       〒603-8083 京都府京都市北区上賀茂向縄手町40-1 <br>
-                       TEL <a href="tel: 0757216600" onclick="gtag('event','tel-tap',{'event_category':'click','event_label': 'head'});">075-721-6600</a>  FAX 075-721-6784 <Br>
-						駐車場有
-                   </address>
-					<h5>・サロンの見学や、数々のお念珠をご覧いただけます。<br>
-						・個人のお客様への店頭販売も行っております。<br>
-						・ご予約不要ですので、お気軽にお越しくださいませ。<br>
-					　平日 9:00～18:00（土日祝は事前のご予約で、できる限りご対応させていただきます。）</h5>
-                </div>
-                <!-- /.col-sm-6 -->
-                <div id="c-ggl-map" class="col-sm-7">
-                </div>
-                <!-- /.col-sm-6 -->
-            </div>
-            <!-- /.row -->
-        </section>
-        <section class="p-fotter-section4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ul class="p-fotter-menu">
-                            <li><a href="/">トップ</a></li>
-                            <li><a href="/about">板倉のこだわり</a></li>
-                            <li><a href="/case">製品紹介・実績</a></li>
-                            <li><a href="/company">会社概要</a></li>
-                            <li><a href="/contact">お問い合わせ</a></li>
-                            <li><a href="/service/fix">京念珠(数珠)の修理について</a></li>
-                            <li><a href="/news/cat-news/616">ワークショップについて</a></li>
-                            <li><a href="/kihou-in">創作京念珠師 喜芳</a></li>
-                            <li><a href="/news/cat-news/894">パートさん募集</a></li>
-                        </ul>
-                    </div>
-                    <!-- /.col-sm-12 -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.conrainer -->
-        </section>
-        <p class="c-copy">Copyright(C) 株式会社意匠京念珠板倉 All rights Reserved.</p>
-    </footer>
-		
-	<!-- フッターメニュー -->
-	<div class="footer-menu d-none d-md-block row">
-		<div class="">
-			<div class="col-xs-4 text-center">
-				<a href="https://kyo-kaon.jp/" target="_blank" class="footer-menu-item">
-					<i class="fas fa-store"></i><br>ネットショップ
-				</a>
+	<?php if ( ! is_page( array( 'contact', 'contact-thanks', 'bill-email' ) ) ) : ?>
+	<section class="ki-ftc">
+		<?php echo ki_img( 'ki/ki-mg0048.jpg', '', array( 'class' => 'ki-ftc__bg' ) ); ?>
+		<div class="ki-wrap ki-ftc__in" data-rv>
+			<p class="ki-eyebrow">CONTACT</p>
+			<h2>お気軽にご相談ください</h2>
+			<p class="ki-ftc__lead">念珠の卸・お見積り、オーダーメイド、修理のご相談まで。<br class="ki-pc">ひとつからのご注文も承ります。お問い合わせいただいた方への営業のお電話はいたしません。</p>
+			<div class="ki-ftc__btns">
+				<a class="ki-ftc__tel" <?php echo ki_tel_attr( 'footer' ); ?>><small>お電話（平日 9:00–18:00）</small><?php echo esc_html( KI_TEL ); ?></a>
+				<a class="ki-ftc__mail" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><small>メール（24時間受付）</small>お問い合わせフォーム</a>
 			</div>
-			<div class="col-xs-4 text-center">
-				<a href="tel:0757216600" class="footer-menu-item">
-					<i class="fas fa-phone"></i><br>お電話
-				</a>
+			<p class="ki-ftc__fax">FAX <?php echo esc_html( KI_FAX ); ?></p>
+		</div>
+	</section>
+	<?php endif; ?>
+
+	<section class="ki-fts" id="ki-access">
+		<div class="ki-wrap ki-fts__grid">
+			<div class="ki-fts__info">
+				<p class="ki-eyebrow ki-eyebrow--ink">ACCESS</p>
+				<h2>本社・サロン</h2>
+				<dl>
+					<dt>住所</dt><dd>〒603-8083<br>京都府京都市北区上賀茂向縄手町40-1</dd>
+					<dt>営業</dt><dd>平日 9:00–18:00<br><small>土日祝は事前のご予約で、できる限りご対応いたします</small></dd>
+					<dt>電話</dt><dd><a <?php echo ki_tel_attr( 'access' ); ?>><?php echo esc_html( KI_TEL ); ?></a>　FAX <?php echo esc_html( KI_FAX ); ?></dd>
+					<dt>駐車場</dt><dd>あり</dd>
+				</dl>
+				<p class="ki-fts__note">サロンでは喜芳の作品や、喜芳工房が手がける数々のお念珠を手に取ってご覧いただけます。個人のお客様への店頭販売も行っております。</p>
+				<div class="ki-fts__sub">
+					<h3>烏丸店<span>（ハンケイ5mショップ内）</span></h3>
+					<p>〒600-8412 京都府京都市下京区二帖半敷町652 からすま京都ホテル1F<br>水・木・金 11:00–19:00／ご予約不要</p>
+				</div>
 			</div>
-			<div class="col-xs-4 text-center">
-				<a href="/contact" class="footer-menu-item">
-					<i class="fas fa-envelope"></i><br>お問い合わせ
-				</a>
+			<div class="ki-fts__map">
+				<iframe title="株式会社意匠京念珠板倉の地図" src="https://www.google.com/maps?q=%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E5%8C%97%E5%8C%BA%E4%B8%8A%E8%B3%80%E8%8C%82%E5%90%91%E7%B8%84%E6%89%8B%E7%94%BA40-1&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 			</div>
 		</div>
-	</div>
-		
-    <?php wp_footer(); ?>
-                   
-    </body>
+	</section>
 
+	<section class="ki-ftm">
+		<div class="ki-wrap ki-ftm__grid">
+			<div class="ki-ftm__brand">
+				<img src="<?php echo esc_url( ki_img_url( 'ki/ki-logo-w.png' ) ); ?>" alt="株式会社 意匠京念珠 板倉" width="230" height="49" loading="lazy">
+				<p>京の名工・喜芳の技と想いを受け継ぐ、<br>京念珠の製造卸。</p>
+			</div>
+			<div class="ki-ftm__col">
+				<h4>ABOUT</h4>
+				<ul>
+					<li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">板倉のこだわり</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/kihou-in/' ) ); ?>">京念珠師 喜芳</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/about/about-nenjyu/' ) ); ?>">念珠（数珠）とは</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/company/' ) ); ?>">会社概要</a></li>
+				</ul>
+			</div>
+			<div class="ki-ftm__col">
+				<h4>BUSINESS</h4>
+				<ul>
+					<li><a href="<?php echo esc_url( home_url( '/about/#oroshi' ) ); ?>">京念珠の製造卸</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/case/' ) ); ?>">製品紹介・実績</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/service/fix/' ) ); ?>">念珠（数珠）の修理</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/about/#hitotsubu' ) ); ?>">Hitotsubu Color</a></li>
+				</ul>
+			</div>
+			<div class="ki-ftm__col">
+				<h4>SHOP</h4>
+				<ul>
+					<li><a href="<?php echo esc_url( KI_SHOP_URL ); ?>" target="_blank" rel="noopener">喜芳工房 オンラインショップ</a></li>
+					<li><a href="<?php echo esc_url( KI_AMAZON_URL ); ?>" target="_blank" rel="noopener">喜芳工房 Amazon店</a></li>
+					<li><a href="https://kyo-kaon.jp/service/workshop/" target="_blank" rel="noopener">京念珠ブレス作り体験</a></li>
+				</ul>
+			</div>
+			<div class="ki-ftm__col">
+				<h4>INFORMATION</h4>
+				<ul>
+					<li><a href="<?php echo esc_url( home_url( '/news/' ) ); ?>">お知らせ</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">お問い合わせ</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/news/cat-news/894' ) ); ?>">パートさん募集</a></li>
+				</ul>
+			</div>
+		</div>
+		<p class="ki-ftm__copy">&copy; 株式会社意匠京念珠板倉</p>
+	</section>
+</footer>
 
-		<?php if ( is_page('contact') ) : ?>
-			<script>
-			document.addEventListener('DOMContentLoaded', function() {
-				const params = new URLSearchParams(window.location.search);
-				const title = params.get('title');
-				const url = params.get('url');
+<button type="button" class="ki-totop" aria-label="ページの先頭へ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg><span>TOP</span></button>
 
-				if (title && url) {
-					const textarea = document.querySelector('textarea[name="box"]');
-					if (textarea) {
-						textarea.value = `【${title}】\n${url}\n上記商品についての問い合わせです。\n\n問い合わせ内容を下に入力してください。\n--------------------------`;
-					}
-				}
-			});
-			</script>
-		<?php endif; ?>
+<?php /* スマホだけ：画面の下に固定するメニュー（768px 以下） */ ?>
+<nav class="ki-spnav" aria-label="よく使うメニュー">
+	<a href="<?php echo esc_url( home_url( '/case/' ) ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="4.5" r="1.6"/><circle cx="12" cy="19.5" r="1.6"/><circle cx="4.5" cy="12" r="1.6"/><circle cx="19.5" cy="12" r="1.6"/></svg><span>製品紹介</span></a>
+	<a <?php echo ki_tel_attr( 'spnav' ); ?>><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5l3 3.5-2 2.2c1 2.3 2.9 4.2 5.3 5.3l2.2-2 3.5 3-1.6 2.8C11 18.5 5.5 13 3.7 5.1z"/></svg><span>電話</span></a>
+	<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1"/><path d="M4 6.5l8 6 8-6"/></svg><span>お問い合わせ</span></a>
+	<a href="<?php echo esc_url( KI_SHOP_URL ); ?>" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>ショップ</span></a>
+</nav>
 
-    </html>
+<?php wp_footer(); ?>
+
+<?php if ( is_page( 'contact' ) ) : ?>
+<script>
+/* 製品ページの「このアイテムについてお問い合わせ」から来たとき、お問い合わせ内容に製品名を入れる */
+document.addEventListener('DOMContentLoaded', function () {
+	var p = new URLSearchParams(window.location.search), t = p.get('title'), u = p.get('url');
+	var ta = document.querySelector('textarea[name="box"]');
+	if (!ta) return;
+	if (t && u) {
+		ta.value = '【' + t + '】\n' + u + '\n上記の製品についての問い合わせです。\n\n問い合わせ内容を下に入力してください。\n--------------------------';
+	} else if (t && !ta.value) {
+		ta.value = '【' + t + '】\n\n';
+	}
+});
+</script>
+<?php endif; ?>
+</body>
+</html>

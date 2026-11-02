@@ -483,10 +483,10 @@ add_filter('wp_mail', function($args) {
     return $args;
 });
 
-//製品紹介15件表示
+//製品紹介の一覧は16件（2026-11-02 4列表示にしたので15→16。分類ページ（material）も同じ）
 function modify_case_archive_posts_per_page( $query ) {
-    if ( !is_admin() && $query->is_main_query() && is_post_type_archive( 'case' ) ) {
-        $query->set( 'posts_per_page', 15 );
+    if ( !is_admin() && $query->is_main_query() && ( $query->is_post_type_archive( 'case' ) || $query->is_tax( 'material' ) ) ) {
+        $query->set( 'posts_per_page', 16 );
     }
 }
 add_action( 'pre_get_posts', 'modify_case_archive_posts_per_page' );
@@ -655,3 +655,6 @@ add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts_ajax_handler');
 
 
 */
+
+/* 2026-11-02 リニューアル（デザインの土台・部品）。説明は inc/itakura-site.php の冒頭 */
+require get_template_directory() . '/inc/itakura-site.php';

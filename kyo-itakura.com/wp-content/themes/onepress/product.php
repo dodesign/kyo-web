@@ -1,179 +1,93 @@
 <?php
+/**
+ * 製品紹介・実績 1件（カスタム投稿 case）。single.php から呼ばれる。2026-11-02 リニューアル（旧版は Git の履歴）。
+ * ・本文はブロックエディタの内容をそのまま出す
+ * ・カスタムフィールド case-lead があれば本文の下に出す
+ * ・「同じ分類の製品」は material の最初の分類から8件
+ *
+ * @package OnePress
+ */
 get_header();
-?>
-<section class="p-under-title p-under-title__case">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="u-color-light">製品紹介・実績</h1>
-            </div>
-            <!-- /.col-sm-12 -->
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-</section>
-<!-- /.p-under-title -->
+the_post();
 
-<div id="content" class="site-content">
-
-
-    <div id="content-inside" class="container <?php echo esc_attr( $layout ); ?>">
-
-        <div class="breadcrumbs" vocab="http://schema.org/" typeof="BreadcrumbList">
-            <?php if(function_exists('bcn_display'))
-{
-bcn_display();
-}?>
-        </div>
-        <div class="content-area">
-            <main id="main" class="site-main" role="main">
-                <?php while ( have_posts() ) : the_post(); ?>
-
-                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <header class="entry-header">
-                        <?php the_title( '<h1 class="section--heading c-text-center">', '</h1>' ); ?>
-                    </header>
-                    <!-- .entry-header -->
-
-                    <div class="entry-content col-sm-9  col-sm-push-3">
-                        <?php the_content(); ?>
-                        <?php
-						wp_link_pages( array(
-							'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'onepress' ),
-							'after'  => '</div>',
-						) );
-						?>
-                            <ul class="c-case-category">
-								<?php
-								// 所属するタクソノミー 'material' を取得
-								$terms = get_the_terms($post->ID, 'material');
-								if ($terms && !is_wp_error($terms)) {
-									foreach ($terms as $term) {
-										echo '<li class="c-line"><a href="' . esc_url(get_term_link($term)) . '">' . esc_html($term->name) . '</a></li>';
-									}
-								}
-								?>
-								    <!--<?php
-										// 所属するタクソノミー 'material' を取得
-										$terms = get_the_terms($post->ID, 'material');
-										if ($terms && !is_wp_error($terms)) {
-											foreach ($terms as $term) {
-												echo '<li class="c-line"><a href="' . esc_url(home_url('/case/material/' . $term->slug)) . '">' . esc_html($term->name) . '</a></li>';
-												
-											}
-										}
-									?>-->
-                                <li style="display: block;">
-                                    更新日：
-                                    <?php the_modified_date(); ?>
-                                </li>
-                                
-                                    <?php $categorys = get_the_category( $post_id ); ;
-foreach($categorys as $category){
-if($category->parent==8):
-echo '<li class="c-line"><a href="/category/case/'.$category->slug.'">'.$category->name.'</a></li>';
-endif;
-}; ?>
-                            </ul>
-<?php
-	$parents = getRootTaxonomies( get_the_terms( $post->ID,"material "), "0" );
-	foreach($parents as $pv){
-		echo "<ul>\n";
-		echo '<li><a href="/material /'.$pv->slug.'">'.$pv->name.'</a></li>'."\n";
-		echo "<li><ul>\n";
-		foreach($pv->children as $ck=>$cv){
-			echo '<li><a
-			href="/material /'.$cv->slug.'">'.$cv->name.'</a></li>'."\n";
-		}
-	echo "</ul></li>\n";
-	echo "</ul>\n";
+$ki_terms = get_the_terms( get_the_ID(), 'material' );
+$ki_terms = ( $ki_terms && ! is_wp_error( $ki_terms ) ) ? $ki_terms : array();
+$ki_cat   = null; // 種類（親が category のもの）
+foreach ( $ki_terms as $t ) {
+	$p = $t->parent ? get_term( $t->parent, 'material' ) : null;
+	if ( $p && ! is_wp_error( $p ) && 'category' === $p->slug ) {
+		$ki_cat = $t;
+		break;
 	}
+}
+$ki_crumb = array( array( '製品紹介・実績', get_post_type_archive_link( 'case' ) ) );
+if ( $ki_cat ) {
+	$ki_crumb[] = array( $ki_cat->name, get_term_link( $ki_cat ) );
+}
+$ki_crumb[] = array( get_the_title() );
+$ki_ask = home_url( '/contact/?title=' . rawurlencode( get_the_title() ) . '&url=' . rawurlencode( get_permalink() ) );
+$ki_lead = get_post_meta( get_the_ID(), 'case-lead', true );
 ?>
-                            <p class="c-pt-2">
-                                <?php echo get_post_meta($post->ID , 'case-lead' ,true); ?>
-                            </p>
-						
-						 <div class="col-sm-12 text-center c-mt-1">
-                             <div class="btn btn-success btn-large text-center">
-                                <a href="/contact?title=<?php echo urlencode(get_the_title()); ?>&url=<?php echo urlencode(get_permalink()); ?>" target="_blank" data-slimstat="5">このアイテムについてお問合せ</a>
-                             </div>
-                         </div>
-						
-						 <div class="p-re c-mt-2">
-                    <h2 class="p-heading_deco">他の念珠（数珠）を見る</h2>
-                    <div class="flexslider">
-                        <ul class="slides">
-    <?php
-    // 現在の投稿のタクソノミー terms（カテゴリー）を取得
-    $terms = wp_get_post_terms($post->ID, 'material'); // 'material' はカスタムタクソノミー名
-    
-    foreach($terms as $term):
-        // カスタム投稿タイプ 'case' で、現在の投稿と同じタクソノミーの投稿を取得
-        $args = array(
-            'post_type'      => 'case',
-            'posts_per_page' => 15,
-            'post__not_in'   => array($post->ID), // 現在の投稿を除外
-            'tax_query'      => array(
-                array(
-                    'taxonomy' => 'material', // カスタムタクソノミー名
-                    'field'    => 'term_id',
-                    'terms'    => $term->term_id,
-                ),
-            ),
-        );
 
-        $related_posts = get_posts($args);
-
-        if($related_posts): ?>
-            <?php foreach($related_posts as $related_post):
-                $thumbnail = get_post_thumbnail_id( $related_post->ID );
-                $src_info = wp_get_attachment_image_src($thumbnail, 'full');
-                $src = $src_info[0];
-                $width = $src_info[1];
-                $height = $src_info[2];
-                $title = $related_post->post_title;
-            ?>
-                <li>
-                    <a href="<?php echo get_permalink($related_post->ID); ?>">
-                        <?php if ( has_post_thumbnail($related_post->ID) ) {
-                            echo '<img src="'.$src.'" alt="'.$title.'" width="'.$width.'" height="'.$height.'" />';
-                        } ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        <?php endif; 
-    endforeach; ?>
-</ul>
-
-                    </div>
-                    <!-- /.flexslider -->
-                </div>
-                <!-- /.p-re -->
-						
-						
-						
-                    </div>
-                    <!-- .entry-content -->
-                    <?php get_sidebar('case'); ?>
-                </article>
-                <!-- #post-## -->
-
-
-
-
-                <?php endwhile; // End of the loop. ?>
-
-               
-
-            </main>
-            <!-- #main -->
-        </div>
-        <!-- #primary -->
-
-    </div>
-    <!--#content-inside -->
+<div class="ki-single-head">
+	<?php ki_crumb( $ki_crumb ); ?>
+	<div class="ki-wrap ki-wrap--narrow">
+		<p class="ki-eyebrow ki-eyebrow--ink">PRODUCTS</p>
+		<h1 class="ki-single-head__t"><?php the_title(); ?></h1>
+		<?php if ( $ki_terms ) : ?>
+		<ul class="ki-chips ki-chips--s">
+			<?php foreach ( $ki_terms as $t ) : $color = get_term_meta( $t->term_id, 'color', true ); ?>
+				<li><a class="ki-chip" href="<?php echo esc_url( get_term_link( $t ) ); ?>"><?php echo $color ? '<i style="background:' . esc_attr( $color ) . '"></i>' : ''; ?><?php echo esc_html( preg_replace( '/（.*?）|\(.*?\)/u', '', $t->name ) ); ?></a></li>
+			<?php endforeach; ?>
+		</ul>
+		<?php endif; ?>
+	</div>
 </div>
-<!-- #content -->
+
+<article <?php post_class( 'ki-sec ki-article' ); ?>>
+	<div class="ki-wrap ki-wrap--narrow">
+		<?php if ( has_post_thumbnail() && false === stripos( get_post_field( 'post_content', get_the_ID() ), '<img' ) ) : ?>
+			<figure class="ki-article__eye"><?php the_post_thumbnail( 'large' ); ?></figure>
+		<?php endif; ?>
+		<div class="ki-prose">
+			<?php the_content(); ?>
+			<?php if ( $ki_lead ) : ?><div class="ki-article__lead"><?php echo wp_kses_post( wpautop( $ki_lead ) ); ?></div><?php endif; ?>
+		</div>
+		<p class="ki-article__date">更新日：<?php echo esc_html( get_the_modified_date( 'Y年n月j日' ) ); ?></p>
+
+		<div class="ki-ask">
+			<p class="ki-ask__t">この製品について</p>
+			<p class="ki-ask__p">卸・お見積り、色や珠を変えてのお仕立てなど、お気軽にお問い合わせください。</p>
+			<div class="ki-ask__btns">
+				<a class="ki-btn ki-btn--ink" href="<?php echo esc_url( $ki_ask ); ?>">この製品について問い合わせる</a>
+				<a class="ki-btn ki-btn--outline" <?php echo ki_tel_attr( 'product' ); ?>>電話 <?php echo esc_html( KI_TEL ); ?></a>
+			</div>
+		</div>
+	</div>
+</article>
+
+<?php
+$ki_rel_args = array(
+	'post_type'      => 'case',
+	'posts_per_page' => 8,
+	'post__not_in'   => array( get_the_ID() ),
+	'no_found_rows'  => true,
+);
+$ki_base = $ki_cat ? $ki_cat : ( $ki_terms ? $ki_terms[0] : null );
+if ( $ki_base ) {
+	$ki_rel_args['tax_query'] = array( array( 'taxonomy' => 'material', 'field' => 'term_id', 'terms' => $ki_base->term_id ) );
+}
+$ki_rel = new WP_Query( $ki_rel_args );
+if ( $ki_rel->have_posts() ) :
+?>
+<section class="ki-sec ki-sec--tint">
+	<div class="ki-wrap">
+		<?php ki_head( 'MORE', $ki_base ? 'ほかの「' . esc_html( preg_replace( '/（.*?）|\(.*?\)/u', '', $ki_base->name ) ) . '」' : 'ほかの製品', $ki_base ? get_term_link( $ki_base ) : get_post_type_archive_link( 'case' ) ); ?>
+		<div class="ki-cards">
+			<?php while ( $ki_rel->have_posts() ) : $ki_rel->the_post(); ki_case_card(); endwhile; wp_reset_postdata(); ?>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
 
 <?php get_footer(); ?>

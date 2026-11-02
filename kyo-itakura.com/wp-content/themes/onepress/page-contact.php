@@ -1,79 +1,38 @@
 <?php
 /**
- * The template for displaying all pages.
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * お問い合わせ（/contact/）。2026-11-02 リニューアル（旧版は Git の履歴）。
+ * ・フォームは MW WP Form（フォームキー 966）のまま。項目を変えるときは管理画面の MW WP Form で。
+ * ・製品ページから来たときに製品名を入れる処理は footer.php の最後
  *
  * @package OnePress
  */
-
 get_header();
-
 ?>
 
-    <section class="p-under-title p-under-title__contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="c-color-light">お問合わせ</h1>
-                    <div class="breadcrumbs" vocab="http://schema.org/" typeof="BreadcrumbList">
-                        <?php if(function_exists('bcn_display'))
-{
-bcn_display();
-}?>
-                    </div>
-                </div>
-                <!-- /.col-sm-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-    <!-- /.p-under-title -->
-    <section class="p-under p-contact section-bg-jpn-light p-section-padding">
-        <div class="container">
-            <div class="row">
-                <!-- /.col-sm-6 -->
-                <div class="col-sm-10 col-sm-offset-1">
-                    <div class="row">
-                        <div class="col-sm-6 text-center">
-                            <h2 class="p-heading_deco">お電話でのお問合せ</h2>
-                            <p class="text-big c-bold c-text-warning c-mt-2 c-no-padding">075-721-6600</p>
-                            <p class="text-center">受付時間 平日9:00～18:00</p>
-                        </div>
-                        <!-- /.col-sm-6 -->
-                        <div class="col-sm-6 text-center">
-                            <h2 class="p-heading_deco">FAXでのお問合せ</h2>
-                            <p class="text-big c-bold c-text-warning c-mt-2">075-721-6784</p>
-                        </div>
-                        <!-- /.col-sm-6 -->
-                        <div class="row">
-                            <div class="col-sm-12">
-								<?php echo do_shortcode('[mwform_formkey key="966"]'); ?>
-                                    <ul class="c-list c-mt-2 text-center">
-                                        <li>お客様から頂いた情報は、お客様への回答以外には利用いたしませんので、ご安心くださいませ。</li>
-                                    </ul>
-                                    <!-- /.c-list -->
-                            </div>
-                            <!-- /.col-sm-12 -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-            </div>
-        </div>
-    </section>
+<?php ki_pagehead( array( 'en' => 'CONTACT', 'title' => 'お問い合わせ', 'lead' => '卸・お見積り、オーダーメイド、修理のご相談まで、お気軽に。', 'img' => 'ki/ki-0014.jpg', 'crumb' => array( array( 'お問い合わせ' ) ) ) ); ?>
 
-    <script>
-document.addEventListener( 'wpcf7mailsent', function( event ) {
-    ga('send', 'event', 'Contact Form', 'submit');
-}, false );
-</script>
+<section class="ki-sec ki-contact">
+	<div class="ki-wrap ki-wrap--narrow">
+		<div class="ki-ways">
+			<a class="ki-way" <?php echo ki_tel_attr( 'contact' ); ?>><span>お電話</span><b><?php echo esc_html( KI_TEL ); ?></b><small>平日 9:00–18:00</small></a>
+			<div class="ki-way"><span>FAX</span><b><?php echo esc_html( KI_FAX ); ?></b><small>24時間受付</small></div>
+			<a class="ki-way" href="#ki-form"><span>メール</span><b class="is-s">下のフォームから</b><small>24時間受付</small></a>
+		</div>
+		<ul class="ki-check ki-contact__notes">
+			<li>ひとつからのご注文も承ります。個人の方・個人事業主の方からのお問い合わせも歓迎です</li>
+			<li>お問い合わせいただいた方への営業のお電話はいたしません</li>
+			<li>いただいた情報は、お客様へのご回答以外には利用いたしません</li>
+		</ul>
+	</div>
+</section>
 
-    <?php get_footer(); ?>
+<section class="ki-sec ki-sec--tint" id="ki-form">
+	<div class="ki-wrap ki-wrap--narrow">
+		<?php ki_head( 'FORM', 'フォームでのお問い合わせ' ); ?>
+		<div class="ki-form">
+			<?php echo do_shortcode( '[mwform_formkey key="966"]' ); ?>
+		</div>
+	</div>
+</section>
+
+<?php get_footer(); ?>

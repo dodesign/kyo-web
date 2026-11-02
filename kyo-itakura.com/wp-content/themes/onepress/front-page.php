@@ -1,262 +1,177 @@
 <?php
 /**
- * The main template file.
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * トップページ。2026-11-02 リニューアル（旧版は Git の履歴）。
+ * 文章はこのファイルに直接書いている。部品は inc/itakura-site.php。
  *
  * @package OnePress
  */
-
 get_header();
 
+$ki_slides = array( 'ki/ki-mg0003.jpg', 'ki/ki-0004.jpg', 'ki/ki-mg0110.jpg', 'ki/ki-mg0055.jpg' );
+
+$ki_biz = array(
+	array( 'no' => '01', 'en' => 'WHOLESALE', 't' => '京念珠の製造卸', 'p' => '家庭用から業務用まで、京念珠の企画・製造・卸売りを行っています。季節の珠や房を取り入れたラインナップをご用意しています。', 'img' => 'ki/ki-0082.jpg', 'url' => home_url( '/about/#oroshi' ) ),
+	array( 'no' => '02', 'en' => 'ORDER MADE', 't' => 'オーダーメイド', 'p' => '各宗派の本式・略式から、ご希望の色や石まで。「こんなことは難しいかな」というご要望も、職人がかたちにします。', 'img' => 'ki/ki-0042.jpg', 'url' => home_url( '/contact/?title=' . rawurlencode( 'オーダーメイドのご相談' ) ) ),
+	array( 'no' => '03', 'en' => 'REPAIR', 't' => '念珠（数珠）の修理', 'p' => '紐の切れや房の傷みも、職人が丁寧にお直しします。他店でお求めのお念珠や、事業者さまの大量のご依頼も承ります。', 'img' => 'ki/ki-mg0113.jpg', 'url' => home_url( '/service/fix/' ) ),
+	array( 'no' => '04', 'en' => 'ONLINE SHOP', 't' => '通信販売（喜芳工房）', 'p' => '板倉が製造した京念珠の一部を、オンラインショップ「喜芳工房」と Amazon 店でお求めいただけます。', 'img' => 'ki/ki-0094.jpg', 'url' => KI_SHOP_URL ),
+);
+
+$ki_works = array(
+	array( 'kinkaku-ginkaku', '金閣・銀閣', 'top_kihou_img1.jpg' ),
+	array( 'ichijo-modoribashi', '一条戻橋', 'top_kihou_img2.jpg' ),
+	array( 'ikkyu-san', '一休さん', 'top_kihou_img3.jpg' ),
+	array( 'jyuni-hitoe', '十二単', 'top_kihou_img5.jpg' ),
+);
 ?>
 
-    <section class="p-intro section-bg-jpn-light">
-        <div class="row">
-            <div class="p-intro__left col-md-5">
-                <img src="<?php echo get_template_directory_uri(); ?>/common/img/top-intro-img.jpg" alt="" class="c-w100b">
-            </div>
-            <!-- /.col-sm-6 -->
-            <div class="col-md-6 p-section-padding">
-                <h2 class="section--heading__s">
-                    世界にたった3人
-                </h2>
-                <!-- /.section--heading__s -->
-                <h1 class="section--heading c-text-center">
-                    念珠師としてはじめて<br> 「京都府伝統産業優秀技術者」に認定された京の名工 喜芳
-                </h1>
-                <div class="p-section--content">
-                    <p>鍛え抜かれた技術力と、喜芳が仕立てる京念珠の独自性が評価され、京都の京念珠師としてはじめて、平成16年に「京都府伝統産業優秀技術者」に認定されました。</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/common/img/top_kyo-meiko_img.jpg" class="c-w80 c-no-padding" alt="">
-                    <h3 class="p-section--heading__sub-title">
-                        ”心棒の棒を折るな”
-                    </h3>
-                    <!-- /.section--heading__sub-title -->
-                    <p>「どんな難しい数珠でも、全部頭の中に入ってます。<br> 誰にも負けないいい仕事ができるという信念がありますから。私のする仕事に勝つ人はおへん。
-                        <br> やっぱり、一つのことを貫くということが、人間にとって一番大切なことなんじゃないですか。」
-                    </p>
-                </div>
-                <!-- /.p-section--content -->
-            </div>
-            <!-- /.col-sm-7 -->
-        </div>
-        <!-- /.row -->
-    </section>
-    <section class="p-top-news p-section-padding">
-        <div class="container">
-			
-			<div class="row">
-    <div class="col-sm-12">
-        <h1 class="section--heading">新着商品</h1>
-        <?php
-        $args = array(
-            'posts_per_page' => 8,
-            'post_type'      => 'case', // カスタム投稿タイプ
-        );
-        $myposts = get_posts($args);
+<?php /* ---------- ヒーロー ---------- */ ?>
+<section class="ki-hero" data-ki-hero>
+	<div class="ki-hero__slides">
+		<?php foreach ( $ki_slides as $i => $s ) : ?>
+			<?php echo ki_img( $s, '', array( 'class' => 'ki-hero__img' . ( 0 === $i ? ' is-on' : '' ), 'loading' => 0 === $i ? 'eager' : 'lazy' ) ); ?>
+		<?php endforeach; ?>
+	</div>
+	<div class="ki-hero__body ki-wrap">
+		<p class="ki-hero__en">KYO NENJU MANUFACTURER &amp; WHOLESALER</p>
+		<h1 class="ki-hero__title">京の名工・喜芳の<br>想いと技を、いまに。</h1>
+		<p class="ki-hero__lead">京都・上賀茂で、京念珠（数珠）を企画・製造・卸。<br class="ki-pc">製造卸一筋<?php echo (int) ki_years(); ?>年、職人が一つひとつ手で仕立てています。</p>
+		<div class="ki-hero__btns">
+			<a class="ki-btn ki-btn--light" href="<?php echo esc_url( home_url( '/case/' ) ); ?>">製品紹介を見る</a>
+			<a class="ki-btn ki-btn--line" href="<?php echo esc_url( home_url( '/about/#oroshi' ) ); ?>">卸・お取引のご相談</a>
+		</div>
+	</div>
+</section>
 
-        if ($myposts) :
-            foreach ($myposts as $post) : setup_postdata($post); ?>
-                <a href="<?php the_permalink(); ?>">
-                    <article class="p-top-news__box col-sm-3 col-xs-6">
-                        <p class="p-top-news__thumbnail c-no-padding c-no-margin c-thumnail-zoom">
-                            <?php if (has_post_thumbnail()): ?>
-                                <?php the_post_thumbnail(array(500, 500), array('class' => 'img-responsive')); ?>
-                            <?php else: ?>
-                                <img src="<?php echo get_template_directory_uri(); ?>/common/img/l_e_others_500.jpg" alt="no image" class="img-responsive">
-                            <?php endif; ?>
-                        </p>
-                        <div class="p-top-news__box__under">
-                            <span class="p-top-news__date"><?php the_time('Y年n月j日'); ?></span>
-                            <h4 class="p-top-news__title"><?php the_title(); ?></h4>
-                        </div>
-                    </article>
-                </a>
-            <?php endforeach;
-            wp_reset_postdata();
-        else:
-            echo '<p>該当する投稿はありません。</p>';
-        endif;
-        ?>
-    </div>
-    <!-- /.col-sm-12 -->
-</div>
-<!-- /.row -->
-			
-			<div class="row">
-                <div class="col-sm-12">
-                    <h1 class="section--heading">
-                        お知らせ
-                    </h1>
-                    <?php
-					$args = array( 'posts_per_page' => 4, 'category' => '52,3' );
-					$myposts = get_posts( $args );
-					foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
-                        <a href="<?php the_permalink(); ?>">
-                            <article class="p-top-news2 p-top-news__box col-sm-3 col-xs-6">
-                                <p class="p-top-news__thumbnail c-no-padding c-no-margin c-thumnail-zoom">
-                                    <?php if(has_post_thumbnail()): ?>
-                                        <?php the_post_thumbnail('full'); ?>
-                                    <?php else: ?>
-                                        <img src="<?php echo get_template_directory_uri(); ?>/common/img/l_e_others_500.jpg" alt="no image">
-                                    <?php endif; ?>
-                                </p>
-                                <div class="p-top-news__box__under">
-                                    <span class="p-top-news__date"><?php the_time('Y年n月j日'); ?></span><span class="p-top-news__category">
-                                    <?php $categorys = get_the_category( $post_id );
-                                        foreach($categorys as $category){
-                                        if($category->parent==2):
-                                            echo '<span class="p-top-news__category-'.$category->slug.'">'.$category->name.'</span>';
-                                        endif;
-                                    }; ?>
-                                    </span>
+<?php /* ---------- 数字 ---------- */ ?>
+<section class="ki-facts">
+	<ul class="ki-wrap ki-facts__list">
+		<li data-rv><b><?php echo (int) ki_years(); ?><small>年</small></b><span>製造卸一筋で歩んできた年月</span></li>
+		<li data-rv><b>3<small>人</small></b><span>念珠師で「京都府伝統産業優秀技術者」に認定された職人。喜芳はその初めての一人</span></li>
+		<li data-rv><b>2<small>つ</small></b><span>意匠登録済みの独自技術。板倉だけがご提供できる製法です</span></li>
+		<li data-rv><b>1<small>本から</small></b><span>最低取引額・月々の固定費なし。必要な分だけご発注いただけます</span></li>
+	</ul>
+</section>
 
-                                    <h4 class="p-top-news__title">
-                                        <?php the_title(); ?>
-                                    </h4>
-                                </div>
-                            </article>
-                        </a>
-                        <?php endforeach; wp_reset_postdata();?>
+<?php /* ---------- 事業 ---------- */ ?>
+<section class="ki-sec">
+	<div class="ki-wrap">
+		<?php ki_head( 'BUSINESS', '板倉の仕事' ); ?>
+		<p class="ki-lead" data-rv>株式会社意匠京念珠板倉は、家庭用から業務用までの京念珠の企画・製造・卸売りを行う製造卸です。<br class="ki-pc">喜芳が育てた職人の工房「喜芳工房」で、一つひとつ丁寧に、心をこめて作っています。</p>
+		<div class="ki-biz">
+			<?php foreach ( $ki_biz as $b ) : $ext = ( 0 !== strpos( $b['url'], home_url() ) ); ?>
+			<a class="ki-biz__item" href="<?php echo esc_url( $b['url'] ); ?>"<?php echo $ext ? ' target="_blank" rel="noopener"' : ''; ?> data-rv>
+				<span class="ki-biz__img"><?php echo ki_img( $b['img'], '' ); ?></span>
+				<span class="ki-biz__body">
+					<span class="ki-biz__no"><?php echo esc_html( $b['no'] . ' ' . $b['en'] ); ?></span>
+					<span class="ki-biz__t"><?php echo esc_html( $b['t'] ); ?></span>
+					<span class="ki-biz__p"><?php echo esc_html( $b['p'] ); ?></span>
+					<span class="ki-biz__more"><?php echo $ext ? 'サイトを見る' : '詳しく見る'; ?></span>
+				</span>
+			</a>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
 
-                </div>
-                <!-- /.col-sm-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-    </section>
-    <section class="p-intro p-top-section2 section-bg-jpn">
-        <div class="container">
-            <div class="p-top-section2__content col-sm-10 col-sm-offset-1 c-db c-mb-2">
-                <div class="p-top-section2__content__left">
-                    <img class="c-w100b" src="<?php echo get_template_directory_uri(); ?>/common/img/about_skill_img10.jpg" alt="">
-                </div>
-                <!-- /.col-sm-6 -->
-                <div class="section-bg-jpn__contents">
-                    <p class="c-no-margin c-no-padding text-center"><img src="<?php echo get_template_directory_uri(); ?>/common/img/top_prise_icn.png" alt=""></p>
-                    <!-- /.p-top-section2__content -->
-                    <!-- /.c-no-margin -->
-                    <h2 class="section-bg-jpn__head">
-                        京都府伝統産業優秀技術者
-                    </h2>
-                    <p>府内の伝統産業に従事し、優れた技術をもって、多年にわたりその振興と発展に寄与した者に付与されます。<br> 認定された名工は、年に一度、京都府主催で開催される「京の名工展」に趣向を凝らした作品を出展します。
-                    </p>
-                </div>
-                <!-- /.col-sm-6 -->
-            </div>
-            <!-- /.col-sm-10 -->
-        </div>
-    </section>
-    <section class="p-top-section3 p-section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="section--heading c-text-center">
-                        <b>12</b>歳の頃から<b>80</b>年間<br>人生のすべてを念珠にささげた
-                    </h1>
-                    <div class="col-sm-6">
-                        <h3>喜芳（きほう）</h3>
+<?php /* ---------- 喜芳 ---------- */ ?>
+<section class="ki-sec ki-sec--tint">
+	<div class="ki-wrap ki-kiho">
+		<figure class="ki-kiho__photo" data-rv>
+			<?php echo ki_img( 'top-intro-img.jpg', '京念珠師 喜芳' ); ?>
+			<figcaption>京念珠師 喜芳</figcaption>
+		</figure>
+		<div class="ki-kiho__body" data-rv>
+			<p class="ki-eyebrow ki-eyebrow--ink">KIHO</p>
+			<h2 class="ki-kiho__t">念珠師としてはじめて<br>「京都府伝統産業優秀技術者」に<br>認定された京の名工</h2>
+			<p>十三歳で念珠屋へ奉公に入り、以来八十年近く、念珠作り一筋。鍛え抜かれた技術力と、喜芳が仕立てる京念珠の独自性が評価され、平成16年、京都の念珠師としてはじめて「京都府伝統産業優秀技術者」に認定されました。名工として平成18年から26年まで「京の名工展」に創作念珠を出展し、その独自性は分野内外から高く評価されました。</p>
+			<blockquote class="ki-quote">
+				<p>どんな難しい数珠でも、全部頭の中に入ってます。……<br>やっぱり、一つのことを貫くということが、<br>人間にとって一番大切なことなんじゃないですか。</p>
+				<cite>喜芳（月刊誌「致知」2010年6月号より）</cite>
+			</blockquote>
+			<p class="ki-kiho__note">平成25年に死去。倒れる寸前まで念珠を作り続けました。その技術と想いは、いまも喜芳工房の職人たちに受け継がれています。</p>
+			<a class="ki-btn ki-btn--ink" href="<?php echo esc_url( home_url( '/kihou-in/' ) ); ?>">喜芳のインタビューを読む</a>
+		</div>
+	</div>
+</section>
 
-                        <p>大正9年京都府生まれ。13才で念珠屋へ奉公に入り、以来、念珠作り一筋に歩む。<br> 平成16年に京都府伝統産業優秀技術賞を念珠師として初受賞。
-                            <br> 2017年2月現在、念珠師として「京都府伝統産業優秀技術賞 」を受賞した技師は、喜芳を含めてたった3人。<br> 名工として、平成18年～平成26年まで名工展に創作念珠を出展しており、その独自性は分野内外から高く評価された。
-                            <br> 平成25年に死去。倒れる寸前まで念珠を作り続けた。
-                            <br> 喜芳の技術と想いは、喜芳工房の職人たちに受け継がれている。
-                        </p>
-                    </div>
-                    <!-- /.col-sm-6 -->
-                    <div class="col-sm-6 text-center">
-                        <img class="c-w100" src="<?php echo get_template_directory_uri(); ?>/common/img/top_kihou.jpg" alt="喜芳">
-                    </div>
-                    <!-- /.col-sm-6 -->
-                </div>
-                <!-- /.col-sm-7 -->
-            </div>
-            <!-- /.row -->
-        </div>
-    </section>
-    <!-- /.p-top-section3 -->
-    <section class="p-top-section4 p-section-full">
-        <div class="row">
-            <a href="/case/kinkaku-ginkaku/">
-                <div class="p-top-section4__box col-sm-6 c-thumnail-zoom">
-                    <img src="<?php echo get_template_directory_uri(); ?>/common/img/top_kihou_img1.jpg" alt="">
-                </div>
-                <!-- /.col-sm-6 -->
-            </a>
-            <a href="/case/ichijo-modoribashi/">
-                <div class="p-top-section4__box col-sm-6 c-thumnail-zoom">
-                    <img src="<?php echo get_template_directory_uri(); ?>/common/img/top_kihou_img2.jpg" alt="">
-                </div>
-                <!-- /.col-sm-6 -->
-            </a>
-        </div>
-        <div class="row">
+<?php /* ---------- 喜芳の作品 ---------- */ ?>
+<section class="ki-works">
+	<?php foreach ( $ki_works as $w ) : ?>
+	<a class="ki-works__item" href="<?php echo esc_url( home_url( '/case/' . $w[0] . '/' ) ); ?>" data-rv>
+		<?php echo ki_img( $w[2], $w[1] ); ?>
+		<span class="ki-works__cap"><small>KIHO WORKS</small><?php echo esc_html( $w[1] ); ?></span>
+	</a>
+	<?php endforeach; ?>
+</section>
 
-            <a href="/case/ikkyu-san/">
-                <div class="p-top-section4__box col-sm-6 c-thumnail-zoom">
-                    <img src="<?php echo get_template_directory_uri(); ?>/common/img/top_kihou_img3.jpg" alt="">
-                </div>
-                <!-- /.col-sm-6 -->
-            </a>
+<?php /* ---------- 新しい製品 ---------- */ ?>
+<?php
+$ki_new = new WP_Query( array( 'post_type' => 'case', 'posts_per_page' => 8, 'no_found_rows' => true ) );
+if ( $ki_new->have_posts() ) :
+?>
+<section class="ki-sec">
+	<div class="ki-wrap">
+		<?php ki_head( 'PRODUCTS', '新しい製品', get_post_type_archive_link( 'case' ), '製品紹介・実績をすべて見る' ); ?>
+		<div class="ki-cards">
+			<?php while ( $ki_new->have_posts() ) : $ki_new->the_post(); ki_case_card(); endwhile; wp_reset_postdata(); ?>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
 
-            <a href="/case/jyuni-hitoe/">
-                <div class="p-top-section4__box col-sm-6 c-thumnail-zoom">
-                    <img src="<?php echo get_template_directory_uri(); ?>/common/img/top_kihou_img5.jpg" alt="">
-                </div>
-            </a>
-            <!-- /.col-sm-6 -->
-        </div>
-        <!-- /.row -->
-    </section>
-    <section class="p-top-section5 c-color-light c-pt-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="section--heading c-text-center">
-                        <b>「すべては人のために」</b>喜芳の想い
-                    </h1>
-                    <div class="col-sm-6">
-                        <h2 class="p-section--heading__sub-title">一生の道を示してくれた祖母</h2>
+<?php /* ---------- 卸・お取引 ---------- */ ?>
+<section class="ki-sec ki-sec--dark ki-whole">
+	<?php echo ki_img( 'ki/ki-mg0051.jpg', '', array( 'class' => 'ki-whole__bg' ) ); ?>
+	<div class="ki-wrap ki-whole__in">
+		<div class="ki-whole__text" data-rv>
+			<p class="ki-eyebrow">FOR BUSINESS</p>
+			<h2>卸・法人のお客様へ</h2>
+			<p>季節によってお取り扱いの念珠が異なり、季節の珠や房をラインナップに取り入れています。サンプルをお手に取ってご覧いただけますので、まずはお気軽にご相談ください。</p>
+		</div>
+		<ul class="ki-whole__list">
+			<li data-rv><b>ひとつからご注文いただけます</b>月々の固定費や最低取引額はありません。ご入用の際に、必要な分だけご発注ください。</li>
+			<li data-rv><b>サンプルをお持ちします</b>関西一円はサンプルをお持ちしてお話を伺います。名古屋・富山には隔月で担当者が参ります。その他の地域は郵送で対応いたします。</li>
+			<li data-rv><b>オーダーメイドも承ります</b>宗派の本式・略式、ご希望の色の珠、材質、ご予算に合わせてお仕立てします。</li>
+			<li data-rv><b>個人・個人事業主の方も歓迎</b>お問い合わせいただいた方への営業のお電話はいたしませんので、ご安心ください。</li>
+		</ul>
+		<div class="ki-whole__btns" data-rv>
+			<a class="ki-btn ki-btn--light" href="<?php echo esc_url( home_url( '/contact/?title=' . rawurlencode( '卸・お取引について' ) ) ); ?>">卸・お取引のお問い合わせ</a>
+			<a class="ki-btn ki-btn--line" <?php echo ki_tel_attr( 'top-whole' ); ?>>電話 <?php echo esc_html( KI_TEL ); ?></a>
+		</div>
+	</div>
+</section>
 
-                        <p>祖母はよく「私が早く死んだら、数珠屋さんに奉公して仕事を習いなさい。数珠の作り方を覚えておけば、ちゃんと食べていける。生活していけるようになる」 と言いました。私が小学六年生の時、祖母が事故で亡くなって、身寄りがなくなった私は数珠屋さんへ奉公することになりました。まだ十三歳の時でしたが、私は一途で、他の事はなんにも考えませんでしたね。<br> 奉公はそれから五年間したんですが、その時分の苦労といったら、働く時間が十六時間ぐらいあったことです。朝八時から晩の十二時頃までぶっ通しで、休憩なんてものはない。
-                            <br> 手編みをしている手は荒れてくるし、年がら年中血だらけでした。でも、もう仕事ができせん、と言ったところで、主人は聞いてくれるはずもない。そんなもん、誰かて割れるもんや、てなもんですわ。
-                        </p>
-                    </div>
-                    <!-- /.col-sm-6 -->
-                    <div class="col-sm-6">
-                        <h2 class="p-section--heading__sub-title">人間は度胸と努力が大事</h2>
+<?php /* ---------- 実績・メディア ---------- */ ?>
+<?php $ki_media = ki_media_list(); ?>
+<section class="ki-sec">
+	<div class="ki-wrap">
+		<?php ki_head( 'MEDIA', 'テレビ・メディア' ); ?>
+		<div class="ki-media">
+			<div class="ki-media__col" data-rv>
+				<h3>テレビ出演</h3>
+				<ul><?php foreach ( $ki_media['tv'] as $m ) : ?><li><?php echo esc_html( $m ); ?></li><?php endforeach; ?></ul>
+			</div>
+			<div class="ki-media__col" data-rv>
+				<h3>カタログ・メディア掲載</h3>
+				<ul><?php foreach ( $ki_media['print'] as $m ) : ?><li><?php echo esc_html( $m ); ?></li><?php endforeach; ?></ul>
+			</div>
+		</div>
+	</div>
+</section>
 
-                        <p>私が三十代の頃、遠くのあるお得意先から「二週間で一万三千連の念珠を作ってほしい」と言われたことがありました。一万三千といえば、大変な数です。<br> でも当時は一緒にやっている人も五人いましたし、一人が一日に二百か三百仕上げたらできると思って、「任してください」と二つ返事をしたんです。
-                            <br> でも、これにはあの喧し屋の社長も驚いて、「そんな返事の仕方をして、大丈夫なんか？」と言わはりますからね。「でも社長。そんなことようしませんわ、と言って渋々引き受けたら、できますか。及び腰ではできるもんもできませんわ」と答えましてね（笑）。これには返す言葉もなかったようで、全面的に任してくださいました。
-                            <br> その間、他の数珠屋さんからは「陣中見舞い」といって、菓子とか果物が次々と届きました。できんかったら、京都の名折れになるさかいに、どうか頑張ってくれと。
-                            <br> 私も「できる」と言ったからには、どんなことをしてでもやろう、と。それで期日どおりにちゃんと仕上げて、板倉に頼めばなんでもできる、という評判をとったんです。
-                        </p>
-                    </div>
-                    <!-- /.col-sm-6 -->
-                    <div class="row">
-                        <div class="col-sm-12 text-center c-mt-1 c-mb-2">
-                            <div class="btn btn-white text-center">
-                                <a href="/kihou-in" target="_blank">すべて読む</a>
-                            </div>
-                        </div>
-                        <!-- /.col-sm-4 -->
-                    </div>
-                    <!-- /.row -->
+<?php /* ---------- お知らせ ---------- */ ?>
+<?php
+$ki_news = new WP_Query( array( 'post_type' => 'post', 'posts_per_page' => 5, 'cat' => 110, 'no_found_rows' => true ) );
+if ( $ki_news->have_posts() ) :
+?>
+<section class="ki-sec ki-sec--tint">
+	<div class="ki-wrap ki-wrap--narrow">
+		<?php ki_head( 'NEWS', 'お知らせ', home_url( '/news/' ) ); ?>
+		<ul class="ki-news">
+			<?php while ( $ki_news->have_posts() ) : $ki_news->the_post(); ki_news_row(); endwhile; wp_reset_postdata(); ?>
+		</ul>
+	</div>
+</section>
+<?php endif; ?>
 
-                    <!-- /.btn -->
-                </div>
-                <!-- /.col-sm-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-    </section>
-    <!-- /.p-top-section3 -->
-
-
-
-    <?php get_footer(); ?>
+<?php get_footer(); ?>

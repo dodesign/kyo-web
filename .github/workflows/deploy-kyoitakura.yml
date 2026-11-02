@@ -9,7 +9,8 @@ name: Deploy kyo-itakura theme
 # ★公開フォルダは kyo-itakura/。server-dir は「/kyo-itakura/」で始める（「/web/…」は間違い。
 #   kyo-kaon の deploy-kyokaon.yml の説明を参照）。
 #
-# ★最初は手動実行（workflow_dispatch）だけにしてある。
+# ★2026-11-02 手動実行で本番反映を確認済み（style.css の Last-Modified が当日に更新）→ push でも自動デプロイに切り替えた。
+# （以下は初回の手順の記録）
 #   1. Dreamweaver で本番の onepress をこのリポジトリの kyo-itakura.com/wp-content/themes/onepress/ に取得
 #   2. サイト同期.bat で push
 #   3. GitHub の Actions → このワークフロー → Run workflow
@@ -19,6 +20,8 @@ name: Deploy kyo-itakura theme
 # uploads・WordPress本体・プラグイン・DBには一切触れない。
 
 on:
+  # ★2026-11-02 デザイン作り直しの作業中は自動デプロイを止めている（作業途中のファイルが
+  #   10分ごとの自動同期で本番に出ないように）。完成したら下の push: のコメントを外す。
   # push:
   #   branches: [ master ]
   #   paths:

@@ -1,83 +1,37 @@
 <?php
 /**
- * The template for displaying archive pages.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * 念珠（数珠）とは（/about/about-nenjyu/）。2026-11-02 リニューアル（旧版は Git の履歴）。
+ * 文章は旧ページのまま（「凡天房」→「梵天房」の表記だけ直した）。
  *
  * @package OnePress
  */
-
 get_header();
-
-$layout = get_theme_mod( 'onepress_layout', 'right-sidebar' );
 ?>
 
-    <section class="p-under-title p-under-title__case">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="u-color-light">念珠（数珠）とは？</h1>
+<?php ki_pagehead( array( 'en' => 'ABOUT NENJU', 'title' => '念珠（数珠）とは', 'lead' => '念ずる珠。心のお守りとなる、身近な仏具。', 'img' => 'ki/ki-0094.jpg', 'crumb' => array( array( '板倉のこだわり', home_url( '/about/' ) ), array( '念珠（数珠）とは' ) ) ) ); ?>
 
-                    <div class="breadcrumbs" vocab="http://schema.org/" typeof="BreadcrumbList">
-                        <?php if(function_exists('bcn_display'))
-{
-bcn_display();
-}?>
-                    </div>
-                </div>
-                <!-- /.col-sm-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-    <!-- /.p-under-title -->
-    <section class="p-under__sub-title p-under__sub-title__case">
-        <div class="container">
-            <div class="col-sm-6 col-sm-offset-6">
-                <h2>京念珠の老舗<br> 製造卸一筋48年の実績
-                </h2>
-                <h3>お客様をのご要望を確実に具現化することを第一 に考え、ひとつひとつ手作りしています。
-                </h3>
-                <p class="p-under-title__lead">こちらに掲載している以外にもさまざまな実績があります。<br> ぜひ一度お問い合わせください。
-                </p>
-            </div>
-        </div>
-        <!-- /.container -->
-    </section>
-    <!-- /.p-under-title -->
-    <section class="p-under p-intro section-bg-jpn-light p-section-padding">
+<section class="ki-sec">
+	<div class="ki-wrap ki-wrap--narrow ki-prose ki-prose--doc">
 
-        <div class="row">
-            <div class="container">
-
-                <div class="col-sm-9  col-sm-push-3">
-                    <div class="p-case p-section--content">
-                            <h1 class="section--heading c-text-center">
-                                数珠・念珠とは
-                            </h1>
+                            <h2>数珠・念珠とは</h2>
                         <p>
-                            <img class="img-w100" src="/wp-content/themes/onepress/common/img/about_nenjyu2.jpg" alt="">
+                            <img class="ki-iv__img" src="/wp-content/themes/onepress/common/img/about_nenjyu2.jpg" alt="">
                         </p>
                         <p>数珠は「珠数」「寿珠」などとも呼ばれ、全国的に広く普及している身近な仏具です。<br>
 念珠は「念ずる珠」とかくように、念仏を唱える際、その回数を数える為に使われる事から呼ばれるようになりました。<br>
 念珠を手に持ち合掌をし一心に祈る事で、すべての煩悩が消え去り、この上ない功徳を得られると言われています。</p>
-                            <h1 class="section--heading c-text-center">
-                                数珠・念珠の起源
-                            </h1>
+                            <h2>数珠・念珠の起源</h2>
                         <p>
-                            <img class="img-w100" src="/wp-content/themes/onepress/common/img/about_nenjyu3.jpg" alt="">
+                            <img class="ki-iv__img" src="/wp-content/themes/onepress/common/img/about_nenjyu3.jpg" alt="">
                         </p>
                         <p>念珠の起源は、はるかお釈迦様の頃にさかのぼります。「モクゲンシキョウ」の中で、ハルリ王は、お釈迦様に「我が国は非常に貧しく、その上戦乱や疫病のため仏道の修行をする余裕もありません。」と伝えたところ、「菩提樹の実を一〇八個貫いて、それを手に仏の名をたたえたならば、それは立派な修行ですよ」とお答えになったことが始まりとされています。<br>
 その後、天平八年（736年）に南インドのボダイセンナというお坊さんが、摂津の難波に来た際に、菩提樹の念珠を天皇に献上したことにより日本全国へ広まったとされています。<br>
 現在ではお葬式はもちろん、お守りとしても使われます。他にもブレスレットなどのアクセサリーとして普段の生活で身に付けるなど、利用用途は格段に広がっています。</p>
-                            <h1 class="section--heading c-text-center">
-                                念珠の構成
-                            </h1>
+                            <h2>念珠の構成</h2>
                         <p>
-                            <img class="img-w100" src="/wp-content/themes/onepress/common/img/about_nenjyu.jpg" alt="">
+                            <img class="ki-iv__img" src="/wp-content/themes/onepress/common/img/about_nenjyu.jpg" alt="">
                         </p>
-                           <table class="table_line" width="100%" cellspacing="1" border="0">
+                           <table class="ki-table">
                             <tbody>
                                 <tr>
                                     <th>主玉</th>
@@ -107,69 +61,28 @@ bcn_display();
                                 </tr>
                                 <tr>
                                     <th>房</th>
-                                    <td>房は男性用が、頭付房、紐房、凡天房、かがり凡房。
-女性用は頭付房、凡天房、かがり凡房、切り房がよく使用されます。
+                                    <td>房は男性用が、頭付房、紐房、梵天房、かがり梵天房。
+女性用は頭付房、梵天房、かがり梵天房、切り房がよく使用されます。
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         
-                    </div>
-                    <!-- /.p-section--content -->
-                </div>
-                <!-- /.col-sm-7 -->
-                <?php get_sidebar('case'); ?>
-            </div>
-            <!-- /.container -->
-        </div>
-        <!-- /.row -->
-    </section>
-    <section class="p-under p-intro">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 p-section-padding">
-                <h1 class="section--heading c-text-center">
-                    実績
-                </h1>
-                <div class="p-section--content">
-                    <div class="col-sm-10 col-sm-offset-1 c-mb-2">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2 class="p-heading_deco">テレビ出演</h2>
-                                <div class="p-heading_deco__lead">
-                                    <ul class="c-list">
-                                        <li>ディノス（東京ローカル）</li>
-                                        <li>ショップチャンネル</li>
-                                        <li>高田純次の春の京都で逸品をさがせ！</li>
-                                        <li>いいものプレミアム</li>
-                                    </ul>
-                                    <!-- /.c-list -->
-                                </div>
-                                <!-- /.p-heading_deco__lead -->
-                            </div>
-                            <!-- /.col-sm-6 -->
-                            <div class="col-sm-6">
-                                <h2 class="p-heading_deco">メディア掲載</h2>
-                                <div class="p-heading_deco__lead">
-                                    <ul class="c-list">
-                                        <li>ディノス</li>
-                                        <li>ワコール</li>
-                                        <li>生協</li>
-                                    </ul>
-                                    <!-- /.c-list -->
-                                </div>
-                                <!-- /.p-heading_deco__lead -->
-                            </div>
-                            <!-- /.col-sm-6 -->
-                        </div>
-                        <!-- /.row -->
+                    
+	</div>
+</section>
 
-                    </div>
-                </div>
-                <!-- /.p-section--content -->
-            </div>
-            <!-- /.col-sm-7 -->
-        </div>
-        <!-- /.row -->
-    </section>
+<section class="ki-sec ki-sec--tint">
+	<div class="ki-wrap">
+		<?php ki_head( 'PRODUCTS', '板倉の京念珠', get_post_type_archive_link( 'case' ), '製品紹介・実績を見る' ); ?>
+		<div class="ki-cards">
+			<?php
+			$ki_q = new WP_Query( array( 'post_type' => 'case', 'posts_per_page' => 4, 'no_found_rows' => true ) );
+			while ( $ki_q->have_posts() ) { $ki_q->the_post(); ki_case_card(); }
+			wp_reset_postdata();
+			?>
+		</div>
+	</div>
+</section>
 
-    <?php get_footer(); ?>
+<?php get_footer(); ?>
