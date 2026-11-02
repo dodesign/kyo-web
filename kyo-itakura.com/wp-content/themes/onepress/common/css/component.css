@@ -1,0 +1,240 @@
+@charset 'UTF-8';
+#c-ggl-map
+{
+    height: 300px;
+}
+
+.c-color-light
+{
+    color: #fff !important;
+}
+.c-color-light b
+{
+    color: #e1d653;
+}
+
+.c-text-warning
+{
+    color: #c6252c;
+}
+
+.text-big
+{
+    font-size: 120%;
+}
+
+.c-copy
+{
+    font-size: 1.5rem;
+}
+
+.c-db
+{
+    display: block;
+}
+
+.c-note
+{
+    font-size: 86%;
+
+    color: #bbb;
+}
+
+.c-note-danger
+{
+    font-size: 86%;
+
+    color: #e38b32;
+}
+
+.c-flo-img
+{
+    float: right;
+
+    padding: 0 0 10px 10px;
+}
+
+.c-bg-white
+{
+    background: #fff !important;
+}
+
+.c-bg-light
+{
+    background: #f3f4f8 !important;
+}
+
+.c-w80
+{
+    display: block;
+
+    max-width: 80%;
+    margin: 0 auto; 
+    padding: 4rem 0 4rem 0;
+}
+
+.c-w100
+{
+    display: block;
+
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.c-w100b
+{
+    display: block;
+
+    width: 100%;
+    margin: 0 auto;
+}
+
+.c-mt-1
+{
+    margin-top: 1rem;
+}
+
+.c-mt-2
+{
+    margin-top: 2rem;
+}
+
+.c-mt-3
+{
+    margin-top: 3rem;
+}
+
+.c-mt-4
+{
+    margin-top: 4rem;
+}
+
+.c-mt-5
+{
+    margin-top: 5rem;
+}
+
+.c-mb-1
+{
+    margin-bottom: 1rem;
+}
+
+.c-mb-2
+{
+    margin-bottom: 2rem;
+}
+
+.c-mb-3
+{
+    margin-bottom: 3rem;
+}
+
+.c-mb-4
+{
+    margin-bottom: 4rem;
+}
+
+.c-mb-5
+{
+    margin-bottom: 5rem;
+}
+
+.c-font-color-white
+{
+    color: #fff;
+}
+
+.c-font-color-blue
+{
+    color: #00d7df;
+}
+
+.text-center
+{
+    display: block;
+
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.c-no-padding
+{
+    padding: 0 !important;
+}
+
+.c-no-margin
+{
+    margin: 0 !important;
+}
+
+.c-list li
+{
+    font-size: 110%;
+
+    margin-bottom: 7px; 
+
+    color: #222;
+}
+.c-list li:before
+{
+    font-size: 80%;
+
+    position: relative;
+    bottom: 1px; 
+
+    margin-right: 8px;
+
+    content: '●';
+
+    color: #b99cca;
+}
+
+.u-color-dark
+{
+    color: #222 !important;
+}
+
+.u-color-light
+{
+    color: #fff !important;
+}
+
+table.table_line
+{
+    line-height: 1.5;
+
+    margin: 0 auto 2rem;
+
+    border-spacing: 1px;
+
+    text-align: left; 
+
+    color: #222;
+    border-width: 1px medium medium;
+    border-style: solid none none;
+    border-color: #222;
+}
+
+table.table_line th
+{
+    width: 25%; 
+    padding: 10px 10px 10px 5%;
+
+    vertical-align: top;
+
+    border-width: medium medium 1px;
+    border-style: none none solid;
+    border-color: currentcolor currentcolor #222;
+}
+
+table.table_line td
+{
+    width: 75%; 
+    padding: 10px;
+
+    vertical-align: top;
+
+    border-width: medium medium 1px;
+    border-style: none none solid;
+    border-color: currentcolor currentcolor #222;
+}

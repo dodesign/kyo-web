@@ -1,0 +1,48 @@
+name: Deploy kyo-itakura theme
+
+# kyo-itakura.com（株式会社意匠京念珠板倉）のテーマを FTPS で本番へ送る。2026-11-02 新設。
+#
+# ★本番で動いているのは onepress（親テーマを直接カスタマイズしてある。子テーマは無い）。
+#   front-page.php・common/ などに手を入れてあるので、WordPress の管理画面から
+#   onepress を「更新」すると全部消える。テーマの自動更新・手動更新はしないこと。
+#
+# ★公開フォルダは kyo-itakura/。server-dir は「/kyo-itakura/」で始める（「/web/…」は間違い。
+#   kyo-kaon の deploy-kyokaon.yml の説明を参照）。
+#
+# ★最初は手動実行（workflow_dispatch）だけにしてある。
+#   1. Dreamweaver で本番の onepress をこのリポジトリの kyo-itakura.com/wp-content/themes/onepress/ に取得
+#   2. サイト同期.bat で push
+#   3. GitHub の Actions → このワークフロー → Run workflow
+#   4. https://kyo-itakura.com/wp-content/themes/onepress/style.css の Last-Modified が今の日時か確認
+#   問題なければ、下の push: のコメントを外して自動デプロイにする。
+#
+# uploads・WordPress本体・プラグイン・DBには一切触れない。
+
+on:
+  # push:
+  #   branches: [ master ]
+  #   paths:
+  #     - 'kyo-itakura.com/wp-content/themes/onepress/**'
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy theme via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.LOLIPOP_FTP_SERVER }}
+          username: ${{ secrets.LOLIPOP_FTP_USERNAME }}
+          password: ${{ secrets.LOLIPOP_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./kyo-itakura.com/wp-content/themes/onepress/
+          server-dir: /kyo-itakura/wp-content/themes/onepress/
+          exclude: |
+            **/_notes/**
+            **/.git*
+            **/.git*/**

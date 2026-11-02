@@ -1,0 +1,299 @@
+$p: #222;
+$main-color: #b99cca;
+$sub-color: #e1d653;
+$sub-color2: #e38b32;
+$orange:#f26522;
+$yellow:#fff467;
+$light: #fff;
+#c-ggl-map {
+    height: 300px;
+}
+
+.c-color-light {
+    color: $light !important;
+    b {
+        color: $sub-color;
+    }
+}
+
+.c-text-warning {
+    color: $sub-color2;
+}
+
+.c-bold {
+    font-weight: bold;
+}
+
+.text-big {
+    font-size: 210%;
+}
+
+.text-danger {
+    color: $sub-color2;
+}
+
+.c-copy {
+    font-size: 1.5rem;
+}
+
+.c-db {
+    display: block;
+}
+
+.c-note {
+    font-size: 86%;
+    color: #bbb;
+}
+
+.c-note-danger {
+    font-size: 86%;
+    color: $sub-color2;
+}
+
+.c-flo-img {
+    float: right;
+    padding: 0 0 10px 10px;
+}
+
+.c-bg-white {
+    background: #FFF !important;
+}
+
+.c-bg-light {
+    background: #F3F4F8 !important;
+}
+
+.c-w80 {
+    padding: 4rem 0 4rem 0;
+    display: block;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.c-w100 {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.c-w100b {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.c-mt-1 {
+    margin-top: 1rem;
+}
+
+.c-mt-2 {
+    margin-top: 2rem;
+}
+
+.c-mt-3 {
+    margin-top: 3rem;
+}
+
+.c-mt-4 {
+    margin-top: 4rem;
+}
+
+.c-mt-5 {
+    margin-top: 5rem;
+}
+
+.c-mt-6 {
+    margin-top: 6rem;
+}
+
+.c-mt-7 {
+    margin-top: 7rem;
+}
+
+.c-mt-8 {
+    margin-top: 8rem;
+}
+
+.c-mt-9 {
+    margin-top: 9rem;
+}
+
+.c-mt-10 {
+    margin-top: 10rem;
+}
+
+.c-mb-1 {
+    margin-bottom: 1rem;
+}
+
+.c-mb-2 {
+    margin-bottom: 2rem;
+}
+
+.c-mb-3 {
+    margin-bottom: 3rem;
+}
+
+.c-mb-4 {
+    margin-bottom: 4rem;
+}
+
+.c-mb-5 {
+    margin-bottom: 5rem;
+}
+
+.c-mb-6 {
+    margin-bottom: 6rem;
+}
+
+.c-mb-7 {
+    margin-bottom: 7rem;
+}
+
+.c-mb-8 {
+    margin-bottom: 8rem;
+}
+
+.c-mb-9 {
+    margin-bottom: 9rem;
+}
+
+.c-pt-1 {
+    padding-top: 1rem;
+}
+
+.c-pt-2 {
+    padding-top: 2rem;
+}
+
+.c-pt-3 {
+    padding-top: 3rem;
+}
+
+.c-pt-4 {
+    padding-top: 4rem;
+}
+
+.c-pt-5 {
+    padding-top: 5rem;
+}
+
+.c-pt-6 {
+    padding-top: 6rem;
+}
+
+.c-font-color-white {
+    color: #FFF;
+}
+
+.c-font-color-blue {
+    color: #00d7df;
+}
+
+.text-center {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.c-no-padding {
+    padding: 0 !important;
+}
+
+.c-no-margin {
+    margin: 0 !important;
+}
+
+.c-int-q {
+    color: #333;
+    &:before {
+        content: "--------";
+        padding-right: 10px;
+    }
+}
+
+.c-list {
+    li {
+        font-size: 110%;
+        color: $p;
+        margin-bottom: 7px;
+        &:before {
+            content: "●";
+            font-size: 80%;
+            color: $main-color;
+            margin-right: 8px;
+            position: relative;
+            bottom: 1px;
+        }
+        a {
+            color: #222;
+            text-decoration: underline;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.u-color-dark {
+    color: #222 !important;
+}
+
+.u-color-light {
+    color: #fff !important;
+}
+
+//テーブル
+table.table_line {
+    width: 100%;
+    border-color: #222;
+    border-spacing: 1px;
+    border-style: solid none none;
+    border-width: 1px medium medium;
+    color: #222;
+    line-height: 1.5;
+    margin: 0 auto 2rem;
+    text-align: left;
+    tbody {
+        width: 100%;
+    }
+    tr {
+        width: 100%;
+        border-bottom: 1px solid #222;
+    }
+}
+
+table.table_line th {
+    //    border-color: currentcolor currentcolor #222;
+    //    border-style: none none solid;
+    //    border-width: medium medium 1px;
+    padding: 10px 10px 10px 5%;
+    vertical-align: top;
+    width: 25%;
+}
+
+table.table_line td {
+    //    border-color: currentcolor currentcolor #222;
+    //    border-style: none none solid;
+    //    border-width: medium medium 1px;
+    padding: 10px;
+    vertical-align: top;
+    width: 75%;
+}
+
+.c-thumnail-zoom {
+    overflow: hidden;
+    img {
+        -webkit-transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
+    }
+    img:hover {
+        opacity: 0.8;
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2); //拡大倍率
+        z-index: 99;
+    }
+}

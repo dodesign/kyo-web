@@ -1,0 +1,250 @@
+$p: #222;
+$main-color: #b99cca;
+$sub-color: #e1d653;
+$sub-color2: #e38b32;
+$orange:#f26522;
+$yellow:#fff467;
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Bold");
+    font-weight: bold;
+}
+
+body {
+    font-family: YuMincho, 'Yu Mincho', "Sawarabi Mincho", 'Noto Sans JP', "-apple-system", "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo;
+    color: #000;
+    overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1,
+h2 {
+    font-family: "Hannari", "Sawarabi Mincho", YuMincho, 'Yu Mincho';
+}
+
+p {
+    font-size: 16px;
+    line-height: 29px;
+    color: #000;
+    padding-bottom: 20px;
+}
+
+a:hover img {
+    opacity: 0.8;
+    -webkit-transition: 0.8s;
+    -moz-transition: 0.8s;
+    -o-transition: 0.8s;
+    -ms-transition: 0.8s;
+    transition: 0.8s;
+}
+
+a {
+    color: #00d7df;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+    -webkit-transition-property: color, border-color, background-color;
+    transition-property: color, border-color, background-color;
+}
+
+a:hover,
+a:focus {
+    color: $sub-color;
+    text-decoration: none;
+    transition: 0.8s;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 300;
+    color: #3D4351;
+    margin: 0 0 5rem 0;
+}
+
+h3 {
+    color: #222;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 15px;
+    color: #3D4351;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.breadcrumbs span {
+    color: #222;
+}
+
+.p-under-title {
+    .breadcrumbs span {
+        color: #fff;
+    }
+}
+
+//ローディング
+//
+//body {
+//    display: none;
+//}
+//
+//#loader-bg {
+//    position: fixed;
+//    width: 100%;
+//    height: 1vh;
+//    top: 0px;
+//    left: 0px;
+//    background: #000;
+//    z-index: 1;
+//}
+//
+//#loader {
+//    position: fixed;
+//    top: 50%;
+//    left: 50%;
+//    width: 200px;
+//    height: 200px;
+//    margin-top: -100px;
+//    margin-left: -100px;
+//    text-align: center;
+//    color: #fff;
+//    z-index: 2;
+//}
+//
+//.loader {
+//    color: #ffffff;
+//    font-size: 20px;
+//    margin: 100px auto;
+//    width: 1em;
+//    height: 1em;
+//    border-radius: 50%;
+//    position: relative;
+//    text-indent: -9999em;
+//    -webkit-animation: load4 1.3s infinite linear;
+//    animation: load4 1.3s infinite linear;
+//    -webkit-transform: translateZ(0);
+//    -ms-transform: translateZ(0);
+//    transform: translateZ(0);
+//}
+//
+//@-webkit-keyframes load4 {
+//    0%,
+//    100% {
+//        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+//    }
+//    12.5% {
+//        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+//    }
+//    25% {
+//        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+//    }
+//    37.5% {
+//        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+//    }
+//    50% {
+//        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+//    }
+//    62.5% {
+//        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+//    }
+//    75% {
+//        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+//    }
+//    87.5% {
+//        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+//    }
+//}
+//
+//@keyframes load4 {
+//    0%,
+//    100% {
+//        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+//    }
+//    12.5% {
+//        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+//    }
+//    25% {
+//        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+//    }
+//    37.5% {
+//        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+//    }
+//    50% {
+//        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+//    }
+//    62.5% {
+//        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+//    }
+//    75% {
+//        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+//    }
+//    87.5% {
+//        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+//    }
+//}
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    .panel {
+        height: 97%;
+        margin-bottom: 3%;
+    }
+}

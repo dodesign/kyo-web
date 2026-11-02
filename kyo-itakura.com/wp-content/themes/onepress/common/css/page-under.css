@@ -1,0 +1,119 @@
+.p-under .section--heading
+{
+    font-size: 220%;
+
+    margin-bottom: 4rem;
+    padding: 0 0 3rem;
+}
+
+.p-under .section--heading
+{
+    margin-top: 0;
+}
+
+.p-under .section--heading__s
+{
+    font-size: 180%;
+}
+
+.p-under-title h1
+{
+    font-size: 260%;
+
+    padding: 90px 0;
+
+    text-align: center;
+    vertical-align: middle; 
+
+    color: #222;
+}
+
+.p-under-title__about
+{
+    display: block;
+
+    height: 260px; 
+
+    background: #eee url('/common/img/about_main_img1.jpg') no-repeat scroll 0 0/100% auto;
+}
+
+.p-under-title__corp
+{
+    display: block;
+
+    height: 260px; 
+
+    background: #eee url('/common/img/corp_img1.jpg') no-repeat scroll 0 0/100% auto;
+    text-shadow: 2px 2px 3px #858585;
+}
+
+.p-under-title__case
+{
+    display: block;
+
+    height: 260px; 
+
+    background: #eee url('/common/img/case_img1.jpg') no-repeat scroll 0 0/100% auto;
+    text-shadow: 2px 2px 3px #858585;
+}
+
+.p-under__sub-title h2
+{
+    font-size: 280%;
+    line-height: 1.5;
+
+    margin: 0; 
+    padding-bottom: 0;
+
+    letter-spacing: 3px;
+
+    color: #222;
+}
+.p-under__sub-title h2 b
+{
+    color: #e1d653;
+}
+
+.p-under__sub-title h3
+{
+    color: #e1d653;
+}
+
+.p-under__sub-title__about
+{
+    height: 300px; 
+
+    background: url('/common/img/about_main_img2.jpg') no-repeat -2px -50px/50% auto;
+}
+
+.p-under__sub-title__netshop
+{
+    height: 300px; 
+
+    background: url('/common/img/about_netshop_img1.jpg') no-repeat -2px -50px/50% auto;
+}
+
+.p-under__sub-title__corp
+{
+    position: relative;
+
+    height: 360px; 
+
+    background: url('/common/img/corp_img2.jpg') no-repeat -2px -50px/50% auto;
+}
+
+.p-under__sub-title__case
+{
+    position: relative;
+
+    height: 360px; 
+
+    background: url('/common/img/case_img2.jpg') no-repeat -2px -50px/50% auto;
+}
+
+.p-under-corp__leader-img
+{
+    position: absolute;
+
+    margin-top: 1rem;
+}

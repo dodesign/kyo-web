@@ -1,0 +1,282 @@
+$main-color: #b99cca;
+$sub-color: #e1d653;
+$sub-color2: #e38b32;
+$orange:#f26522;
+$yellow:#fff467;
+.p-under {
+    .section--heading {
+        font-size: 220%;
+        margin-bottom: 4rem;
+        padding: 0 0 3rem;
+    }
+    .section--heading {
+        margin-top: 0;
+    }
+    .section--heading__s {
+        font-size: 180%;
+    }
+}
+
+.p-under-title {
+    background: no-repeat top center / cover;
+    height: 260px;
+    position: relative;
+    h1 {
+        color: #222;
+        font-size: 260%;
+        text-align: center;
+        padding: 90px 0 50px 0;
+        vertical-align: middle;
+    }
+    .breadcrumbs {
+        position: absolute;
+        padding: 0;
+        color: #fff;
+        border: none;
+        text-shadow: none;
+        font-size: 100%;
+        font-weight: normal;
+        bottom: -40px;
+        span {
+            color: #fff;
+        }
+    }
+}
+
+.p-under-title__about {
+    display: block;
+    background: #eeeeee url("../img/about_main_img1.jpg") no-repeat top center / cover;
+    .breadcrumbs span {
+        color: #222;
+    }
+}
+
+.p-under-title__corp {
+    display: block;
+    text-shadow: 2px 2px 3px #858585;
+    background: #eeeeee url("../img/corp_img1.jpg") no-repeat top center / cover;
+}
+
+.p-under-title__case {
+    display: block;
+    text-shadow: 2px 2px 3px #858585;
+    background: #eeeeee url("../img/case_img1.jpg") no-repeat top center / cover;
+}
+
+.p-under-title__contact {
+    color: #fff;
+    display: block;
+    text-shadow: 2px 2px 3px #858585;
+    background: #eeeeee url("../img/contact_main_img1.jpg") no-repeat top center / cover;
+    breadcrumbs {
+        color: #222;
+    }
+}
+
+.p-under-title__kihou {
+    position: relative;
+    background: url("../img/title_img.jpg") no-repeat top center / cover;
+}
+
+.p-under__sub-title {
+    h2 {
+        color: #222;
+        font-size: 280%;
+        letter-spacing: 3px;
+        line-height: 1.5;
+        padding-bottom: 0;
+        margin: 0;
+        b {
+            color: $sub-color;
+        }
+    }
+    h3 {
+        color: $sub-color;
+    }
+}
+
+.p-under__sub-title__about {
+    background: url("../img/about_main_img2.jpg") no-repeat -2px top / 50% auto;
+}
+
+.p-under__sub-title__netshop {
+    background: url("../img/about_netshop_img1.jpg") no-repeat -2px top / 50% auto;
+}
+
+.p-under__sub-title__corp {
+    position: relative;
+    background: url("../img/corp_img2.jpg") no-repeat -2px top / 50% auto;
+}
+
+.p-under__sub-title__case {
+    position: relative;
+    background: url("../img/case_img2.jpg") no-repeat -2px top / 50% auto;
+}
+
+.p-under__sub-title__kihou {
+    background: url("../img/title_img2.jpg") no-repeat -2px top / 42% auto;
+}
+
+.p-under-corp__leader-img {
+    position: absolute;
+    margin-top: 1rem;
+}
+
+//会社概要
+//ブログ
+.entry-header .entry-title {
+    font-family: YuMincho, 'Yu Mincho', "Sawarabi Mincho", 'Noto Sans JP', "-apple-system", "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo;
+    color: #222;
+}
+
+//製品紹介(case)
+.p-case {
+    .p-case__box {
+        margin-bottom: 10px;
+    }
+    .p-case__box__under {
+        background: #fff;
+        padding: 1.2rem 1rem;
+    }
+    .p-case__box__thumbnail {
+        background: #fff;
+        img {
+            display: block;
+            height: 200px;
+            width: auto;
+            max-width: 100%;
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
+}
+
+.p-simpleS-head {
+    color: #222;
+    font-family: YuMincho, "Yu Mincho", Meiryo, "Noto Sans JP", "-apple-system", "Helvetica Neue", "Yu Gothic", YuGothic, Verdana;
+    font-size: 115%;
+    margin: 0;
+    padding: 7px 0 0;
+    text-align: center;
+}
+
+.c-case-category li {
+    display: inline-block;
+    margin: 10px 4px 0 0;
+    a {
+        color: $sub-color2;
+    }
+}
+
+#imageList {
+    li {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+        cursor: pointer;
+    }
+    img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+}
+
+#inner-gallery {
+    /*上下中央*/
+    width: 100%;
+    height: 400px;
+    text-align: center;
+    /*左右中央*/
+    vertical-align: middle;
+    /*上下中央*/
+    layout-grid-line: 166px;
+    /*IE7*/
+    overflow: hidden;
+    img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 400px;
+        vertical-align: middle;
+        /*IE7*/
+        object-fit: cover;
+    }
+    section {
+        height: 400px;
+        position: relative;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+        &:hover img {
+            opacity: 0.8;
+        }
+    }
+    div {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        p,
+        h1,
+        h2 {
+            color: #fff;
+        }
+    }
+}
+
+// サムネイル
+#inner-gallery-thumb {
+    font-size: 0;
+    li {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+        cursor: pointer;
+        &:hover {
+            border: 2px solid $main-color;
+        }
+    }
+    img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+    .active {
+        border: 2px solid $main-color;
+    }
+    // サムネイルのボーダー用のハック
+    a {
+        cursor: default;
+        overflow: hidden;
+        display: inline-block;
+    }
+    // サムネイルのwidthを指定
+    img {
+        max-width: 150px;
+    }
+}
+
+.p-re {
+    li {
+        display: inline-block;
+        margin: 10px 10px 0 0;
+        cursor: pointer;
+    }
+    img {
+        width: 200px !important;
+        height: 200px !important;
+        object-fit: cover;
+    }
+}
+
+.slick-slide {
+    div {
+        height: 180px;
+    }
+    img {
+        width: 100%;
+    }
+}

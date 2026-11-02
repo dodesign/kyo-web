@@ -1,0 +1,515 @@
+        $p: #222;
+        $main-color: #b99cca;
+        $sub-color: #e1d653;
+        $sub-color2: #e38b32;
+        $orange:#f26522;
+        $yellow:#fff467;
+        $light: #fff;
+        @import url("/common/css/variables.scss");
+        .section-padding {
+            padding: 5rem 0;
+        }
+        /* ==========================================================================
+header
+========================================================================== */
+        
+        .p-nav {
+            -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+            width: 100%;
+            position: relative;
+            background: #FFF !important;
+            opacity: 1;
+        }
+        
+        .p-nav a {
+            color: #232731 !important;
+        }
+        
+        .p-nav {
+            .logo {
+                display: inline-block;
+                position: relative;
+                float: left;
+                margin-right: 35px;
+                padding: 12px 0;
+            }
+            .p-nav--content__primary {
+                float: left;
+                li {
+                    font-size: 120%;
+                    display: inline-block;
+                    padding: 29px 9px 25px 9px;
+                    &:hover {
+                        //                font-weight: bold;
+                        background: #f7f8f8;
+                        transition: all .9s ease;
+                    }
+                }
+            }
+            .p-nav--content__primary__cv {
+                background: $sub-color;
+                color: #fff !important;
+                text-shadow: 2px 2px 3px #858585;
+                a {
+                    color: #fff !important;
+                }
+                &:hover {
+                    opacity: 0.8;
+                    background: $sub-color !important;
+                    transition: all .9s ease;
+                }
+            }
+            .p-nav--content__primary__cv2 {
+                background: #76b54a;
+                color: #fff !important;
+                text-shadow: 2px 2px 3px #858585;
+                a {
+                    color: #fff !important;
+                }
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+            .is-active {
+                background: #f7f8f8;
+                font-weight: bold;
+            }
+            .p-nav--content__cv {
+                display: inline-block;
+                position: relative;
+                right: 0;
+                float: right;
+                padding-top: 17px;
+                padding-bottom: 17px;
+            }
+        }
+        
+        .p-header {
+            position: relative;
+            width: 100% !important;
+            z-index: 9999;
+            background: #fff;
+        }
+        
+        .p-header.fixed {
+            position: fixed;
+            z-index: 999;
+            width: 100%;
+            top: 0;
+        }
+        
+        .nav-toggle {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            z-index: 999999;
+            padding: 10px 35px 16px 0;
+            cursor: pointer;
+        }
+        
+        .nav-toggle:focus {
+            outline: none;
+        }
+        
+        .nav-toggle span,
+        .nav-toggle span:before,
+        .nav-toggle span:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 35px;
+            height: 3px;
+            border-radius: 1px;
+            background: #232731;
+            cursor: pointer;
+        }
+        
+        .nav-toggle span:before {
+            top: -10px;
+        }
+        
+        .nav-toggle span:after {
+            bottom: -10px;
+        }
+        
+        .nav-toggle span,
+        .nav-toggle span:before,
+        .nav-toggle span:after {
+            -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+        }
+        
+        .nav-toggle.active span {
+            background-color: transparent;
+        }
+        
+        .nav-toggle.active span:before,
+        .nav-toggle.active span:after {
+            top: 0;
+        }
+        
+        .nav-toggle.active span:before {
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        
+        .nav-toggle.active span:after {
+            top: 10px;
+            -ms-transform: translatey(-10px) rotate(-45deg);
+            -webkit-transform: translatey(-10px) rotate(-45deg);
+            transform: translatey(-10px) rotate(-45deg);
+        }
+        
+        .navicon {
+            position: absolute;
+            height: 26px;
+            right: 10px;
+            top: 48px;
+            visibility: hidden;
+            -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+        }
+        
+        //スマホメニュー
+        .spmenu_btn {
+            display: none;
+            position: absolute;
+            top: 24px;
+            right: 25px;
+            width: 30px;
+            height: 22px;
+            background: #000;
+            border-top: 10px solid #fff;
+            border-bottom: 10px solid #fff;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -moz-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        
+        .spmenu_btn:hover {
+            cursor: pointer;
+        }
+        
+        .spmenu_btn_text {
+            display: none;
+            font-size: 80%;
+            position: absolute;
+            right: 15px;
+            text-align: center;
+            top: 45px;
+        }
+        
+        .j-spmenu_btn_text__close {
+            position: absolute;
+            right: 22px;
+        }
+        
+        .spmenu_btn_text:hover {
+            cursor: pointer;
+        }
+        
+        .spmenu_btn:before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: #000;
+            top: -9px;
+            right: 0;
+            -moz-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        
+        .spmenu_btn:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: #000;
+            bottom: -9px;
+            right: 0;
+            -moz-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        
+        .spmenu_btn.active {
+            background: #FFF;
+        }
+        
+        .spmenu_btn.active:before {
+            -moz-transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+            top: 0;
+            right: 0;
+        }
+        
+        .spmenu_btn.active:after {
+            -moz-transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+            bottom: 0;
+            right: 0;
+        }
+        
+        .spmenu {
+            display: none;
+            position: absolute;
+            top: 104px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .spmenu nav {
+            top: 100px; //ヘッダーの高さ
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            li {
+                background: rgba(255, 255, 255, 0.9);
+            }
+        }
+        
+        .spmenu nav li a {
+            display: block;
+            width: 100%;
+            color: #FFF;
+            font-size: 120%;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            position: relative;
+            border-bottom: 1px solid #999;
+        }
+        
+        @media screen and (max-width:1100px) {
+            .spmenu_btn,
+            .spmenu_btn_text {
+                display: block !important;
+            }
+            .header-nav {
+                //pcメニューのclassを指定する
+                display: none;
+            }
+        }
+        /* ==========================================================================
+footer
+========================================================================== */
+        
+        footer.p-footer {
+            background: #222;
+        }
+        
+        .p-footer {
+            display: block;
+            clear: both;
+            .p-fotter-section1 {
+                h2.p-fotter-section1__title {
+                    font-size: 2.8rem;
+                    text-align: center;
+                    color: #fff;
+                    background: url(/common/img/title_img.png) no-repeat bottom center;
+                    padding: 0 0 3rem 0;
+                    margin-bottom: 1.4rem;
+                    text-shadow: 2px 2px 3px #858585;
+                    letter-spacing: 2px;
+                    position: relative;
+                    z-index: 1;
+                }
+                .title_mini {
+                    font-size: 2rem !important;
+                }
+                .p-fotter-section1__lead {
+                    position: relative;
+                    z-index: 1;
+                }
+                .btn {
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+            .p-fotter-section__inner {
+                padding: 3rem 0;
+                position: relative;
+                overflow: hidden;
+            }
+            .p-fotter-section1-1 {
+                &:after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: #000 url("../img/footer_img1.jpg") no-repeat scroll left center /100% auto;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -ms-background-size: cover;
+                    background-size: cover;
+                    -webkit-transition: all .3s ease-out;
+                    -moz-transition: all .3s ease-out;
+                    -ms-transition: all .3s ease-out;
+                    transition: all .3s ease-out;
+                }
+                &:hover:after {
+                    opacity: .8;
+                    -moz-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                    transform: scale(1.2);
+                }
+            }
+            .p-fotter-section1-2 {
+                &:after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: #000 url("../img/footer_img2.jpg") no-repeat scroll left center /100% auto;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -ms-background-size: cover;
+                    background-size: cover;
+                    -webkit-transition: all .3s ease-out;
+                    -moz-transition: all .3s ease-out;
+                    -ms-transition: all .3s ease-out;
+                    transition: all .3s ease-out;
+                }
+                &:hover:after {
+                    opacity: .8;
+                    -moz-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                    transform: scale(1.2);
+                }
+            }
+            .p-fotter-section1-3 {
+                &:after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: #000 url("../img/footer_img3.jpg") no-repeat scroll left center /100% auto;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -ms-background-size: cover;
+                    background-size: cover;
+                    -webkit-transition: all .3s ease-out;
+                    -moz-transition: all .3s ease-out;
+                    -ms-transition: all .3s ease-out;
+                    transition: all .3s ease-out;
+                }
+                &:hover:after {
+                    opacity: .8;
+                    -moz-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                    transform: scale(1.2);
+                }
+            }
+            .p-fotter-section1-4 {
+                &:after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: #000 url("../img/about_netshop_img2.jpg") no-repeat scroll left center /100% auto;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -ms-background-size: cover;
+                    background-size: cover;
+                    -webkit-transition: all .3s ease-out;
+                    -moz-transition: all .3s ease-out;
+                    -ms-transition: all .3s ease-out;
+                    transition: all .3s ease-out;
+                }
+                &:hover:after {
+                    opacity: .8;
+                    -moz-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                    transform: scale(1.2);
+                }
+            }
+            .p-fotter-section1-5 {
+                &:after {
+                    position: absolute;
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: #000 url("../img/about_netshop_img3.jpg") no-repeat scroll left center /100% auto;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -ms-background-size: cover;
+                    background-size: cover;
+                    -webkit-transition: all .3s ease-out;
+                    -moz-transition: all .3s ease-out;
+                    -ms-transition: all .3s ease-out;
+                    transition: all .3s ease-out;
+                }
+                &:hover:after {
+                    opacity: .8;
+                    -moz-transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                    transform: scale(1.2);
+                }
+            }
+            .p-fotter-section2 {
+                padding: 3rem 0;
+                h1.section--heading {
+                    background: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                p {
+                    color: #222;
+                }
+            }
+            .p-fotter-section3 {
+                background: #fff;
+                .p-fotter-section3__left {
+                    padding: 3rem 0;
+                }
+                h4,
+                address,
+                a {
+                    color: #222;
+                    text-decoration: none;
+                }
+                address {
+                    padding-top: 1rem;
+                }
+            }
+            .p-fotter-section4 {
+                background: #222;
+                .p-fotter-menu {
+                    display: inline-block;
+                    padding-top: 3rem;
+                    li {
+                        float: left;
+                        padding: 5px 5px 5px 0;
+                    }
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }

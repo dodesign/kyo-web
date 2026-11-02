@@ -1,0 +1,614 @@
+@charset "utf-8";
+
+/*
+	Description: /faq.html style
+	Update: 2011/07/27-
+	Author: Japan Electronic Industrial Arts Co.Ltd.
+	Notes: 
+*/
+
+@import url("/common/css/page-common.css");
+#undercolumn_content .top {
+    background: url(../images/usage-waku.png ) no-repeat top center;
+    height: 115px;
+}
+
+/*
+#undercolumn_content .top p {
+    font-size: 14px;
+    padding-top: 10px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+#undercolumn_content .step1 {
+    background: url(../images/usage-step1.png ) no-repeat top center;
+    height: 190px;
+}
+
+#undercolumn_content .step1 p.title {
+    padding-left: 190px;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #208ecf
+}
+
+#undercolumn_content .step1 p {
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 90px;
+    padding-top: 20px;
+    line-height: 1.4;
+}
+
+#undercolumn_content .step1 img {
+    padding-left: 270px;
+    padding-top: 10px;
+}
+
+#undercolumn_content .step1 a:hover img {
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    opacity: 0.80;
+}
+
+#undercolumn_content .step2 {
+    background: url(../images/usage-step2.png ) no-repeat top center;
+    height: 290px;
+}
+
+#undercolumn_content .step2 ul {
+    padding-left: 55px;
+    padding-top: 22px;
+}
+
+#undercolumn_content .step2 ul li {
+    float: left;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+#undercolumn_content .step2 ul li a:hover img {
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    opacity: 0.80;
+}
+
+#undercolumn_content .step2 p.title {
+    padding-left: 190px;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #208ecf
+}
+
+#undercolumn_content .step2 p {
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 90px;
+    padding-top: 20px;
+    line-height: 1.2;
+}
+
+#undercolumn_content .step3 {
+    background: url(../images/usage-step3.png ) no-repeat top center;
+    height: 130px;
+}
+
+#undercolumn_content .step3 p.title {
+    padding-left: 190px;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #208ecf
+}
+
+#undercolumn_content .step3 p {
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 90px;
+    padding-top: 20px;
+    line-height: 1.4;
+}
+
+#undercolumn_content .step4 {
+    background: url(../images/usage-step1.png ) no-repeat top center;
+    height: 190px;
+}
+
+#undercolumn_content .step4 p.title {
+    padding-left: 190px;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #208ecf
+}
+
+#undercolumn_content .step4 p {
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 90px;
+    padding-top: 20px;
+    line-height: 1.4;
+    width: 580px;
+}
+
+#undercolumn_content .step5 {
+    background: url(../images/usage-step2.png ) no-repeat top center;
+    height: 455px;
+}
+
+#undercolumn_content .step5 p.title {
+    padding-left: 190px;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #208ecf
+}
+
+#undercolumn_content .step5 p {
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 90px;
+    padding-top: 20px;
+    line-height: 1.4;
+    width: 580px;
+}
+
+#undercolumn_content .stepend {
+    background: url(../images/bg_list_category_title_b.gif) no-repeat left bottom;
+    height: 5px;
+}
+
+#undercolumn_content .faq_area dl {
+    display: block;
+    margin-bottom: 32px;
+}
+
+#undercolumn_content .faq_area dl dt {
+    display: block;
+    padding: 0 0 8px 22px;
+    background: transparent url(../images/bg_faq_dt.gif ) no-repeat 0 0;
+    color: #41A732;
+}
+
+#undercolumn_content .faq_area dl dd {
+    line-height: 1.4em;
+}
+*/
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Bold");
+    font-weight: bold;
+}
+
+.usage_area p {
+    font-size: 100%;
+}
+
+#two_maincolumn_right {
+    font-family: "-apple-system", "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo;
+}
+
+#undercolumn_content {
+    display: block;
+    margin-left: 2px;
+}
+
+#two_maincolumn_right a:hover img {
+    opacity: 0.8;
+}
+
+#two_maincolumn_right h2.title {
+    margin-bottom: 0;
+}
+
+#two_maincolumn_right p {
+    line-height: 1.7;
+}
+
+#two_maincolumn_right b {
+    color: #4bab3d;
+}
+
+#two_maincolumn_right .c-margin-top-100 {
+    margin-top: 40px;
+}
+
+#two_maincolumn_right .c-clear-both {
+    clear: both;
+    overflow: hidden;
+}
+
+#two_maincolumn_right .c-note {
+    font-size: 83% !important;
+    background: rgba(192, 226, 179, 0.4);
+    border-radius: 7px;
+    padding: 10px;
+    color: #bb001a !important;
+    font-weight: bold;
+}
+
+#two_maincolumn_right .c-note b {
+    color: #bb001a !important;
+}
+
+#two_maincolumn_right .c-btn {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#two_maincolumn_right .c-str_bg {
+    background: url(../images/usg_bg1.png) repeat;
+}
+
+#two_maincolumn_right .p-usg-block {
+    display: block;
+    padding: 10px 30px 30px 30px;
+}
+
+#two_maincolumn_right .p-usg-block h3 {
+    color: #4bab3d;
+    /*    padding-left: 120px;*/
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+#two_maincolumn_right .c-str_bg h3,
+#two_maincolumn_right .c-str_bg p {
+    color: #fff;
+}
+
+#two_maincolumn_right .step1_line {
+    display: block;
+    position: relative;
+    top: -150px;
+}
+
+#two_maincolumn_right .step1 {
+    display: block;
+    position: relative;
+    margin-top: -150px;
+    /*    background: url("/common/images/usg_line1.png") top center,
+url(../images/usg_bg1.png) repeat;*/
+}
+
+#two_maincolumn_right .step1 h3:before {
+    content: url("../images/usg_step1.png");
+    padding-right: 10px;
+    position: relative;
+    top: 7px;
+}
+
+#two_maincolumn_right .step2 h3:before {
+    content: url("../images/usg_step2.png");
+    padding-right: 10px;
+    position: relative;
+    top: 7px;
+}
+
+#two_maincolumn_right .step3 h3:before {
+    content: url("../images/usg_step3.png");
+    padding-right: 10px;
+    position: relative;
+    top: 7px;
+}
+
+#two_maincolumn_right .step4 h3:before {
+    content: url("../images/usg_step4.png");
+    padding-right: 10px;
+    position: relative;
+    top: 7px;
+}
+
+#two_maincolumn_right .step5 h3:before {
+    content: url("../images/usg_step5.png");
+    padding-right: 10px;
+    position: relative;
+    top: 7px;
+}
+
+#two_maincolumn_right .usage_area {
+    border-bottom: 2px solid #4bab3d;
+    border-left: 2px solid #4bab3d;
+    border-right: 2px solid #4bab3d;
+    display: block;
+    padding-left: 0;
+    width: 729px;
+    overflow: hidden;
+}
+
+
+/*
+.hero-img1 {
+    position: relative;
+}
+*/
+
+#two_maincolumn_right .deco-img1 {
+    display: block;
+    position: relative;
+    z-index: 99 !important;
+}
+
+#two_maincolumn_right .step2 ul {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: 720px;
+}
+
+#two_maincolumn_right .step2 ul li {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 9px 2px #9d9d9d;
+    -moz-box-shadow: 0px 0px 9px 2px #9d9d9d;
+    -webkit-box-shadow: 0px 0px 9px 2px #9d9d9d;
+}
+
+#two_maincolumn_right .p-usg-list img {
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 9px 2px #9d9d9d;
+    -moz-box-shadow: 0px 0px 9px 2px #9d9d9d;
+    -webkit-box-shadow: 0px 0px 9px 2px #9d9d9d;
+}
+
+#two_maincolumn_right .step2 .p-usg-block {
+    display: block;
+    padding: 10px 20px 0px 20px;
+}
+
+#parks_ranking_area h2 {
+    margin-bottom: 0;
+}
+
+.c-mt-20 {
+    margin-top: 20px;
+}
+
+.c-mb-20 {
+    margin-bottom: 20px;
+}
+
+.c-max-img {
+    max-width: 100%;
+}
+
+.c-clear_both {
+    clear: both;
+}
+
+.text-center {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.c-img-mtb {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+    float: right;
+    clear: both;
+}
+
+.p-point-box {
+    padding: 0 0 20px 0;
+    overflow: hidden;
+}
+
+.p-usage_area__price {
+    background: #0f2a41;
+    padding-bottom: 2rem;
+    color: #fff;
+}
+
+#undercolumn_content h2.c-park-contents-menu-title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #d7c800;
+    padding: 25px 0 10px 0;
+    border-bottom: none;
+    text-align: center;
+}
+
+#undercolumn_content .usage_area h2.c-park-contents-menu-title__tebura {
+    background: url(../images/f-keiba/f-keiba_title-img1.jpg) no-repeat top center;
+}
+
+#undercolumn_content .usage_area h2.c-park-contents-menu-title__mochikomi {
+    background: url(../images/f-keiba/f-keiba_title-img2.jpg) no-repeat top center;
+}
+
+h1.c-park-contents-menu__big-head {
+    color: #393939;
+    text-align: center;
+    font-weight: bold;
+    font-size: 27px;
+    margin: 50px auto 20px auto !important;
+    border-bottom: none;
+}
+
+.p-point-box__point1 {
+    background: url(../images/f-keiba/f-keiba_point-img1.jpg) no-repeat top left;
+}
+
+.p-point-box__point2 {
+    background: url(../images/f-keiba/f-keiba_point-img2.jpg) no-repeat top left;
+}
+
+#undercolumn_content .usage_area h3.p-point-box__sub-title {
+    font-weight: bold;
+    font-size: 24px;
+    color: #d7c800;
+    padding: 20px 0 5px 120px;
+    margin: 0;
+}
+
+#undercolumn_content .usage_area h2.p-point-box__title {
+    font-weight: bold;
+    font-size: 32px;
+    color: #2e5d94 !important;
+    padding: 0 0 30px 120px;
+    margin: 0;
+    border: none;
+}
+
+
+.mb-text-center {
+    text-align: center;
+}
+
+#undercolumn_content .entry-map {
+    overflow: hidden;
+}
+
+#undercolumn_content .entry-data table {
+    text-align: center;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 480px) {
+    .p-point-box__point1 {
+        background-size: 80px;
+    }
+
+    .p-point-box__point2 {
+        background-size: 80px;
+    }
+    #undercolumn_content .usage_area h3.p-point-box__sub-title {
+        font-size: 18px;
+        padding: 6px 0 0px 80px;
+    }
+
+    #undercolumn_content .usage_area h2.p-point-box__title {
+        font-size: 23px;
+        padding: 0 0 30px 80px;
+    }
+    .c-mb-p-1 {
+        padding: 1rem !important;
+    }
+    h1.c-park-contents-menu__big-head {
+        font-size: 25px;
+    }
+    #two_maincolumn_right .usage_area {
+        border: none;
+    }
+    #navigation_bar,
+    #pan + h2,
+    #title-list,
+    #windowarea h2,
+    .title-mypagecolumn,
+    .title-under02column,
+    .title-undercolumn,
+    h2.title {
+        padding: 0;
+    }
+    #undercolumn_content .service_area table th {
+        width: auto;
+        padding: 4px 0 20px;
+        background: #4BAB3D;
+    }
+    ul#categorytree {
+        margin: 0 auto !important;
+    }
+    .iframe-content {
+        padding: 180% 0 0 0;
+    }
+}
+
+ol li {
+    list-style-type: decimal !important;
+    padding: 5px 0;
+    margin-left: 18px;
+}
+
+#undercolumn_content .service_area table td p {
+    font-size: inherit;
+}
+
+
+#undercolumn_content .service_area table td p.attention {
+    font-size: .9rem;
+}
+
+#undercolumn_content .entry-data table {
+    font-size: 1rem;
+}
+
+#container {
+    position: relative;
+}
+
+.pc-side-nav-fixed {
+    top: 0;
+    position: fixed;
+}
+
+.iframe-content {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 80% 0 0 0;
+}
+
+.iframe-content iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#fk3 {
+    display: block;
+}
+
+.fk-menu {
+    max-width: 100%;
+}
+
+/*
+.ff-bold {
+    background: #1F9E8B;
+}
+*/
+
+ul#categorytree li.level1 {
+    width: 100%;
+}
+
+.c-txt-danger {
+    color: #bb001a;
+}

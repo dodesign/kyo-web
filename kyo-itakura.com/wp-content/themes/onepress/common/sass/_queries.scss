@@ -1,0 +1,346 @@
+@media screen and (min-width:1200px) {
+    .p-under__sub-title__corp {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width:1200px) {
+    header {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .p-header .container {
+        width: 100%;
+        max-width: 100%;
+    }
+    .intro-content {
+        display: inline-block;
+    }
+    .hero .hero-content {
+        padding-top: 28%;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    //        .p-intro .col-sm-5 {
+    //        width: 54%;
+    //    }
+    .p-top-section2 .p-top-section2__content {
+        flex-direction: column;
+    }
+    .section-bg-jpn__contents,
+    .p-intro .section-bg-jpn__contents {
+        width: 100%;
+    }
+    .p-under-title__about {
+        background-size: auto 100%;
+    }
+    .p-company {
+        margin-top: 20%;
+    }
+}
+
+
+/* Responsive nav kicks in */
+
+@media screen and (max-width:991px) {
+    header {
+        width: 100%;
+    }
+    .hero .hero-content {
+        padding-top: 32%;
+    }
+    .header-nav {
+        position: fixed;
+        background-color: #FFF;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+        transition: opacity 0.5s, visibility 0s 0.5s;
+    }
+    ul.member-actions {
+        position: static;
+    }
+    .navicon {
+        visibility: visible;
+    }
+    header .nav-wrapper {
+        display: absolute;
+    }
+    header nav {
+        position: relative;
+        top: 45%;
+        -moz-transform: translatey(-45%);
+        -ms-transform: translatey(-45%);
+        -o-transform: translatey(-45%);
+        -webkit-transform: translatey(-45%);
+        transform: translatey(-45%);
+    }
+    nav ul li a {
+        color: #fff;
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: 600;
+        -moz-transition: all 300ms ease-in-out;
+        -o-transition: all 300ms ease-in-out;
+        -webkit-transition: all 300ms ease-in-out;
+        transition: all 300ms ease-in-out
+    }
+    footer .social-share {
+        display: none;
+    }
+    footer .footer-links {
+        margin: 120px 0 120px 0;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .btn {
+        width: 70%;
+    }
+    p {
+        font-size: 100%;
+        line-height: 20px;
+    }
+    .p-under__sub-title h2 {
+        font-size: 200%;
+    }
+    .section-padding {
+        padding: 0;
+    }
+    .p-under .section--heading {
+        font-size: 180%;
+        line-height: 1.3;
+        padding: 0 0 2rem;
+        margin-bottom: 2rem;
+    }
+    .p-heading_deco {
+        font-size: 130%;
+    }
+    .p-section-padding {
+        padding: 3rem 2rem;
+    }
+    .hero {
+        height: auto;
+    }
+    .section3 {
+        background: #fff url("../img/section3_bg.jpg") no-repeat left bottom / 100% auto !important;
+        padding-bottom: 200px;
+    }
+    .section5 {
+        background: url("../img/section5_bg.png") no-repeat left 0px / 100% auto !important;
+        padding-top: 48%;
+    }
+    .section6 {
+        background: #fff url("../img/section6_bg.jpg") no-repeat right bottom / 100% auto !important;
+        h2 {
+            font-size: 150%;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .c-recipe {
+            padding: 2rem 3rem 2rem 2rem;
+            margin-bottom: 3rem;
+            h3 {
+                font-size: 120%;
+                margin: 0 0 1rem 0
+            }
+        }
+        .choco {
+            .choco-label {
+                max-width: 90px;
+                position: absolute;
+                top: -10px;
+                left: -10px;
+            }
+        }
+    }
+    .modal-content {
+        width: 86%;
+    }
+    .p-re img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    .slick-slide {
+        div {
+            height: 150px;
+        }
+        img {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width:640px) {
+    .p-section-padding {
+        padding: 2rem 3rem;
+    }
+    .section--heading__s {
+        font-size: 2.2rem;
+        margin: 0;
+    }
+    .section--heading {
+        font-size: 2.5rem;
+        line-height: 1.5;
+        margin-bottom: .5rem;
+        padding: 0 0 2rem;
+    }
+    .p-top-section5 .p-section--heading__sub-title {
+        font-size: 2rem;
+    }
+    .p-top-news__box {
+        margin-bottom: .5rem;
+    }
+    .p-top-news .p-top-news__thumbnail {
+        height: 100px;
+    }
+    //                                            .p-fotter-section1 {
+    //                                                margin-bottom: 100px;
+    //                                            }
+    .p-footer .p-fotter-section3 .p-fotter-section3__left {
+        padding: 3rem;
+    }
+    .p-under__sub-title {
+        background-size: 100% auto;
+        padding-top: 40%;
+    }
+    .p-under__sub-title__kihou {
+        padding-top: 3%;
+        h2,
+        p {
+            color: #fff;
+        }
+    }
+    .breadcrumbs span {
+        font-size: 9px;
+    }
+    .p-under-title {
+        height: 180px;
+        background-size: auto 100%;
+        h1 {
+            font-size: 210%;
+            padding: 40px 0 15px;
+        }
+    }
+    .p-under-title__corp {
+        //        background: #eeeeee url("../img/corp_img1.jpg") no-repeat scroll 0 0 / auto 100%;
+        display: block;
+        text-shadow: 2px 2px 3px #858585;
+    }
+    .p-under__sub-title__about {
+        //        height: 500px;
+        //        padding-top: 200px;
+    }
+    .p-under__sub-title__netshop {
+        //        background-size: 100% auto;
+    }
+    .p-under__sub-title h2 {
+        line-height: 1.2;
+    }
+    .p-under-title__case {
+        background-size: cover;
+    }
+    .p-under__sub-title__case {
+        //        background: rgba(0, 0, 0, 0) url("../img/case_img2.jpg") no-repeat scroll -2px top;
+        position: relative;
+    }
+    .p-under__sub-title__corp {
+        //        background: rgba(0, 0, 0, 0) url("../img/corp_img2.jpg") no-repeat scroll -2px top / 100% auto;
+        position: relative;
+    }
+    .p-under-title__contact {
+        //        background: #eeeeee url("../img/contact_main_img1.jpg") no-repeat scroll 0 0 / auto 100%;
+    }
+    input[type="reset"],
+    input[type="submit"],
+    input[type="submit"] {
+        width: 100%;
+    }
+    .section-bg-jpn__contents,
+    .p-intro .section-bg-jpn__contents {
+        width: 100%;
+        padding: .8rem;
+    }
+    .c-copy {
+        font-size: 1rem;
+    }
+    .p-company {
+        margin-top: 35%;
+    }
+    footer ul.footer-group {
+        border-top: none;
+    }
+    footer ul.footer-group li a {
+        font-size: 13px;
+        text-transform: uppercase;
+        padding: 20px 0;
+        display: block;
+        border-bottom: dashed 1px #4E566C;
+    }
+    footer ul.footer-group li {
+        display: block;
+    }
+    footer .footer-links {
+        margin: 50px 0 50px 0;
+    }
+    #pricing-table .plan {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .hero .hero-content {
+        padding-top: 41%;
+    }
+    .hero .btn {
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .hero .btn:first-of-type {
+        margin-bottom: 20px;
+    }
+    .hero h1 {
+        font-size: 50px;
+    }
+    .btn-margin-right {
+        margin-right: 0px;
+    }
+    .features .device-showcase-left {
+        position: absolute;
+        bottom: -392px;
+        left: 41%;
+        right: auto;
+        transform: translateX(-50%);
+    }
+    .features .ipad-wrap {
+        width: 706px;
+        height: 1002px;
+        background: url("../img/ipad-device.png") no-repeat center center;
+        z-index: 1;
+        background-size: 40%;
+    }
+    .features .iphone-wrap {
+        width: 304px;
+        height: 617px;
+        background: url("../img/iphone6.png") no-repeat center center;
+        position: absolute;
+        left: 350px;
+        bottom: 129px;
+        z-index: 2;
+        background-size: 40%;
+    }
+    .features {
+        padding-bottom: 0;
+    }
+    .down-arrow {
+        display: none;
+    }
+}

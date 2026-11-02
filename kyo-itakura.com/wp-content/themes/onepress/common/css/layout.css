@@ -1,0 +1,455 @@
+@import url('/common/css/variables.scss');
+.section-padding
+{
+    padding: 5rem 0;
+}
+
+.p-nav
+{
+    position: relative;
+
+    width: 100%;
+
+    -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+
+    opacity: 1; 
+    background: #fff !important;
+}
+
+/* ==========================================================================
+header
+========================================================================== */
+.p-nav a
+{
+    color: #232731 !important;
+}
+
+.p-nav .logo
+{
+    position: relative;
+
+    display: inline-block;
+    float: left;
+
+    margin-right: 35px;
+    padding: 12px 0;
+}
+
+.p-nav .p-nav--content__primary
+{
+    float: left;
+}
+.p-nav .p-nav--content__primary li
+{
+    font-size: 120%;
+
+    display: inline-block;
+
+    padding: 29px 9px 25px 9px;
+}
+.p-nav .p-nav--content__primary li:hover
+{
+    -webkit-transition: all .9s ease;
+            transition: all .9s ease; 
+
+    background: #f7f8f8;
+}
+
+.p-nav .p-nav--content__primary__cv
+{
+    color: #fff !important;
+    background: #e1d653;
+    text-shadow: 2px 2px 3px #858585;
+}
+.p-nav .p-nav--content__primary__cv a
+{
+    color: #fff !important;
+}
+.p-nav .p-nav--content__primary__cv:hover
+{
+    -webkit-transition: all .9s ease;
+            transition: all .9s ease; 
+
+    opacity: .8;
+    background: #e1d653 !important;
+}
+
+.p-nav .is-active
+{
+    font-weight: bold; 
+
+    background: #f7f8f8;
+}
+
+.p-nav .p-nav--content__cv
+{
+    position: relative;
+    right: 0;
+
+    display: inline-block;
+    float: right;
+
+    padding-top: 17px;
+    padding-bottom: 17px;
+}
+
+.header-nav .fixed
+{
+    position: fixed;
+    z-index: 999;
+    top: 0; 
+
+    width: 100%;
+
+    background-color: #232731;
+}
+
+.nav-toggle
+{
+    position: absolute;
+    z-index: 999999;
+    top: 0;
+    right: 15px;
+
+    padding: 10px 35px 16px 0;
+
+    cursor: pointer;
+}
+
+.nav-toggle:focus
+{
+    outline: none;
+}
+
+.nav-toggle span,
+.nav-toggle span:before,
+.nav-toggle span:after
+{
+    position: absolute;
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    content: '';
+    cursor: pointer; 
+
+    border-radius: 1px;
+    background: #232731;
+}
+
+.nav-toggle span:before
+{
+    top: -10px;
+}
+
+.nav-toggle span:after
+{
+    bottom: -10px;
+}
+
+.nav-toggle span,
+.nav-toggle span:before,
+.nav-toggle span:after
+{
+    -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+}
+
+.nav-toggle.active span
+{
+    background-color: transparent;
+}
+
+.nav-toggle.active span:before,
+.nav-toggle.active span:after
+{
+    top: 0;
+}
+
+.nav-toggle.active span:before
+{
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+
+.nav-toggle.active span:after
+{
+    top: 10px;
+
+    -webkit-transform: translatey(-10px) rotate(-45deg);
+        -ms-transform: translatey(-10px) rotate(-45deg);
+            transform: translatey(-10px) rotate(-45deg);
+}
+
+.navicon
+{
+    position: absolute;
+    top: 48px;
+    right: 10px;
+
+    visibility: hidden;
+
+    height: 26px;
+
+    -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+}
+
+/* ==========================================================================
+footer
+========================================================================== */
+footer.p-footer
+{
+    background: #222;
+}
+
+.p-footer .p-fotter-section1 h2.p-fotter-section1__title
+{
+    font-size: 2.8rem;
+
+    position: relative;
+    z-index: 1; 
+
+    margin-bottom: 1.4rem;
+    padding: 0 0 3rem 0;
+
+    text-align: center;
+    letter-spacing: 2px;
+
+    color: #fff;
+    background: url(/common/img/title_img.png) no-repeat bottom center;
+    text-shadow: 2px 2px 3px #858585;
+}
+
+.p-footer .p-fotter-section1 .title_mini
+{
+    font-size: 2rem !important;
+}
+
+.p-footer .p-fotter-section1 .p-fotter-section1__lead
+{
+    position: relative;
+    z-index: 1;
+}
+
+.p-footer .p-fotter-section1 .btn
+{
+    position: relative;
+    z-index: 1;
+}
+
+.p-footer .p-fotter-section__inner
+{
+    position: relative;
+
+    overflow: hidden; 
+
+    padding: 3rem 0;
+}
+
+.p-footer .p-fotter-section1-1:after
+{
+    position: absolute;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: all .3s ease-out;
+            transition: all .3s ease-out; 
+
+    background: #000 url('../img/footer_img1.jpg') no-repeat scroll left center/100% auto;
+        background-size: cover;
+
+    -ms-background-size: cover;
+}
+
+.p-footer .p-fotter-section1-1:hover:after
+{
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2); 
+
+    opacity: .8;
+}
+
+.p-footer .p-fotter-section1-2:after
+{
+    position: absolute;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: all .3s ease-out;
+            transition: all .3s ease-out; 
+
+    background: #000 url('../img/footer_img2.jpg') no-repeat scroll left center/100% auto;
+        background-size: cover;
+
+    -ms-background-size: cover;
+}
+
+.p-footer .p-fotter-section1-2:hover:after
+{
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2); 
+
+    opacity: .8;
+}
+
+.p-footer .p-fotter-section1-3:after
+{
+    position: absolute;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: all .3s ease-out;
+            transition: all .3s ease-out; 
+
+    background: #000 url('../img/footer_img3.jpg') no-repeat scroll left center/100% auto;
+        background-size: cover;
+
+    -ms-background-size: cover;
+}
+
+.p-footer .p-fotter-section1-3:hover:after
+{
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2); 
+
+    opacity: .8;
+}
+
+.p-footer .p-fotter-section1-4:after
+{
+    position: absolute;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: all .3s ease-out;
+            transition: all .3s ease-out; 
+
+    background: #000 url('../img/about_netshop_img2.jpg') no-repeat scroll left center/100% auto;
+        background-size: cover;
+
+    -ms-background-size: cover;
+}
+
+.p-footer .p-fotter-section1-4:hover:after
+{
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2); 
+
+    opacity: .8;
+}
+
+.p-footer .p-fotter-section1-5:after
+{
+    position: absolute;
+    top: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: all .3s ease-out;
+            transition: all .3s ease-out; 
+
+    background: #000 url('../img/about_netshop_img3.jpg') no-repeat scroll left center/100% auto;
+        background-size: cover;
+
+    -ms-background-size: cover;
+}
+
+.p-footer .p-fotter-section1-5:hover:after
+{
+    -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+            transform: scale(1.2); 
+
+    opacity: .8;
+}
+
+.p-footer .p-fotter-section2
+{
+    padding: 3rem 0;
+}
+.p-footer .p-fotter-section2 h1.section--heading
+{
+    margin: 0; 
+    padding: 0;
+
+    background: none;
+}
+.p-footer .p-fotter-section2 p
+{
+    color: #222;
+}
+
+.p-footer .p-fotter-section3
+{
+    background: #fff;
+}
+.p-footer .p-fotter-section3 .p-fotter-section3__left
+{
+    padding: 3rem 0;
+}
+.p-footer .p-fotter-section3 h4,
+.p-footer .p-fotter-section3 address,
+.p-footer .p-fotter-section3 a
+{
+    text-decoration: none; 
+
+    color: #222;
+}
+.p-footer .p-fotter-section3 address
+{
+    padding-top: 1rem;
+}
+
+.p-footer .p-fotter-section4
+{
+    background: #222;
+}
+.p-footer .p-fotter-section4 .p-fotter-menu
+{
+    display: inline-block;
+
+    padding-top: 3rem;
+}
+.p-footer .p-fotter-section4 .p-fotter-menu li
+{
+    float: left;
+
+    padding: 5px 5px 5px 0;
+}
+.p-footer .p-fotter-section4 .p-fotter-menu a
+{
+    text-decoration: none;
+}

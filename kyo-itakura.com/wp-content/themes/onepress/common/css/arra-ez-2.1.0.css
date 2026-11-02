@@ -1,0 +1,152 @@
+@charset "utf-8";
+
+/*------------------------------------------------------------------------------------------
+あらイージー！ (arra-ez)  Responsive fluid column CSS / based on flexbox
+Version: 2.1.0 (2016-09-14) 
+Copyright 2016, ジュウロクデザイン (16design)
+Licensed under MIT
+------------------------------------------------------------------------------------------*/
+
+/* ///////// !! YOUR-SETTING from here  ///////////////////////////////////////  */
+.container {width:auto; max-width:1000px; margin:0 auto; padding:0;}
+.wide-container {width:auto; max-width:1280px; margin:0 auto; padding:0;}
+.full-container {width:100%; margin:0; padding:0;}
+@media only screen and (max-width: 1040px) {	.container {padding:0 0.4em;} }
+/* ////////////////////////////////////// !! end of YOUR-SETTING  //////////  */
+
+
+/* ////// arra-ez responsive set --- please custom as you like //////////////////////////  */
+body, html {margin:0; padding:0;}
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.shell { display: flex; flex-direction:row; flex-wrap:wrap; }
+.shell.reverse { display: flex; flex-direction:row-reverse; flex-wrap:wrap; }
+.shell.nowrap-x { flex-wrap:nowrap; }
+.shell.left { justify-content:flex-start; }
+.shell.center, .shell.x-center { justify-content:center; }
+.shell.right { justify-content:flex-end; }
+.shell.fill, .shell.fill-x, .shell.split { justify-content:space-between; }
+.shell.equalize { justify-content:space-around; }
+.shell.top { align-items:flex-start; }
+.shell.middle, .shell.y-center { align-items:center; }
+.shell.baseline { align-items:baseline; }
+.shell.bottom { align-items:flex-end; }
+.shell > .grow-x {flex-grow:1;}
+.stretch, .grow-y { align-self:stretch; }
+
+.solo, .full { width:100%;}
+.duo, .half { width:50%;}
+.trio, .one-third { width:calc(100% / 3);}
+.two-thirds { width:calc(100% / 3 * 2);}
+.quad, .quarter { width:25%;}
+.three-quarters { width:75%;}
+.penta, .twenty { width:20%;}
+.thirty { width:30%;} 
+.forty { width:40%;} 
+.sixty { width:60%;}
+.seventy { width:70%;}
+.eighty { width:80%;}
+
+.solo.gutter, .full.gutter { width:98%; margin:1em 1%;}
+.duo.gutter, .half.gutter { width:48%;  margin:1em 1%;}
+.trio.gutter, .one-third.gutter { width:calc(94% / 3); margin:1em 1%;}
+.two-thirds.gutter { width:calc(97% / 3 * 2); margin:1em 1%;}
+.quad.gutter, .quarter.gutter { width:23%; margin:1em 1%;}
+.three-quarters.gutter { width:73%; margin:1em 1%;}
+.penta.gutter, .twenty.gutter { width:18%; margin:1em 1%;}
+.thirty.gutter { width:28%; margin:1em 1%;} 
+.forty.gutter{ width:38%; margin:1em 1%;} 
+.sixty.gutter { width:58%; margin:1em 1%;}
+.seventy.gutter { width:68%; margin:1em 1%;}
+.eighty.gutter { width:78%; margin:1em 1%;}
+
+.centering {text-align:center;}
+.centering > * { margin-left:auto !important; margin-right:auto !important;}
+
+/* Universal Padding Class --- as you like */
+.pd-around {padding:1.5em 1.5em;}
+.pd-side {padding:0 1.5em;}
+.pd-top-bottom {padding:1.5em 0;}
+.pd-right {padding-right:1.5em;}
+.pd-left {padding-left:1.5em;}
+
+/* clearfix --- for use together with legacy float layout */
+.clearfix:before, .clearfix:after { content: " "; display: table;}
+.clearfix:after { clear: both;}
+.clearfix { *zoom: 1;}
+.clear { clear: both; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0;}
+
+/*** Media Query ***/
+@media only screen and (max-width: 899px) {
+	
+	.shell.break900:not(.step) { flex-direction:column;}
+	.shell.break900 > .solo, .shell.break900 > .full, .shell.break900 > .duo, .shell.break900 > .half, .shell.break900 > .trio, .shell.break900 > .one-third, .shell.break900 > .two-thirds, .shell.break900 > .quad, .shell.break900 > .quarter, .shell.break900 > .three-quarters, .shell.break900 > .penta, .shell.break900 > .twenty, .shell.break900 > .thirty, .shell.break900 > .forty, .shell.break900 > .sixty, .shell.break900 > .seventy, .shell.break900 > .eighty 
+	{ width:100%; }
+	.shell.break900 > .solo.gutter, .shell.break900 > .full.gutter, .shell.break900 > .duo.gutter, .shell.break900 > .half.gutter, .shell.break900 > .trio.gutter, .shell.break900 > .one-third.gutter, .shell.break900 > .two-thirds.gutter, .shell.break900 > .quad.gutter, .shell.break900 > .quarter.gutter, .shell.break900 > .three-quarters.gutter, .shell.break900 > .penta.gutter, .shell.break900 > .twenty.gutter, .shell.break900 > .thirty.gutter, .shell.break900 > .forty.gutter, .shell.break900 > .sixty.gutter, .shell.break900 > .seventy.gutter, .shell.break900 > .eighty.gutter
+	{ width:98%; margin:1em 1%;}
+	
+	.shell.step { flex-direction:row; flex-wrap:wrap; }
+	.shell.step > .duo, .shell.step > .half, .shell.step > .trio, .shell.step > .one-third, .shell.step > .two-thirds, .shell.step > .quad, .shell.step > .quarter, .shell.step > .three-quarters, .shell.step > .penta, .shell.step > .twenty, .shell.step > .thirty, .shell.step > .forty, .shell.step > .sixty, .shell.step > .seventy, .shell.step > .eighty 
+	{ width:50%;}
+	.shell.step > .duo.gutter, .shell.step > .half.gutter, .shell.step > .trio.gutter, .shell.step > .one-third.gutter, .shell.step > .two-thirds.gutter, .shell.step > .quad.gutter, .shell.step > .quarter.gutter, .shell.step > .three-quarters.gutter, .shell.step > .penta.gutter, .shell.step > .twenty.gutter, .shell.step > .thirty.gutter, .shell.step > .forty.gutter, .shell.step > .sixty.gutter, .shell.step > .seventy.gutter, .shell.step > .eighty.gutter 
+	{ width:48%; margin:1em 1%;}
+	
+}
+
+/* Mobile Single Column ( like 7-10 inch Tablet ) */
+@media only screen and (max-width: 768px) {
+
+	.container, .wide-container {padding:0 0.3em;} /* as you like */
+
+	.shell.break768:not(.step) { flex-direction:column;}
+	.shell.break768 > .solo, .shell.break768 > .full, .shell.break768 > .duo, .shell.break768 > .half, .shell.break768 > .trio, .shell.break768 > .one-third, .shell.break768 > .two-thirds, .shell.break768 > .quad, .shell.break768 > .quarter, .shell.break768 > .three-quarters, .shell.break768 > .penta, .shell.break768 > .twenty, .shell.break768 > .thirty, .shell.break768 > .forty, .shell.break768 > .sixty, .shell.break768 > .seventy, .shell.break768 > .eighty
+	{ width:100%; }
+	.shell.break768 > .solo.gutter, .shell.break768 > .full.gutter, .shell.break768 > .duo.gutter, .shell.break768 > .half.gutter, .shell.break768 > .trio.gutter, .shell.break768 > .one-third.gutter, .shell.break768 > .two-thirds.gutter, .shell.break768 > .quad.gutter, .shell.break768 > .quarter.gutter, .shell.break768 > .three-quarters.gutter, .shell.break768 > .penta.gutter, .shell.break768 > .twenty.gutter, .shell.break768 > .thirty.gutter, .shell.break768 > .forty.gutter, .shell.break768 > .sixty.gutter, .shell.break768 > .seventy.gutter, .shell.break768 > .eighty.gutter
+	{ width:98%; margin:1em 1%;}
+	
+	.shell:not(.keep) > .solo, .shell:not(.keep) > .full, .shell:not(.keep) > .duo, .shell:not(.keep) > .half, .shell:not(.keep) > .trio, .shell:not(.keep) > .one-third, .shell:not(.keep) > .two-thirds, .shell:not(.keep) > .quad, .shell:not(.keep) > .quarter, .shell:not(.keep) > .three-quarters, .shell:not(.keep) > .penta, .shell:not(.keep) > .twenty, .shell:not(.keep) > .thirty, .shell:not(.keep) > .forty, .shell:not(.keep) > .sixty, .shell:not(.keep) > .seventy, .shell:not(.keep) > .eighty
+ 	{ width:100%; margin:0; }	
+	.shell:not(.keep) > .solo.gutter, .shell:not(.keep) > .full.gutter, .shell:not(.keep) > .duo.gutter, .shell:not(.keep) > .half.gutter, .shell:not(.keep) > .trio.gutter, .shell:not(.keep) > .one-third.gutter, .shell:not(.keep) > .two-thirds.gutter, .shell:not(.keep) > .quad.gutter, .shell:not(.keep) > .quarter.gutter, .shell:not(.keep) > .three-quarters.gutter, .shell:not(.keep) > .penta.gutter, .shell:not(.keep) > .twenty.gutter, .shell:not(.keep) > .thirty.gutter, .shell:not(.keep) > .forty.gutter, .shell:not(.keep) > .sixty.gutter, .shell:not(.keep) > .seventy.gutter, .shell:not(.keep) > .eighty.gutter
+	{ width:98%; margin:1em 1%;}
+
+	.shell.step { flex-direction:row; flex-wrap:wrap; }
+	.shell.step > .duo, .shell.step > .half, .shell.step > .trio, .shell.step > .one-third, .shell.step > .two-thirds, .shell.step > .quad, .shell.step > .quarter, .shell.step > .three-quarters, .shell.step > .penta, .shell.step > .twenty, .shell.step > .thirty, .shell.step > .forty, .shell.step > .sixty, .shell.step > .seventy, .shell.step > .eighty 
+	{ width:50%;}
+	.shell.step > .duo.gutter, .shell.step > .half.gutter, .shell.step > .trio.gutter, .shell.step > .one-third.gutter, .shell.step > .two-thirds.gutter, .shell.step > .quad.gutter, .shell.step > .quarter.gutter, .shell.step > .three-quarters.gutter, .shell.step > .penta.gutter, .shell.step > .twenty.gutter, .shell.step > .thirty.gutter, .shell.step > .forty.gutter, .shell.step > .sixty.gutter, .shell.step > .seventy.gutter, .shell.step > .eighty.gutter
+	{ width:48%; margin:1em 1%;}
+
+	.shell.keep-half:not(.keep), .shell.keep-half:not(.keep) { flex-direction:row;}
+	.shell.keep-half:not(.keep) > .solo, .shell.keep-half:not(.keep) > .full, .shell.keep-half:not(.keep) > .duo, .shell.keep-half:not(.keep) > .half, .shell.keep-half:not(.keep) > .trio, .shell.keep-half:not(.keep) > .one-third, .shell.keep-half:not(.keep) > .two-thirds, .shell.keep-half:not(.keep) > .quad, .shell.keep-half:not(.keep) > .quarter, .shell.keep-half:not(.keep) > .three-quarters, .shell.keep-half:not(.keep) > .penta, .shell.keep-half:not(.keep) > .twenty, .shell.keep-half:not(.keep) > .thirty, .shell.keep-half:not(.keep) > .forty, .shell.keep-half:not(.keep) > .sixty, .shell.keep-half:not(.keep) > .seventy, .shell.keep-half:not(.keep) > .eighty	
+ 	{ width:50%;}	
+	.shell.keep-half:not(.keep) > .solo.gutter, .shell.keep-half:not(.keep) > .full.gutter, .shell.keep-half:not(.keep) > .duo.gutter, .shell.keep-half:not(.keep) > .half.gutter, .shell.keep-half:not(.keep) > .trio.gutter, .shell.keep-half:not(.keep) > .one-third.gutter, .shell.keep-half:not(.keep) > .two-thirds.gutter, .shell.keep-half:not(.keep) > .quad.gutter, .shell.keep-half:not(.keep) > .quarter.gutter, .shell.keep-half:not(.keep) > .three-quarters.gutter, .shell.keep-half:not(.keep) > .penta.gutter, .shell.keep-half:not(.keep) > .twenty.gutter, .shell.keep-half:not(.keep) > .thirty.gutter, .shell.keep-half:not(.keep) > .forty.gutter, .shell.keep-half:not(.keep) > .sixty.gutter, .shell.keep-half:not(.keep) > .seventy.gutter, .shell.keep-half:not(.keep) > .eighty.gutter
+	{ width:48%; margin:1em 1%;}
+	
+	/* Universal padding class --- as you like */
+	.pd-around {padding:1.5em 1.5em;}
+	.pd-side {padding:0 1.5em;}
+	.ttal {text-align:left !important;}
+	.ttal:not(.pd-side) { padding:0 1.5em;}
+	.pd-around .ttal:not(.pd-side), .pd-side .ttal:not(.pd-side) { padding:0;}	
+	
+}
+
+/* Traditional SmartPhone Portrait Size */
+@media only screen and (max-width: 479px) {
+	
+	.shell:not(.keep), .shell.step:not(.keep) { flex-direction:column;}
+	.shell.step:not(.keep) > .solo, .shell.step:not(.keep) > .full, .shell.step:not(.keep) > .duo, .shell.step:not(.keep) > .half, .shell.step:not(.keep) > .trio, .shell.step:not(.keep) > .one-third, .shell.step:not(.keep) > .two-thirds, .shell.step:not(.keep) > .quad, .shell.step:not(.keep) > .quarter, .shell.step:not(.keep) > .three-quarters, .shell.step:not(.keep) > .penta, .shell.step:not(.keep) > .twenty, .shell.step:not(.keep) > .thirty, .shell.step:not(.keep) > .forty, .shell.step:not(.keep) > .sixty, .shell.step:not(.keep) > .seventy, .shell.step:not(.keep) > .eighty	
+ 	{ width:100%; margin: margin:0;}
+	.shell.step:not(.keep) > .solo.gutter, .shell.step:not(.keep) > .full.gutter, .shell.step:not(.keep) > .duo.gutter, .shell.step:not(.keep) > .half.gutter, .shell.step:not(.keep) > .trio.gutter, .shell.step:not(.keep) > .one-third.gutter, .shell.step:not(.keep) > .two-thirds.gutter, .shell.step:not(.keep) > .quad.gutter, .shell.step:not(.keep) > .quarter.gutter, .shell.step:not(.keep) > .three-quarters.gutter, .shell.step:not(.keep) > .penta.gutter, .shell.step:not(.keep) > .twenty.gutter, .shell.step:not(.keep) > .thirty.gutter, .shell.step:not(.keep) > .forty.gutter, .shell.step:not(.keep) > .sixty.gutter, .shell.step:not(.keep) > .seventy.gutter, .shell.step:not(.keep) > .eighty.gutter	
+	{ width:98%; margin:1em 1%;}
+
+	/* Single Column --- Universal margin-bottom class */
+	.shell.automa > , .shell.automa > .gutter {margin-bottom:1.5em !important;}
+
+	/* Universal padding class --- as you like */
+	.pd-around {padding:6% 3%;}
+	.pd-side, .pd-right, .pd-left {padding:0 3%;}
+	.stal {text-align:left !important;}
+	.stal:not(.pd-side) { padding:0 3%;}
+	.pd-around .stal:not(.pd-side), .pd-side .stal:not(.pd-side) { padding:0;}	
+
+}

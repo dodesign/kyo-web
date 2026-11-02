@@ -124,3 +124,11 @@ desktop.ini
 
 # 退避した入れ子リポジトリ
 **/.git_old/
+
+# ==========================================================
+# kyo-itakura.com : テーマ onepress（2026-11-02 追加）
+# ==========================================================
+# 大きすぎるファイルはリポジトリに入れない（本番にはある。デプロイしても消えない）
+#   171028_3.pdf … 1.2GB / movie/ … 動画 34〜76MB（GitHub は 100MB/ファイルが上限）
+kyo-itakura.com/wp-content/themes/onepress/common/171028_3.pdf
+kyo-itakura.com/wp-content/themes/onepress/common/movie/

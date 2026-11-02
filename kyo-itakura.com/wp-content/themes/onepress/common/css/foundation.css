@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Yu Gothic';
+    font-weight: 100;
+    src: local('Yu Gothic Medium');
+}
+
+@font-face {
+    font-family: 'Yu Gothic';
+    font-weight: 200;
+    src: local('Yu Gothic Medium');
+}
+
+@font-face {
+    font-family: 'Yu Gothic';
+    font-weight: 300;
+    src: local('Yu Gothic Medium');
+}
+
+@font-face {
+    font-family: 'Yu Gothic';
+    font-weight: 400;
+    src: local('Yu Gothic Medium');
+}
+
+@font-face {
+    font-family: 'Yu Gothic';
+    font-weight: bold;
+    src: local('Yu Gothic Bold');
+}
+
+body {
+    font-family: YuMincho, 'Yu Mincho', 'Sawarabi Mincho', 'Noto Sans JP', '-apple-system', 'Helvetica Neue', 'Yu Gothic', YuGothic, Verdana, Meiryo;
+    overflow-x: hidden;
+    color: #000;
+}
+
+h1,
+h2 {
+    font-family: 'Hannari', 'Sawarabi Mincho', YuMincho, 'Yu Mincho';
+}
+
+p {
+    font-size: 16px;
+    line-height: 29px;
+    padding-bottom: 20px;
+    color: #000;
+}
+
+a:hover img {
+    -webkit-transition: .8s;
+    transition: .8s;
+    opacity: .8;
+}
+
+a {
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: 200ms;
+    transition-duration: 200ms;
+    -webkit-transition-property: color, border-color, background-color;
+    transition-property: color, border-color, background-color;
+    color: #00d7df;
+}
+
+a:hover,
+a:focus {
+    -webkit-transition: .8s;
+    transition: .8s;
+    text-decoration: none;
+    color: #e1d653;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 300;
+    margin: 0 0 5rem 0;
+    color: #3d4351;
+}
+
+h3 {
+    color: #222;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #3d4351;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    .panel {
+        height: 97%;
+        margin-bottom: 3%;
+    }
+}
