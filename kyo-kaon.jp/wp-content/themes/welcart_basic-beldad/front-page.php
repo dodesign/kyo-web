@@ -33,335 +33,220 @@ get_header(); ?>
 
 				<?php else: ?>
 
-					<div class="upper">
+					<?php
+					/* ===== トップページ（2026-11-02 リニューアル） =====
+					   中身（特集の写真・文言、念珠をさがすの6枠、件数）は inc/kaon-home.php で設定する。
+					   旧トップは Git の履歴に残っている（2026-11-02 より前のコミット）。 */
+					$kn_cnt    = kaon_home_counts();
+					$kn_hidden = kaon_home_hidden_items();
+					?>
+					<div class="kn-home">
 
-						<?php
-						if ( wcct_get_options( 'display_topics' ) ):
-							$topics_num      = wcct_get_options( 'topics_num' );
-							$topics_cat_slug = wcct_get_options( 'topics_cat' );
-							$topics_cat      = get_term_by( 'slug', $topics_cat_slug, 'category' );
-						?>
-						<section class="topics-area home-area">
-							<div class="slider">
-							<?php
-							$topics_args = array(
-								'posts_per_page' => $topics_num,
-								'category_name'  => $topics_cat_slug,
-							); 
-							$topics_query = new WP_Query( $topics_args );
-							if ( $topics_query->have_posts() ):
-								while ( $topics_query->have_posts() ) :
-								$topics_query->the_post();
-							?>
-								<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-									<a href="<?php the_permalink(); ?>">
-										<span class="thumbnail">
-										<?php if( has_post_thumbnail() ): ?>
-											<?php the_post_thumbnail( 'img500x500' ); ?>
-										<?php else: ?>
-											<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/noimg.gif" alt="noimg">
-										<?php endif; ?>
+						<?php /* ---------- ① 特集カルーセル ---------- */ ?>
+						<?php $kn_feat = kaon_home_features(); ?>
+						<section class="kn-fc kn-full" data-kn-fc aria-roledescription="carousel" aria-label="特集">
+							<div class="kn-fc__viewport">
+								<div class="kn-fc__track">
+									<?php foreach ( $kn_feat as $i => $f ) : ?>
+									<a class="kn-fc__slide" href="<?php echo esc_url( kaon_url( $f['url'] ) ); ?>" data-index="<?php echo (int) $i; ?>">
+										<?php echo kaon_img( $f['img'], '1536x1536', '', array( 'class' => 'kn-fc__img', 'loading' => ( 0 === $i ? 'eager' : 'lazy' ) ) ); ?>
+										<span class="kn-fc__body">
+											<span class="kn-fc__eyebrow"><?php echo esc_html( $f['eyebrow'] ); ?></span>
+											<span class="kn-fc__title"><?php echo esc_html( $f['title'] ); ?></span>
+											<span class="kn-fc__copy"><?php echo nl2br( esc_html( $f['copy'] ) ); ?></span>
+											<span class="kn-fc__facts"><?php echo kaon_facts( $f['facts'] ); ?></span>
+											<span class="kn-fc__cta"><?php echo esc_html( $f['cta'] ); ?></span>
 										</span>
-										<span class="title"><?php the_title(); ?></span>
 									</a>
-								</article>
-							<?php
-								endwhile;
-								wp_reset_postdata();
-							else:
-							?>
-							<p class="no-date"><?php _e( 'Sorry, no posts matched your criteria.', 'usces' ); ?></p>
-							<?php
-							endif;
-							?>
-							</div><!-- .slider -->
-						</section><!-- .topics-area -->
-						<?php
-						endif;
-						?>
-
-						<div class="section-head cf">
-							<h2>ブログ</h2>
-						</div>
-						<section class="topics-area home-area">
-							<div class="slider">
-							<?php
-							$topics_args = array(
-								'posts_per_page' => 10,
-								'category_name'  => 'blog',
-							); 
-							$topics_query = new WP_Query( $topics_args );
-							if ( $topics_query->have_posts() ):
-								while ( $topics_query->have_posts() ) :
-								$topics_query->the_post();
-							?>
-								<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-									<a href="<?php the_permalink(); ?>">
-										<span class="thumbnail">
-										<?php if( has_post_thumbnail() ): ?>
-											<?php the_post_thumbnail( 'img500x500' ); ?>
-										<?php else: ?>
-											<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/noimg.gif" alt="noimg">
-										<?php endif; ?>
-										</span>
-										<span class="date uk-text-small uk-padding-small-bottom uk-text-muted"><?php the_time('Y/m/d'); ?></span>
-										<span class="title"><?php the_title(); ?></span>
-									</a>
-								</article>
-							<?php
-								endwhile;
-								wp_reset_postdata();
-							else:
-							?>
-							<p class="no-date"><?php _e( 'Sorry, no posts matched your criteria.', 'usces' ); ?></p>
-							<?php
-							endif;
-							?>
-							</div><!-- .slider -->
-						</section><!-- .topics-area -->						
-					
-						
-						<section class="pickup-area home-area">
-							<!--<div class="section-head cf">
-								<h2>サービス</h2>
-							</div>--><!-- .section-head -->
-								<div class="noslider cf">
-										<div class="list post-461 post type-post status-publish format-standard has-post-thumbnail category-case">
-											<a href="https://kyo-kaon.jp/news/5888/">
-												<span class="thumbnail">
-													<img src="https://kyo-kaon.jp/wp-content/uploads/2024/11/furusato.jpg" sizes="(max-width: 500px) 100vw, 500px">												
-												</span>
-												<h3 class="title">ふるさと納税の返礼品として喜芳工房の京念珠をお選びいただけます</h3>
-											</a>
-										</div>
-										<div class="list post-461 post type-post status-publish format-standard has-post-thumbnail category-case">
-											<a href="https://kyo-kaon.jp/service/workshop/">
-												<span class="thumbnail">
-													<?php /* ★2026-11-01 料金改定（8,800円→9,900円）にともない差し替え。
-														旧: /common/img/service_workshop.jpg（8,800円が画像に焼き込まれていた）
-														/common/ はWeb直下でGit管理外＝Actionsで配信できないため、
-														新バナーはメディアライブラリ（uploads）に置いて参照している。
-														差し替えるときは管理画面でアップロードし、このURLを書き換えること。 */ ?>
-													<img src="https://kyo-kaon.jp/wp-content/uploads/2026/11/banner-workshop-9900.jpg" sizes="(max-width: 500px) 100vw, 500px" alt="京念珠ブレス作り体験 9,900円（税込）所要約60分・手ぶらでOK・1名様から">
-												</span>
-												<h3 class="title">京念珠ブレスレット作り体験 受付中！</h3>
-											</a>
-										</div>
-										<div class="list post-461 post type-post status-publish format-standard has-post-thumbnail category-case">
-												<a href="https://kyo-kaon.jp/service/fix/">
-													<span class="thumbnail">
-														<img src="https://kyo-kaon.jp/common/img/service_repair.jpg" sizes="(max-width: 500px) 100vw, 500px">
-													</span>
-													<h3 class="title">京念珠(数珠)の修理 承ります</h3>
-												</a>
-											</div>
-										</div><!-- .slider -->
+									<?php endforeach; ?>
+								</div>
+							</div>
+							<div class="kn-fc__nav">
+								<button type="button" class="kn-fc__arrow" data-prev aria-label="前へ">&lsaquo;</button>
+								<div class="kn-fc__dots"></div>
+								<span class="kn-fc__count"></span>
+								<button type="button" class="kn-fc__arrow" data-next aria-label="次へ">&rsaquo;</button>
+							</div>
 						</section>
-						
-						<?php if ( is_active_sidebar( 'beldad1' ) ) : ?>
-						<section id="beldad1" class="home-widget widget-area">
-							<?php dynamic_sidebar( 'beldad1' ); ?>
-						</section><!-- #beldad1 -->
-						<?php endif; ?>
 
-
+						<?php /* ---------- ② お知らせ ---------- */ ?>
 						<?php
-						if ( wcct_get_options( 'display_cat' ) ):
-						$term_ids = array();
-						$target_terms = get_terms( 'category', array( 'child_of' => usces_get_cat_id( 'item' ) ) );
-						if ( ! empty( $target_terms ) && ! is_wp_error( $target_terms ) ) {
-							foreach ( $target_terms as $target_term ) {
-								$img_thumb_url	= get_term_meta( $target_term->term_id, 'wcct-tag-thumbnail-url', true );
-								$img_catimg_url	= get_term_meta( $target_term->term_id, 'wcct-tag-catimg-url', true );
-								if ( ! empty( $img_thumb_url || $img_catimg_url )  )
-								$term_ids[] = $target_term->term_id;
-							}
-						}
-						if( $term_ids ):
+						$kn_news = new WP_Query( array(
+							'category_name'       => 'news',
+							'posts_per_page'      => $kn_cnt['news'],
+							'ignore_sticky_posts' => true,
+							'no_found_rows'       => true,
+						) );
+						if ( $kn_news->have_posts() ) :
 						?>
-						<section class="cat-area home-area">
-
-							<div class="section-head cf">
-								<h2><?php wcct_options( 'display_cat_title' ); ?></h2>
-							</div><!-- .section-head -->
-
-							<?php if( wcct_get_options( 'display_cat_slide' ) ): ?>
-							<div class="slider cf">
-							<?php else: ?>
-							<div class="noslider cf">
-							<?php endif; ?>
-							<?php
-							foreach( $term_ids as $term_id ):
-								$term			= get_term_by( 'id', $term_id, 'category' );
-								$img_thumb_url	= get_term_meta( $term_id, 'wcct-tag-thumbnail-url', true );
-								$img_thumb_id	= get_term_meta( $term_id, 'wcct-tag-thumbnail-id', true );
-								$img_catimg_url	= get_term_meta( $term_id, 'wcct-tag-catimg-url', true );
-								$img_catimg_id	= get_term_meta( $term_id, 'wcct-tag-catimg-id', true );
-								if ( ! empty( $img_thumb_id ) ) {
-									$img_att    = wp_get_attachment_image_src( $img_thumb_id, 'large' );
-									$img_url	= $img_att[0];
-								} elseif ( ! empty( $img_catimg_id ) ) {
-									$img_att    = wp_get_attachment_image_src( $img_catimg_id, 'thumbnail' );
-									$img_url	= $img_att[0];
-								}
-							?>
-								<div class="list">
-									<a href="<?php echo get_category_link( $term_id ); ?>">
-										<span class="thumbnail"><img src="<?php echo $img_url; ?>"></span>
-										<span class="title"><?php esc_html_e( $term->name ); ?></span>
-									</a>
-								</div>
-							<?php
-							endforeach;
-							?>
-							</div><!-- .slider -->
-						</section><!-- .cat-area -->
-
-						<?php 
-							endif;
-						endif;
-						?>
-
-						<?php
-						if( wcct_get_options( 'display_pickup' ) ):
-							$pickup_num		= wcct_get_options( 'pickup_num' );
-							$pickup_slug	= wcct_get_options( 'pickup_cat' );
-							$pickup_cat     = get_term_by( 'slug', $pickup_slug, 'category' );
-							$pickup_name	= $pickup_cat->name;
-						?>
-						<section class="pickup-area home-area">
-
-							<div class="section-head cf">
-								<h2><?php echo $pickup_name; ?></h2>
-							</div><!-- .section-head -->
-
-							<?php if( wcct_get_options( 'display_pickup_slide' ) ): ?>
-							<div class="slider cf">
-							<?php else: ?>
-							<div class="noslider cf">
-							<?php endif; ?>
-							<?php
-							$pickup_args = array(
-								'posts_per_page' => $pickup_num,
-								'category_name'  => $pickup_slug,
-							); 
-							$pickup_query = new WP_Query( $pickup_args );
-							if ( $pickup_query->have_posts() ):
-								while ( $pickup_query->have_posts() ):
-								$pickup_query->the_post();
-							?>
-								<div id="post-<?php the_ID(); ?>" <?php post_class('list'); ?>>
-									<a href="<?php the_permalink(); ?>">
-										<span class="thumbnail">
-										<?php if ( has_post_thumbnail() ): ?>
-											<?php the_post_thumbnail( 'full' ); ?>
-										<?php else: ?>
-											<img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/noimg.gif" alt="noimg">
-										<?php endif; ?>
-										</span>
-										<span class="title"><?php the_title(); ?></span>
-										<span class="excerpt"><?php the_excerpt(); ?></span>
-									</a>
-								</div>
-							<?php
-								endwhile;
-								wp_reset_postdata();
-							else:
-							?>
-							<p class="no-date"><?php _e( 'Sorry, no posts matched your criteria.', 'usces' ); ?></p>
-							<?php
-							endif;
-							?>
-							</div><!-- .slider -->
-
-						</section><!-- .pickup-area -->
-						<?php
-						endif;
-						?>
-
-						<?php if ( is_active_sidebar( 'beldad2' ) ) : ?>
-						<section id="beldad2" class="home-widget widget-area">
-							<?php dynamic_sidebar( 'beldad2' ); ?>
-						</section><!-- #beldad2 -->
-						<?php endif; ?>
-
-					</div><!-- .upper -->
-
-					<div class="lower cf">
-
-						<div class="products-box">
-
-							<?php if ( is_active_sidebar( 'beldad3' ) ): ?>
-							<section id="beldad3" class="home-widget widget-area">
-								<?php dynamic_sidebar( 'beldad3' ); ?>
-							</section><!-- #beldad3 -->
-							<?php endif; ?>
-
-							<section class="product-area home-area">
-
-							<?php if ( have_posts() ) : ?>
-								<?php
-								$product_cat = get_query_var( 'cat' );
-								?>
-								<div class="section-head cf">
-									<h2><?php echo get_cat_name( $product_cat ); ?></h2>
-								</div><!-- .section-head -->
-
-								<?php if ( wcct_get_options( 'display_h_item_slide' ) ): ?>
-								<div class="product-list slider cf layout-grid">
-								<?php else: ?>
-								<div class="product-list cf layout-grid">
-								<?php endif; ?>
-
-									<?php while ( have_posts() ) : the_post(); usces_the_item(); ?>
-
-									<div id="post-<?php the_ID(); ?>" <?php post_class('list'); ?>>
-										<a href="<?php the_permalink(); ?>" rel="bookmark"> 
-											<span class="thumbnail">
-												<?php welcart_basic_campaign_message(); ?>
-												<?php usces_the_itemImage( 0, 300, 300 ); ?>
-												<?php if ( wcct_get_options( 'display_soldout' ) && !usces_have_zaiko_anyone() ): ?>
-												<span class="itemsoldout">
-														<span class="text">
-															<?php _e( 'SOLD OUT', 'welcart_basic_beldad' ); ?>
-															<?php if( wcct_get_options( 'display_inquiry' ) ): ?>
-															<span class="sub_text"><?php wcct_options( 'display_inquiry_text' ); ?></span>
-															<?php endif; ?>
-														</span>
-												</span>
-												<?php endif; ?>
-											</span>
-											<span class="title"><?php usces_the_itemName(); ?></span>
-											<?php wcct_produt_tag(); ?>
-											<span class="price"><?php usces_the_firstPriceCr(); ?><?php usces_guid_tax(); ?></span>
-										</a>
+						<section class="kn-sec kn-full">
+							<div class="kn-wrap">
+								<div class="kn-news">
+									<div class="kn-head kn-head--side">
+										<h2><small>NEWS</small>お知らせ</h2>
+										<a class="kn-more" href="<?php echo esc_url( home_url( '/category/news/' ) ); ?>">一覧を見る</a>
 									</div>
-
-									<?php endwhile; ?>
-
-								</div><!-- .product-list -->
-
-								<?php else: ?>
-
-									<p class="no-date"><?php _e( 'No posts found.', 'usces' ); ?></p>
-
-								<?php endif; ?>
-
-							</section><!-- .product-area -->
-
-							<?php if ( is_active_sidebar( 'beldad4' ) ): ?>
-							<section id="beldad4" class="home-widget widget-area">
-								<?php dynamic_sidebar( 'beldad4' ); ?>
-							</section><!-- #beldad4 -->
-							<?php endif; ?>
-
-						</div><!-- .products-box -->
-
-						<?php if ( wcct_get_options( 'display_top_sidebar' ) ): ?>
-							<?php get_sidebar(); ?>
+									<ul class="kn-news__list">
+										<?php while ( $kn_news->have_posts() ) : $kn_news->the_post(); $kind = kaon_news_kind( get_the_title() ); ?>
+										<li><a href="<?php the_permalink(); ?>">
+											<time datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></time>
+											<span class="kn-news__tag <?php echo esc_attr( $kind[0] ); ?>"><?php echo esc_html( $kind[1] ); ?></span>
+											<span class="kn-news__t"><?php the_title(); ?></span>
+											<span class="kn-news__arr" aria-hidden="true">&rsaquo;</span>
+										</a></li>
+										<?php endwhile; wp_reset_postdata(); ?>
+									</ul>
+								</div>
+							</div>
+						</section>
 						<?php endif; ?>
 
-					</div><!-- .lower -->
+						<?php /* ---------- ④ 新着の念珠（カテゴリー「新商品」の新しい順） ---------- */ ?>
+						<?php
+						$kn_new_ids = array();
+						$kn_new = new WP_Query( array(
+							'category_name'       => 'itemnew',
+							'posts_per_page'      => $kn_cnt['new'],
+							'post__not_in'        => $kn_hidden,
+							'ignore_sticky_posts' => true,
+							'no_found_rows'       => true,
+						) );
+						if ( $kn_new->have_posts() ) :
+						?>
+						<section class="kn-sec kn-sec--tint kn-full">
+							<div class="kn-wrap">
+								<div class="kn-head">
+									<h2><small>NEW ARRIVALS</small>新着の念珠</h2>
+									<a class="kn-more" href="<?php echo esc_url( home_url( '/category/item/itemnew/' ) ); ?>">新着をすべて見る</a>
+								</div>
+								<div class="kn-items">
+									<?php while ( $kn_new->have_posts() ) : $kn_new->the_post(); usces_the_item(); $kn_new_ids[] = get_the_ID(); ?>
+										<?php kaon_item_card(); ?>
+									<?php endwhile; wp_reset_postdata(); ?>
+								</div>
+							</div>
+						</section>
+						<?php endif; ?>
+
+						<?php /* ---------- ⑤ 念珠をさがす ---------- */ ?>
+						<section class="kn-sec kn-full">
+							<div class="kn-wrap">
+								<div class="kn-head">
+									<h2><small>FIND YOURS</small>念珠をさがす</h2>
+									<a class="kn-more" href="<?php echo esc_url( home_url( '/category/item/' ) ); ?>">すべての商品</a>
+								</div>
+								<div class="kn-cats">
+									<?php foreach ( kaon_home_cat_tiles() as $t ) : $cat = get_category( $t['cat'] ); if ( ! $cat || is_wp_error( $cat ) ) { continue; } ?>
+									<a class="kn-cat" href="<?php echo esc_url( get_category_link( $cat ) ); ?>">
+										<?php echo kaon_img( $t['img'], 'medium_large', '', array( 'class' => 'kn-cat__img' ) ); ?>
+										<span class="kn-cat__body">
+											<span class="kn-cat__name"><small><?php echo esc_html( $t['en'] ); ?></small><?php echo esc_html( $t['ja'] ); ?></span>
+											<?php if ( empty( $t['hide_count'] ) && $cat->count ) : ?><span class="kn-cat__n"><?php echo (int) $cat->count; ?>点</span><?php endif; ?>
+										</span>
+									</a>
+									<?php endforeach; ?>
+								</div>
+							</div>
+						</section>
+
+						<?php /* ---------- ⑥ お勧め商品（新着に出したものは除く） ---------- */ ?>
+						<?php
+						$kn_reco = new WP_Query( array(
+							'category_name'       => 'itemreco',
+							'posts_per_page'      => $kn_cnt['reco'],
+							'post__not_in'        => array_merge( $kn_hidden, $kn_new_ids ),
+							'ignore_sticky_posts' => true,
+							'no_found_rows'       => true,
+						) );
+						if ( $kn_reco->have_posts() ) :
+						?>
+						<section class="kn-sec kn-sec--tint kn-full">
+							<div class="kn-wrap">
+								<div class="kn-head">
+									<h2><small>RECOMMENDED</small>お勧め商品</h2>
+									<a class="kn-more" href="<?php echo esc_url( home_url( '/category/item/itemreco/' ) ); ?>">お勧めをすべて見る</a>
+								</div>
+								<div class="kn-items">
+									<?php while ( $kn_reco->have_posts() ) : $kn_reco->the_post(); usces_the_item(); ?>
+										<?php kaon_item_card(); ?>
+									<?php endwhile; wp_reset_postdata(); ?>
+								</div>
+							</div>
+						</section>
+						<?php endif; ?>
+
+						<?php /* ---------- ⑦ オーダーメイド（制作事例） ---------- */ ?>
+						<?php
+						$kn_works = new WP_Query( array(
+							'category_name'       => 'case',
+							'posts_per_page'      => $kn_cnt['works'],
+							'post__not_in'        => array( 461 ), // 「制作の流れ」の説明ページは実例ではないので除く
+							'ignore_sticky_posts' => true,
+							'no_found_rows'       => true,
+						) );
+						?>
+						<section class="kn-sec kn-full">
+							<div class="kn-wrap">
+								<div class="kn-om">
+									<div class="kn-om__text">
+										<div class="kn-head kn-head--solo"><h2><small>ORDER MADE</small>オーダーメイド</h2></div>
+										<p class="kn-om__lead">ご希望の珠の色や材質、ご予算、込められた想いまで。「こんなことは難しいかな」と思われることも、ご遠慮なくご相談ください。<strong>お見積りは無料</strong>です。</p>
+										<ol class="kn-om__steps">
+											<li><span>01</span>お見積り</li>
+											<li><span>02</span>打ち合わせ</li>
+											<li><span>03</span>制作</li>
+											<li><span>04</span>納品</li>
+										</ol>
+										<a class="kn-om__btn" href="<?php echo esc_url( home_url( '/case/461/' ) ); ?>">制作の流れを見る</a>
+									</div>
+									<?php if ( $kn_works->have_posts() ) : ?>
+									<div class="kn-om__works">
+										<?php while ( $kn_works->have_posts() ) : $kn_works->the_post(); ?>
+										<a href="<?php the_permalink(); ?>">
+											<span class="kn-om__im"><?php the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy', 'alt' => '' ) ); ?></span>
+											<span class="kn-om__cap"><small>制作事例</small><?php echo esc_html( preg_replace( '/^【[^】]*】\s*/u', '', get_the_title() ) ); ?></span>
+										</a>
+										<?php endwhile; wp_reset_postdata(); ?>
+									</div>
+									<?php endif; ?>
+								</div>
+							</div>
+						</section>
+
+						<?php /* ---------- ③ ブログ ---------- */ ?>
+						<?php
+						$kn_blog = new WP_Query( array(
+							'category_name'       => 'blog',
+							'posts_per_page'      => $kn_cnt['blog'],
+							'ignore_sticky_posts' => true,
+							'no_found_rows'       => true,
+						) );
+						if ( $kn_blog->have_posts() ) :
+						?>
+						<section class="kn-sec kn-sec--tint kn-full">
+							<div class="kn-wrap">
+								<div class="kn-head">
+									<h2><small>JOURNAL</small>ブログ</h2>
+									<a class="kn-more" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">すべて見る</a>
+								</div>
+								<p class="kn-blog__lead">工房の手仕事と、ワークショップのようすをお届けしています。</p>
+								<div class="kn-posts">
+									<?php while ( $kn_blog->have_posts() ) : $kn_blog->the_post(); ?>
+									<a class="kn-post" href="<?php the_permalink(); ?>">
+										<span class="kn-post__img">
+											<?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy', 'alt' => '' ) ); } ?>
+											<?php if ( in_category( 96 ) ) : ?><span class="kn-post__tag">体験</span><?php endif; ?>
+										</span>
+										<time datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>"><?php echo esc_html( get_the_date( 'Y.m.d' ) ); ?></time>
+										<span class="kn-post__t"><?php the_title(); ?></span>
+									</a>
+									<?php endwhile; wp_reset_postdata(); ?>
+								</div>
+							</div>
+						</section>
+						<?php endif; ?>
+
+					</div><!-- .kn-home -->
 	
 				<?php endif; ?>
 

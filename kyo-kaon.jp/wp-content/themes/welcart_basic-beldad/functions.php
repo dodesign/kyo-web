@@ -9,6 +9,22 @@ if ( !defined('USCES_VERSION') ) return;
 
 require( dirname( __FILE__ ) . '/inc/theme-customizer.php' );
 require( get_stylesheet_directory() . '/inc/load.php' );
+// 2026-11-02 リニューアル：トップの設定（特集・念珠をさがす・件数）と、ヘッダー・フッター・トップの部品
+require( get_stylesheet_directory() . '/inc/kaon-home.php' );
+
+/* ---------- 2026-11-02 リニューアル用の読み込み ----------
+   CSS（assets/css/kaon-site.css）は header.php で直接読んでいる（uikit より後に読むため）。 */
+add_action( 'wp_enqueue_scripts', 'kaon_site_assets', 20 );
+function kaon_site_assets() {
+	$dir = get_stylesheet_directory();
+	$uri = get_stylesheet_directory_uri();
+	wp_enqueue_style( 'kaon-font-mincho', 'https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&display=swap', array(), null );
+	wp_enqueue_script( 'kaon-site', $uri . '/assets/js/kaon-site.js', array(), filemtime( $dir . '/assets/js/kaon-site.js' ), true );
+	// 旧ヘッダー用の「スクロールで固定」スクリプトは不要（新ヘッダーは CSS の sticky で固定）。
+	// 残すと body に margin-top を足してしまうので止める。
+	wp_dequeue_style( 'fixed-header-style' );
+	wp_dequeue_script( 'fixed-header-js' );
+}
 
 
 /***********************************************************
@@ -175,7 +191,8 @@ function wcct_enqueue_styles() {
 	}
 	
 	// Common
-	wp_enqueue_script( 'wcct-customized', $stylesheet_dir . '/assets/js/wcct-customized.js', array(), '1.0' );
+	// バージョンを上げるとブラウザのキャッシュが切れる。JSを直したら必ず上げること。
+	wp_enqueue_script( 'wcct-customized', $stylesheet_dir . '/assets/js/wcct-customized.js', array(), '1.1' );
 
 	//FlexSlider
 	if ( is_home() || is_front_page() ) {

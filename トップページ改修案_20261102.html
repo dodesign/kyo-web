@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>トップページ改修案</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b2118; --sub:#6b655d; --mute:#8a8279; --gold:#a89770;
+  --paper:#faf7f2; --line:#e7ddcf; --accent:#9a3b2f;
+  --M:"Shippori Mincho","Yu Mincho",YuMincho,"Hiragino Mincho ProN","Noto Serif JP",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#efece6;color:var(--ink);font-family:var(--M);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ---------- 説明 ---------- */
+.doc{max-width:1100px;margin:0 auto;padding:36px 20px 8px}
+.doc h1{font-size:22px;font-weight:500;letter-spacing:.08em;margin:0 0 14px}
+.doc p,.doc li{font-size:14px;line-height:2;color:#4a4038}
+.doc .box{background:#fff;border:1px solid var(--line);padding:20px 26px;margin:0 0 18px}
+.doc ol,.doc ul{margin:6px 0 0;padding-left:1.4em}
+.doc b{color:var(--accent);font-weight:600}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;margin:10px 0 2px}
+.flow span{background:var(--paper);border:1px solid var(--line);padding:4px 12px}
+.flow span.new{background:var(--ink);color:#fff;border-color:var(--ink)}
+.flow i{font-style:normal;color:var(--mute)}
+.label{max-width:1100px;margin:40px auto 12px;padding:0 20px;font-size:14px;letter-spacing:.16em}
+.label em{font-style:normal;display:inline-block;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.18em;padding:4px 10px;margin-right:12px;vertical-align:2px}
+.pair{max-width:1100px;margin:0 auto;padding:0 20px}
+.desk{border:1px solid #d6cfc3;box-shadow:0 14px 30px rgba(0,0,0,.08)}
+.phone{width:390px;margin:0 auto 80px;border:10px solid #1d1a17;border-radius:34px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.18)}
+.phone .site{height:780px;overflow-y:auto}
+
+/* ---------- サイト ---------- */
+.site{background:#fff;container-type:inline-size;overflow:hidden}
+.fakevideo{height:240px;background:#222 url(https://kyo-kaon.jp/wp-content/uploads/2025/01/0091-scaled.jpg) center/cover;position:relative}
+.fakevideo::after{content:"（いまのトップ動画）";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;letter-spacing:.2em;background:rgba(0,0,0,.35)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.sec{padding:84px 0}
+.sec.tint{background:var(--paper)}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:34px}
+.head h2{margin:0;font-size:26px;font-weight:500;letter-spacing:.14em}
+.head h2 small{display:block;font-size:11px;letter-spacing:.32em;color:var(--gold);margin-bottom:10px}
+.more{font-size:13px;letter-spacing:.1em;border-bottom:1px solid var(--ink);padding-bottom:3px;white-space:nowrap}
+.more::after{content:" →";font-family:sans-serif}
+
+/* ===== ① 特集カルーセル ===== */
+.fc{position:relative;padding:48px 0 36px;background:var(--paper)}
+.fc__viewport{overflow:hidden}
+.fc__track{display:flex;gap:22px;transition:transform .9s cubic-bezier(.2,.75,.2,1);will-change:transform}
+.fc__slide{flex:0 0 70cqw;aspect-ratio:16/9;position:relative;overflow:hidden;opacity:.4;transition:opacity .9s ease;background:#111}
+.fc__slide.is-active{opacity:1}
+.fc__slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 6s ease}
+.fc__slide.is-active img{transform:scale(1)}
+.fc__slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,10,6,.78) 0%,rgba(14,10,6,.45) 42%,rgba(14,10,6,0) 72%)}
+.fc__body{position:absolute;z-index:2;left:6%;bottom:12%;max-width:52%;color:#fff}
+.fc__eyebrow{font-size:12px;letter-spacing:.36em;color:#e4d4b4;margin:0 0 16px;display:flex;align-items:center;gap:12px}
+.fc__eyebrow::before{content:"";width:26px;height:1px;background:#e4d4b4}
+.fc__title{font-size:clamp(22px,3.3cqw,42px);line-height:1.55;font-weight:500;letter-spacing:.06em;margin:0 0 14px}
+.fc__copy{font-size:clamp(12px,1.25cqw,15px);line-height:2;margin:0 0 20px;color:#f1e9dc}
+.fc__facts{font-size:clamp(12px,1.2cqw,14px);letter-spacing:.06em;margin:0 0 22px;padding-top:14px;border-top:1px solid rgba(255,255,255,.35);color:#f1e9dc;white-space:nowrap}
+.fc__facts b{font-size:1.9em;font-weight:500;color:#fff;margin-right:2px;letter-spacing:.02em;vertical-align:-2px}
+.fc__facts i{font-style:normal;opacity:.45;margin:0 .7em}
+.fc__cta{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.16em;background:#fff;color:var(--ink);padding:11px 22px}
+.fc__cta::after{content:"→";font-family:sans-serif}
+.fc__nav{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:22px}
+.fc__dots{display:flex;gap:10px}
+.fc__dots button{width:28px;height:2px;border:0;padding:0;background:#cfc3ae;cursor:pointer;transition:background .3s,width .3s}
+.fc__dots button.is-active{background:var(--ink);width:46px}
+.fc__arrow{width:40px;height:40px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-size:16px;line-height:1}
+.fc__count{font-size:12px;letter-spacing:.2em;color:var(--sub);min-width:52px;text-align:center}
+
+/* ===== ② お知らせ ===== */
+.news{display:grid;grid-template-columns:220px 1fr;gap:40px}
+.news .head{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:20px;margin:0}
+.news ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.news li a{display:grid;grid-template-columns:110px 74px 1fr 18px;align-items:baseline;gap:16px;padding:20px 4px;border-bottom:1px solid var(--line);transition:background .3s}
+.news li a:hover{background:var(--paper)}
+.news time{font-size:13px;letter-spacing:.12em;color:var(--gold)}
+.news .tag{font-size:11px;letter-spacing:.14em;text-align:center;border:1px solid currentColor;padding:2px 0;color:var(--sub)}
+.news .tag.ev{color:var(--accent)}
+.news .tag.off{color:#5a6b7a}
+.news .t{font-size:15px;line-height:1.85;letter-spacing:.03em}
+.news .arr{font-family:sans-serif;color:var(--mute);font-size:13px}
+
+/* ===== ④⑥ 商品カード ===== */
+.items{display:grid;grid-template-columns:repeat(4,1fr);gap:44px 28px}
+.item__img{aspect-ratio:1;overflow:hidden;background:#f3efe8;position:relative}
+.item__img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+.item:hover .item__img img{transform:scale(1.05)}
+.item__tag{position:absolute;left:0;top:14px;background:var(--ink);color:#fff;font-size:10.5px;letter-spacing:.2em;padding:4px 10px 4px 12px}
+.item__name{font-size:14px;line-height:1.85;margin:16px 0 10px;letter-spacing:.03em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:3.7em}
+.item__price{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:10px}
+.item__price b{font-size:19px;font-weight:500;letter-spacing:.03em}
+.item__price small{font-size:11px;color:var(--mute);margin-left:2px}
+.item__price span{font-size:11px;letter-spacing:.1em;color:var(--gold)}
+
+/* ===== ⑤ 念珠をさがす ===== */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cat{position:relative;aspect-ratio:3/2;overflow:hidden;background:#111;color:#fff}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;transition:transform 1.2s ease,opacity .6s}
+.cat:hover img{transform:scale(1.05);opacity:.68}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,0) 35%,rgba(14,10,6,.72))}
+.cat__body{position:absolute;z-index:2;left:22px;right:22px;bottom:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.cat__name{font-size:19px;letter-spacing:.1em;line-height:1.5;margin:0}
+.cat__name small{display:block;font-size:10.5px;letter-spacing:.3em;color:#e4d4b4;margin-bottom:6px}
+.cat__n{font-size:12px;letter-spacing:.12em;color:#f1e9dc;white-space:nowrap}
+
+/* ===== ⑦ オーダーメイド ===== */
+.om{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:center}
+.om__lead{font-size:15px;line-height:2.1;color:#4a4038;margin:0 0 28px}
+.om__steps{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.om__steps li{padding:16px 6px;text-align:center;font-size:13.5px;letter-spacing:.08em;position:relative}
+.om__steps li + li::before{content:"";position:absolute;left:0;top:30%;bottom:30%;width:1px;background:var(--line)}
+.om__steps li span{display:block;font-size:10.5px;letter-spacing:.24em;color:var(--gold);margin-bottom:6px}
+.om__btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;font-size:13.5px;letter-spacing:.16em;padding:15px 30px}
+.om__btn::after{content:"→";font-family:sans-serif}
+.om__works{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.om__works a{display:block}
+.om__works .im{aspect-ratio:4/3;overflow:hidden;background:#eee}
+.om__works img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+.om__works a:hover img{transform:scale(1.05)}
+.om__works p{font-size:13.5px;line-height:1.85;margin:12px 0 0}
+.om__works p span{display:block;font-size:10.5px;letter-spacing:.24em;color:var(--gold);margin-bottom:4px}
+
+/* ===== ③ ブログ ===== */
+.blog__lead{font-size:14px;line-height:2;color:var(--sub);margin:-14px 0 30px}
+.posts{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+/* サムネイルは縦長9:16のインスタ表紙。下1/4は余白なので、上から3:4で切ると
+   写真＋表紙のタイトル＋ロゴがちょうど収まる（/blog/ 一覧のカードとも同じ比率） */
+.post__img{aspect-ratio:3/4;overflow:hidden;background:#eee;position:relative}
+.post__img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s ease}
+.post:hover .post__img img{transform:scale(1.04)}
+.post__tag{position:absolute;left:10px;top:10px;font-size:10px;letter-spacing:.14em;background:rgba(255,255,255,.92);color:var(--ink);padding:3px 8px}
+.post time{display:block;font-size:12px;letter-spacing:.14em;color:var(--gold);margin:14px 0 6px}
+.post h3{font-size:14px;line-height:1.85;font-weight:500;margin:0;letter-spacing:.03em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ===== ヘッダー ===== */
+.hd{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.hd__tag{font-size:11px;letter-spacing:.24em;color:var(--sub);text-align:center;padding:7px 0;border-bottom:1px solid #f0ebe3;margin:0}
+.hd__bar{max-width:1180px;margin:0 auto;padding:0 28px;height:78px;display:flex;align-items:center;gap:32px}
+.hd__logo img{height:44px;width:auto}
+.hd__nav{margin-left:auto}
+.hd__nav > ul{list-style:none;margin:0;padding:0;display:flex;gap:30px}
+.hd__nav li{position:relative}
+.hd__nav > ul > li > a{display:block;font-size:14px;letter-spacing:.14em;padding:28px 0;position:relative}
+.hd__nav > ul > li > a::after{content:"";position:absolute;left:0;right:0;bottom:20px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .4s ease}
+.hd__nav > ul > li:hover > a::after,.hd__nav > ul > li.is-open > a::after{transform:scaleX(1)}
+.hd__nav .has-sub > a{padding-right:14px}
+.hd__nav .has-sub > a::before{content:"";position:absolute;right:0;top:50%;width:5px;height:5px;border-right:1px solid var(--sub);border-bottom:1px solid var(--sub);transform:translateY(-70%) rotate(45deg)}
+.hd__sub{position:absolute;left:50%;top:100%;transform:translate(-50%,8px);min-width:220px;background:#fff;border:1px solid var(--line);box-shadow:0 18px 40px rgba(43,33,24,.08);list-style:none;margin:0;padding:10px 0;opacity:0;visibility:hidden;transition:.3s}
+.hd__nav li:hover .hd__sub,.hd__nav li.is-open .hd__sub{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.hd__sub a{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;letter-spacing:.1em;padding:12px 22px;transition:background .2s}
+.hd__sub a:hover{background:var(--paper)}
+.hd__sub a::after{content:"→";font-family:sans-serif;font-size:11px;color:var(--mute)}
+.hd__sub a span{white-space:nowrap}
+.hd__sub{min-width:250px}
+.hd__sub .new{display:inline-block;vertical-align:2px;font-style:normal;font-size:9.5px;letter-spacing:.16em;color:var(--accent);border:1px solid currentColor;padding:1px 5px;margin-left:8px}
+.hd__icons{display:flex;gap:6px;align-items:center}
+.hd__icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;position:relative;border:0;background:none;color:var(--ink);cursor:pointer}
+.hd__icon svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.3}
+.hd__badge{position:absolute;right:4px;top:5px;min-width:16px;height:16px;border-radius:8px;background:var(--accent);color:#fff;font-size:10px;line-height:16px;text-align:center;font-family:sans-serif}
+.hd__menu{display:none}
+/* スマホのメニュー */
+.sp-menu{position:absolute;inset:0;z-index:60;background:var(--paper);padding:22px 26px;overflow:auto;opacity:0;visibility:hidden;transition:.35s}
+.sp-menu.is-open{opacity:1;visibility:visible}
+.sp-menu__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.sp-menu ul{list-style:none;margin:0;padding:0}
+.sp-menu > ul > li{border-bottom:1px solid var(--line)}
+.sp-menu > ul > li > a,.sp-menu > ul > li > span{display:block;font-size:16px;letter-spacing:.14em;padding:18px 2px}
+.sp-menu > ul > li > span{color:var(--gold);font-size:11px;letter-spacing:.3em;padding:18px 2px 4px}
+.sp-menu .sub a{display:block;font-size:14px;letter-spacing:.1em;padding:10px 0 10px 14px;color:#4a4038}
+.sp-menu .sub{padding-bottom:12px}
+.sp-menu__tel{margin-top:30px;text-align:center}
+.sp-menu__tel a{display:block;font-size:24px;letter-spacing:.06em}
+.sp-menu__tel small{font-size:11px;color:var(--mute);letter-spacing:.12em}
+
+/* ===== フッター ===== */
+.ft-contact{position:relative;color:#fff;text-align:center;padding:88px 24px;background:#1e1915 url(https://kyo-kaon.jp/common/img/footer-bg.jpg) center/cover}
+.ft-contact::before{content:"";position:absolute;inset:0;background:rgba(22,17,12,.78)}
+.ft-contact > *{position:relative}
+.ft-contact small{display:block;font-size:11px;letter-spacing:.36em;color:#d7c6a3;margin-bottom:14px}
+.ft-contact h2{font-size:28px;font-weight:500;letter-spacing:.16em;margin:0 0 18px}
+.ft-contact p{font-size:14px;line-height:2.1;color:#e9e1d4;margin:0 auto 40px;max-width:620px}
+.ft-contact__cols{display:grid;grid-template-columns:1fr 1fr;max-width:720px;margin:0 auto;border-top:1px solid rgba(255,255,255,.22);border-bottom:1px solid rgba(255,255,255,.22)}
+.ft-contact__cols > div{padding:30px 10px}
+.ft-contact__cols > div + div{border-left:1px solid rgba(255,255,255,.22)}
+.ft-contact__cols h3{font-size:12px;letter-spacing:.3em;color:#d7c6a3;font-weight:500;margin:0 0 12px}
+.ft-tel{font-size:32px;letter-spacing:.06em;display:inline-block}
+.ft-btn{display:inline-flex;align-items:center;gap:12px;border:1px solid #fff;color:#fff;font-size:14px;letter-spacing:.16em;padding:14px 30px;transition:.3s}
+.ft-btn:hover{background:#fff;color:var(--ink)}
+.ft-btn::after{content:"→";font-family:sans-serif}
+.ft-contact__cols span{display:block;font-size:12px;color:#cfc4b2;margin-top:10px;letter-spacing:.1em}
+
+.ft-shops{background:var(--paper);padding:84px 0}
+.ft-shops__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.shop{background:#fff;border:1px solid var(--line);padding:34px 34px 30px}
+.shop small{font-size:10.5px;letter-spacing:.3em;color:var(--gold)}
+.shop h3{font-size:21px;font-weight:500;letter-spacing:.12em;margin:8px 0 18px}
+.shop dl{display:grid;grid-template-columns:72px 1fr;gap:10px 14px;margin:0 0 18px;font-size:13.5px;line-height:1.85}
+.shop dt{color:var(--mute);letter-spacing:.1em}
+.shop dd{margin:0}
+.shop p{font-size:12.5px;line-height:1.9;color:var(--sub);margin:0 0 20px;padding-top:14px;border-top:1px solid #f0ebe3}
+.shop a.map{font-size:13px;letter-spacing:.1em;border-bottom:1px solid var(--ink);padding-bottom:3px}
+.shop a.map::after{content:" ↗";font-family:sans-serif}
+
+.ft-main{background:#1e1915;color:#d9d0c2;padding:72px 0 34px}
+.ft-main__grid{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:36px}
+.ft-brand img{height:44px;width:auto;margin-bottom:18px}
+.ft-brand p{font-size:12.5px;line-height:2;color:#a99f90;margin:0 0 20px}
+.ft-sns{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;color:#d9d0c2;border:1px solid #4a4038;padding:8px 14px}
+.ft-sns svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.4}
+.ft-col h4{font-size:11px;letter-spacing:.3em;color:#b9a77f;font-weight:500;margin:0 0 18px}
+.ft-col ul{list-style:none;margin:0;padding:0}
+.ft-col li{margin:0 0 11px}
+.ft-col a{font-size:13px;letter-spacing:.08em;color:#d9d0c2;transition:color .2s}
+.ft-col a:hover{color:#fff}
+.ft-copy{max-width:1080px;margin:56px auto 0;padding:24px 28px 0;border-top:1px solid #3a322b;display:flex;justify-content:space-between;gap:16px;font-size:11.5px;letter-spacing:.1em;color:#8d8376}
+
+/* ---------- スマホ（枠の幅で切り替え） ---------- */
+@container (max-width: 640px){
+  .hd__tag{display:none}
+  .hd__bar{height:62px;padding:0 14px 0 18px;gap:10px}
+  .hd__logo img{height:34px}
+  .hd__nav{display:none}
+  .hd__icons{margin-left:auto}
+  .hd__icon.user{display:none}
+  .hd__menu{display:flex}
+  .ft-contact{padding:60px 20px}
+  .ft-contact h2{font-size:19px;letter-spacing:.06em}
+  .ft-contact p{font-size:13px;text-align:left}
+  .ft-contact__cols{grid-template-columns:1fr}
+  .ft-contact__cols > div + div{border-left:0;border-top:1px solid rgba(255,255,255,.22)}
+  .ft-tel{font-size:28px}
+  .ft-shops{padding:56px 0}
+  .ft-shops__grid{grid-template-columns:1fr;gap:16px}
+  .shop{padding:26px 22px}
+  .shop dl{grid-template-columns:60px 1fr;font-size:13px}
+  .ft-main{padding:52px 0 28px}
+  .ft-main__grid{grid-template-columns:1fr 1fr;gap:34px 20px}
+  .ft-brand{grid-column:1 / -1}
+  .ft-copy{flex-direction:column;gap:6px;margin-top:40px;padding:20px 18px 0}
+  .wrap{padding:0 18px}
+  .sec{padding:56px 0}
+  .head{margin-bottom:24px}
+  .head h2{font-size:21px}
+  .fc{padding:28px 0 22px}
+  .fc__track{gap:10px}
+  .fc__slide{flex-basis:86cqw;aspect-ratio:4/5}
+  .fc__slide::after{background:linear-gradient(180deg,rgba(14,10,6,0) 30%,rgba(14,10,6,.85))}
+  .fc__body{left:7%;right:7%;bottom:7%;max-width:none}
+  .fc__title{font-size:22px}
+  .fc__copy{font-size:12.5px;margin-bottom:14px}
+  .fc__facts{font-size:11.5px;white-space:normal;margin-bottom:16px;padding-top:10px}
+  .fc__cta{font-size:12px;padding:9px 16px}
+  .fc__arrow{display:none}
+  .news{grid-template-columns:1fr;gap:16px}
+  .news .head{flex-direction:row;align-items:flex-end;justify-content:space-between}
+  .news li a{grid-template-columns:auto auto 1fr;row-gap:6px;column-gap:10px;padding:16px 2px}
+  .news .t{grid-column:1 / -1;font-size:14px}
+  .news .arr{display:none}
+  .items{grid-template-columns:repeat(2,1fr);gap:30px 14px}
+  .item__name{font-size:12.5px;margin:12px 0 8px}
+  .item__price{flex-direction:column;align-items:flex-start;gap:2px}
+  .item__price b{font-size:16px}
+  .cats{grid-template-columns:repeat(2,1fr);gap:10px}
+  .cat{aspect-ratio:1}
+  .cat__body{left:12px;right:12px;bottom:12px;flex-direction:column;align-items:flex-start;gap:2px}
+  .cat__name{font-size:15px}
+  .om{grid-template-columns:1fr;gap:30px}
+  .om__lead{font-size:13.5px}
+  .om__steps li{font-size:12px;padding:12px 2px}
+  .om__btn{width:100%;justify-content:center}
+  .posts{grid-template-columns:repeat(2,1fr);gap:22px 14px}
+  .post h3{font-size:12.5px}
+}
+</style>
+</head>
+<body>
+
+<div class="doc">
+  <h1>喜芳工房 トップページ改修案（第3版）</h1>
+  <div class="box">
+    <p><b>このファイルはブラウザで開いてください。</b>写真はサイトの本番画像を読み込んでいます。カルーセルは実際に動き、スマホ枠の右上のメニューも開きます。</p>
+    <p>第3版で足したもの：<strong>ヘッダー</strong>（Hitotsubu Color をサービスの中へ）／<strong>フッター</strong>／<strong>お知らせを3件に</strong>。<br>
+    第2版で決まったこと：①特集はA案／サービス3枚バナーは撤去／ブログはグリッド／新着・お勧め・オーダーメイドの作り直し。</p>
+    <p>並び順（<span style="background:var(--ink);color:#fff;padding:0 6px">黒</span>が作り直す部分）：</p>
+    <div class="flow">
+      <span>動画</span><i>→</i>
+      <span class="new">① 特集</span><i>→</i>
+      <span class="new">② お知らせ</span><i>→</i>
+      <span class="new">④ 新着の念珠</span><i>→</i>
+      <span class="new">⑤ 念珠をさがす</span><i>→</i>
+      <span class="new">⑥ お勧め商品</span><i>→</i>
+      <span class="new">⑦ オーダーメイド</span><i>→</i>
+      <span class="new">③ ブログ</span>
+    </div>
+  </div>
+  <div class="box">
+    <p><b>ヘッダーとフッターで変えたこと</b></p>
+    <ul>
+      <li><strong>ヘッダー</strong>：ロゴ・メニュー・アイコンを1段にまとめ、明朝に。区切りの縦線をやめ、マウスを乗せると金の細線が出ます。<strong>Hitotsubu Color はサービスの中</strong>に入れました（パソコン版は開いた状態で表示しています）。スマホはメニューを開くと全画面で、電話番号も一番下に出ます。</li>
+      <li><strong>お問い合わせ帯</strong>：写真の上の文字が読みにくかったので暗く敷き、電話とフォームを左右に整理。説明文も3行から2行に縮めました。</li>
+      <li><strong>店舗のご案内</strong>：北山本店と烏丸店を同じ形のカードに。<strong>埋め込みのGoogleマップはやめて「Googleマップで見る」リンクに</strong>しました。地図の埋め込みは全ページの一番下で毎回読み込まれていて重く、表示が遅い原因の一つです。</li>
+      <li><strong>リンク</strong>：いまの「すべて／お勧め商品／男性用＞数珠ブレスレット／女性用＞数珠ブレスレット／制作事例」という並びは「数珠ブレスレット」が2回出てわかりにくいので、<strong>お買い物・サービス・喜芳工房について・ご案内</strong>の4列に整理しました。</li>
+      <li><strong>著作権表示</strong>：いまは空欄でした。「© 株式会社意匠京念珠板倉（喜芳工房）」を入れています。</li>
+      <li>ついでに、フッターの「ホーム」のリンクが <code>http://</code>（https ではない）になっていたのも直します。</li>
+    </ul>
+  </div>
+  <div class="box">
+    <p><b>いまの下半分の問題（調べてわかったこと）</b></p>
+    <ul>
+      <li><strong>「新商品」と「お勧め商品」の先頭6点がまったく同じ</strong>で、同じ商品が2回続けて並んでいます（どちらも新しい順のため）。</li>
+      <li>商品名がSEO用の長い名前（「喜芳工房 … / 京念珠 数珠 じゅず 葬式 葬儀…」）のまま出ていて、1枚に<strong>8行</strong>出ているものもあります。<br>
+          → <strong>カードでは短く整えた名前を2行まで</strong>出します。商品ページのタイトルはSEOのためそのまま残します。</li>
+      <li>「新着商品」「お勧め商品」「送料無料」の赤と緑のバッジが毎回3つずつ付いていてうるさい。<br>
+          → バッジは<strong>「一点物」だけ</strong>にし、送料無料は価格の横に小さく入れます。</li>
+      <li>新商品が6点なので<strong>5列だと最後の1点だけ2段目にはみ出して</strong>います。→ 4列にして1段にきっちり並べます。</li>
+      <li>制作事例は<strong>3件しかなく、うち1件は「制作の流れ」の説明ページ</strong>。画像は文字入りのバナーです。どれも2020年のもの。<br>
+          → 「オーダーメイド」の紹介としてまとめ、流れ（4ステップ）と実例2点を並べます。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="label"><em>パソコン</em>トップページ全体</div>
+<div class="pair"><div class="desk"><div class="site" data-page></div></div></div>
+
+<div class="label"><em>スマホ</em>同じページをスマホ幅で（枠の中はスクロールできます）</div>
+<div class="pair"><div class="phone"><div class="site" data-page data-sp></div></div></div>
+
+<div class="doc" style="padding-bottom:80px">
+  <div class="box">
+    <p><b>このあと</b></p>
+    <p>ヘッダー・フッターもこれでよければ、トップページ・ヘッダー・フッターをまとめて組み込みます（<code>front-page.php</code>・<code>header.php</code>・<code>footer.php</code>）。ヘッダーとフッターは<strong>全ページ共通</strong>なので、商品ページやカートなども同時に新しくなります。<br>
+    <strong>Hitotsubu Color をサービスの中へ移すのは、メニュー設定で先に済ませました（本番に反映済み）。</strong></p>
+  </div>
+</div>
+
+<script>
+const U='https://kyo-kaon.jp/wp-content/uploads/';
+const FEATURES=[
+  {eb:'体験',t:'京念珠ブレス作り体験',c:'京念珠の美術館で、天然石を選び、<br>自分だけの一本を仕立てます。',f:'<b>9,900</b>円（税込）<i>｜</i>約60分<i>｜</i>1名様から',cta:'体験を予約する',img:'2025/01/BK2A0324-scaled.jpg'},
+  {eb:'一点物',t:'選りすぐりの一点もの',c:'一点限りの珠でお仕立てした、<br>世界にひとつの京念珠。',f:'新作が入りました',cta:'一点物を見る',img:'2026/03/IMG_8705.jpg'},
+  {eb:'オーダーメイド',t:'あなただけの京念珠を',c:'珠の色や材質、ご予算、込められた想いまで。<br>ご相談からお仕立てします。',f:'お見積りは無料です',cta:'制作の流れを見る',img:'2025/01/0049-scaled.jpg'},
+  {eb:'ふるさと納税',t:'ふるさと納税の返礼品に',c:'職人が一つひとつ仕上げた京念珠を、<br>返礼品としてお選びいただけます。',f:'さとふる<i>｜</i>ふるなび<i>｜</i>ふるさとチョイス<i>｜</i>楽天',cta:'詳しく見る',img:'2024/11/1-1.jpg'},
+  {eb:'修理',t:'京念珠の修理承ります',c:'紐が切れた、房が汚れた。大切な念珠を、<br>職人が一つひとつ丁寧に直します。',f:'他店でお求めの念珠も承ります',cta:'修理について',img:'2017/08/MG_0116.jpg'},
+];
+const NEWS=[
+  ['2026.09.10','ev','イベント','【9/18 京都・四条烏丸】京念珠ブレスレット制作体験＆トークイベント「いい言葉を響かせる、念珠のはなし」'],
+  ['2026.07.27','ev','イベント','【8/15・16 京都・四条烏丸】京念珠ブレスレット制作体験｜わかさの舞台「京都伝統工芸体験会」'],
+  ['2026.07.27','off','休業','お盆休みのお知らせ【2026/8/11(火)～8/16(日)】'],
+];
+/* [短い名前, 価格, 画像, 一点物?, 送料無料?] */
+const NEWITEMS=[
+  ['クリソコーラ 8mm 片手念珠 一点物 甲府手研磨 銀箔入り組紐 正絹房','143,000','2026/03/IMG_8705-500x500.jpg',1,1],
+  ['ルチルヘマタイト 22玉 片手念珠 一点物 甲府手研磨 飾り結び三連 ぼかし房','484,000','2026/05/IMG_8696-500x500.jpg',1,1],
+  ['ミックス菩提樹 片手念珠 鳳眼 インド龍眼 インド虎眼 星月 太陽 五種','36,300','2026/10/商品写真_06-500x500.jpg',1,1],
+  ['女性用 片手念珠 アマゾナイト 天河石 正絹房 すべての宗派で使える','42,900','2026/09/IMG_4628-500x500.jpg',0,1],
+];
+const RECO=[
+  ['女性用 片手念珠 ミックスベリル 左右色違い正絹房','73,700','2026/09/IMG_4669-500x500.jpg',0,1],
+  ['女性用 片手念珠 本水晶 色石入 5種 白瑪瑙 サンストーン','23,100','2026/09/IMG_4613-500x500.jpg',0,1],
+  ['女性用 片手念珠 グリーンクォーツ＆ブルークォーツ 水晶平切子コンビ','47,000','2026/06/IMG_1336-500x500.jpg',0,1],
+  ['女性用 片手念珠 黒オニキス 零カット 5種 天然石 正絹2色房','51,700','2026/06/IMG_1338-500x500.jpg',0,1],
+  ['最高級 名工・喜芳作 蜜蝋虎琥珀 京念珠 18玉 共仕立 西陣正絹房','550,000','2026/06/IMG_9755-1-500x500.jpg',1,0],
+  ['創作京念珠 正絹房 ピンク イエロー ブルー グリーン パープル','35,200','2026/05/IMG_9783-1-500x500.jpg',0,1],
+  ['屋久杉・虎眼石入 京念珠 男性用','39,600','2026/01/IMG_6283-500x500.jpg',0,1],
+  ['インカローズ 京念珠','99,000','2026/01/IMG_6287-500x500.jpg',1,1],
+];
+const CATS=[
+  ['ONE OF A KIND','一点もの',17,'2026/05/IMG_8696-500x500.jpg'],
+  ['KIHO','喜芳作',6,'2026/06/IMG_9755-1-500x500.jpg'],
+  ['FOR WOMEN','女性用 京念珠',45,'2026/09/IMG_4669-500x500.jpg'],
+  ['FOR MEN','男性用 京念珠',25,'2026/01/IMG_6283-500x500.jpg'],
+  ['BRACELET','数珠ブレスレット',null,'2025/01/BK2A0324-scaled.jpg'],
+  ['VALUE','お値打ち品',6,'2025/07/25066-300x300.jpg'],
+];
+const WORKS=[
+  ['制作事例','麒麟と四神金彫り水晶　レインボーカラーストーン','2020/05/2020.jpg'],
+  ['制作事例','勾玉ペンダント　アベンチュリン','2020/05/thumb.jpg'],
+];
+const POSTS=[
+  ['2026.11.02','体験','【京念珠作りワークショップ写真】わかさ生活でのご縁から　ご兄妹で念珠ブレスレット作り','2026/10/サムネイル_ワークショップ_20261024-768x1365.jpg'],
+  ['2026.10.26','念珠','ミックストルマリン　珍しい色目を集めた二本','2026/10/2610_4_サムネイル-768x1365.jpg'],
+  ['2026.10.19','念珠','日蓮宗のお念珠　かがり梵天を添えた紫水晶とローズアメジスト','2026/10/2610_3_サムネイル-768x1365.jpg'],
+  ['2026.10.12','念珠','甲府研磨の黄水晶　光を返すカットデザインの二重念珠','2026/10/2610_2_サムネイル-768x1365.jpg'],
+];
+
+const itemHTML=([n,p,img,one,free])=>`
+  <a class="item" href="#">
+    <div class="item__img"><img src="${U+img}" alt="" loading="lazy">${one?'<span class="item__tag">一点物</span>':''}</div>
+    <p class="item__name">${n}</p>
+    <div class="item__price"><b>¥${p}<small>（税込）</small></b>${free?'<span>送料無料</span>':''}</div>
+  </a>`;
+
+const ICON={
+  user:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
+  bag:'<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+  menu:'<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+  close:'<svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>',
+  ig:'<svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6"/></svg>',
+};
+const SERVICES=[['京念珠（数珠）の修理',''],['数珠ブレス作り体験',''],['オーダーメイド',''],['Hitotsubu Color','<i class="new">移動</i>']];
+const HEADER=`
+  <header class="hd">
+    <p class="hd__tag">京の名工 喜芳の技術と想いを受け継いだ京念珠とブレスレット</p>
+    <div class="hd__bar">
+      <a class="hd__logo" href="#"><img src="https://kyo-kaon.jp/wp-content/uploads/2021/08/logo_w_s.jpg" alt="創作京念珠 喜芳工房作 京 上賀茂 かおん"></a>
+      <nav class="hd__nav"><ul>
+        <li><a href="#">商品一覧</a></li>
+        <li><a href="#">喜芳工房のこだわり</a></li>
+        <li><a href="#">ご利用ガイド</a></li>
+        <li class="has-sub" data-demo-open><a href="#">サービス</a>
+          <ul class="hd__sub">${SERVICES.map(([t,b])=>`<li><a href="#"><span>${t}${b}</span></a></li>`).join('')}</ul></li>
+        <li><a href="#">ブログ</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+      </ul></nav>
+      <div class="hd__icons">
+        <a class="hd__icon user" href="#" aria-label="会員">${ICON.user}</a>
+        <a class="hd__icon" href="#" aria-label="カート">${ICON.bag}<span class="hd__badge">0</span></a>
+        <button class="hd__icon hd__menu" data-open-menu aria-label="メニュー">${ICON.menu}</button>
+      </div>
+    </div>
+  </header>
+  <div class="sp-menu">
+    <div class="sp-menu__top">
+      <img src="https://kyo-kaon.jp/wp-content/uploads/2021/08/logo_w_s.jpg" alt="" style="height:34px;mix-blend-mode:multiply">
+      <button class="hd__icon" data-close-menu aria-label="閉じる">${ICON.close}</button>
+    </div>
+    <ul>
+      <li><a href="#">商品一覧</a></li>
+      <li><a href="#">喜芳工房のこだわり</a></li>
+      <li><a href="#">ご利用ガイド</a></li>
+      <li><span>SERVICE</span><div class="sub">${SERVICES.map(([t])=>`<a href="#">${t}</a>`).join('')}</div></li>
+      <li><a href="#">ブログ</a></li>
+      <li><a href="#">お問い合わせ</a></li>
+      <li><a href="#">ログイン・会員登録</a></li>
+    </ul>
+    <div class="sp-menu__tel"><a href="#">075-721-6600</a><small>受付時間 9:00–18:00</small></div>
+  </div>`;
+
+const FOOTER=`
+  <section class="ft-contact">
+    <small>CONTACT</small>
+    <h2>お気軽にお問い合わせください</h2>
+    <p>各宗派の本式・略式はもちろん、ご希望の色の珠でのオーダーメイドも承ります。「こんなことは難しいかな」と思われるようなこだわりも、ご遠慮なくご相談ください。</p>
+    <div class="ft-contact__cols">
+      <div><h3>お電話</h3><a class="ft-tel" href="#">075-721-6600</a><span>受付時間 9:00–18:00</span></div>
+      <div><h3>メール</h3><a class="ft-btn" href="#">お問い合わせフォーム</a><span>24時間受付</span></div>
+    </div>
+  </section>
+
+  <section class="ft-shops"><div class="wrap">
+    <div class="head"><h2><small>SHOPS</small>店舗のご案内</h2></div>
+    <p style="font-size:14px;line-height:2;color:var(--sub);margin:-18px 0 30px">お品を手に取ってご覧いただけます。</p>
+    <div class="ft-shops__grid">
+      <div class="shop">
+        <small>MAIN STORE</small><h3>北山本店</h3>
+        <dl>
+          <dt>住所</dt><dd>〒603-8083<br>京都府京都市北区上賀茂向縄手町40-1</dd>
+          <dt>営業</dt><dd>平日 10:00–17:00</dd>
+          <dt>ご案内</dt><dd>駐車場あり／ご予約不要</dd>
+        </dl>
+        <p>サロンの見学や、喜芳工房の数々のお念珠をご覧いただけます。修理も承ります。土日祝は事前のご予約で、できる限りご対応いたします。</p>
+        <a class="map" href="#">Googleマップで見る</a>
+      </div>
+      <div class="shop">
+        <small>KARASUMA</small><h3>烏丸店<span style="font-size:13px;letter-spacing:.06em;color:var(--sub)">（ハンケイ5mショップ内）</span></h3>
+        <dl>
+          <dt>住所</dt><dd>〒600-8412<br>京都府京都市下京区二帖半敷町652<br>からすま京都ホテル1F</dd>
+          <dt>営業</dt><dd>水・木・金 11:00–19:00</dd>
+          <dt>ご案内</dt><dd>ご予約不要</dd>
+        </dl>
+        <a class="map" href="#">Googleマップで見る</a>
+      </div>
+    </div>
+  </div></section>
+
+  <footer class="ft-main"><div class="wrap">
+    <div class="ft-main__grid">
+      <div class="ft-brand">
+        <img src="https://kyo-kaon.jp/common/img/logo_04_g.png" alt="創作京念珠 喜芳工房作 京 上賀茂 かおん">
+        <p>京の名工 喜芳の技術と想いを<br>受け継いだ京念珠とブレスレット</p>
+        <a class="ft-sns" href="#">${ICON.ig}Instagram</a>
+      </div>
+      <div class="ft-col"><h4>SHOP</h4><ul>
+        <li><a href="#">商品一覧</a></li><li><a href="#">一点もの</a></li><li><a href="#">女性用</a></li><li><a href="#">男性用</a></li><li><a href="#">喜芳作</a></li><li><a href="#">ふるさと納税 返礼品</a></li></ul></div>
+      <div class="ft-col"><h4>SERVICE</h4><ul>
+        <li><a href="#">数珠ブレス作り体験</a></li><li><a href="#">京念珠の修理</a></li><li><a href="#">オーダーメイド</a></li><li><a href="#">Hitotsubu Color</a></li></ul></div>
+      <div class="ft-col"><h4>ABOUT</h4><ul>
+        <li><a href="#">喜芳工房のこだわり</a></li><li><a href="#">会社概要</a></li><li><a href="#">ブログ</a></li><li><a href="#">お知らせ</a></li></ul></div>
+      <div class="ft-col"><h4>GUIDE</h4><ul>
+        <li><a href="#">ご利用ガイド</a></li><li><a href="#">お問い合わせ</a></li><li><a href="#">特定商取引法に基づく表記</a></li><li><a href="#">プライバシーポリシー</a></li></ul></div>
+    </div>
+  </div>
+  <div class="ft-copy"><span>© 株式会社意匠京念珠板倉（喜芳工房）</span><span>京都・上賀茂</span></div>
+  </footer>`;
+
+const PAGE=HEADER+`
+  <div class="fakevideo"></div>
+
+  <section class="fc" data-fc>
+    <div class="fc__viewport"><div class="fc__track"></div></div>
+    <div class="fc__nav">
+      <button class="fc__arrow" data-prev aria-label="前へ">‹</button>
+      <div class="fc__dots"></div><span class="fc__count"></span>
+      <button class="fc__arrow" data-next aria-label="次へ">›</button>
+    </div>
+  </section>
+
+  <section class="sec"><div class="wrap"><div class="news">
+    <div class="head"><h2><small>NEWS</small>お知らせ</h2><a class="more" href="#">一覧を見る</a></div>
+    <ul>${NEWS.map(([d,k,tag,t])=>`<li><a href="#"><time>${d}</time><span class="tag ${k}">${tag}</span><span class="t">${t}</span><span class="arr">›</span></a></li>`).join('')}</ul>
+  </div></div></section>
+
+  <section class="sec tint"><div class="wrap">
+    <div class="head"><h2><small>NEW ARRIVALS</small>新着の念珠</h2><a class="more" href="#">新着をすべて見る</a></div>
+    <div class="items">${NEWITEMS.map(itemHTML).join('')}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="head"><h2><small>FIND YOURS</small>念珠をさがす</h2><a class="more" href="#">すべての商品</a></div>
+    <div class="cats">${CATS.map(([en,ja,n,img])=>`
+      <a class="cat" href="#"><img src="${U+img}" alt="" loading="lazy">
+        <div class="cat__body"><p class="cat__name"><small>${en}</small>${ja}</p>${n?`<span class="cat__n">${n}点</span>`:''}</div></a>`).join('')}</div>
+  </div></section>
+
+  <section class="sec tint"><div class="wrap">
+    <div class="head"><h2><small>RECOMMENDED</small>お勧め商品</h2><a class="more" href="#">お勧めをすべて見る</a></div>
+    <div class="items">${RECO.map(itemHTML).join('')}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap"><div class="om">
+    <div>
+      <div class="head" style="margin-bottom:22px"><h2><small>ORDER MADE</small>オーダーメイド</h2></div>
+      <p class="om__lead">ご希望の珠の色や材質、ご予算、込められた想いまで。「こんなことは難しいかな」と思われることも、ご遠慮なくご相談ください。<strong>お見積りは無料</strong>です。</p>
+      <ol class="om__steps">
+        <li><span>01</span>お見積り</li><li><span>02</span>打ち合わせ</li><li><span>03</span>制作</li><li><span>04</span>納品</li>
+      </ol>
+      <a class="om__btn" href="#">制作の流れを見る</a>
+    </div>
+    <div class="om__works">${WORKS.map(([eb,t,img])=>`
+      <a href="#"><div class="im"><img src="${U+img}" alt="" loading="lazy"></div><p><span>${eb}</span>${t}</p></a>`).join('')}</div>
+  </div></div></section>
+
+  <section class="sec tint"><div class="wrap">
+    <div class="head"><h2><small>JOURNAL</small>ブログ</h2><a class="more" href="#">すべて見る</a></div>
+    <p class="blog__lead">工房の手仕事と、ワークショップのようすをお届けしています。</p>
+    <div class="posts">${POSTS.map(([d,tag,t,img])=>`
+      <a class="post" href="#"><div class="post__img"><img src="${U+img}" alt="" loading="lazy"><span class="post__tag">${tag}</span></div>
+      <time>${d}</time><h3>${t}</h3></a>`).join('')}</div>
+  </div></section>
+`+FOOTER;
+document.querySelectorAll('[data-page]').forEach(el=>{
+  el.style.position='relative';
+  el.innerHTML=PAGE;
+  // パソコン版：サービスのメニューを開いた状態で見せる（マウスを乗せても開きます）
+  if(!el.hasAttribute('data-sp')) el.querySelector('[data-demo-open]').classList.add('is-open');
+  const m=el.querySelector('.sp-menu');
+  el.querySelector('[data-open-menu]').addEventListener('click',()=>{m.style.top=el.scrollTop+'px';m.classList.add('is-open')});
+  el.querySelector('[data-close-menu]').addEventListener('click',()=>m.classList.remove('is-open'));
+});
+
+/* ---- ① カルーセル：前後に2枚ずつ複製して無限ループ ---- */
+document.querySelectorAll('[data-fc]').forEach(root=>{
+  const track=root.querySelector('.fc__track'), dots=root.querySelector('.fc__dots'), count=root.querySelector('.fc__count');
+  const N=FEATURES.length, PAD=2;
+  const slideHTML=s=>`
+    <a class="fc__slide" href="#"><img src="${U+s.img}" alt="">
+      <div class="fc__body"><p class="fc__eyebrow">${s.eb}</p><h3 class="fc__title">${s.t}</h3>
+        <p class="fc__copy">${s.c}</p><p class="fc__facts">${s.f}</p><span class="fc__cta">${s.cta}</span></div></a>`;
+  track.innerHTML=[...FEATURES.slice(-PAD),...FEATURES,...FEATURES.slice(0,PAD)].map(slideHTML).join('');
+  dots.innerHTML=FEATURES.map((_,i)=>`<button aria-label="${i+1}枚目"></button>`).join('');
+  const slides=[...track.children], dotEls=[...dots.children];
+  let pos=PAD, timer, settle;
+  const real=()=>((pos-PAD)%N+N)%N;
+  const place=animate=>{
+    track.style.transition=animate?'':'none';
+    const vw=root.querySelector('.fc__viewport').clientWidth, s=slides[pos];
+    track.style.transform=`translateX(${-(s.offsetLeft-(vw-s.offsetWidth)/2)}px)`;
+    slides.forEach((el,k)=>el.classList.toggle('is-active',k===pos));
+    dotEls.forEach((el,k)=>el.classList.toggle('is-active',k===real()));
+    if(count) count.textContent=String(real()+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
+    if(!animate){track.offsetHeight;track.style.transition='';}
+  };
+  const normalize=()=>{ if(pos>=PAD+N){pos-=N;place(false);} else if(pos<PAD){pos+=N;place(false);} };
+  const move=target=>{ normalize(); pos=Math.max(0,Math.min(slides.length-1,target())); place(true); clearTimeout(settle); settle=setTimeout(normalize,950); };
+  const step=d=>move(()=>pos+d), jump=k=>move(()=>PAD+k);
+  const play=()=>{clearInterval(timer);timer=setInterval(()=>step(1),5000)};
+  root.addEventListener('mouseenter',()=>clearInterval(timer));
+  root.addEventListener('mouseleave',play);
+  dotEls.forEach((d,k)=>d.addEventListener('click',()=>{jump(k);play()}));
+  root.querySelector('[data-prev]')?.addEventListener('click',()=>{step(-1);play()});
+  root.querySelector('[data-next]')?.addEventListener('click',()=>{step(1);play()});
+  let sx=null;
+  root.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  root.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40){step(dx<0?1:-1);play()}sx=null});
+  window.addEventListener('resize',()=>place(false));
+  requestAnimationFrame(()=>{place(false);play()});
+});
+</script>
+</body>
+</html>

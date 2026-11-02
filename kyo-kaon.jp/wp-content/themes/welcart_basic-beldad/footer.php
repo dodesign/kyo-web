@@ -12,126 +12,121 @@
 				<div id="toTop" class="wrap fixed"><a href="#masthead"><i class="fa fa-angle-up" aria-hidden="true"></i></a></div>
 			<?php endif; ?>
 
-			<footer id="colophon" role="contentinfo">
-				<div class="inner">
-					
-					<div class="p-more uk-text-center uk-padding">
-						<div class="column1070">
-						<h2 class="">お気軽にお問合せください</h2>
-							<p>各宗派の本式や略式はもちろんのこと、ご希望のお色の珠などでオーダーメイドでご対応させて頂くことも可能です。<br>
-お探しの材質や色目やご予算など、「こんなことは難しいかな……」と思われるようなこだわりもご遠慮なくご相談ください。<br>
-喜芳直伝の技術を受け継いだ職人がお一人おひとりのご要望を具現化します。</p>
-							<div class="uk-child-width-1-2@s" uk-grid>
-								<div>
-								<h3 class="uk-text-center">お電話</h3>
-									<a href="tel: 0757216600"><h4 class="uk-text-large">075-721-6600</h4></a>
-									<span class="c-note">受付時間 9:00-18:00</span>
-								</div>
-								<div>
-									<h3 class="uk-text-center">メール</h3>
-									<p><button onclick="location.href='/contact/'" class="uk-button uk-button-secondary">お問い合わせフォーム</button></p>
-									<span class="c-note">受付時間 24時間</span>
-								</div>
+			<?php
+			/* ===== フッター（2026-11-02 リニューアル） =====
+			   旧フッターは Git の履歴に残っている（2026-11-02 より前のコミット）。
+			   ★埋め込みのGoogleマップはやめた（全ページで毎回読み込まれて重かったため）。
+			   ★リンクの4列はここに直接書いている。項目を増やすときはこのファイルを編集する。 */
+			$kn_u = function ( $path ) { return esc_url( home_url( $path ) ); };
+			?>
+			<footer id="colophon" class="kn-ft" role="contentinfo">
+
+				<section class="kn-ft-contact">
+					<div class="kn-ft-contact__in">
+						<small>CONTACT</small>
+						<h2>お気軽にお問い合わせください</h2>
+						<p>各宗派の本式・略式はもちろん、ご希望の色の珠でのオーダーメイドも承ります。「こんなことは難しいかな」と思われるようなこだわりも、ご遠慮なくご相談ください。</p>
+						<div class="kn-ft-contact__cols">
+							<div>
+								<h3>お電話</h3>
+								<a class="kn-ft-tel" href="tel:0757216600">075-721-6600</a>
+								<span>受付時間 9:00–18:00</span>
+							</div>
+							<div>
+								<h3>メール</h3>
+								<a class="kn-ft-btn" href="<?php echo $kn_u( '/contact/' ); ?>">お問い合わせフォーム</a>
+								<span>24時間受付</span>
 							</div>
 						</div>
 					</div>
-					
-					<div class="p-map">
-							<div uk-grid>
-								<div class="uk-width-1-3@s uk-padding c-bg-light">
-								<h2 class="">お品を手に取ってご覧いただけます</h2>
-									<h2 class="c-no-margin"><img src="/wp-content/uploads/2020/04/logo_04.png" alt="創作京念珠 喜芳工房 京 上賀茂かおん"></h2>
-									<h3><b>北山本店</b></h3>
-									<address>
-									   〒603-8083 京都府京都市北区上賀茂向縄手町40-1<br>
-										営業日時 平日 10:00-17:00 / 駐車場有 / ご予約不要
-								   </address>
-									<span class="c-note">喜芳工房では、サロンの見学や、喜芳工房の数々のお念珠をご覧いただけます。修理も承ります。お気軽にお越しくださいませ。<br>
-										※ 土日祝は事前のご予約で、できる限りご対応させていただきます。お気軽にご連絡くださいませ
-									</span>
-									
-									<h3><b>烏丸店（ハンケイ5mショップ内）</b></h3>
-									<address>
-									   〒600-8412 京都府京都市下京区二帖半敷町652 からすま京都ホテル1F<br>
-										営業日時 :水木金 11:00-19:00 / ご予約不要
-								   </address>
-								</div>
-								<div class="uk-width-2-3@s">
-									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3266.016028142963!2d135.7594293153971!3d35.056338371595096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001a7f758630f83%3A0xa2d8eef8950af020!2z77yI5qCq77yJ5oSP5Yyg5Lqs5b-154-g5p2_5YCJ!5e0!3m2!1sja!2sjp!4v1599990156290!5m2!1sja!2sjp" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-								</div>
+				</section>
+
+				<section class="kn-ft-shops">
+					<div class="kn-wrap">
+						<div class="kn-head kn-head--solo"><h2><small>SHOPS</small>店舗のご案内</h2></div>
+						<p class="kn-ft-shops__lead">お品を手に取ってご覧いただけます。</p>
+						<div class="kn-ft-shops__grid">
+							<div class="kn-shop">
+								<small>MAIN STORE</small>
+								<h3>北山本店</h3>
+								<dl>
+									<dt>住所</dt><dd>〒603-8083<br>京都府京都市北区上賀茂向縄手町40-1</dd>
+									<dt>営業</dt><dd>平日 10:00–17:00</dd>
+									<dt>ご案内</dt><dd>駐車場あり／ご予約不要</dd>
+								</dl>
+								<p>サロンの見学や、喜芳工房の数々のお念珠をご覧いただけます。修理も承ります。土日祝は事前のご予約で、できる限りご対応いたします。</p>
+								<a class="kn-shop__map" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%84%8F%E5%8C%A0%E4%BA%AC%E5%BF%B5%E7%8F%A0%E6%9D%BF%E5%80%89" target="_blank" rel="noopener">Googleマップで見る</a>
 							</div>
+							<div class="kn-shop">
+								<small>KARASUMA</small>
+								<h3>烏丸店<span>（ハンケイ5mショップ内）</span></h3>
+								<dl>
+									<dt>住所</dt><dd>〒600-8412<br>京都府京都市下京区二帖半敷町652<br>からすま京都ホテル1F</dd>
+									<dt>営業</dt><dd>水・木・金 11:00–19:00</dd>
+									<dt>ご案内</dt><dd>ご予約不要</dd>
+								</dl>
+								<a class="kn-shop__map" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%8B%E3%82%89%E3%81%99%E3%81%BE%E4%BA%AC%E9%83%BD%E3%83%9B%E3%83%86%E3%83%AB" target="_blank" rel="noopener">Googleマップで見る</a>
+							</div>
+						</div>
 					</div>
+				</section>
 
-					<div class="top cf">
-
-						<div class="column1070">
-
-							<?php if ( is_active_sidebar( 'footer' ) ): ?>
-							<div class="f-widgetArea">
-								<?php dynamic_sidebar( 'footer' ); ?>
-							</div><!-- .f-widgetArea -->
-							<?php endif; ?>
-
-							<?php if ( has_nav_menu( 'footer' ) ): ?>
-							<nav id="site-info" class="f-mainnav">
-							<?php
-								$page_cart	=	get_page_by_path( 'usces-cart' );
-								$page_member	=	get_page_by_path( 'usces-member' );
-								$exclude_pages	=	"{$page_cart->ID},{$page_member->ID}";
-								wp_nav_menu( array( 'theme_location' => 'footer', 'exclude' => $exclude_pages, 'menu_class' => 'footer-menu cf' ) ); 
-							?>
-							</nav><!-- #colophon -->
-							<?php endif; ?>
-
-							<?php if ( has_nav_menu( 'footer-sub' ) ): ?>
-							<nav class="f-subnav">
-							<?php
-								$page_cart	=	get_page_by_path( 'usces-cart' );
-								$page_member	=	get_page_by_path( 'usces-member' );
-								$exclude_pages	=	"{$page_cart->ID},{$page_member->ID}";
-								wp_nav_menu( array( 'depth' => '1', 'theme_location' => 'footer-sub', 'exclude' => $exclude_pages , 'menu_class' => 'footer-menu cf' ) );
-							?>
-							</nav><!-- f-subnav -->
-							<?php endif; ?>
-
-						</div><!-- .column1070 -->
-
-					</div><!-- .top -->
-
-					<div class="bottom">
-
-						<div class="column1070">
-
-							<div class="flex-container">
-								<div class="f-logo"><a href="/"><?php bloginfo( 'name' ); ?></a></div>
-
-								<?php if( wcct_get_options( 'facebook_button' ) || wcct_get_options( 'twitter_button' ) || wcct_get_options( 'instagram_button' ) ): ?>
-								<div class="sns">
-									<ul class="cf">
-										<?php if( wcct_get_options( 'facebook_button' ) ): ?>
-										<li><a href="https://www.facebook.com/<?php wcct_options( 'facebook_id' ); ?>" target="_blank" rel="nofollow"><i class="fa fa-facebook"></i></a></li>
-										<?php endif; ?>
-
-										<?php if( wcct_get_options( 'twitter_button' ) ): ?>
-										<li><a href="https://twitter.com/<?php wcct_options( 'twitter_id' ); ?>" target="_blank" rel="nofollow"><i class="fa fa-twitter"></i></a></li>
-										<?php endif; ?>
-
-										<?php if( wcct_get_options( 'instagram_button' ) ): ?>
-										<li><a href="https://www.instagram.com/<?php wcct_options( 'instagram_id' ); ?>" target="_blank" rel="nofollow"><i class="fa fa-instagram"></i></a></li>
-										<?php endif; ?>
-									</ul>
-								</div>
+				<div class="kn-ft-main">
+					<div class="kn-wrap">
+						<div class="kn-ft-main__grid">
+							<div class="kn-ft-brand">
+								<a href="<?php echo $kn_u( '/' ); ?>"><img src="<?php echo esc_url( home_url( '/common/img/logo_04_g.png' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" width="205" height="50" loading="lazy"></a>
+								<p>京の名工 喜芳の技術と想いを<br>受け継いだ京念珠とブレスレット</p>
+								<?php if ( wcct_get_options( 'instagram_button' ) ) : ?>
+								<a class="kn-ft-sns" href="https://www.instagram.com/<?php echo esc_attr( wcct_get_options( 'instagram_id' ) ); ?>" target="_blank" rel="noopener"><?php echo kaon_icon( 'ig' ); ?>Instagram</a>
 								<?php endif; ?>
-
-							</div><!-- .flex-container -->
-
-						</div><!-- .column1070 -->
-
-						<p class="copyright"><?php usces_copyright(); ?></p>
-
+							</div>
+							<div class="kn-ft-col">
+								<h4>SHOP</h4>
+								<ul>
+									<li><a href="<?php echo $kn_u( '/category/item/' ); ?>">商品一覧</a></li>
+									<li><a href="<?php echo $kn_u( '/category/item/one-of-a-kind/' ); ?>">一点もの</a></li>
+									<li><a href="<?php echo $kn_u( '/category/item/ladies/' ); ?>">女性用</a></li>
+									<li><a href="<?php echo $kn_u( '/category/item/mens/' ); ?>">男性用</a></li>
+									<li><a href="<?php echo $kn_u( '/category/item/kiho/' ); ?>">喜芳作</a></li>
+									<li><a href="<?php echo $kn_u( '/category/item/furusato/' ); ?>">ふるさと納税 返礼品</a></li>
+								</ul>
+							</div>
+							<div class="kn-ft-col">
+								<h4>SERVICE</h4>
+								<ul>
+									<li><a href="<?php echo $kn_u( '/service/workshop/' ); ?>">数珠ブレス作り体験</a></li>
+									<li><a href="<?php echo $kn_u( '/service/fix/' ); ?>">京念珠の修理</a></li>
+									<li><a href="<?php echo $kn_u( '/case/461/' ); ?>">オーダーメイド</a></li>
+									<li><a href="<?php echo $kn_u( '/hitotsubu-color/' ); ?>">Hitotsubu Color</a></li>
+								</ul>
+							</div>
+							<div class="kn-ft-col">
+								<h4>ABOUT</h4>
+								<ul>
+									<li><a href="<?php echo $kn_u( '/kihou-koubou/' ); ?>">喜芳工房のこだわり</a></li>
+									<li><a href="<?php echo $kn_u( '/company/' ); ?>">会社概要</a></li>
+									<li><a href="<?php echo $kn_u( '/blog/' ); ?>">ブログ</a></li>
+									<li><a href="<?php echo $kn_u( '/category/news/' ); ?>">お知らせ</a></li>
+								</ul>
+							</div>
+							<div class="kn-ft-col">
+								<h4>GUIDE</h4>
+								<ul>
+									<li><a href="<?php echo $kn_u( '/guide/' ); ?>">ご利用ガイド</a></li>
+									<li><a href="<?php echo $kn_u( '/contact/' ); ?>">お問い合わせ</a></li>
+									<li><a href="<?php echo $kn_u( '/tokushoho/' ); ?>">特定商取引法に基づく表記</a></li>
+									<li><a href="<?php echo $kn_u( '/terms/' ); ?>">プライバシーポリシー</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-
+					<div class="kn-ft-copy">
+						<span>&copy; 株式会社意匠京念珠板倉（喜芳工房）</span>
+						<span>京都・上賀茂</span>
+					</div>
 				</div>
+
 			</footer><!-- #colophon -->
 
 			<div id="gray-bg" class="gray-bg"></div>

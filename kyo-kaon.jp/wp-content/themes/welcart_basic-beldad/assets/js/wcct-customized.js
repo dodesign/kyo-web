@@ -169,12 +169,31 @@ document.addEventListener('DOMContentLoaded', function() {
             bElement.innerHTML = link.innerHTML; // a要素の内容をb要素に設定
             link.parentNode.replaceChild(bElement, link); // a要素をb要素に置き換え
         } else {
-            // カッコ内の色名を含む部分をfont-sizeを90%にするスタイルで置き換え
-            let html = link.innerHTML;
-            html = html.replace(/（[^）]+）/g, function(match) {
-                return '<span style="font-size: 85%;">' + match + '</span>';
+            // カッコ内（色名など）を少し小さくする。★テキストノードだけを対象にすること。
+            // 2026-11-02 修正：以前は link.innerHTML を正規表現で置換していたため、
+            // <img alt="…（税込）…"> のような「属性の中の（…）」まで <span> に書き換えてしまい、
+            // タグが壊れて「（税込）」などの文字が画面に漏れていた（トップのワークショップバナーで発覚）。
+            const walker = document.createTreeWalker(link, NodeFilter.SHOW_TEXT);
+            const targets = [];
+            let node;
+            while ((node = walker.nextNode())) {
+                if (/（[^）]+）/.test(node.nodeValue)) targets.push(node);
+            }
+            targets.forEach(function(textNode) {
+                const frag = document.createDocumentFragment();
+                textNode.nodeValue.split(/(（[^）]+）)/).forEach(function(part) {
+                    if (!part) return;
+                    if (/^（[^）]+）$/.test(part)) {
+                        const span = document.createElement('span');
+                        span.style.fontSize = '85%';
+                        span.textContent = part;
+                        frag.appendChild(span);
+                    } else {
+                        frag.appendChild(document.createTextNode(part));
+                    }
+                });
+                textNode.parentNode.replaceChild(frag, textNode);
             });
-            link.innerHTML = html;
         }
     });
 
