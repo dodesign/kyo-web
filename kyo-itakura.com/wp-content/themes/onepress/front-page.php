@@ -1,7 +1,7 @@
 <?php
 /**
  * トップページ。2026-11-02 リニューアル（旧版は Git の履歴）。
- * 並び：写真 → 数字 → 喜芳 → 板倉の仕事 → 新しい製品 → テレビ・メディア → 卸・法人 → 講演 → お知らせ
+ * 並び：写真 → 数字 → 喜芳 → 板倉の仕事（最後に講演）→ 新しい製品 → テレビ・メディア → 卸・法人 → お知らせ
  * 文章はこのファイルに直接書いている。部品は inc/itakura-site.php。
  *
  * @package OnePress
@@ -17,6 +17,7 @@ $ki_biz = array(
 	array( 'en' => 'REPAIR', 't' => '念珠（数珠）の修理', 'p' => '紐の切れや房の傷みも、職人が丁寧にお直しします。他店でお求めのお念珠や、ご自宅にあったお念珠、事業者さまの大量のご依頼も承ります。', 'img' => 'ki/ki-ws-0034.jpg', 'url' => home_url( '/service/fix/' ), 'btn' => '修理について' ),
 	array( 'en' => 'WORKSHOP', 't' => '念珠ブレスレット ワークショップ', 'p' => 'たくさんの珠から色を選び、自分だけの一本を作る体験です。保育園・幼稚園・学校から、企業・地域のイベントまで出張して開催。樹脂の玉で費用を抑えるなど、人数やご予算に合わせてアレンジします。個人の方は本社サロンでの体験も。', 'img' => 'https://kyo-kaon.jp/wp-content/uploads/2025/01/BK2A0324-1536x1024.jpg', 'url' => home_url( '/workshop/' ), 'btn' => 'ワークショップについて' ),
 	array( 'en' => 'ONLINE SHOP', 't' => '通信販売（喜芳工房）', 'p' => '板倉が製造した京念珠の一部を、オンラインショップ「喜芳工房」と Amazon 店でお求めいただけます。一点ものや、喜芳の作品もご紹介しています。', 'img' => 'ki/ki-0094.jpg', 'url' => KI_SHOP_URL, 'btn' => 'オンラインショップへ' ),
+	array( 'en' => 'LECTURE', 't' => '講演・トークイベント', 'p' => '代表の辰尾が、祖母である名工 喜芳の歩みや職人としての哲学、念珠に込めた想いをお話しします。企業・学校・経済団体・公民館など、さまざまな場でご依頼をいただいています。ワークショップとの組み合わせも。', 'img' => 'ki/ki-lec-058.jpg', 'url' => home_url( '/lecture/' ), 'btn' => '講演について' ),
 );
 
 $ki_works = array(
@@ -191,19 +192,6 @@ if ( $ki_new->have_posts() ) :
 			<a class="ki-btn ki-btn--light" href="<?php echo esc_url( home_url( '/contact/?title=' . rawurlencode( '卸・お取引について' ) ) ); ?>">卸・お取引のお問い合わせ</a>
 			<a class="ki-btn ki-btn--line" <?php echo ki_tel_attr( 'top-whole' ); ?>>電話 <?php echo esc_html( KI_TEL ); ?></a>
 		</div>
-	</div>
-</section>
-
-<?php /* ---------- 講演 ---------- */ ?>
-<section class="ki-sec ki-lecband">
-	<div class="ki-wrap ki-split">
-		<div class="ki-split__text" data-rv>
-			<p class="ki-eyebrow ki-eyebrow--ink">LECTURE</p>
-			<h2 class="ki-h2">講演・トークイベント<small>名工 喜芳の信念と、念珠に込めた想いを語ります</small></h2>
-			<p>代表の辰尾が、祖母である喜芳の歩みや職人としての哲学、京念珠の技術とこだわりをお話しします。企業・学校・経済団体・公民館など、さまざまな場でご依頼をいただいています。</p>
-			<a class="ki-btn ki-btn--ink" href="<?php echo esc_url( home_url( '/lecture/' ) ); ?>">講演について</a>
-		</div>
-		<figure class="ki-split__img" data-rv><?php echo ki_img( 'ki/ki-lec-058.jpg', '講演のようす' ); ?></figure>
 	</div>
 </section>
 

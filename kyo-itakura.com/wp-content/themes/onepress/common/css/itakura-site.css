@@ -814,3 +814,8 @@ a.ki-way:hover{border-color:var(--ki-gold)}
 .ki-lecgal--4 figure{aspect-ratio:1}
 @media (max-width:1000px){.ki-points--3{grid-template-columns:repeat(2,1fr)}.ki-plan,.ki-plan:nth-child(even){grid-template-columns:1fr}.ki-plan:nth-child(even) .ki-plan__img{order:0}.ki-plan__img{min-height:0;aspect-ratio:3/2}}
 @media (max-width:768px){.ki-points--3{grid-template-columns:1fr}.ki-lecgal--4{grid-template-columns:1fr 1fr}.ki-plan__body{padding:26px 18px}.ki-plan__dl{grid-template-columns:1fr;gap:0}.ki-plan__dl dd{margin-bottom:8px}}
+
+/* ワークショップ：大人向けチラシ（表・裏）を2枚並べ、その下に園・学校向けを1枚 */
+.ki-flyers--pair figure{width:min(320px,44%)}
+.ki-flyers--one{margin-top:28px}
+.ki-flyers--one figure{width:min(420px,90%)}

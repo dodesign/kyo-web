@@ -126,10 +126,12 @@ $ki_personal = 'https://kyo-kaon.jp/service/workshop/';
 			<a class="ki-btn ki-btn--ink" href="<?php echo esc_url( $ki_ask ); ?>">ワークショップについて問い合わせる</a>
 			<a class="ki-btn ki-btn--outline" <?php echo ki_tel_attr( 'workshop' ); ?>>電話 <?php echo esc_html( KI_TEL ); ?></a>
 		</div>
-		<div class="ki-flyers" data-ki-zoom>
-			<figure><?php echo ki_img( 'ki/ki-wk-flyer-kids.jpg', '保育園・幼稚園・こども園向け 出張ワークショップのチラシ' ); ?><figcaption>園・学校向け（出張）</figcaption></figure>
+		<div class="ki-flyers ki-flyers--pair" data-ki-zoom>
 			<figure><?php echo ki_img( 'ki/ki-wk-flyer-adult1.jpg', '念珠ブレスレット創作体験のチラシ（表）' ); ?><figcaption>大人向け創作体験（表）</figcaption></figure>
 			<figure><?php echo ki_img( 'ki/ki-wk-flyer-adult2.jpg', '念珠ブレスレット創作体験のチラシ（裏）' ); ?><figcaption>大人向け創作体験（裏）</figcaption></figure>
+		</div>
+		<div class="ki-flyers ki-flyers--one" data-ki-zoom>
+			<figure><?php echo ki_img( 'ki/ki-wk-flyer-kids.jpg', '保育園・幼稚園・こども園向け 出張ワークショップのチラシ' ); ?><figcaption>園・学校向け（出張）</figcaption></figure>
 		</div>
 		<p class="ki-small" style="margin-top:30px">個人でのご参加は <a href="<?php echo esc_url( $ki_personal ); ?>" target="_blank" rel="noopener">喜芳工房の「京念珠ブレスレット作り体験」</a> からご予約いただけます。</p>
 	</div>
