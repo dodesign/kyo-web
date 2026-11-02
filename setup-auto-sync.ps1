@@ -25,9 +25,17 @@ $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
   -MultipleInstances IgnoreNew `
   -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
 
-Register-ScheduledTask -TaskName "GitAutoSync-kyo" -Action $action -Trigger @($trigger, $logon) `
+try {
+  Register-ScheduledTask -TaskName "GitAutoSync-kyo" -Action $action -Trigger @($trigger, $logon) `
   -Settings $settings -Force `
-  -Description "Auto sync kyo (Lolipop) web folder to GitHub" | Out-Null
+  -Description "Auto sync kyo (Lolipop) web folder to GitHub" -ErrorAction Stop | Out-Null
+} catch {
+  Write-Host ""
+  Write-Host "FAILED: could not register the task." -ForegroundColor Red
+  Write-Host $_.Exception.Message
+  Write-Host "Right-click this bat and choose 'Run as administrator', then try again." -ForegroundColor Yellow
+  exit 1
+}
 
 Write-Host ""
 Write-Host ("OK: 'GitAutoSync-kyo' now runs every {0} minutes (hidden)." -f $IntervalMinutes) -ForegroundColor Green
