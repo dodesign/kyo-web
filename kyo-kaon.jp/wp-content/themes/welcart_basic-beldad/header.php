@@ -88,7 +88,7 @@
 						<?php if ( usces_is_membersystem_state() ) : ?>
 						<a class="kn-hd__icon kn-hd__icon--user" href="<?php echo esc_url( USCES_MEMBER_URL ); ?>" aria-label="<?php echo usces_is_login() ? 'マイページ' : 'ログイン・会員登録'; ?>"><?php echo kaon_icon( 'user' ); ?></a>
 						<?php endif; ?>
-						<a class="kn-hd__icon" href="<?php echo esc_url( USCES_CART_URL ); ?>" aria-label="カート"><?php echo kaon_icon( 'bag' ); ?><?php if ( $kn_qty > 0 ) : ?><span class="kn-hd__badge"><?php echo $kn_qty; ?></span><?php endif; ?></a>
+						<a class="kn-hd__icon" href="<?php echo esc_url( USCES_CART_URL ); ?>" aria-label="カート"><?php echo kaon_icon( 'bag' ); ?><span class="kn-hd__badge" data-kn-cartn<?php echo $kn_qty > 0 ? '' : ' hidden'; ?>><?php echo (int) $kn_qty; ?></span></a>
 						<button type="button" class="kn-hd__icon kn-hd__burger" aria-controls="kn-spmenu" aria-expanded="false" aria-label="メニューを開く"><?php echo kaon_icon( 'menu' ); ?></button>
 					</div>
 					<?php endif; ?>

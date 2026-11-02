@@ -15,6 +15,8 @@ require( get_stylesheet_directory() . '/inc/kaon-home.php' );
 require( get_stylesheet_directory() . '/inc/kaon-item.php' );
 // ブログ・お知らせ・固定ページの部品（サイドバーをやめてデザインをそろえた）
 require( get_stylesheet_directory() . '/inc/kaon-posts.php' );
+// 表示の高速化（ページキャッシュ・reCAPTCHA をフォームのページだけに）
+require( get_stylesheet_directory() . '/inc/kaon-speed.php' );
 
 /* ---------- 2026-11-02 リニューアル用の読み込み ----------
    CSS（assets/css/kaon-site.css）は header.php で直接読んでいる（uikit より後に読むため）。 */

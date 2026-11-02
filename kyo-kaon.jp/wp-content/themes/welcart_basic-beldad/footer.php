@@ -28,7 +28,7 @@
 				<a href="<?php echo esc_url( home_url( '/category/item/' ) ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="4.5" r="1.6"/><circle cx="12" cy="19.5" r="1.6"/><circle cx="4.5" cy="12" r="1.6"/><circle cx="19.5" cy="12" r="1.6"/></svg><span>商品一覧</span></a>
 				<a href="tel:0757216600"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5l3 3.5-2 2.2c1 2.3 2.9 4.2 5.3 5.3l2.2-2 3.5 3-1.6 2.8C11 18.5 5.5 13 3.7 5.1z"/></svg><span>電話</span></a>
 				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1"/><path d="M4 6.5l8 6 8-6"/></svg><span>お問い合わせ</span></a>
-				<a href="<?php echo esc_url( defined( 'USCES_CART_URL' ) ? USCES_CART_URL : home_url( '/usces-cart/' ) ); ?>"><?php echo kaon_icon( 'bag' ); ?><span>カート</span><?php if ( $kn_cart_n ) : ?><b class="kn-spnav__n"><?php echo (int) $kn_cart_n; ?></b><?php endif; ?></a>
+				<a href="<?php echo esc_url( defined( 'USCES_CART_URL' ) ? USCES_CART_URL : home_url( '/usces-cart/' ) ); ?>"><?php echo kaon_icon( 'bag' ); ?><span>カート</span><b class="kn-spnav__n" data-kn-cartn<?php echo $kn_cart_n ? '' : ' hidden'; ?>><?php echo (int) $kn_cart_n; ?></b></a>
 			</nav>
 
 			<?php
@@ -152,7 +152,9 @@
 						<span>京都・上賀茂</span>
 					</div>
 					<?php /* reCAPTCHA のマークを消す代わりに、Google の規約どおりこの一文を載せる（消すならこの文は必須） */ ?>
+					<?php if ( kaon_needs_recaptcha() ) : // reCAPTCHA を読み込むページ（フォームのあるページ）だけ ?>
 					<p class="kn-ft-recaptcha">このサイトは reCAPTCHA によって保護されており、Google の<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener">利用規約</a>が適用されます。</p>
+					<?php endif; ?>
 				</div>
 
 			</footer><!-- #colophon -->

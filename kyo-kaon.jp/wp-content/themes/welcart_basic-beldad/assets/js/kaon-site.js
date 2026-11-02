@@ -99,7 +99,7 @@
 
 		var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		// 自動送りの間隔。2026-11-02 5秒→3.8秒（沙織さん指示）
-		var INTERVAL = 3800;
+		var INTERVAL = 2000; // 自動送りの間隔（ミリ秒）。2026-11-02 沙織さん指定で2秒
 		function play() { clearInterval(timer); if (!reduce) timer = setInterval(function () { step(1); }, INTERVAL); }
 		function stop() { clearInterval(timer); }
 
@@ -336,8 +336,27 @@
 		check();
 	}
 
+	/* ---------- カートの点数を取り直す ----------
+	   ページはロリポップ！アクセラレータにキャッシュされる（inc/kaon-speed.php）ので、
+	   HTMLに書かれた点数は他の人のときのものかもしれない。admin-ajax（キャッシュされない）から取り直す。 */
+	function initCartCount() {
+		var els = document.querySelectorAll('[data-kn-cartn]');
+		if (!els.length || !window.fetch) return;
+		var run = function () {
+			fetch('/wp-admin/admin-ajax.php?action=kaon_cart_count', { credentials: 'same-origin' })
+				.then(function (r) { return r.json(); })
+				.then(function (d) {
+					var n = parseInt(d && d.n, 10) || 0;
+					for (var i = 0; i < els.length; i++) { els[i].textContent = n; els[i].hidden = n <= 0; }
+				})
+				.catch(function () {});
+		};
+		if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2000 }); else setTimeout(run, 600);
+	}
+
 	function init() {
 		initMenu();
+		initCartCount();
 		initToTop();
 		initVariations();
 		initStickyCart();
