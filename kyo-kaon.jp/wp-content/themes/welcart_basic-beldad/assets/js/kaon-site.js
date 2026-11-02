@@ -322,8 +322,23 @@
 		}
 	}
 
+	/* ---------- ページの先頭へ（少しスクロールしたら出る） ---------- */
+	function initToTop() {
+		var b = document.querySelector('.kn-totop');
+		if (!b) return;
+		b.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+		var on = false;
+		function check() {
+			var s = window.pageYOffset > 600;
+			if (s !== on) { on = s; b.classList.toggle('is-show', s); }
+		}
+		window.addEventListener('scroll', check, { passive: true });
+		check();
+	}
+
 	function init() {
 		initMenu();
+		initToTop();
 		initVariations();
 		initStickyCart();
 		initReveal();

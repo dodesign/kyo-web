@@ -9,7 +9,8 @@
 			</div><!-- #main -->
 
 			<?php if (! wp_is_mobile() ) : ?>
-				<div id="toTop" class="wrap fixed"><a href="#masthead"><i class="fa fa-angle-up" aria-hidden="true"></i></a></div>
+				<?php /* ページの先頭へ（2026-11-02 PC・スマホ共通に作り直し。親テーマの #toTop はスマホで出ていなかった）。動きは kaon-site.js initToTop */ ?>
+				<button type="button" class="kn-totop" aria-label="ページの先頭へ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg><span>TOP</span></button>
 			<?php endif; ?>
 
 			<?php
@@ -132,6 +133,8 @@
 						<span>&copy; 株式会社意匠京念珠板倉（喜芳工房）</span>
 						<span>京都・上賀茂</span>
 					</div>
+					<?php /* reCAPTCHA のマークを消す代わりに、Google の規約どおりこの一文を載せる（消すならこの文は必須） */ ?>
+					<p class="kn-ft-recaptcha">このサイトは reCAPTCHA によって保護されており、Google の<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>と<a href="https://policies.google.com/terms" target="_blank" rel="noopener">利用規約</a>が適用されます。</p>
 				</div>
 
 			</footer><!-- #colophon -->
