@@ -48,6 +48,15 @@ function kaon_body_class_posts( $classes ) {
 	return $classes;
 }
 
+/** カート・会員ページに kn-cart-flow を付ける（見た目は kaon-site.css の「カート・会員」ブロック。テンプレートは Welcart のまま） */
+add_filter( 'body_class', 'kaon_body_class_cart' );
+function kaon_body_class_cart( $classes ) {
+	if ( function_exists( 'welcart_basic_is_cart_page' ) && ( welcart_basic_is_cart_page() || welcart_basic_is_member_page() ) ) {
+		$classes[] = 'kn-cart-flow';
+	}
+	return $classes;
+}
+
 /** page.php で新しいデザインにする固定ページか（カート・会員・Elementor のLP・専用テンプレートのページは除く） */
 function kaon_is_plain_page( $id = 0 ) {
 	$id = $id ? $id : get_queried_object_id();

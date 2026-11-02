@@ -1108,3 +1108,99 @@ body.kn-has-sticky .kn-totop{bottom:96px}
 .kn-search--arc{margin:22px 0 0;max-width:520px}
 .kn-search--arc input{padding:12px 16px;font-size:16px}
 @media (max-width:768px){.kn-search--arc{max-width:none}}
+
+/* =========================================================
+   カート・会員ページ（body.kn-cart-flow。inc/kaon-posts.php で付けている）
+   ★テンプレートと処理は Welcart のまま。見た目だけをここで上書きしている。
+     フォームの name や class は変えていないので、注文の流れには影響しない。
+   ========================================================= */
+.kn-cart-flow #main{margin-bottom:0 !important}
+.kn-cart-flow #primary{float:none !important;width:auto !important;max-width:none !important;margin:0 !important;padding:0 !important}
+.kn-cart-flow #secondary,.kn-cart-flow .kn-ft-shops{display:none !important}
+.kn-cart-flow #content{max-width:980px;margin:0 auto !important;padding:48px 28px 96px !important;font-family:var(--kn-M);color:var(--kn-ink);float:none !important;width:auto !important}
+.kn-cart-flow #content *{box-sizing:border-box}
+/* 見出し */
+.kn-cart-flow .cart_page_title,.kn-cart-flow .member_page_title,.kn-cart-flow #content h1{display:block !important;font-family:var(--kn-M);font-size:28px;font-weight:500;letter-spacing:.14em;text-align:center;margin:0 0 34px;padding:0;border:0;background:none;color:var(--kn-ink)}
+.kn-cart-flow #content h1::before,.kn-cart-flow #content h1::after{display:none}
+.kn-cart-flow #content h5,.kn-cart-flow #content h3{font-family:var(--kn-M);font-size:19px;font-weight:500;letter-spacing:.1em;margin:44px 0 16px;padding:0 0 12px;border:0;border-bottom:1px solid var(--kn-ink);background:none;color:var(--kn-ink)}
+.kn-cart-flow #content h5::before,.kn-cart-flow #content h5::after,.kn-cart-flow #content h3::before,.kn-cart-flow #content h3::after{display:none}
+/* 進み具合（カート → お客様情報 → 配送・支払方法 → 内容確認） */
+body.kn-cart-flow div.cart_navi{margin:0 0 44px}
+body.kn-cart-flow div.cart_navi ul{display:flex;list-style:none;margin:0;padding:0;counter-reset:knstep;border:0;background:none}
+body.kn-cart-flow div.cart_navi li{flex:1;position:relative;margin:0;padding:34px 4px 0 !important;height:auto !important;background:none !important;color:var(--kn-mute) !important;font-size:14px;letter-spacing:.08em;text-align:center;line-height:1.5;border:0 !important;counter-increment:knstep;float:none !important;width:auto !important}
+body.kn-cart-flow div.cart_navi li::before{content:counter(knstep) !important;padding:0 !important;margin:0 !important;box-sizing:border-box !important;position:absolute;left:50%;top:0;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;border:1px solid #cfc3ae;background:#fff !important;color:var(--kn-mute);font-size:13px;line-height:24px;text-align:center;z-index:1;font-family:var(--kn-M)}
+body.kn-cart-flow div.cart_navi li::after{content:"" !important;position:absolute;top:13px;left:calc(-50% + 13px);right:calc(50% + 13px);height:1px;background:#cfc3ae !important;padding:0 !important;display:block !important}
+body.kn-cart-flow div.cart_navi li:first-child::after{display:none !important}
+body.kn-cart-flow div.cart_navi li.current{color:var(--kn-ink) !important;font-weight:600}
+body.kn-cart-flow div.cart_navi li.current::before{background:var(--kn-ink) !important;border-color:var(--kn-ink);color:#fff}
+/* 説明・エラー */
+.kn-cart-flow .header_explanation:empty,.kn-cart-flow .footer_explanation:empty,.kn-cart-flow .error_message:empty{display:none}
+.kn-cart-flow .error_message{background:#fbf1ef;border:1px solid #e7c3bd;color:var(--kn-accent);padding:14px 18px;margin:0 0 24px;font-size:15px;line-height:1.8}
+.kn-cart-flow .no_cart{text-align:center;font-size:17px;padding:40px 0;color:var(--kn-sub)}
+/* カートの表 */
+.kn-cart-flow #cart{margin:0}
+.kn-cart-flow .upbutton{text-align:right;margin:0 0 12px;font-size:13.5px;color:var(--kn-sub)}
+.kn-cart-flow .upbutton input{margin-left:10px}
+.kn-cart-flow #cart_table{width:100%;border-collapse:collapse;border:0;font-size:15.5px;margin:0}
+.kn-cart-flow #cart_table th,.kn-cart-flow #cart_table td{border:0 !important;border-bottom:1px solid var(--kn-line) !important;background:none !important;padding:16px 10px !important;vertical-align:middle;font-weight:400}
+.kn-cart-flow #cart_table thead th{font-size:13px;letter-spacing:.12em;color:var(--kn-mute);border-bottom:1px solid var(--kn-ink) !important;padding-top:6px !important;padding-bottom:10px !important}
+.kn-cart-flow #cart_table td.thumbnail img{width:84px !important;height:84px !important;object-fit:cover;display:block}
+.kn-cart-flow #cart_table td.productname{line-height:1.8;font-size:15px}
+.kn-cart-flow #cart_table td.unitprice,.kn-cart-flow #cart_table td.subtotal{white-space:nowrap;font-size:16.5px}
+.kn-cart-flow #cart_table td.stock{font-size:13.5px;color:var(--kn-sub);white-space:nowrap}
+.kn-cart-flow #cart_table input.quantity{width:60px !important;height:44px;text-align:center;font-size:17px;border:1px solid #d9cdbb;border-radius:2px;font-family:var(--kn-M)}
+.kn-cart-flow #cart_table tfoot th{border-bottom:0 !important;background:var(--kn-paper) !important;padding:20px 10px !important;font-size:15px}
+.kn-cart-flow #cart_table tfoot .amount{font-size:26px;letter-spacing:.03em;color:var(--kn-ink)}
+.kn-cart-flow .currency_code{text-align:right;font-size:12.5px;color:var(--kn-mute);margin-top:8px}
+/* お客様情報などの入力表 */
+.kn-cart-flow table.customer_form,.kn-cart-flow #content table:not(#cart_table){width:100%;border-collapse:collapse;border:0;margin:0 0 10px;background:none}
+.kn-cart-flow table.customer_form th,.kn-cart-flow table.customer_form td,.kn-cart-flow #content table:not(#cart_table) th,.kn-cart-flow #content table:not(#cart_table) td{border:0 !important;border-bottom:1px solid #f0ebe3 !important;background:none !important;padding:16px 10px !important;vertical-align:middle;text-align:left;font-size:15.5px;line-height:1.8;font-weight:400}
+.kn-cart-flow table.customer_form th,.kn-cart-flow #content table:not(#cart_table) th{width:220px;color:var(--kn-ink);letter-spacing:.06em;white-space:normal}
+.kn-cart-flow table.customer_form th em,.kn-cart-flow #content th em{font-style:normal;color:var(--kn-accent);margin-right:4px}
+.kn-cart-flow .member_name,.kn-cart-flow .member_furigana{font-size:14px;color:var(--kn-sub);margin-right:8px}
+.kn-cart-flow #content input[type=text],.kn-cart-flow #content input[type=email],.kn-cart-flow #content input[type=tel],.kn-cart-flow #content input[type=password],.kn-cart-flow #content input[type=number],.kn-cart-flow #content select,.kn-cart-flow #content textarea{font-size:16px !important;font-family:var(--kn-M);color:var(--kn-ink);border:1px solid #d9cdbb !important;border-radius:2px;background:#fff;padding:11px 13px;height:auto;line-height:1.5;box-shadow:none;max-width:100%}
+.kn-cart-flow #content input[type=text]:focus,.kn-cart-flow #content input[type=email]:focus,.kn-cart-flow #content input[type=password]:focus,.kn-cart-flow #content select:focus,.kn-cart-flow #content textarea:focus{outline:none;border-color:var(--kn-gold) !important;box-shadow:0 0 0 3px rgba(168,151,112,.18)}
+.kn-cart-flow #content textarea{width:100%;min-height:140px}
+.kn-cart-flow #content td > input[type=text]:only-child,.kn-cart-flow #content td > input[type=password]:only-child{width:100%;max-width:440px}
+.kn-cart-flow #nav{margin:14px 0 0;font-size:14.5px}
+.kn-cart-flow #nav a{color:var(--kn-accent);text-decoration:underline}
+/* ボタン（進む＝濃い色、戻る・買い物を続ける＝線） */
+.kn-cart-flow .send{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:40px 0 0;padding:0;border:0;background:none}
+.kn-cart-flow .send input,.kn-cart-flow #content input[type=submit],.kn-cart-flow #content input[type=button],.kn-cart-flow #content button{font-family:var(--kn-M) !important;cursor:pointer;transition:background .25s,color .25s;border-radius:0 !important;float:none !important}
+.kn-cart-flow .send input[type=submit],.kn-cart-flow .send input[type=button]{min-width:260px;height:60px;padding:0 30px !important;font-size:17px !important;letter-spacing:.2em;background:var(--kn-ink) !important;color:#fff !important;border:1px solid var(--kn-ink) !important;margin:0 !important;width:auto !important}
+.kn-cart-flow .send input[type=submit]:hover,.kn-cart-flow .send input[type=button]:hover{background:#4a3b2e !important}
+.kn-cart-flow .send input[class*=back],.kn-cart-flow .send input[class*=continue],.kn-cart-flow .send input[id*=previous],.kn-cart-flow .send input[class*=previous]{background:#fff !important;color:var(--kn-ink) !important;min-width:200px;order:-1}
+.kn-cart-flow .send input[class*=back]:hover,.kn-cart-flow .send input[class*=continue]:hover{background:var(--kn-paper) !important}
+.kn-cart-flow .send input.to_reganddeliveryinfo_button[type=submit]{background:#fff !important;color:var(--kn-ink) !important}
+.kn-cart-flow .send input.to_reganddeliveryinfo_button[type=submit]:hover{background:var(--kn-paper) !important}
+.kn-cart-flow #cart_table .delButton,.kn-cart-flow .upbutton input{background:#fff !important;color:var(--kn-sub) !important;border:1px solid var(--kn-line) !important;font-size:13px !important;padding:8px 14px !important;height:auto !important;letter-spacing:.08em;width:auto !important}
+.kn-cart-flow #cart_table .delButton:hover,.kn-cart-flow .upbutton input:hover{border-color:var(--kn-accent) !important;color:var(--kn-accent) !important}
+.kn-cart-flow #content input[type=radio],.kn-cart-flow #content input[type=checkbox]{width:20px;height:20px;vertical-align:-4px;margin-right:6px;accent-color:var(--kn-ink)}
+@media (max-width:768px){
+	.kn-cart-flow #content{padding:30px 16px 60px !important}
+	.kn-cart-flow .cart_page_title,.kn-cart-flow #content h1{font-size:22px;margin-bottom:24px}
+	body.kn-cart-flow div.cart_navi{margin-bottom:30px}
+	body.kn-cart-flow div.cart_navi li{font-size:11.5px;letter-spacing:0;padding-top:32px !important}
+	.kn-cart-flow #cart_table thead{display:none}
+	.kn-cart-flow #cart_table,.kn-cart-flow #cart_table tbody,.kn-cart-flow #cart_table tfoot{display:block;width:100%}
+	.kn-cart-flow #cart_table tbody tr{display:grid;grid-template-columns:84px 1fr auto;gap:6px 14px;padding:16px 0;border-bottom:1px solid var(--kn-line)}
+	.kn-cart-flow #cart_table tbody td{display:block;border:0 !important;padding:0 !important}
+	.kn-cart-flow #cart_table tbody td.num{display:none}
+	.kn-cart-flow #cart_table tbody td.thumbnail{grid-row:1 / span 3}
+	.kn-cart-flow #cart_table tbody td.productname{grid-column:2 / -1;font-size:14px}
+	.kn-cart-flow #cart_table tbody td.unitprice{grid-column:2;font-size:14px;color:var(--kn-sub)}
+	.kn-cart-flow #cart_table tbody td.subtotal{grid-column:3;text-align:right;font-size:17px}
+	.kn-cart-flow #cart_table tbody td.quantity{grid-column:2}
+	.kn-cart-flow #cart_table tbody td.stock{grid-column:3;text-align:right;align-self:center}
+	.kn-cart-flow #cart_table tbody td.action{grid-column:2 / -1}
+	.kn-cart-flow #cart_table tfoot tr{display:flex;justify-content:flex-end;align-items:baseline;gap:10px;background:var(--kn-paper);padding:16px}
+	.kn-cart-flow #cart_table tfoot th{display:block;padding:0 !important;background:none !important}
+	.kn-cart-flow #cart_table tfoot th:empty{display:none}
+	.kn-cart-flow #cart_table tfoot .amount{font-size:23px}
+	.kn-cart-flow table.customer_form,.kn-cart-flow table.customer_form tbody,.kn-cart-flow table.customer_form tr,.kn-cart-flow #content table:not(#cart_table),.kn-cart-flow #content table:not(#cart_table) tbody,.kn-cart-flow #content table:not(#cart_table) tr{display:block;width:100%}
+	.kn-cart-flow table.customer_form th,.kn-cart-flow table.customer_form td,.kn-cart-flow #content table:not(#cart_table) th,.kn-cart-flow #content table:not(#cart_table) td{display:block;width:100% !important;border-bottom:0 !important;padding:6px 0 !important}
+	.kn-cart-flow table.customer_form tr,.kn-cart-flow #content table:not(#cart_table) tr{padding:12px 0;border-bottom:1px solid #f0ebe3}
+	.kn-cart-flow .send{flex-direction:column;align-items:stretch}
+	.kn-cart-flow .send input[type=submit],.kn-cart-flow .send input[type=button]{min-width:0;width:100% !important}
+	.kn-cart-flow .send input[class*=back],.kn-cart-flow .send input[class*=continue],.kn-cart-flow .send input[id*=previous]{order:2}
+}
