@@ -3,6 +3,13 @@
  * @package Welcart
  * @subpackage Welcart Belded
  */
+// オーダーメイド（/case/461/）だけは専用のデザイン（2026-11-02）。文章は template-parts/kaon-ordermade.php にある
+if ( 461 === get_queried_object_id() ) {
+	get_header();
+	get_template_part( 'template-parts/kaon-ordermade' );
+	get_footer();
+	return;
+}
 get_header(); ?>
 
 		<div id="primary" class="site-content">

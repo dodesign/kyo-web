@@ -11,6 +11,8 @@ require( dirname( __FILE__ ) . '/inc/theme-customizer.php' );
 require( get_stylesheet_directory() . '/inc/load.php' );
 // 2026-11-02 リニューアル：トップの設定（特集・念珠をさがす・件数）と、ヘッダー・フッター・トップの部品
 require( get_stylesheet_directory() . '/inc/kaon-home.php' );
+// 商品ページの部品（本文の共通部分の切り分け・おすすめ商品）
+require( get_stylesheet_directory() . '/inc/kaon-item.php' );
 
 /* ---------- 2026-11-02 リニューアル用の読み込み ----------
    CSS（assets/css/kaon-site.css）は header.php で直接読んでいる（uikit より後に読むため）。 */

@@ -181,6 +181,19 @@ function kaon_body_class_arc( $classes ) {
 		$classes[] = 'kn-wide-page';
 		$classes[] = 'kn-contact-page'; // フッターのお問い合わせ帯を出さない（同じ内容が続くため）
 	}
+	if ( is_page( 'fix' ) ) {
+		$classes[] = 'kn-wide-page';
+		$classes[] = 'kn-contact-page'; // ページ内に相談窓口があるので、フッターの帯は出さない
+	}
+	if ( is_single( 461 ) ) { // オーダーメイド（template-parts/kaon-ordermade.php）
+		$classes[] = 'kn-wide-page';
+		$classes[] = 'kn-contact-page';
+	}
+	// 商品ページ（Welcart の商品は post_mime_type が item）
+	if ( is_singular( 'post' ) && 'item' === get_post_field( 'post_mime_type', get_queried_object_id() ) ) {
+		$classes[] = 'kn-wide-page';
+		$classes[] = 'kn-item-page';
+	}
 	return $classes;
 }
 

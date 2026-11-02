@@ -153,7 +153,8 @@
 	var REVEAL = [
 		'.kn-home .kn-head', '.kn-news__list li', '.kn-item', '.kn-cat', '.kn-om__text', '.kn-om__works > a',
 		'.kn-post', '.kn-blog__lead', '.kn-ft-contact__in', '.kn-ft-shops .kn-head', '.kn-shop',
-		'.kn-page [data-rv]', '.kn-arc .kn-head', '.kn-arc__chips'
+		'.kn-page [data-rv]', '.kn-ip [data-rv]', '.kn-ip__related .kn-head', '.kn-ip__brand .kn-head',
+		'.kn-arc .kn-head', '.kn-arc__chips'
 	].join(',');
 	function initReveal() {
 		if (!('IntersectionObserver' in window)) return;

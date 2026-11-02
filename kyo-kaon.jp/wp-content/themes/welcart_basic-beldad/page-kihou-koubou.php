@@ -60,8 +60,20 @@ $kn_tech = array(
 			</div>
 		</div>
 
+		<?php /* ---------- はじめに（数字は下の「喜芳とは」「技術」の内容から） ---------- */ ?>
+		<section class="kn-sec kn-full kn-craft__intro">
+			<div class="kn-wrap">
+				<p class="kn-craft__statement" data-rv>京都・上賀茂。<br>名工・喜芳が一生をかけて磨いた念珠の技を、<br class="kn-pc">いまも工房の職人たちが、一つひとつ手で受け継いでいます。</p>
+				<ul class="kn-craft__facts">
+					<li data-rv><b>13<small>歳</small></b><span>喜芳が念珠屋へ奉公に入った年齢。以来、生涯を念珠作りに捧げました。</span></li>
+					<li data-rv><b>3<small>人</small></b><span>念珠師として「京都府伝統産業優秀技術賞」を受けた技師。喜芳はその一人です。</span></li>
+					<li data-rv><b>2<small>つ</small></b><span>意匠登録済みの独自技術。喜芳工房だけがお届けできる仕立てです。</span></li>
+				</ul>
+			</div>
+		</section>
+
 		<?php /* ---------- 喜芳とは ---------- */ ?>
-		<section class="kn-sec kn-full">
+		<section class="kn-sec kn-sec--tint kn-full">
 			<div class="kn-wrap">
 				<div class="kn-craft__kiho">
 					<figure class="kn-craft__portrait" data-rv>
@@ -88,7 +100,7 @@ $kn_tech = array(
 		</section>
 
 		<?php /* ---------- 喜芳工房とは ---------- */ ?>
-		<section class="kn-sec kn-sec--tint kn-full">
+		<section class="kn-sec kn-full">
 			<div class="kn-wrap">
 				<div class="kn-craft__koubou">
 					<div data-rv>
@@ -112,7 +124,7 @@ $kn_tech = array(
 		</section>
 
 		<?php /* ---------- 喜芳工房の技術 ---------- */ ?>
-		<section class="kn-sec kn-full">
+		<section class="kn-sec kn-sec--tint kn-full">
 			<div class="kn-wrap">
 				<div class="kn-head"><h2><small>TECHNIQUE</small>喜芳工房の技術</h2></div>
 				<div class="kn-tech">
@@ -128,6 +140,52 @@ $kn_tech = array(
 					</article>
 					<?php endforeach; ?>
 				</div>
+			</div>
+		</section>
+
+		<?php /* ---------- 安心してお求めいただくために ---------- */ ?>
+		<section class="kn-sec kn-full">
+			<div class="kn-wrap">
+				<div class="kn-head"><h2><small>FOR YOU</small>安心してお求めいただくために</h2></div>
+				<div class="kn-trust">
+					<a class="kn-trust__item" href="#kn-shops" data-rv>
+						<span class="kn-trust__no">01</span>
+						<h3>店舗で手に取って選べます</h3>
+						<p>京都・上賀茂の北山本店と、烏丸の店舗で、実際のお品をご覧いただけます。写真では伝わりにくい石の色や房の手触りも、ぜひお確かめください。</p>
+						<span class="kn-trust__more">店舗のご案内</span>
+					</a>
+					<a class="kn-trust__item" href="<?php echo esc_url( home_url( '/service/fix/' ) ); ?>" data-rv>
+						<span class="kn-trust__no">02</span>
+						<h3>お買い上げのあとも、修理を承ります</h3>
+						<p>紐が切れた、房が傷んだ。そんなときも職人が丁寧にお直しします。喜芳工房のお念珠でなくてもご相談いただけます。</p>
+						<span class="kn-trust__more">念珠の修理</span>
+					</a>
+					<a class="kn-trust__item" href="<?php echo esc_url( home_url( '/case/461/' ) ); ?>" data-rv>
+						<span class="kn-trust__no">03</span>
+						<h3>色や珠の変更、オーダーメイドも</h3>
+						<p>宗派の本式・略式、ご希望の色や石、ご予算。「こんなことは難しいかな」と思うこだわりも、職人がかたちにします。</p>
+						<span class="kn-trust__more">オーダーメイド</span>
+					</a>
+					<a class="kn-trust__item" href="tel:0757216600" data-rv>
+						<span class="kn-trust__no">04</span>
+						<h3>わからないことは、お電話で</h3>
+						<p>選び方や宗派のこと、贈り物のご相談まで、お電話でお気軽にお尋ねください。<br><b class="kn-trust__tel">075-721-6600</b>（受付 9:00–18:00）</p>
+						<span class="kn-trust__more">電話をかける</span>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<?php /* ---------- 掲載・取り組み（お知らせの記事へ） ---------- */ ?>
+		<section class="kn-sec kn-sec--tint kn-full">
+			<div class="kn-wrap">
+				<div class="kn-head"><h2><small>NEWS &amp; ACTIVITIES</small>掲載・取り組み</h2></div>
+				<ul class="kn-media">
+					<li data-rv><a href="<?php echo esc_url( home_url( '/news/7026/' ) ); ?>"><time>2025.10</time><span class="kn-media__k">掲載</span><span class="kn-media__t">Yahoo!ニュースに、喜芳の精神と職人技を受け継ぐ京念珠の老舗として紹介されました</span></a></li>
+					<li data-rv><a href="<?php echo esc_url( home_url( '/news/5888/' ) ); ?>"><time>2024.11</time><span class="kn-media__k">返礼品</span><span class="kn-media__t">喜芳工房の京念珠が、ふるさと納税の返礼品としてお選びいただけるようになりました</span></a></li>
+					<li data-rv><a href="<?php echo esc_url( home_url( '/service/workshop/' ) ); ?>"><time>開催中</time><span class="kn-media__k">体験</span><span class="kn-media__t">京念珠（数珠）ブレスレット作り体験。職人と一緒に、自分だけの一本を作れます</span></a></li>
+					<li data-rv><a href="<?php echo esc_url( home_url( '/category/news/' ) ); ?>"><time>随時</time><span class="kn-media__k">イベント</span><span class="kn-media__t">きょうとみらい博、京都伝統工芸体験会など、京都の伝統工芸を伝える催しにも参加しています</span></a></li>
+				</ul>
 			</div>
 		</section>
 

@@ -46,7 +46,7 @@
 				   差し替えるときはIDを変える。 */
 				$kn_shops_bg = wp_get_attachment_image_url( 8048, '1536x1536' );
 				?>
-				<section class="kn-ft-shops"<?php if ( $kn_shops_bg ) : ?> style="--kn-shops-bg:url('<?php echo esc_url( $kn_shops_bg ); ?>')"<?php endif; ?>>
+				<section id="kn-shops" class="kn-ft-shops"<?php if ( $kn_shops_bg ) : ?> style="--kn-shops-bg:url('<?php echo esc_url( $kn_shops_bg ); ?>')"<?php endif; ?>>
 					<div class="kn-wrap">
 						<div class="kn-head kn-head--solo"><h2><small>SHOPS</small>店舗のご案内</h2></div>
 						<p class="kn-ft-shops__lead">お品を手に取ってご覧いただけます。</p>
@@ -156,11 +156,14 @@
 				const title = params.get('title');
 				const url = params.get('url');
 
+				const textarea = document.querySelector('textarea[name="box"]');
 				if (title && url) {
-					const textarea = document.querySelector('textarea[name="box"]');
 					if (textarea) {
 						textarea.value = `【${title}】\n${url}\n上記商品についての問い合わせです。\n\n問い合わせ内容を下に入力してください。\n--------------------------`;
 					}
+				} else if (title && textarea && !textarea.value) {
+					// 修理・オーダーメイドのページから来たとき（?title= だけ付く）
+					textarea.value = `【${title}】\n\n`;
 				}
 			});
 			</script>
