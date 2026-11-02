@@ -179,8 +179,153 @@
 		});
 	}
 
+	/* ---------- 商品ページ：バリエーション（SKU）が複数あるとき ----------
+	   Welcart は SKU ごとに「名前・価格・数量・カートに入れる」を縦に並べて出す。
+	   それだと、どの価格でどのボタンを押せばよいか分かりにくいので、
+	   上に選択肢のカード（名前と価格）を並べ、選んだ SKU の欄だけを見せる。
+	   フォーム自体は Welcart のまま（隠しているだけ）なので、カートの動きは変わらない。
+	   JS が動かない環境では、今までどおり全部並んで表示される。 */
+	function initVariations() {
+		var form = document.querySelector('.kn-ip__form');
+		if (!form) return;
+		var skus = Array.prototype.slice.call(form.querySelectorAll('.skuform'));
+		if (skus.length < 2) return;
+
+		var wrap = document.createElement('div');
+		wrap.className = 'kn-var';
+		wrap.innerHTML = '<p class="kn-var__label">お選びください<small>（' + skus.length + '種類）</small></p>';
+		var list = document.createElement('div');
+		list.className = 'kn-var__list';
+		list.setAttribute('role', 'radiogroup');
+		wrap.appendChild(list);
+
+		var first = -1;
+		var btns = skus.map(function (sku, i) {
+			var nameEl = sku.querySelector('.skuname');
+			var priceEl = sku.querySelector('.kn-ip__price b');
+			var img = sku.querySelector('.skuimg img');
+			var sold = !!sku.querySelector('.kn-ip__soldout');
+			var left = sku.querySelector('.kn-ip__alert');
+			var b = document.createElement('button');
+			b.type = 'button';
+			b.className = 'kn-var__opt' + (sold ? ' is-sold' : '');
+			b.setAttribute('role', 'radio');
+			b.innerHTML =
+				'<span class="kn-var__radio" aria-hidden="true"></span>' +
+				(img ? '<span class="kn-var__img"><img src="' + img.currentSrc + '" alt=""></span>' : '') +
+				'<span class="kn-var__name"></span>' +
+				'<span class="kn-var__price"></span>';
+			b.querySelector('.kn-var__name').textContent = nameEl ? nameEl.textContent.trim() : ('種類' + (i + 1));
+			b.querySelector('.kn-var__price').textContent = priceEl ? priceEl.textContent.trim() : '';
+			if (sold || left) {
+				var st = document.createElement('small');
+				st.className = 'kn-var__state';
+				st.textContent = sold ? '品切れ' : left.textContent.trim();
+				b.querySelector('.kn-var__name').appendChild(st);
+			}
+			b.addEventListener('click', function () { select(i); });
+			list.appendChild(b);
+			sku.classList.add('kn-var__sku');
+			if (!sold && first < 0) first = i;
+			return b;
+		});
+
+		function select(n) {
+			skus.forEach(function (s, i) {
+				var on = i === n;
+				s.hidden = !on;
+				btns[i].classList.toggle('is-on', on);
+				btns[i].setAttribute('aria-checked', on ? 'true' : 'false');
+			});
+		}
+		form.insertBefore(wrap, form.firstChild);
+		form.classList.add('has-var');
+		// カートに入れたときにエラーが出た SKU があれば、それを開いておく
+		var err = -1;
+		skus.forEach(function (s, i) {
+			var e = s.querySelector('.error_message');
+			if (err < 0 && e && e.textContent.trim()) err = i;
+		});
+		select(err >= 0 ? err : (first < 0 ? 0 : first));
+	}
+
+	/* ---------- 商品ページ：画面の下に固定する「カートに入れる」バー ----------
+	   本物のカートボタンが画面から外れたら下から出てくる。
+	   ・種類が1つの商品 → 押すとそのままカートに入る（本物のボタンを押している）
+	   ・種類が複数の商品 → 押すと選択肢のところまでスクロール（選んでから入れてもらう）
+	   ・品切れ → 「お問い合わせ」へスクロール */
+	function initStickyCart() {
+		var form = document.querySelector('.kn-ip__form');
+		var buy = document.querySelector('.kn-ip__buy');
+		if (!form || !buy) return;
+		var skus = Array.prototype.slice.call(form.querySelectorAll('.skuform'));
+		if (!skus.length) return;
+		var multi = skus.length > 1;
+		function current() {
+			for (var i = 0; i < skus.length; i++) if (!skus[i].hidden) return skus[i];
+			return skus[0];
+		}
+		var titleEl = document.querySelector('.kn-ip__title');
+		var thumb = document.querySelector('#itemimg-main img');
+
+		var bar = document.createElement('div');
+		bar.className = 'kn-sticky';
+		bar.setAttribute('aria-hidden', 'true');
+		bar.innerHTML =
+			'<div class="kn-sticky__in">' +
+				(thumb ? '<span class="kn-sticky__img"><img src="' + (thumb.currentSrc || thumb.src) + '" alt=""></span>' : '') +
+				'<span class="kn-sticky__info"><span class="kn-sticky__name"></span><span class="kn-sticky__price"></span></span>' +
+				'<button type="button" class="kn-sticky__btn"></button>' +
+			'</div>';
+		document.body.appendChild(bar);
+		var nameEl = bar.querySelector('.kn-sticky__name');
+		var priceEl = bar.querySelector('.kn-sticky__price');
+		var btn = bar.querySelector('.kn-sticky__btn');
+		nameEl.textContent = titleEl ? titleEl.textContent.trim() : '';
+
+		function refresh() {
+			var s = current();
+			var p = s.querySelector('.kn-ip__price b');
+			var sold = !!s.querySelector('.kn-ip__soldout');
+			var vname = multi && s.querySelector('.skuname') ? s.querySelector('.skuname').textContent.trim() : '';
+			priceEl.textContent = (vname ? vname + '　' : '') + (p ? p.textContent.trim() : '');
+			if (sold && !multi) btn.textContent = 'お問い合わせ';
+			else if (multi) btn.textContent = '種類を選んでカートへ';
+			else btn.textContent = 'カートに入れる';
+		}
+		refresh();
+		form.addEventListener('click', function () { setTimeout(refresh, 0); });
+
+		btn.addEventListener('click', function () {
+			var s = current();
+			var real = s.querySelector('.skubutton');
+			if (!multi && real && !s.querySelector('.kn-ip__soldout')) {
+				real.click(); // そのままカートへ
+				return;
+			}
+			var target = multi ? form.querySelector('.kn-var') || form : (s.querySelector('.kn-ip__soldout') || form);
+			var y = target.getBoundingClientRect().top + window.pageYOffset - 140;
+			window.scrollTo({ top: y, behavior: 'smooth' });
+		});
+
+		// 本物のカート欄が見えているあいだは隠す
+		var cartArea = form;
+		if ('IntersectionObserver' in window) {
+			var io = new IntersectionObserver(function (en) {
+				var show = !en[0].isIntersecting;
+				bar.classList.toggle('is-show', show);
+				document.body.classList.toggle('kn-has-sticky', show);
+			}, { threshold: 0 });
+			io.observe(cartArea);
+		} else {
+			bar.classList.add('is-show');
+		}
+	}
+
 	function init() {
 		initMenu();
+		initVariations();
+		initStickyCart();
 		initReveal();
 		var cs = document.querySelectorAll('[data-kn-fc]');
 		for (var i = 0; i < cs.length; i++) initCarousel(cs[i]);

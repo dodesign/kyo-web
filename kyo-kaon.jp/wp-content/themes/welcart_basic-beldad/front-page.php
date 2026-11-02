@@ -129,25 +129,7 @@ get_header(); ?>
 						<?php endif; ?>
 
 						<?php /* ---------- ⑤ 念珠をさがす ---------- */ ?>
-						<section class="kn-sec kn-full">
-							<div class="kn-wrap">
-								<div class="kn-head">
-									<h2><small>FIND YOURS</small>念珠をさがす</h2>
-									<a class="kn-more" href="<?php echo esc_url( home_url( '/category/item/' ) ); ?>">すべての商品</a>
-								</div>
-								<div class="kn-cats">
-									<?php foreach ( kaon_home_cat_tiles() as $t ) : $cat = get_category( $t['cat'] ); if ( ! $cat || is_wp_error( $cat ) ) { continue; } ?>
-									<a class="kn-cat" href="<?php echo esc_url( get_category_link( $cat ) ); ?>">
-										<?php echo kaon_img( $t['img'], 'medium_large', '', array( 'class' => 'kn-cat__img' ) ); ?>
-										<span class="kn-cat__body">
-											<span class="kn-cat__name"><small><?php echo esc_html( $t['en'] ); ?></small><?php echo esc_html( $t['ja'] ); ?></span>
-											<?php if ( empty( $t['hide_count'] ) && $cat->count ) : ?><span class="kn-cat__n"><?php echo (int) $cat->count; ?>点</span><?php endif; ?>
-										</span>
-									</a>
-									<?php endforeach; ?>
-								</div>
-							</div>
-						</section>
+						<?php kaon_cat_tiles_section(); // 商品ページの下にも同じものを出している（inc/kaon-home.php） ?>
 
 						<?php /* ---------- ⑥ お勧め商品（新着に出したものは除く） ---------- */ ?>
 						<?php

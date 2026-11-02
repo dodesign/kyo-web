@@ -23,7 +23,8 @@ $kn_steps = array(
 
 		<?php /* ★<header> にしないこと（親テーマの #content header 指定に負ける） */ ?>
 		<div class="kn-pghero kn-full">
-			<?php echo kaon_img( 612, 'full', '', array( 'class' => 'kn-pghero__img', 'loading' => 'eager' ) ); ?>
+			<?php /* 旧ページの写真。メディアライブラリに登録が無いので URL で指定 */ ?>
+			<?php echo kaon_img( '/wp-content/uploads/2017/08/MG_0116.jpg', 'full', '', array( 'class' => 'kn-pghero__img', 'loading' => 'eager' ) ); ?>
 			<div class="kn-pghero__body">
 				<p class="kn-pghero__eyebrow">REPAIR</p>
 				<h1 class="kn-pghero__title">念珠の修理</h1>
@@ -70,6 +71,7 @@ $kn_steps = array(
 		</section>
 
 		<section class="kn-fix__cta kn-full">
+			<?php echo kaon_img( 8054, '1536x1536', '', array( 'class' => 'kn-fix__ctaimg' ) ); // 工房で職人が作業している写真 ?>
 			<div class="kn-wrap kn-wrap--narrow" data-rv>
 				<p class="kn-pghero__eyebrow">CONTACT</p>
 				<h2>修理のご相談はこちら</h2>

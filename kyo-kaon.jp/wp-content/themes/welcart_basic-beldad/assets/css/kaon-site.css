@@ -903,3 +903,83 @@ a.kn-contact__card:hover{border-color:var(--kn-gold);box-shadow:0 14px 30px rgba
 	.kn-om2__works{grid-template-columns:1fr 1fr;gap:14px}
 	.kn-om2__hints{grid-template-columns:1fr}
 }
+
+/* ---------- 修理・オーダーメイドの相談帯に写真（真っ黒だったため） ---------- */
+.kn-fix__cta{position:relative;overflow:hidden;padding:110px 0}
+.kn-fix__ctaimg{position:absolute;inset:0;width:100% !important;height:100% !important;max-width:none !important;object-fit:cover}
+.kn-fix__cta::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,17,12,.62),rgba(22,17,12,.78));z-index:1}
+.kn-fix__cta > .kn-wrap{position:relative;z-index:2}
+@media (max-width:768px){.kn-fix__cta{padding:72px 0}}
+
+/* ---------- 商品ページ：バリエーションの選択（kaon-site.js の initVariations） ---------- */
+.kn-var{margin:0 0 22px}
+.kn-var__label{font-size:16px;letter-spacing:.1em;margin:0 0 12px}
+.kn-var__label small{font-size:13px;color:var(--kn-mute);margin-left:6px}
+.kn-var__list{display:grid;gap:10px}
+.kn-var__opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#fff;border:1px solid var(--kn-line);padding:16px 18px;font-family:var(--kn-M);color:var(--kn-ink);cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s;border-radius:2px;line-height:1.5}
+.kn-var__opt:hover{border-color:var(--kn-gold)}
+.kn-var__opt.is-on{border-color:var(--kn-ink);box-shadow:0 0 0 1px var(--kn-ink) inset;background:var(--kn-paper)}
+.kn-var__radio{flex:0 0 20px;width:20px;height:20px;border-radius:50%;border:1px solid #bfb3a0;background:#fff;position:relative}
+.kn-var__opt.is-on .kn-var__radio{border-color:var(--kn-ink)}
+.kn-var__opt.is-on .kn-var__radio::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--kn-ink)}
+.kn-var__img{flex:0 0 52px;width:52px;height:52px;overflow:hidden;background:#f3efe8}
+.kn-var__img img{width:100%;height:100%;object-fit:cover}
+.kn-var__name{flex:1;font-size:16.5px;letter-spacing:.04em}
+.kn-var__state{display:block;font-size:13px;color:var(--kn-accent);letter-spacing:.08em;margin-top:2px}
+.kn-var__price{font-size:19px;letter-spacing:.03em;white-space:nowrap}
+.kn-var__opt.is-sold{color:var(--kn-mute)}
+.kn-var__opt.is-sold .kn-var__price{text-decoration:line-through}
+.kn-var__sku[hidden]{display:none !important}
+.kn-ip__form.has-var .skuname{display:none}
+.kn-ip__form.has-var .kn-ip__price{border-top:0;padding-top:4px}
+@media (max-width:768px){
+	.kn-var__opt{padding:14px 14px;gap:12px}
+	.kn-var__name{font-size:15.5px}
+	.kn-var__price{font-size:17px}
+}
+
+/* ---------- 念珠をさがす：商品ページの下に出すときの案内 ---------- */
+.kn-ip__related + .kn-ip__find{border-top:0}
+.kn-cats__help{margin-top:40px;padding-top:30px;border-top:1px solid var(--kn-line);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.kn-cats__help p{font-size:16.5px;line-height:1.9;color:#3d342c;margin:0}
+.kn-cats__help b{font-weight:600;color:var(--kn-ink)}
+.kn-cats__links{display:flex;gap:12px;flex-wrap:wrap}
+.kn-cats__links a{display:inline-flex;align-items:center;gap:10px;font-size:15px;letter-spacing:.08em;color:var(--kn-ink) !important;border:1px solid var(--kn-ink);background:#fff;padding:12px 22px;transition:.25s;text-decoration:none}
+.kn-cats__links a::after{content:"→";font-family:sans-serif}
+.kn-cats__links a:hover{background:var(--kn-ink);color:#fff !important}
+@media (max-width:768px){
+	.kn-cats__help{flex-direction:column;align-items:stretch;margin-top:30px}
+	.kn-cats__links{flex-direction:column}
+	.kn-cats__links a{justify-content:center}
+}
+
+/* ---------- 商品ページ：スマホで表示されなかった件 ----------
+   画像スライダー（slick）がグリッドの「1fr」列を無限に押し広げ、幅3300万pxになっていた。
+   列を minmax(0,1fr) にし、中身にも min-width:0 を付けて止める。 */
+.kn-ip__top > *{min-width:0}
+@media (max-width:900px){.kn-ip__top{grid-template-columns:minmax(0,1fr)}}
+.kn-ip #itemimg-main,.kn-ip #itemimg-sub{max-width:100%}
+
+/* ---------- 商品ページ：下に固定する「カートに入れる」バー（kaon-site.js initStickyCart） ---------- */
+.kn-sticky{position:fixed;left:0;right:0;bottom:0;z-index:150;background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-top:1px solid var(--kn-line);box-shadow:0 -10px 30px rgba(43,33,24,.08);transform:translateY(110%);transition:transform .35s ease;font-family:var(--kn-M);color:var(--kn-ink)}
+.kn-sticky.is-show{transform:none}
+.kn-sticky__in{max-width:1080px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;gap:16px}
+.kn-sticky__img{flex:0 0 54px;width:54px;height:54px;overflow:hidden;background:#f3efe8}
+.kn-sticky__img img{width:100%;height:100%;object-fit:cover;display:block}
+.kn-sticky__info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.kn-sticky__name{font-size:15px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kn-sticky__price{font-size:18px;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kn-sticky__btn{flex:0 0 auto;min-width:240px;height:56px;padding:0 26px;background:var(--kn-ink);color:#fff;border:0;border-radius:0;font-family:var(--kn-M);font-size:16.5px;letter-spacing:.16em;cursor:pointer;transition:background .3s}
+.kn-sticky__btn:hover{background:#4a3b2e}
+body.kn-has-sticky #toTop{bottom:96px !important;transition:bottom .35s}
+body.kn-has-sticky .grecaptcha-badge{bottom:96px !important}
+@media (max-width:768px){
+	.kn-sticky__in{padding:10px 12px calc(10px + env(safe-area-inset-bottom));gap:10px}
+	.kn-sticky__img{display:none}
+	.kn-sticky__name{display:none}
+	.kn-sticky__price{font-size:16px}
+	.kn-sticky__btn{min-width:0;flex:0 0 58%;height:52px;padding:0 10px;font-size:15px;letter-spacing:.08em}
+	body.kn-has-sticky #toTop,body.kn-has-sticky .grecaptcha-badge{bottom:84px !important}
+	body.kn-item-page{padding-bottom:74px}
+}
+@media (min-width:769px){body.kn-item-page{padding-bottom:80px}}

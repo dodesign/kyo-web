@@ -284,6 +284,9 @@ get_header();
 		wp_reset_postdata();
 		?>
 
+		<?php /* ---------- 念珠をさがす（トップと同じ6枠）。おすすめに合うものが無かった人の行き先 ---------- */ ?>
+		<?php kaon_cat_tiles_section( 'kn-sec--tint kn-ip__find', true ); ?>
+
 	<?php else : ?>
 		<p><?php _e( 'Sorry, no posts matched your criteria.', 'usces' ); ?></p>
 	<?php endif; ?>

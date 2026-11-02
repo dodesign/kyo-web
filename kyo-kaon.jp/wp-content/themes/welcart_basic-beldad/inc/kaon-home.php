@@ -197,6 +197,44 @@ function kaon_body_class_arc( $classes ) {
 	return $classes;
 }
 
+/**
+ * 「念珠をさがす」の6枠。トップと商品ページの下で使う。
+ * @param string $extra_class section に足すクラス（例 'kn-sec--tint'）
+ * @param bool   $help        下に「見つからないときは…」の案内を出すか（商品ページ用）
+ */
+function kaon_cat_tiles_section( $extra_class = '', $help = false ) {
+	?>
+	<section class="kn-sec kn-full <?php echo esc_attr( $extra_class ); ?>">
+		<div class="kn-wrap">
+			<div class="kn-head">
+				<h2><small>FIND YOURS</small>念珠をさがす</h2>
+				<a class="kn-more" href="<?php echo esc_url( home_url( '/category/item/' ) ); ?>">すべての商品</a>
+			</div>
+			<div class="kn-cats">
+				<?php foreach ( kaon_home_cat_tiles() as $t ) : $cat = get_category( $t['cat'] ); if ( ! $cat || is_wp_error( $cat ) ) { continue; } ?>
+				<a class="kn-cat" href="<?php echo esc_url( get_category_link( $cat ) ); ?>">
+					<?php echo kaon_img( $t['img'], 'medium_large', '', array( 'class' => 'kn-cat__img' ) ); ?>
+					<span class="kn-cat__body">
+						<span class="kn-cat__name"><small><?php echo esc_html( $t['en'] ); ?></small><?php echo esc_html( $t['ja'] ); ?></span>
+						<?php if ( empty( $t['hide_count'] ) && $cat->count ) : ?><span class="kn-cat__n"><?php echo (int) $cat->count; ?>点</span><?php endif; ?>
+					</span>
+				</a>
+				<?php endforeach; ?>
+			</div>
+			<?php if ( $help ) : ?>
+			<div class="kn-cats__help">
+				<p>ぴったりのお品が見つからないときは、<b>お好みの色や石でお仕立てする</b>こともできます。</p>
+				<div class="kn-cats__links">
+					<a href="<?php echo esc_url( home_url( '/case/461/' ) ); ?>">オーダーメイドについて</a>
+					<a href="tel:0757216600">お電話で相談 075-721-6600</a>
+				</div>
+			</div>
+			<?php endif; ?>
+		</div>
+	</section>
+	<?php
+}
+
 /** 画像を ID または URL から <img> にする */
 function kaon_img( $img, $size = 'large', $alt = '', $attr = array() ) {
 	$attr = array_merge( array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => $alt ), $attr );

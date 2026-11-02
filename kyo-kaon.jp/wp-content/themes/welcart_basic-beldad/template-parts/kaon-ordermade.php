@@ -183,6 +183,7 @@ $kn_works = new WP_Query( array(
 		</section>
 
 		<section class="kn-fix__cta kn-full">
+			<?php echo kaon_img( 8052, '1536x1536', '', array( 'class' => 'kn-fix__ctaimg' ) ); // 職人の手仕事の写真 ?>
 			<div class="kn-wrap kn-wrap--narrow" data-rv>
 				<p class="kn-pghero__eyebrow">CONTACT</p>
 				<h2>オーダーメイドのご相談はこちら</h2>
