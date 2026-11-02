@@ -14,7 +14,8 @@ get_header();
 <?php /* ---------- トップメッセージ ---------- */ ?>
 <section class="ki-sec">
 	<div class="ki-wrap ki-message">
-		<figure class="ki-message__img" data-rv><?php echo ki_img( 'corp_img3.jpg', '代表取締役 辰尾由佳' ); ?></figure>
+		<?php /* 旧サイトでも代表の顔写真は出していなかった（文字の画像だけ）ので、写真はカラーリストの仕事に合う念珠の写真にしている */ ?>
+		<figure class="ki-message__img" data-rv><?php echo ki_img( 'ki/ki-0042.jpg', '' ); ?><figcaption>京念珠カラーリストとして、色の力を念珠に。</figcaption></figure>
 		<div class="ki-message__body" data-rv>
 			<p class="ki-eyebrow ki-eyebrow--ink">MESSAGE</p>
 			<h2 class="ki-h2">トップメッセージ<small>「念珠を持つ人の幸せを願い、その人のお守りとなるように念じて作る」</small></h2>

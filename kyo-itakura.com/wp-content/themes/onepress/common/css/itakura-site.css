@@ -78,7 +78,7 @@ body.ki{margin:0;background:#fff;color:var(--ki-ink);font-family:var(--ki-M);fon
 .ki-hd__sub a{display:block;font-size:15px;padding:12px 22px;letter-spacing:.06em}
 .ki-hd__sub a:hover{background:var(--ki-paper)}
 .ki-hd__cv{display:flex;align-items:center;gap:12px}
-.ki-hd__tel{display:flex;flex-direction:column;align-items:flex-end;font-size:20px;letter-spacing:.04em;line-height:1.2}
+.ki-hd__tel{display:flex;flex-direction:column;align-items:flex-end;font-size:20px;letter-spacing:.04em;line-height:1.2;white-space:nowrap}
 .ki-hd__tel small{font-size:11px;letter-spacing:.12em;color:var(--ki-mute)}
 .ki-hd__shop{font-size:13.5px;letter-spacing:.08em;border:1px solid var(--ki-line);padding:9px 14px;white-space:nowrap}
 .ki-hd__shop:hover{border-color:var(--ki-gold)}
@@ -87,7 +87,8 @@ body.ki{margin:0;background:#fff;color:var(--ki-ink);font-family:var(--ki-M);fon
 .ki-hd__burger{display:none;margin-left:auto;width:54px;height:54px;border:0;background:none;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;color:var(--ki-ink)}
 .ki-hd__burger span{display:block;width:24px;height:1.5px;background:currentColor}
 .ki-hd__burger b{font-size:10px;font-weight:400;letter-spacing:.1em;margin-top:3px}
-@media (max-width:1280px){.ki-hd__tel{display:none}.ki-hd__menu{gap:20px}.ki-hd__menu > li > a{font-size:14px}}
+@media (max-width:1440px){.ki-hd__tel{display:none}}
+@media (max-width:1280px){.ki-hd__menu{gap:20px}.ki-hd__menu > li > a{font-size:14px}}
 @media (max-width:1080px){
 	:root{--ki-hd:66px}
 	.ki-hd__bar{padding:0 10px 0 18px}
@@ -119,7 +120,7 @@ html.ki-lock,html.ki-lock body{overflow:hidden !important}
 .ki-hero__img{position:absolute;inset:0;width:100%;height:100% !important;object-fit:cover;opacity:0;transition:opacity 1.6s ease;transform:scale(1.04)}
 .ki-hero__img.is-on{opacity:1;animation:ki-zoom 9s ease-out both}
 @keyframes ki-zoom{from{transform:scale(1.08)}to{transform:scale(1)}}
-.ki-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,.12) 0%,rgba(14,10,6,.25) 45%,rgba(14,10,6,.8) 100%)}
+.ki-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,.05) 0%,rgba(14,10,6,.18) 45%,rgba(14,10,6,.7) 100%)}
 .ki-hero__body{position:relative;z-index:1;width:100%;padding-bottom:84px}
 .ki-hero__en{font-size:12px;letter-spacing:.36em;color:#e4d4b4;margin:0 0 18px}
 .ki-hero__title{font-size:clamp(30px,4vw,52px);letter-spacing:.14em;line-height:1.55;margin:0 0 22px !important;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.25)}
@@ -263,6 +264,7 @@ html.ki-lock,html.ki-lock body{overflow:hidden !important}
 .ki-message{display:grid;grid-template-columns:4fr 8fr;gap:60px;align-items:start}
 .ki-message__img{margin:0;position:sticky;top:calc(var(--ki-hd) + 30px)}
 .ki-message__img img{width:100%}
+.ki-message__img figcaption{font-size:13.5px;letter-spacing:.1em;color:var(--ki-mute);margin-top:10px}
 .ki-message__body p{font-size:16.5px;line-height:2.15;color:#3d342c}
 .ki-sign{margin-top:34px;padding-top:26px;border-top:1px solid var(--ki-line)}
 .ki-sign p{text-align:right;font-size:16px !important}
@@ -571,3 +573,16 @@ a.ki-way:hover{border-color:var(--ki-gold)}
 	body.ki{padding-bottom:calc(60px + env(safe-area-inset-bottom))}
 	.ki-totop{right:14px;bottom:76px;width:52px;height:52px}
 }
+
+/* ---------- 本文の写真のまとめ表示・拡大（itakura-site.js initGallery） ---------- */
+.ki-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 2em}
+.ki-gal figure{margin:0 !important}
+.ki-gal img{width:100% !important;height:100% !important;aspect-ratio:3/4;object-fit:cover;margin:0 !important;cursor:zoom-in}
+.ki-prose figure.wp-block-image img{cursor:zoom-in}
+.ki-prose figure.wp-block-image:not(.ki-gal figure) img{max-height:80vh;width:auto}
+.ki-prose .jp-relatedposts,.ki-prose .sharedaddy{display:none !important}
+.ki-lb{position:fixed;inset:0;z-index:300;background:rgba(20,16,12,.92);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:.25s;cursor:zoom-out}
+.ki-lb.is-open{opacity:1;visibility:visible}
+.ki-lb img{max-width:100%;max-height:100%;object-fit:contain}
+.ki-lb button{position:absolute;top:14px;right:18px;border:0;background:none;color:#fff;font-size:34px;line-height:1;cursor:pointer}
+@media (max-width:768px){.ki-gal{grid-template-columns:repeat(2,1fr);gap:6px}}

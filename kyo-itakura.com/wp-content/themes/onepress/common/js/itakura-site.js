@@ -94,8 +94,51 @@
 		check();
 	}
 
+	/* ---------- 本文の写真：続けて並んだ写真はまとめて並べ、押すと大きく見られる ----------
+	   製品紹介の写真はインスタ用の縦長が多く、1枚ずつ縦に並ぶと長くなりすぎるため */
+	function initGallery() {
+		var prose = document.querySelectorAll('.ki-prose');
+		Array.prototype.forEach.call(prose, function (box) {
+			var kids = Array.prototype.slice.call(box.children);
+			var run = [];
+			function flush() {
+				if (run.length >= 2) {
+					var g = document.createElement('div');
+					g.className = 'ki-gal';
+					run[0].parentNode.insertBefore(g, run[0]);
+					run.forEach(function (f) { g.appendChild(f); });
+				}
+				run = [];
+			}
+			kids.forEach(function (el) {
+				if (el.matches('figure.wp-block-image') && el.querySelector('img')) run.push(el); else flush();
+			});
+			flush();
+		});
+		// 押すと大きく
+		var lb = null;
+		document.addEventListener('click', function (e) {
+			var img = e.target.closest('.ki-prose figure.wp-block-image img');
+			if (!img) return;
+			var a = img.closest('a');
+			if (a && !/\.(jpe?g|png|webp|gif)(\?|$)/i.test(a.href)) return; // 写真以外へのリンクはそのまま
+			e.preventDefault();
+			if (!lb) {
+				lb = document.createElement('div');
+				lb.className = 'ki-lb';
+				lb.innerHTML = '<img alt=""><button type="button" aria-label="閉じる">×</button>';
+				lb.addEventListener('click', function () { lb.classList.remove('is-open'); });
+				document.body.appendChild(lb);
+			}
+			var src = (a && a.href) || img.currentSrc || img.src;
+			lb.querySelector('img').src = src;
+			lb.classList.add('is-open');
+		});
+	}
+
 	function init() {
 		initMenu();
+		initGallery();
 		initHero();
 		initFold();
 		initReveal();
