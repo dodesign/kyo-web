@@ -41,7 +41,8 @@ function ki_assets() {
 	}
 
 	wp_enqueue_style( 'ki-font', 'https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&display=swap', array(), null );
-	wp_enqueue_style( 'ki-site', $uri . '/common/css/itakura-site.css', array(), filemtime( $dir . '/common/css/itakura-site.css' ) );
+	// ★functions.php の vc_remove_wp_ver_css_js が CSS の ?ver= を消してしまうため、更新日時は ?v= で付ける（付けないとブラウザに古いCSSが残る）
+	wp_enqueue_style( 'ki-site', $uri . '/common/css/itakura-site.css?v=' . filemtime( $dir . '/common/css/itakura-site.css' ), array(), null );
 	wp_enqueue_script( 'ki-site', $uri . '/common/js/itakura-site.js', array(), filemtime( $dir . '/common/js/itakura-site.js' ), true );
 }
 
