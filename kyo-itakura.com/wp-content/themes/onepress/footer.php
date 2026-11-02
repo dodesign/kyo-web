@@ -72,6 +72,7 @@
 					<li><a href="<?php echo esc_url( home_url( '/case/' ) ); ?>">製品紹介・実績</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/service/fix/' ) ); ?>">念珠（数珠）の修理</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/about/#hitotsubu' ) ); ?>">Hitotsubu Color</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/workshop/' ) ); ?>">ワークショップ（団体・出張）</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/lecture/' ) ); ?>">講演・トークイベント</a></li>
 				</ul>
 			</div>

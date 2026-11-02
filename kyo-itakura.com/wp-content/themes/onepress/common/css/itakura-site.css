@@ -783,3 +783,34 @@ a.ki-way:hover{border-color:var(--ki-gold)}
 .ki-flyers figcaption{font-size:13px;color:var(--ki-mute);margin-top:10px}
 @media (max-width:1000px){.ki-themes{grid-template-columns:1fr}}
 @media (max-width:768px){.ki-lecgal{grid-template-columns:1fr 1fr}.ki-history li{grid-template-columns:1fr;gap:4px}.ki-lecask__dl{grid-template-columns:1fr;gap:2px}.ki-lecask__dl dd{margin-bottom:12px}.ki-flyers figure{width:44%}}
+
+/* こだわり：技術の小さい写真（旧サイトの写真）は切らずに全体を見せる（2026-11-02 沙織さん指摘：01の結び目が見切れていた） */
+.ki-tech2__sub{aspect-ratio:auto !important;width:44%;padding:0;bottom:-48px}
+.ki-tech2__sub img{height:auto !important;object-fit:contain;display:block}
+[data-ki-zoom] img{cursor:zoom-in}
+/* 念珠とは：写真の幅を本文の幅にそろえる（.ki-iv__img の max-width:640px が効いて狭かった） */
+.ki-prose--doc .ki-iv__img{max-width:100% !important;width:100% !important}
+/* ---------- ワークショップ（団体・出張） ---------- */
+.ki-points--3{grid-template-columns:repeat(3,1fr)}
+.ki-plans{display:flex;flex-direction:column;gap:40px}
+.ki-plan{display:grid;grid-template-columns:5fr 7fr;gap:0;border:1px solid var(--ki-line);background:#fff}
+.ki-plan:nth-child(even){grid-template-columns:7fr 5fr}
+.ki-plan:nth-child(even) .ki-plan__img{order:2}
+.ki-plan__img{min-height:360px;overflow:hidden;background:#eee}
+.ki-plan__img img{width:100%;height:100% !important;object-fit:cover}
+.ki-plan__body{padding:40px clamp(24px,4vw,56px)}
+.ki-plan__en{font-size:12px;letter-spacing:.32em;color:var(--ki-gold);margin:0 0 8px !important}
+.ki-plan h3{font-size:23px;letter-spacing:.1em;margin:0 0 14px !important}
+.ki-plan__catch{font-size:17.5px;line-height:1.95;color:var(--ki-ink);margin:0 0 16px !important;padding-left:14px;border-left:2px solid var(--ki-gold)}
+.ki-plan__p{font-size:15.5px;line-height:2;color:#4a4038}
+.ki-plan__steps{list-style:none;display:flex;gap:10px;margin:0 0 16px;padding:0;flex-wrap:wrap}
+.ki-plan__steps li{display:flex;align-items:center;gap:8px;font-size:15px;background:var(--ki-paper);border:1px solid var(--ki-line);padding:6px 14px}
+.ki-plan__steps b{font-weight:400;color:var(--ki-gold);font-size:18px}
+.ki-plan__dl{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;margin:16px 0 0;font-size:15px;line-height:1.8;padding-top:14px;border-top:1px solid var(--ki-line)}
+.ki-plan__dl dt{color:var(--ki-mute)}
+.ki-plan__dl dd{margin:0}
+.ki-plan__dl a{color:var(--ki-accent);text-decoration:underline}
+.ki-lecgal--4{grid-template-columns:repeat(4,1fr)}
+.ki-lecgal--4 figure{aspect-ratio:1}
+@media (max-width:1000px){.ki-points--3{grid-template-columns:repeat(2,1fr)}.ki-plan,.ki-plan:nth-child(even){grid-template-columns:1fr}.ki-plan:nth-child(even) .ki-plan__img{order:0}.ki-plan__img{min-height:0;aspect-ratio:3/2}}
+@media (max-width:768px){.ki-points--3{grid-template-columns:1fr}.ki-lecgal--4{grid-template-columns:1fr 1fr}.ki-plan__body{padding:26px 18px}.ki-plan__dl{grid-template-columns:1fr;gap:0}.ki-plan__dl dd{margin-bottom:8px}}

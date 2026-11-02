@@ -19,7 +19,7 @@ $ki_nav = array(
 	array( '卸・法人の方へ', home_url( '/about/#oroshi' ), array() ),
 	array( 'サービス', home_url( '/service/fix/' ), array(
 		array( '念珠（数珠）の修理', home_url( '/service/fix/' ) ),
-		array( '京念珠ブレス作り体験', 'https://kyo-kaon.jp/service/workshop/' ),
+		array( 'ワークショップ（団体・出張）', home_url( '/workshop/' ) ),
 		array( '講演・トークイベント', home_url( '/lecture/' ) ),
 	) ),
 	array( '会社概要', home_url( '/company/' ), array() ),

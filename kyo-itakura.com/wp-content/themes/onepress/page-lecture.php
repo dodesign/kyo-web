@@ -119,7 +119,7 @@ $ki_history = array(
 			<a class="ki-btn ki-btn--ink" href="<?php echo esc_url( $ki_ask ); ?>">講演について問い合わせる</a>
 			<a class="ki-btn ki-btn--outline" <?php echo ki_tel_attr( 'lecture' ); ?>>電話 <?php echo esc_html( KI_TEL ); ?></a>
 		</div>
-		<div class="ki-flyers">
+		<div class="ki-flyers" data-ki-zoom>
 			<figure><?php echo ki_img( 'ki/ki-lec-flyer-2410.jpg', '念珠講演会のチラシ（2024年）' ); ?><figcaption>念珠講演会のチラシ（2024年）</figcaption></figure>
 			<figure><?php echo ki_img( 'ki/ki-lec-flyer-2609.jpg', 'トークイベントのチラシ（2026年9月）' ); ?><figcaption>トークイベントのチラシ（2026年9月）</figcaption></figure>
 		</div>

@@ -118,7 +118,7 @@
 		// 押すと大きく
 		var lb = null;
 		document.addEventListener('click', function (e) {
-			var img = e.target.closest('.ki-prose figure.wp-block-image img');
+			var img = e.target.closest('.ki-prose figure.wp-block-image img, [data-ki-zoom] img'); // [data-ki-zoom] の中の写真（チラシなど）も拡大
 			if (!img) return;
 			var a = img.closest('a');
 			if (a && !/\.(jpe?g|png|webp|gif)(\?|$)/i.test(a.href)) return; // 写真以外へのリンクはそのまま
