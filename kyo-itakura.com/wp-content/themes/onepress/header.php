@@ -20,6 +20,7 @@ $ki_nav = array(
 	array( 'サービス', home_url( '/service/fix/' ), array(
 		array( '念珠（数珠）の修理', home_url( '/service/fix/' ) ),
 		array( '京念珠ブレス作り体験', 'https://kyo-kaon.jp/service/workshop/' ),
+		array( '講演・トークイベント', home_url( '/lecture/' ) ),
 	) ),
 	array( '会社概要', home_url( '/company/' ), array() ),
 	array( 'お知らせ', home_url( '/news/' ), array() ),

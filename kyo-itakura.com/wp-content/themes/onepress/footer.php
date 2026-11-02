@@ -22,12 +22,12 @@
 				<a class="ki-ftc__tel" <?php echo ki_tel_attr( 'footer' ); ?>><small>お電話（平日 9:00–18:00）</small><?php echo esc_html( KI_TEL ); ?></a>
 				<a class="ki-ftc__mail" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><small>メール（24時間受付）</small>お問い合わせフォーム</a>
 			</div>
-			<p class="ki-ftc__fax">FAX <?php echo esc_html( KI_FAX ); ?></p>
 		</div>
 	</section>
 	<?php endif; ?>
 
 	<section class="ki-fts" id="ki-access">
+		<?php echo ki_img( 'ki/ki-0004.jpg', '', array( 'class' => 'ki-fts__bg' ) ); // 背景はサロンの写真 ?>
 		<div class="ki-wrap ki-fts__grid">
 			<div class="ki-fts__info">
 				<p class="ki-eyebrow ki-eyebrow--ink">ACCESS</p>
@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<div class="ki-fts__map">
-				<iframe title="株式会社意匠京念珠板倉の地図" src="https://www.google.com/maps?q=%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%BA%AC%E9%83%BD%E5%B8%82%E5%8C%97%E5%8C%BA%E4%B8%8A%E8%B3%80%E8%8C%82%E5%90%91%E7%B8%84%E6%89%8B%E7%94%BA40-1&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+				<iframe title="株式会社意匠京念珠板倉の地図" src="https://maps.google.com/maps?q=%EF%BC%88%E6%A0%AA%EF%BC%89%E6%84%8F%E5%8C%A0%E4%BA%AC%E5%BF%B5%E7%8F%A0%E6%9D%BF%E5%80%89%EF%BC%88%E5%96%9C%E8%8A%B3%E5%B7%A5%E6%88%BF%20%E3%81%8D%E3%81%BB%E3%81%86%E3%81%93%E3%81%86%E3%81%BC%E3%81%86%EF%BC%89&amp;ll=35.0561748,135.7616073&amp;z=16&amp;hl=ja&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 			</div>
 		</div>
 	</section>
@@ -72,6 +72,7 @@
 					<li><a href="<?php echo esc_url( home_url( '/case/' ) ); ?>">製品紹介・実績</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/service/fix/' ) ); ?>">念珠（数珠）の修理</a></li>
 					<li><a href="<?php echo esc_url( home_url( '/about/#hitotsubu' ) ); ?>">Hitotsubu Color</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/lecture/' ) ); ?>">講演・トークイベント</a></li>
 				</ul>
 			</div>
 			<div class="ki-ftm__col">

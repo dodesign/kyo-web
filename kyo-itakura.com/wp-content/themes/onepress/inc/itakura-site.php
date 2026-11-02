@@ -13,13 +13,15 @@
 /* =========================================================
    設定
    ========================================================= */
-define( 'KI_FOUNDED', 1970 ); // 製造卸を始めた年（「製造卸一筋◯年」の計算に使う。旧サイトの製品紹介ページと同じ値）
+define( 'KI_FOUNDED', 1969 ); // 設立年（昭和44年）。出典：kyo-kaon.jp の会社概要「設立 昭和44年」。
+// ★旧サイトは 1970 から「製造卸一筋◯年」を計算していたが、1970 は根拠が見つからず（代表の生年と同じ）、
+//   2017年からは自社の通信販売もしているので「一筋」もやめて「設立◯年」に統一した（2026-11-02）。
 define( 'KI_SHOP_URL', 'https://kyo-kaon.jp/' );
 define( 'KI_AMAZON_URL', 'https://www.amazon.co.jp/s?rh=n%3A85895051%2Cp_4%3A%E5%96%9C%E8%8A%B3%E5%B7%A5%E6%88%BF' );
 define( 'KI_TEL', '075-721-6600' );
 define( 'KI_FAX', '075-721-6784' );
 
-/** 製造卸を始めてからの年数 */
+/** 設立からの年数 */
 function ki_years() {
 	return (int) date_i18n( 'Y' ) - KI_FOUNDED;
 }
@@ -152,8 +154,9 @@ function ki_case_card() {
 	<a class="ki-card" href="<?php the_permalink(); ?>">
 		<span class="ki-card__img">
 			<?php
-			if ( has_post_thumbnail() ) {
-				the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy', 'alt' => '' ) );
+			$tid = ( 'case' === get_post_type() ) ? ki_case_thumb_id( get_the_ID() ) : (int) get_post_thumbnail_id();
+			if ( $tid ) {
+				echo wp_get_attachment_image( $tid, 'medium_large', false, array( 'loading' => 'lazy', 'alt' => '' ) );
 			} else {
 				echo '<span class="ki-card__noimg">板倉</span>';
 			}
@@ -255,6 +258,108 @@ function ki_case_chips( $current = 0 ) {
 function ki_media_list() {
 	return array(
 		'tv'    => array( 'ディノス（東京ローカル）', 'ショップチャンネル', '高田純次の春の京都で逸品をさがせ！', 'いいものプレミアム' ),
-		'print' => array( 'ディノス', 'ワコール', '生協' ),
+		'print' => array( 'ディノス', 'ワコール', '生協', '京都新聞（2019年6月）' ),
+	);
+}
+
+
+/* =========================================================
+   製品紹介（case）の写真
+   一覧のカードには、アイキャッチ（インスタの表紙。文字入り）ではなく、
+   本文の最初の写真（文字の入っていない写真）を使う。本文に写真が無ければアイキャッチ。
+   ========================================================= */
+function ki_case_thumb_id( $post_id ) {
+	$cache = get_post_meta( $post_id, '_ki_thumb', true );
+	$mod   = get_post_modified_time( 'U', true, $post_id );
+	if ( is_array( $cache ) && isset( $cache['t'], $cache['id'] ) && (int) $cache['t'] === (int) $mod ) {
+		return (int) $cache['id'];
+	}
+	$id = 0;
+	if ( preg_match( '/wp-image-(\d+)/', (string) get_post_field( 'post_content', $post_id ), $m ) ) {
+		$id = (int) $m[1];
+		if ( ! wp_attachment_is_image( $id ) ) {
+			$id = 0;
+		}
+	}
+	if ( ! $id ) {
+		$id = (int) get_post_thumbnail_id( $post_id );
+	}
+	update_post_meta( $post_id, '_ki_thumb', array( 't' => (int) $mod, 'id' => $id ) );
+	return $id;
+}
+
+/* =========================================================
+   Smart Slider 3 の代わり
+   旧サイトの製品ページ（喜芳の作品など）に [smartslider3 slider=◯] が残っているが、
+   Smart Slider 3 のプラグインは止まっている（2026-09 の更新事故のあと有効化していない）。
+   プラグインが無いときだけ、スライダーに登録されていた写真をデータベースから読み、写真の並びとして出す。
+   ========================================================= */
+add_action( 'init', 'ki_ss3_fallback_register', 99 );
+function ki_ss3_fallback_register() {
+	if ( ! shortcode_exists( 'smartslider3' ) ) {
+		add_shortcode( 'smartslider3', 'ki_ss3_fallback' );
+	}
+}
+function ki_ss3_fallback( $atts ) {
+	global $wpdb;
+	$id    = isset( $atts['slider'] ) ? (int) $atts['slider'] : 0;
+	$table = $wpdb->prefix . 'nextend2_smartslider3_slides';
+	if ( ! $id || $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) !== $table ) {
+		return '';
+	}
+	$rows = $wpdb->get_results( $wpdb->prepare( "SELECT title, params, thumbnail FROM {$table} WHERE slider = %d ORDER BY ordering", $id ) );
+	if ( ! $rows ) {
+		return '';
+	}
+	$up  = wp_upload_dir();
+	$out = '';
+	foreach ( $rows as $r ) {
+		$p   = json_decode( (string) $r->params, true );
+		$src = ( is_array( $p ) && ! empty( $p['backgroundImage'] ) ) ? $p['backgroundImage'] : (string) $r->thumbnail;
+		if ( ! $src ) {
+			continue;
+		}
+		$src = str_replace( '$upload$', $up['baseurl'], $src );
+		if ( 0 === strpos( $src, '$/' ) ) {
+			$src = home_url( substr( $src, 1 ) );
+		}
+		$out .= '<figure class="wp-block-image"><a href="' . esc_url( $src ) . '"><img src="' . esc_url( $src ) . '" alt="' . esc_attr( $r->title ) . '" loading="lazy"></a></figure>';
+	}
+	return $out ? '<div class="ki-ss3">' . $out . '</div>' : '';
+}
+
+/* =========================================================
+   製品ページの本文に貼られた「オンラインショップの商品URL」を、押せるボタンにする
+   例：<p>https://kyo-kaon.jp/item/7830/</p> → 「オンラインショップで見る」のカード
+   商品名は kyo-kaon.jp から読み、1日保存する（読めなければボタンだけ）。
+   ========================================================= */
+add_filter( 'the_content', 'ki_shop_link_card', 20 );
+function ki_shop_link_card( $html ) {
+	if ( ! is_singular( 'case' ) && ! is_singular( 'post' ) ) {
+		return $html;
+	}
+	return preg_replace_callback(
+		'#<p[^>]*>\s*(?:<a[^>]*>)?\s*(https?://kyo-kaon\.jp/[^\s<"]+)\s*(?:</a>)?\s*</p>#u',
+		function ( $m ) {
+			$url   = $m[1];
+			$title = '';
+			if ( preg_match( '#/item/(?:[^/]+/)?(\d+)/?#', $url, $mm ) ) {
+				$key   = 'ki_kaon_t_' . $mm[1];
+				$title = get_transient( $key );
+				if ( false === $title ) {
+					$title = '';
+					$res   = wp_remote_get( 'https://kyo-kaon.jp/wp-json/wp/v2/posts/' . $mm[1] . '?_fields=title', array( 'timeout' => 3 ) );
+					if ( ! is_wp_error( $res ) && 200 === (int) wp_remote_retrieve_response_code( $res ) ) {
+						$j = json_decode( wp_remote_retrieve_body( $res ), true );
+						if ( isset( $j['title']['rendered'] ) ) {
+							$title = wp_strip_all_tags( html_entity_decode( $j['title']['rendered'] ) );
+						}
+					}
+					set_transient( $key, $title, DAY_IN_SECONDS );
+				}
+			}
+			return '<a class="ki-shoplink" href="' . esc_url( $url ) . '" target="_blank" rel="noopener"><small>ONLINE SHOP ｜ 喜芳工房</small><b>' . esc_html( $title ? $title : 'この念珠をオンラインショップで見る' ) . '</b><em>オンラインショップで見る</em></a>';
+		},
+		$html
 	);
 }

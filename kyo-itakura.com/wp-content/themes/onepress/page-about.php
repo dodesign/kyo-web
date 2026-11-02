@@ -9,12 +9,13 @@
 get_header();
 
 $ki_skills = array(
-	array( '軸部分の飾り結び', '念珠の美しさを決めるといわれる軸部分。一般的な飾り結びとは一線を画し、手作業で仕上げる美しい飾り結びで仕上げています。', 'about_skill_img1.jpg', true ),
-	array( '二色の芯糸が産み出す美しさ「京のいろは」', '芯糸がふたつの色で彩られた技術です。水晶などの透明度の高い玉に、2色の芯糸が石の奥から美しく映えます。光の加減や見る角度によって見える芯糸の色が異なったり、二色が調和して見えたり、絶妙な美しさです。', 'about_skill_img2.jpg', true ),
-	array( '一粒一粒見極めて仕入れる「珠」', '念珠の基本となる石は、質の良い物を選びます。職人自ら信頼できる問屋で買い付けを行います。ご希望の珠をお探ししてお仕立てすることも可能です。', 'about_skill_img3.jpg', false ),
-	array( 'カラーリストによる、色の特性を引き出す「配色」', '石のもつ特性や、人が色を見たときの心理的効果を最大限に引き出す組み合わせを日々研究しています。', 'about_skill_img4.jpg', false ),
-	array( '京都の伝統職人が仕立てる「房」', '京都の伝統職人が仕立てた、高い品質の正絹を使用しています。数本の差し色をいれるなどのご要望にお応えすることも可能です。', 'about_skill_img5.jpg', false ),
-	array( '長くお使いいただくために「高級桐箱」', '私たちは、お客様の目に触れるものすべてにこだわっています。高級桐箱と中板には板倉の毛筆筆耕をいれ、念珠に合わせたカラーで装飾しています。その後、一つひとつ、真心をこめて梱包しています。', 'about_skill_img6.jpg', false ),
+	// [ 見出し, 文章, 大きい写真, 小さい写真（旧サイトの写真）, 意匠登録か, 一言 ]
+	array( '軸部分の飾り結び', '念珠の美しさを決めるといわれる軸部分。一般的な飾り結びとは一線を画し、手作業で仕上げる美しい飾り結びで仕上げています。喜芳が考案した組み台で、正確で硬く、きれいな四つ編みに。', 'ki/ki-ws-0029.jpg', 'about_skill_img1.jpg', true, '帯締めを組むように、念珠を編む。' ),
+	array( '二色の芯糸が産み出す美しさ「京のいろは」', '芯糸がふたつの色で彩られた技術です。水晶などの透明度の高い玉に、2色の芯糸が石の奥から美しく映えます。光の加減や見る角度によって見える芯糸の色が異なったり、二色が調和して見えたり、絶妙な美しさです。', 'ki/ki-0094.jpg', 'about_skill_img2.jpg', true, '珠の奥から、ふたつの色が透ける。' ),
+	array( '一粒一粒見極めて仕入れる「珠」', '念珠の基本となる石は、質の良い物を選びます。職人自ら信頼できる問屋で買い付けを行います。ご希望の珠をお探ししてお仕立てすることも可能です。', 'ki/ki-0052.jpg', 'about_skill_img3.jpg', false, '一粒ずつ、目で確かめて。' ),
+	array( 'カラーリストによる、色の特性を引き出す「配色」', '石のもつ特性や、人が色を見たときの心理的効果を最大限に引き出す組み合わせを日々研究しています。', 'ki/ki-0042.jpg', 'about_skill_img4.jpg', false, '色は、心に届く。' ),
+	array( '京都の伝統職人が仕立てる「房」', '京都の伝統職人が仕立てた、高い品質の正絹を使用しています。淡い紫やピンク、ブルーなど、さし色を配した洗練された房も。数本の差し色をいれるなどのご要望にお応えすることも可能です。', 'ki/ki-0082.jpg', 'about_skill_img5.jpg', false, '正絹の、やわらかな彩り。' ),
+	array( '長くお使いいただくために「高級桐箱」', '私たちは、お客様の目に触れるものすべてにこだわっています。高級桐箱と中板には板倉の毛筆筆耕をいれ、念珠に合わせたカラーで装飾しています。その後、一つひとつ、真心をこめて梱包しています。', 'ki/ki-0059.jpg', 'about_skill_img6.jpg', false, '手に取るその時まで、美しく。' ),
 );
 ?>
 
@@ -26,7 +27,7 @@ $ki_skills = array(
 		<div class="ki-split__text" data-rv>
 			<p class="ki-eyebrow ki-eyebrow--ink">WHOLESALE</p>
 			<h2 class="ki-h2">京念珠製造卸事業<small>すべてはお客様のために。</small></h2>
-			<p>株式会社意匠京念珠板倉は、家庭用から業務用までの意匠京念珠の企画・製造・卸売りを行っている製造卸業者です。製造卸一筋<?php echo (int) ki_years(); ?>年。お客様のご要望を確実に具現化することを第一に考え、ひとつひとつ手作りしています。</p>
+			<p>株式会社意匠京念珠板倉は、家庭用から業務用までの意匠京念珠の企画・製造・卸売りを行っている製造卸業者です。昭和44年の設立から<?php echo (int) ki_years(); ?>年。お客様のご要望を確実に具現化することを第一に考え、ひとつひとつ手作りしています。</p>
 			<h3 class="ki-h3">一つひとつ丁寧に、心をこめて作ります</h3>
 			<p>念珠は、故人を偲ぶときに使う大切なもの。念珠は「念ずる珠」とかくように、心のお守りとなります。時には、ふとした瞬間に見るだけで、あるいは触るだけで心安らぐ拠り所として使っていただけるように、一つひとつ丁寧に、心をこめて作ります。</p>
 			<p>喜芳は、日常生活で京の四季折々に触れて美しいと感じた色合いや、歌舞伎・茶道・生け花といった京文化から学んだことから創作念珠を発想しました。板倉の念珠は、喜芳の創作のルーツとなった「自然物の色合い」や「京文化」を念珠へ取り入れています。</p>
@@ -53,19 +54,37 @@ $ki_skills = array(
 	</div>
 </section>
 
-<?php /* ---------- 板倉の技術 ---------- */ ?>
-<section class="ki-sec">
+<?php /* ---------- 板倉の技術（写真を大きく、交互に） ---------- */ ?>
+<section class="ki-tech-intro">
+	<?php echo ki_img( 'ki/ki-ws-0021.jpg', '', array( 'class' => 'ki-tech-intro__bg' ) ); ?>
+	<div class="ki-wrap ki-tech-intro__in" data-rv>
+		<p class="ki-eyebrow">TECHNIQUE</p>
+		<h2>板倉の技術</h2>
+		<p>珠をとおし、軸を編み、房を付ける。<br>一本の念珠は、いくつもの手を経て仕上がります。</p>
+	</div>
+</section>
+<section class="ki-tech2">
+	<?php foreach ( $ki_skills as $i => $s ) : ?>
+	<article class="ki-tech2__row<?php echo $i % 2 ? ' is-rev' : ''; ?>">
+		<div class="ki-tech2__img" data-rv>
+			<?php echo ki_img( $s[2], $s[0] ); ?>
+			<span class="ki-tech2__sub"><?php echo ki_img( $s[3], '' ); ?></span>
+		</div>
+		<div class="ki-tech2__body" data-rv>
+			<p class="ki-tech2__no"><?php echo sprintf( '%02d', $i + 1 ); ?></p>
+			<p class="ki-tech2__catch"><?php echo esc_html( $s[5] ); ?></p>
+			<h3 class="ki-tech2__t"><?php echo esc_html( $s[0] ); ?></h3>
+			<p class="ki-tech2__p"><?php echo esc_html( $s[1] ); ?></p>
+			<?php if ( $s[4] ) : ?><p class="ki-skill__note">意匠登録済み。板倉だけがご提供できる、独自の製法です。</p><?php endif; ?>
+		</div>
+	</article>
+	<?php endforeach; ?>
+</section>
+<section class="ki-sec ki-sec--dark2">
 	<div class="ki-wrap">
-		<?php ki_head( 'TECHNIQUE', '板倉の技術' ); ?>
-		<div class="ki-skills">
-			<?php foreach ( $ki_skills as $i => $s ) : ?>
-			<article class="ki-skill" data-rv>
-				<div class="ki-skill__img"><?php echo ki_img( $s[2], $s[0] ); ?></div>
-				<p class="ki-skill__no"><?php echo sprintf( '%02d', $i + 1 ); ?></p>
-				<h3 class="ki-skill__t"><?php echo esc_html( $s[0] ); ?></h3>
-				<p><?php echo esc_html( $s[1] ); ?></p>
-				<?php if ( $s[3] ) : ?><p class="ki-skill__note">意匠登録済み。板倉だけがご提供できる、独自の製法です。</p><?php endif; ?>
-			</article>
+		<div class="ki-photostory" data-rv>
+			<?php foreach ( array( 'ki-ws-0011', 'ki-ws-0034', 'ki-ws-0041', 'ki-ws-0049', 'ki-ws-0057' ) as $ph ) : ?>
+				<?php echo ki_img( 'ki/' . $ph . '.jpg', '喜芳工房の手仕事' ); ?>
 			<?php endforeach; ?>
 		</div>
 		<div class="ki-wrap--narrow ki-video" data-rv>

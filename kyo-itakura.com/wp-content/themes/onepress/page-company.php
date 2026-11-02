@@ -14,8 +14,7 @@ get_header();
 <?php /* ---------- トップメッセージ ---------- */ ?>
 <section class="ki-sec">
 	<div class="ki-wrap ki-message">
-		<?php /* 旧サイトでも代表の顔写真は出していなかった（文字の画像だけ）ので、写真はカラーリストの仕事に合う念珠の写真にしている */ ?>
-		<figure class="ki-message__img" data-rv><?php echo ki_img( 'ki/ki-0042.jpg', '' ); ?><figcaption>京念珠カラーリストとして、色の力を念珠に。</figcaption></figure>
+		<figure class="ki-message__img" data-rv><?php echo ki_img( 'ki/ki-ceo-salon.jpg', '代表取締役 辰尾由佳' ); ?><figcaption>代表取締役　辰尾 由佳</figcaption></figure>
 		<div class="ki-message__body" data-rv>
 			<p class="ki-eyebrow ki-eyebrow--ink">MESSAGE</p>
 			<h2 class="ki-h2">トップメッセージ<small>「念珠を持つ人の幸せを願い、その人のお守りとなるように念じて作る」</small></h2>
@@ -44,6 +43,7 @@ get_header();
 		<table class="ki-table" data-rv>
 			<tr><th>会社名</th><td>株式会社意匠京念珠板倉</td></tr>
 			<tr><th>代表取締役</th><td>辰尾 由佳</td></tr>
+			<tr><th>設立</th><td>昭和44年（1969年）</td></tr>
 			<tr><th>事業内容</th><td>京念珠（数珠）の企画・製造・卸売り／通信販売（喜芳工房）／念珠の修理</td></tr>
 			<tr><th>所在地</th><td>〒603-8083<br>京都府京都市北区上賀茂向縄手町40-1</td></tr>
 			<tr><th>電話</th><td><a <?php echo ki_tel_attr( 'company' ); ?>><?php echo esc_html( KI_TEL ); ?></a>（平日 9:00–18:00）</td></tr>

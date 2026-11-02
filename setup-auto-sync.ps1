@@ -12,15 +12,20 @@ $runner = Join-Path $repo "auto-sync.ps1"
 $action = New-ScheduledTaskAction -Execute "powershell.exe" `
   -Argument ("-WindowStyle Hidden -NonInteractive -ExecutionPolicy Bypass -File `"$runner`"")
 
+# NOTE (2026-11-02): without -RepetitionDuration the repetition stopped after 1 day
+#   (the task last ran on 2026-10-14). Repeat for 10 years, and also start at logon.
 $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) `
-  -RepetitionInterval (New-TimeSpan -Minutes $IntervalMinutes)
+  -RepetitionInterval (New-TimeSpan -Minutes $IntervalMinutes) `
+  -RepetitionDuration (New-TimeSpan -Days 3650)
+$logon = New-ScheduledTaskTrigger -AtLogOn
+$logon.Repetition = $trigger.Repetition
 
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
   -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries `
   -MultipleInstances IgnoreNew `
   -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
 
-Register-ScheduledTask -TaskName "GitAutoSync-kyo" -Action $action -Trigger $trigger `
+Register-ScheduledTask -TaskName "GitAutoSync-kyo" -Action $action -Trigger @($trigger, $logon) `
   -Settings $settings -Force `
   -Description "Auto sync kyo (Lolipop) web folder to GitHub" | Out-Null
 

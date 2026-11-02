@@ -136,8 +136,25 @@
 		});
 	}
 
+	/* ---------- 横に流れる帯（新しい製品）の矢印 ---------- */
+	function initStrip() {
+		Array.prototype.forEach.call(document.querySelectorAll('[data-ki-strip]'), function (st) {
+			var tr = st.querySelector('.ki-strip__track');
+			if (!tr) return;
+			function step(d) {
+				var it = tr.querySelector('.ki-strip__item');
+				var w = it ? it.getBoundingClientRect().width + 22 : 300;
+				tr.scrollBy({ left: d * w * 2, behavior: 'smooth' });
+			}
+			var p = st.querySelector('.is-prev'), n = st.querySelector('.is-next');
+			if (p) p.addEventListener('click', function () { step(-1); });
+			if (n) n.addEventListener('click', function () { step(1); });
+		});
+	}
+
 	function init() {
 		initMenu();
+		initStrip();
 		initGallery();
 		initHero();
 		initFold();
