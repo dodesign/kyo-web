@@ -84,7 +84,9 @@ function kaon_drop_recaptcha_head() {
 }
 
 /* ---------- ページキャッシュ ---------- */
-add_action( 'template_redirect', 'kaon_cache_headers', 9999 );
+// ★優先度は 0（早め）。Welcart は商品ページを template_redirect の中で表示して exit するため、
+//   遅い優先度（以前は 9999）だと商品ページでこの処理まで届かず、キャッシュされていなかった。
+add_action( 'template_redirect', 'kaon_cache_headers', 0 );
 function kaon_cache_headers() {
 	if ( ! KAON_PAGE_CACHE || headers_sent() ) {
 		return;
