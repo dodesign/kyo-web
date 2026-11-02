@@ -98,6 +98,12 @@ $kn_in_colmat = $kn_cat && in_array( (int) $kn_cat->parent, array( $kn_color_id,
 					<div class="kn-arc__desc"><?php echo wp_kses_post( category_description() ); ?></div>
 				<?php endif; ?>
 				<p class="kn-arc__count"><?php echo (int) $GLOBALS['wp_query']->found_posts; ?>点</p>
+				<?php /* 商品だけを探す検索（cat=商品 で絞る。結果は search.php → kaon-post-archive.php） */ ?>
+				<form class="kn-search kn-search--arc" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<input type="search" name="s" value="" placeholder="石の名前・色・宗派などで探す" aria-label="商品を検索">
+					<input type="hidden" name="cat" value="<?php echo (int) $kn_root; ?>">
+					<button type="submit">検索</button>
+				</form>
 			</div>
 		</div>
 

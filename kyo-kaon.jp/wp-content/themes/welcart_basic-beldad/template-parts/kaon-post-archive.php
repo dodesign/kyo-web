@@ -76,6 +76,9 @@ if ( have_posts() ) {
 				<?php if ( is_search() ) : ?>
 					<form class="kn-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 						<input type="search" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="石の名前・色・宗派など" aria-label="サイト内検索">
+						<?php if ( get_query_var( 'cat' ) ) : // 商品一覧の検索から来たときは、商品だけで探し直す ?>
+							<input type="hidden" name="cat" value="<?php echo (int) get_query_var( 'cat' ); ?>">
+						<?php endif; ?>
 						<button type="submit">検索</button>
 					</form>
 				<?php endif; ?>

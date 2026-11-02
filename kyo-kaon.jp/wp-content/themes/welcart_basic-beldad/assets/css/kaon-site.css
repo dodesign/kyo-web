@@ -1101,3 +1101,10 @@ body.kn-has-sticky .kn-totop{bottom:96px}
 	.kn-plain__sec{padding-top:40px}
 	.kn-search input{font-size:16px}
 }
+
+/* ---------- ヘッダー下の検索バー（親テーマ .common-parts）はやめた（トップの動画の下に出ていた）。
+   かわりに商品一覧の見出しに「商品を検索」を置いた（kaon-item-archive.php .kn-search--arc） ---------- */
+.common-parts{display:none !important}
+.kn-search--arc{margin:22px 0 0;max-width:520px}
+.kn-search--arc input{padding:12px 16px;font-size:16px}
+@media (max-width:768px){.kn-search--arc{max-width:none}}

@@ -33,7 +33,11 @@
 	
 		<?php wp_body_open(); ?>
 		
-		<?php if ( wcct_get_options( 'page_loading' ) ) : ?>
+		<?php
+		/* ★ローディング画面（Now Loading...）は 2026-11-02 にやめた。
+		   ページの画像・動画が全部読み終わるまで画面を隠し、さらに0.9秒待ってから表示していたため、
+		   どのページも2秒ほど真っ白だった。カスタマイザーの設定に関係なく出さない（functions.php も同じ）。 */
+		if ( false && wcct_get_options( 'page_loading' ) ) : ?>
 			<?php if (! ( welcart_basic_is_member_page() || welcart_basic_is_cart_page() ) ) : ?>
 			<div id="loader-bg">
 				<div id="loader">

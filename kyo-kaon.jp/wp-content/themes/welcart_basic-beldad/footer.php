@@ -14,7 +14,16 @@
 			<button type="button" class="kn-totop" aria-label="ページの先頭へ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg><span>TOP</span></button>
 
 			<?php /* スマホだけ：画面の下に固定するメニュー（2026-11-02）。表示はCSSで 768px 以下だけ */ ?>
-			<?php $kn_cart_n = function_exists( 'usces_totalquantity_in_cart' ) ? (int) usces_totalquantity_in_cart() : 0; ?>
+			<?php
+			// ★usces_totalquantity_in_cart() は数字を「表示」してしまう関数（戻り値ではない）。
+			//   そのまま呼ぶと画面に「0」が出る（2026-11-02 実際に出た）。必ず ob_start で受け取る（header.php と同じ）
+			$kn_cart_n = 0;
+			if ( function_exists( 'usces_totalquantity_in_cart' ) ) {
+				ob_start();
+				usces_totalquantity_in_cart();
+				$kn_cart_n = (int) trim( wp_strip_all_tags( ob_get_clean() ) );
+			}
+			?>
 			<nav class="kn-spnav" aria-label="よく使うメニュー">
 				<a href="<?php echo esc_url( home_url( '/category/item/' ) ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="4.5" r="1.6"/><circle cx="12" cy="19.5" r="1.6"/><circle cx="4.5" cy="12" r="1.6"/><circle cx="19.5" cy="12" r="1.6"/></svg><span>商品一覧</span></a>
 				<a href="tel:0757216600"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5l3 3.5-2 2.2c1 2.3 2.9 4.2 5.3 5.3l2.2-2 3.5 3-1.6 2.8C11 18.5 5.5 13 3.7 5.1z"/></svg><span>電話</span></a>

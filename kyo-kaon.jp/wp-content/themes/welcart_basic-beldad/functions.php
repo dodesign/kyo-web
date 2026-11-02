@@ -160,7 +160,8 @@ function wcct_enqueue_styles() {
 	$template_dir	= get_template_directory_uri();
 	$stylesheet_dir = get_stylesheet_directory_uri();
 
-	if ( wcct_get_options( 'page_loading' ) ) {
+	// ★ローディング画面はやめた（header.php の説明を参照）
+	if ( false && wcct_get_options( 'page_loading' ) ) {
 		if (! ( welcart_basic_is_member_page() || welcart_basic_is_cart_page() ) ) {
 			wp_enqueue_script( 'wcct-loading-js', $stylesheet_dir .'/assets/js/wcct-loading.js', array( 'jquery' ), '1.0');
 		}
