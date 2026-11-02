@@ -8,8 +8,6 @@
  */
 get_header();
 
-$ki_slides = array( 'ki/ki-mg0003.jpg', 'ki/ki-0004.jpg', 'ki/ki-mg0110.jpg', 'ki/ki-mg0055.jpg' );
-
 // 板倉の仕事（写真は横長が映えるものを選んでいる。img は common/img/ 以下のファイルか URL）
 $ki_biz = array(
 	array( 'en' => 'WHOLESALE', 't' => '京念珠の製造卸', 'p' => '家庭用から業務用まで、京念珠の企画・製造・卸売りを行っています。全国の仏具店さま・葬祭業者さまとお取引があり、季節の珠や房を取り入れたラインナップをご用意しています。ひとつからご注文いただけます。', 'img' => 'ki/ki-0082.jpg', 'url' => home_url( '/about/#oroshi' ), 'btn' => '卸のお取引について' ),
@@ -30,10 +28,16 @@ $ki_works = array(
 
 <?php /* ---------- ヒーロー ---------- */ ?>
 <section class="ki-hero" data-ki-hero>
+	<?php
+	// 2026-11-03 写真のスライドから動画に差し替え（音なし・約31秒のループ）。
+	// 元動画：06.画像素材/181229_動画/movie_short_181229.mp4 から念珠を作る場面だけを切り出して 1280x720 に圧縮。
+	$ki_hero_mp4 = get_template_directory() . '/common/img/ki/ki-hero.mp4';
+	$ki_hero_v   = file_exists( $ki_hero_mp4 ) ? filemtime( $ki_hero_mp4 ) : 1;
+	?>
 	<div class="ki-hero__slides">
-		<?php foreach ( $ki_slides as $i => $s ) : ?>
-			<?php echo ki_img( $s, '', array( 'class' => 'ki-hero__img' . ( 0 === $i ? ' is-on' : '' ), 'loading' => 0 === $i ? 'eager' : 'lazy' ) ); ?>
-		<?php endforeach; ?>
+		<video class="ki-hero__video" autoplay muted loop playsinline preload="auto" poster="<?php echo esc_url( ki_img_url( 'ki/ki-hero-poster.jpg' ) ); ?>" aria-hidden="true">
+			<source src="<?php echo esc_url( ki_img_url( 'ki/ki-hero.mp4' ) . '?v=' . $ki_hero_v ); ?>" type="video/mp4">
+		</video>
 	</div>
 	<div class="ki-hero__body ki-wrap">
 		<p class="ki-hero__en">KYO NENJU MANUFACTURER &amp; WHOLESALER</p>

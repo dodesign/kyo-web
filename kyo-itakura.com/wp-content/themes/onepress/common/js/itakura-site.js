@@ -21,10 +21,22 @@
 		document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
 	}
 
-	/* ---------- トップの写真（5秒ごとに切り替え） ---------- */
+	/* ---------- トップの動画（動きを減らす設定の人には止めてポスター画像を見せる）／写真（5秒ごとに切り替え） ---------- */
 	function initHero() {
 		var hero = document.querySelector('[data-ki-hero]');
 		if (!hero) return;
+		var vid = hero.querySelector('.ki-hero__video');
+		if (vid) {
+			var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (still) { vid.removeAttribute('autoplay'); vid.pause(); return; }
+			var p = vid.play && vid.play();
+			if (p && p.catch) p.catch(function () {});
+			// タブが見えていないときは止めておく
+			document.addEventListener('visibilitychange', function () {
+				if (document.hidden) vid.pause(); else { var q = vid.play(); if (q && q.catch) q.catch(function () {}); }
+			});
+			return;
+		}
 		var imgs = hero.querySelectorAll('.ki-hero__img');
 		if (imgs.length < 2) return;
 		if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

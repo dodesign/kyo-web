@@ -121,6 +121,7 @@ html.ki-lock,html.ki-lock body{overflow:hidden !important}
 .ki-hero__slides{position:absolute;inset:0}
 .ki-hero__img{position:absolute;inset:0;width:100%;height:100% !important;object-fit:cover;opacity:0;transition:opacity 1.6s ease;transform:scale(1.04)}
 .ki-hero__img.is-on{opacity:1;animation:ki-zoom 9s ease-out both}
+.ki-hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--ki-dark)}
 @keyframes ki-zoom{from{transform:scale(1.08)}to{transform:scale(1)}}
 .ki-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,.05) 0%,rgba(14,10,6,.18) 45%,rgba(14,10,6,.7) 100%)}
 .ki-hero__body{position:relative;z-index:1;width:100%;padding-bottom:84px}
