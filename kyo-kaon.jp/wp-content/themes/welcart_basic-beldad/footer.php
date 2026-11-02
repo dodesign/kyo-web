@@ -8,10 +8,19 @@
 				</div><!-- .site-content-wrap -->
 			</div><!-- #main -->
 
-			<?php if (! wp_is_mobile() ) : ?>
-				<?php /* ページの先頭へ（2026-11-02 PC・スマホ共通に作り直し。親テーマの #toTop はスマホで出ていなかった）。動きは kaon-site.js initToTop */ ?>
-				<button type="button" class="kn-totop" aria-label="ページの先頭へ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg><span>TOP</span></button>
-			<?php endif; ?>
+			<?php /* ページの先頭へ（2026-11-02 PC・スマホ共通に作り直し）。
+			         ★旧 #toTop は「if ( ! wp_is_mobile() )」で囲まれていてスマホでは出力されていなかった。条件は付けないこと。
+			         動きは kaon-site.js initToTop */ ?>
+			<button type="button" class="kn-totop" aria-label="ページの先頭へ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg><span>TOP</span></button>
+
+			<?php /* スマホだけ：画面の下に固定するメニュー（2026-11-02）。表示はCSSで 768px 以下だけ */ ?>
+			<?php $kn_cart_n = function_exists( 'usces_totalquantity_in_cart' ) ? (int) usces_totalquantity_in_cart() : 0; ?>
+			<nav class="kn-spnav" aria-label="よく使うメニュー">
+				<a href="<?php echo esc_url( home_url( '/category/item/' ) ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="4.5" r="1.6"/><circle cx="12" cy="19.5" r="1.6"/><circle cx="4.5" cy="12" r="1.6"/><circle cx="19.5" cy="12" r="1.6"/></svg><span>商品一覧</span></a>
+				<a href="tel:0757216600"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5l3 3.5-2 2.2c1 2.3 2.9 4.2 5.3 5.3l2.2-2 3.5 3-1.6 2.8C11 18.5 5.5 13 3.7 5.1z"/></svg><span>電話</span></a>
+				<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="1"/><path d="M4 6.5l8 6 8-6"/></svg><span>お問い合わせ</span></a>
+				<a href="<?php echo esc_url( defined( 'USCES_CART_URL' ) ? USCES_CART_URL : home_url( '/usces-cart/' ) ); ?>"><?php echo kaon_icon( 'bag' ); ?><span>カート</span><?php if ( $kn_cart_n ) : ?><b class="kn-spnav__n"><?php echo (int) $kn_cart_n; ?></b><?php endif; ?></a>
+			</nav>
 
 			<?php
 			/* ===== フッター（2026-11-02 リニューアル） =====
